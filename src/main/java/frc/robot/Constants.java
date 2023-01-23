@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
 
 /**
@@ -52,6 +53,9 @@ public final class Constants {
     }
 
     public static final class encoders {
+        public static final Encoder m_leftEncoder = new Encoder(0, 1);
+        public static final Encoder m_rightEncoder = new Encoder(2, 3);
+
         public static final double encoderDistancePerPulse = 0.22;//todo
     }
     /**

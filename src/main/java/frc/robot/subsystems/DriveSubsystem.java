@@ -23,19 +23,6 @@ public class DriveSubsystem extends SubsystemBase {
   // The robot's drive
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
 
-  // The left-side drive encoder
-  private final Encoder m_leftEncoder =
-      new Encoder(
-          Constants.kLeftEncoderPorts[0],
-          Constants.kLeftEncoderPorts[1],
-          Constants.kLeftEncoderReversed);
-
-  // The right-side drive encoder
-  private final Encoder m_rightEncoder =
-      new Encoder(
-          DriveConstants.kRightEncoderPorts[0],
-          DriveConstants.kRightEncoderPorts[1],
-          DriveConstants.kRightEncoderReversed);
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
@@ -45,8 +32,8 @@ public class DriveSubsystem extends SubsystemBase {
     m_rightMotors.setInverted(true);
 
     // Sets the distance per pulse for the encoders
-    m_leftEncoder.setDistancePerPulse(Constants.encoders.encoderDistancePerPulse);
-    m_rightEncoder.setDistancePerPulse(Constants.encoders.encoderDistancePerPulse);
+    Constants.encoders.m_leftEncoder.setDistancePerPulse(Constants.encoders.encoderDistancePerPulse);
+    Constants.encoders.m_rightEncoder.setDistancePerPulse(Constants.encoders.encoderDistancePerPulse);
   }
 
   /**
@@ -61,8 +48,8 @@ public class DriveSubsystem extends SubsystemBase {
 
   /** Resets the drive encoders to currently read a position of 0. */
   public void resetEncoders() {
-    m_leftEncoder.reset();
-    m_rightEncoder.reset();
+    Constants.encoders.m_leftEncoder.reset();
+    Constants.encoders.m_rightEncoder.reset();
   }
 
   /**
@@ -71,7 +58,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @return the average of the TWO encoder readings
    */
   public double getAverageEncoderDistance() {
-    return (m_leftEncoder.getDistance() + m_rightEncoder.getDistance()) / 2.0;
+    return (Constants.encoders.m_leftEncoder.getDistance() + Constants.encoders.m_rightEncoder.getDistance()) / 2.0;
   }
 
   /**
@@ -80,7 +67,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @return the left drive encoder
    */
   public Encoder getLeftEncoder() {
-    return m_leftEncoder;
+    return Constants.encoders.m_leftEncoder;
   }
 
   /**
@@ -89,7 +76,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @return the right drive encoder
    */
   public Encoder getRightEncoder() {
-    return m_rightEncoder;
+    return Constants.encoders.m_rightEncoder;
   }
 
   /**
