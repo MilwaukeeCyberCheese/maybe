@@ -12,13 +12,13 @@ import frc.robot.commands.DriveCommand;
 import frc.robot.commands.IntakeCommand;
 
 import frc.robot.commands.OuttakeCommand;
-import frc.robot.commands.ServoCommand;
+import frc.robot.commands.ShiftCommand;
 
 import frc.robot.other.FilteredController;
 import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.ServoSubsystem;
+import frc.robot.subsystems.ShiftSubsystem;
 ;
 
 /**
@@ -57,8 +57,8 @@ public class RobotContainer {
   // private static final OuttakeCommand m_outtakeCommand = new
   // OuttakeCommand(m_intakeSubsystem);
 
-  private static final ServoSubsystem m_servoSubsystem = new ServoSubsystem();
-  private static final ServoCommand m_servoCommand = new ServoCommand(m_servoSubsystem);
+  private static final ShiftSubsystem m_servoSubsystem = new ShiftSubsystem();
+  private static final ShiftCommand m_servoCommand = new ShiftCommand(m_servoSubsystem);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.

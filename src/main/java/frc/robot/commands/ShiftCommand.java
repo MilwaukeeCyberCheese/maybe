@@ -2,13 +2,13 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.ServoSubsystem;
+import frc.robot.subsystems.ShiftSubsystem;
 
-public class ServoCommand extends CommandBase {
-    private final ServoSubsystem m_servoSubsystem;
+public class ShiftCommand extends CommandBase {
+    private final ShiftSubsystem m_servoSubsystem;
 
     //constructor
-    public ServoCommand(ServoSubsystem m_servoSubsystem) {
+    public ShiftCommand(ShiftSubsystem m_servoSubsystem) {
         this.m_servoSubsystem = m_servoSubsystem;
 
         addRequirements(m_servoSubsystem);
@@ -16,7 +16,7 @@ public class ServoCommand extends CommandBase {
 
     @Override
     public void execute() {
-        m_servoSubsystem.drive(Constants.subsystems.servo.OPEN_POS);
+        m_servoSubsystem.drive();
     }
 
     /**
@@ -26,6 +26,6 @@ public class ServoCommand extends CommandBase {
      */
     @Override
     public void end(boolean interrupted) {
-        m_servoSubsystem.drive(Constants.subsystems.servo.CLOSED_POS);
+        
     }
 }

@@ -9,7 +9,9 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.Solenoid;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -69,6 +71,11 @@ public final class Constants {
         public static final double WHEEL_DIAMETER = Units.inchesToMeters(8);
     }
 
+
+    public static final class pneumatics{
+        public static final Solenoid leftShifter = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
+        public static final Solenoid rightShifter = new Solenoid(PneumaticsModuleType.CTREPCM, 1);
+    }
     /**
      * These values all relate to the various subsystems that are throughout the
      * robot code
