@@ -15,25 +15,25 @@ import java.util.function.DoubleSupplier;
  */
 public class DriveCommand extends CommandBase {
   private final DriveSubsystem m_drive;
-  private final DoubleSupplier m_forward;
-  private final DoubleSupplier m_rotation;
+  private final Double m_forward;
+  private final Double m_rotation;
 
   /**
    * Creates a new DefaultDrive.
    *
    * @param subsystem The drive subsystem this command wil run on.
-   * @param forward The control input for driving forwards/backwards
-   * @param rotation The control input for turning
+   * @param d The control input for driving forwards/backwards
+   * @param e The control input for turning
    */
-  public DriveCommand(DriveSubsystem subsystem, DoubleSupplier forward, DoubleSupplier rotation) {
+  public DriveCommand(DriveSubsystem subsystem, double d, double e) {
     m_drive = subsystem;
-    m_forward = forward;
-    m_rotation = rotation;
+    m_forward = d;
+    m_rotation = e;
     addRequirements(m_drive);
   }
 
   @Override
   public void execute() {
-    m_drive.arcadeDrive(m_forward.getAsDouble(), m_rotation.getAsDouble());
+    m_drive.arcadeDrive(m_forward, m_rotation);
   }
 }

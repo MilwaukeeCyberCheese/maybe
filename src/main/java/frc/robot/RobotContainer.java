@@ -41,11 +41,9 @@ public class RobotContainer {
   public static final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
   public static final DriveCommand m_driveCommand = new DriveCommand(
       m_driveSubsystem,
-      () -> (modifyAxis(filteredController.getYLeft(.2)) * DriveSubsystem.MAX_VELOCITY_METERS_PER_SECOND)
+      modifyAxis(filteredController.getYLeft(.2))
           * Constants.subsystems.drive.strafe,
-      () -> (-modifyAxis(filteredController.getXLeft(.2)) * DriveSubsystem.MAX_VELOCITY_METERS_PER_SECOND)
-          * Constants.subsystems.drive.strafe,
-      () -> (modifyAxis(filteredController.getXRight(.2)) * -DriveSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND)
+      -modifyAxis(filteredController.getXRight(.2))
           * Constants.subsystems.drive.turnRate);
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
