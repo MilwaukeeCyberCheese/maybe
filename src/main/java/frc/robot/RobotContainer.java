@@ -57,8 +57,8 @@ public class RobotContainer {
   // private static final OuttakeCommand m_outtakeCommand = new
   // OuttakeCommand(m_intakeSubsystem);
 
-  private static final ShiftSubsystem m_servoSubsystem = new ShiftSubsystem();
-  private static final ShiftCommand m_servoCommand = new ShiftCommand(m_servoSubsystem);
+  private static final ShiftSubsystem m_shiftSubsystem = new ShiftSubsystem();
+  private static final ShiftCommand m_shiftCommand = new ShiftCommand(m_shiftSubsystem);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -89,7 +89,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     new Button(filteredController::getLeftTriggerActive).whileHeld(m_intakeCommand);
     new Button(filteredController::getLeftBumper).whileHeld(m_outtakeCommand);
-    new Button(filteredController::getAButton).whileHeld(m_servoCommand);
+    new Button(filteredController::getAButton).whileHeld(m_shiftCommand);
     new Button(filteredController::getPOVPressed).whenActive(new Runnable() {
       @Override
       public void run() {
