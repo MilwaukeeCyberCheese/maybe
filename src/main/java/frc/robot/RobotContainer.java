@@ -4,70 +4,103 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.button.Button;
-import frc.robot.commands.AutoCommand;
-import frc.robot.commands.DriveCommand;
-import frc.robot.commands.IntakeCommand;
-
-import frc.robot.commands.OuttakeCommand;
-import frc.robot.commands.ShiftCommand;
-
-import frc.robot.other.FilteredController;
-import frc.robot.subsystems.AutoSubsystem;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.ShiftSubsystem;
-;
+import frc.robot.commands.Autonomous;
+import frc.robot.commands.CloseClaw;
+import frc.robot.commands.OpenClaw;
+import frc.robot.commands.Pickup;
+import frc.robot.commands.Place;
+import frc.robot.commands.PrepareToPickup;
+import frc.robot.commands.SetElevatorSetpoint;
+import frc.robot.commands.SetWristSetpoint;
+import frc.robot.commands.TankDrive;
+import frc.robot.subsystems.Claw;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Wrist;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
- * This class is where the bulk of the robot should be declared. Since
- * Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in
- * the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of
- * the robot (including
+ * This class is where the bulk of the robot should be declared. Since Command-based is a
+ * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  public static boolean readAuto = false;
+  // The robot's subsystems and commands are defined here...
+  private final Drivetrain m_drivetrain = new Drivetrain();
+  private final Elevator m_elevator = new Elevator();
+  private final Wrist m_wrist = new Wrist();
+  private final Claw m_claw = new Claw();
 
-  // input controllers
-  private static final XboxController m_controller = new XboxController(0);
-  public static final FilteredController filteredController = new FilteredController(m_controller);
+  private final XboxController m_joystick = new XboxController(0);
 
-  // the robot's subsystems and commands are defined here...
-  public static final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
-  public static final DriveCommand m_driveCommand = new DriveCommand(
-      m_driveSubsystem,
-      modifyAxis(filteredController.getYLeft(.2))
-          * Constants.subsystems.drive.strafe,
-      -modifyAxis(filteredController.getXRight(.2))
-          * Constants.subsystems.drive.turnRate);
+  private final CommandBase m_autonomousCommand =
+      new Autonomous(m_drivetrain, m_claw, m_wrist, m_elevator);
 
-  public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
-  private static final AutoCommand m_autoCommand = new AutoCommand(m_autoSubsystem);
-
-  private static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-  private static final IntakeCommand m_intakeCommand = new IntakeCommand(m_intakeSubsystem);
-  private static final OuttakeCommand m_outtakeCommand = new OuttakeCommand(m_intakeSubsystem);
-  // private static final OuttakeSubsystem m_outtakeSubsystem = new
-  // OuttakeSubsystem();
-  // private static final OuttakeCommand m_outtakeCommand = new
-  // OuttakeCommand(m_intakeSubsystem);
-
-  private static final ShiftSubsystem m_shiftSubsystem = new ShiftSubsystem();
-  private static final ShiftCommand m_shiftCommand = new ShiftCommand(m_shiftSubsystem);
-
-  /**
-   * The container for the robot. Contains subsystems, OI devices, and commands.
-   */
+  /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    m_driveSubsystem.setDefaultCommand(m_driveCommand);
+    // Put Some buttons on the SmartDashboard
+    // SmartDashboard.putData("Elevator Bottom", new SetElevatorSetpoint(0, m_elevator));
+    // SmartDashboard.putData("Elevator Top", new SetElevatorSetpoint(0.25, m_elevator));
+
+    // SmartDashboard.putData("Wrist Horizontal", new SetWristSetpoint(0, m_wrist));
+    // SmartDashboard.putData("Raise Wrist", new SetWristSetpoint(-45, m_wrist));
+
+    // SmartDashboard.putData("Open Claw", new OpenClaw(m_claw));
+    // SmartDashboard.putData("Close Claw", new CloseClaw(m_claw));
+
+    // SmartDashboard.putData(
+    //     "Deliver Soda", new Autonomous(m_drivetrain, m_claw, m_wrist, m_elevator));
+
+    // Assign default commands
+    m_drivetrain.setDefaultCommand(
+        new TankDrive(() -> -m_joystick.getLeftY(), () -> -m_joystick.getRightX(), m_drivetrain));
+
+    // // Show what command your subsystem is running on the SmartDashboard
+    // SmartDashboard.putData(m_drivetrain);
+    // SmartDashboard.putData(m_elevator);
+    // SmartDashboard.putData(m_wrist);
+    // SmartDashboard.putData(m_claw);
 
     // Configure the button bindings
     configureButtonBindings();
+  }
+
+  /**
+   * Use this method to define your button->command mappings. Buttons can be created by
+   * instantiating a {@link edu.wpi.first.wpilibj.GenericHID} or one of its subclasses ({@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   */
+  private void configureButtonBindings() {
+    // Create some buttons
+    final JoystickButton a = new JoystickButton(m_joystick, 1);
+    final JoystickButton b = new JoystickButton(m_joystick, 2);
+    final JoystickButton x = new JoystickButton(m_joystick, 3);
+    final JoystickButton y = new JoystickButton(m_joystick, 4);
+    final JoystickButton dpadUp = new JoystickButton(m_joystick, 5);
+    final JoystickButton dpadRight = new JoystickButton(m_joystick, 6);
+    final JoystickButton dpadDown = new JoystickButton(m_joystick, 7);
+    final JoystickButton dpadLeft = new JoystickButton(m_joystick, 8);
+    final JoystickButton l2 = new JoystickButton(m_joystick, 9);
+    final JoystickButton r2 = new JoystickButton(m_joystick, 10);
+    final JoystickButton l1 = new JoystickButton(m_joystick, 11);
+    final JoystickButton r1 = new JoystickButton(m_joystick, 12);
+
+    // Connect the buttons to commands
+    // dpadUp.onTrue(new SetElevatorSetpoint(0.25, m_elevator));
+    // dpadDown.onTrue(new SetElevatorSetpoint(0.0, m_elevator));
+    // dpadRight.onTrue(new CloseClaw(m_claw));
+    // dpadLeft.onTrue(new OpenClaw(m_claw));
+
+    // r1.onTrue(new PrepareToPickup(m_claw, m_wrist, m_elevator));
+    // r2.onTrue(new Pickup(m_claw, m_wrist, m_elevator));
+    // l1.onTrue(new Place(m_claw, m_wrist, m_elevator));
+    // l2.onTrue(new Autonomous(m_drivetrain, m_claw, m_wrist, m_elevator));
   }
 
   /**
@@ -75,78 +108,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public AutoCommand getAutonomousCommand() {
-    return m_autoCommand;
-  }
-
-  /**
-   * Use this method to define your button->command mappings. Buttons can be
-   * created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
-   * it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
-  private void configureButtonBindings() {
-    new Button(filteredController::getLeftTriggerActive).whileHeld(m_intakeCommand);
-    new Button(filteredController::getLeftBumper).whileHeld(m_outtakeCommand);
-    new Button(filteredController::getAButton).whileHeld(m_shiftCommand);
-    new Button(filteredController::getPOVPressed).whenActive(new Runnable() {
-      @Override
-      public void run() {
-        if (!readAuto) {
-          readAuto = true;
-          m_autoSubsystem.clearShit();
-          System.out.println("Started - Begin Tracking Autonomous");
-        } else {
-          readAuto = false;
-          System.out.println("Ended - Finished Tracking Autonomous");
-          m_autoSubsystem.printSpeeds();
-        }
-      }
-    });
-    new Button(filteredController::getYButton).whenActive(new Runnable() {
-      @Override
-      public void run() {
-        if (readAuto) {
-          readAuto = false;
-          m_autoSubsystem.clearShit();
-        }
-      }
-    });
-  }
-
-  /**
-   * Modifies the controller joysticks
-   * 
-   * @param value
-   * @return
-   */
-  private static double modifyAxis(double value) {
-    // Deadband
-    value = deadband(value, 0.05);
-
-    // Square the axis
-    value = Math.copySign(value * value, value);
-
-    return value;
-  }
-
-  /**
-   * Deadband for the controller joysticks
-   * 
-   * @param value
-   * @param deadband
-   * @return
-   */
-  private static double deadband(double value, double deadband) {
-    if (Math.abs(value) > deadband) {
-      if (value > 0.0) {
-        return (value - deadband) / (1.0 - deadband);
-      } else {
-        return (value + deadband) / (1.0 - deadband);
-      }
-    } else {
-      return 0.0;
-    }
+  public Command getAutonomousCommand() {
+    return m_autonomousCommand;
   }
 }
