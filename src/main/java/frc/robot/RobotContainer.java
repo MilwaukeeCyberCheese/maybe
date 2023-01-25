@@ -13,10 +13,12 @@ import frc.robot.commands.Place;
 import frc.robot.commands.PrepareToPickup;
 import frc.robot.commands.SetElevatorSetpoint;
 import frc.robot.commands.SetWristSetpoint;
+import frc.robot.commands.Shift;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Shifter;
 import frc.robot.subsystems.Wrist;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -35,6 +37,7 @@ public class RobotContainer {
   private final Elevator m_elevator = new Elevator();
   private final Wrist m_wrist = new Wrist();
   private final Claw m_claw = new Claw();
+  private final Shifter m_shifter = new Shifter();
 
   private final XboxController m_joystick = new XboxController(0);
 
@@ -91,6 +94,7 @@ public class RobotContainer {
     final JoystickButton l1 = new JoystickButton(m_joystick, 11);
     final JoystickButton r1 = new JoystickButton(m_joystick, 12);
 
+    a.debounce(0.1).onTrue(new Shift(m_shifter));
     // Connect the buttons to commands
     // dpadUp.onTrue(new SetElevatorSetpoint(0.25, m_elevator));
     // dpadDown.onTrue(new SetElevatorSetpoint(0.0, m_elevator));
