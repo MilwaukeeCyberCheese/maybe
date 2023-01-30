@@ -23,7 +23,6 @@ public class Shift extends CommandBase {
     m_shifter.toggle();
   }
 
- 
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {

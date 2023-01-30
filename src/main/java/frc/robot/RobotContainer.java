@@ -94,7 +94,7 @@ public class RobotContainer {
     final JoystickButton l1 = new JoystickButton(m_joystick, 11);
     final JoystickButton r1 = new JoystickButton(m_joystick, 12);
 
-    a.debounce(0.1).onTrue(new Shift(m_shifter));
+    a.onTrue(new Shift(m_shifter));
     // Connect the buttons to commands
     // dpadUp.onTrue(new SetElevatorSetpoint(0.25, m_elevator));
     // dpadDown.onTrue(new SetElevatorSetpoint(0.0, m_elevator));

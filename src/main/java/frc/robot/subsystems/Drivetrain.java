@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.robot.Constants;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -20,14 +21,7 @@ public class Drivetrain extends SubsystemBase {
    * The Drivetrain subsystem incorporates the sensors and actuators attached to the robots chassis.
    * These include four drive motors, a left and right encoder and a gyro.
    */
-  private final MotorController m_leftMotor =
-      new MotorControllerGroup(new PWMSparkMax(0), new PWMSparkMax(1));
-
-  private final MotorController m_rightMotor =
-      new MotorControllerGroup(new PWMSparkMax(2), new PWMSparkMax(3));
-
-  private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotor, m_rightMotor);
-
+  
   private final Encoder m_leftEncoder = new Encoder(1, 2);
   private final Encoder m_rightEncoder = new Encoder(3, 4);
   private final AnalogInput m_rangefinder = new AnalogInput(6);
@@ -40,7 +34,7 @@ public class Drivetrain extends SubsystemBase {
     // We need to invert one side of the drivetrain so that positive voltages
     // result in both sides moving forward. Depending on how your robot's
     // gearbox is constructed, you might have to invert the left side instead.
-    m_rightMotor.setInverted(true);
+    Constants.drive.m_rightMotorController.setInverted(true);
 
     // Encoders may measure differently in the real world and in
     // simulation. In this example the robot moves 0.042 barleycorns
@@ -57,7 +51,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     // Let's name the sensors on the LiveWindow
-    addChild("Drive", m_drive);
+    addChild("Drive", Constants.drive.m_drive);
     addChild("Left Encoder", m_leftEncoder);
     addChild("Right Encoder", m_rightEncoder);
     addChild("Rangefinder", m_rangefinder);
@@ -80,7 +74,7 @@ public class Drivetrain extends SubsystemBase {
    * @param right Speed in range [-1,1]
    */
   public void drive(double left, double right) {
-    m_drive.arcadeDrive(left, right);
+    Constants.drive.m_drive.arcadeDrive(left, right);
   }
 
   /**
