@@ -4,25 +4,17 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Wrist;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 /** The main autonomous command to pickup and deliver the soda to the box. */
 public class Autonomous extends SequentialCommandGroup {
   /** Create a new autonomous command. */
-  public Autonomous(Drivetrain drive, Claw claw, Wrist wrist, Elevator elevator) {
-    addCommands(
-        new PrepareToPickup(claw, wrist, elevator),
-        new Pickup(claw, wrist, elevator),
-        new SetDistanceToBox(0.10, drive),
-        // new DriveStraight(4), // Use encoders if ultrasonic is broken
-        new Place(claw, wrist, elevator),
-        new SetDistanceToBox(0.60, drive),
-        // new DriveStraight(-2), // Use Encoders if ultrasonic is broken
-        Commands.parallel(new SetWristSetpoint(-45, wrist), new CloseClaw(claw)));
+  public Autonomous(Drivetrain drive, Elevator elevator) {
+    addCommands();
+     
+        
   }
 }

@@ -6,20 +6,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Autonomous;
-import frc.robot.commands.CloseClaw;
-import frc.robot.commands.OpenClaw;
-import frc.robot.commands.Pickup;
-import frc.robot.commands.Place;
-import frc.robot.commands.PrepareToPickup;
 import frc.robot.commands.SetElevatorSetpoint;
-import frc.robot.commands.SetWristSetpoint;
 import frc.robot.commands.Shift;
 import frc.robot.commands.TankDrive;
-import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shifter;
-import frc.robot.subsystems.Wrist;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -35,14 +27,12 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final Elevator m_elevator = new Elevator();
-  private final Wrist m_wrist = new Wrist();
-  private final Claw m_claw = new Claw();
   private final Shifter m_shifter = new Shifter();
 
   private final XboxController m_joystick = new XboxController(0);
 
   private final CommandBase m_autonomousCommand =
-      new Autonomous(m_drivetrain, m_claw, m_wrist, m_elevator);
+      new Autonomous(m_drivetrain, m_elevator);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
