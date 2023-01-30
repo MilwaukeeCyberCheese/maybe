@@ -23,6 +23,7 @@ public final class Constants {
         public static final int DRIVETRAIN_RIGHT_REAR_SPARK = 4;
         public static final int LEFT_INTAKE_SPARK = 5;
         public static final int RIGHT_INTAKE_SPARK = 6;
+        public static final int ELEVATOR_SPARK = 7;
 
         /**
          * These static objects are used throughout the program.
@@ -41,6 +42,8 @@ public final class Constants {
                 MotorType.kBrushless);
         public static final CANSparkMax rightIntakeSpark = new CANSparkMax(RIGHT_INTAKE_SPARK, 
                 MotorType.kBrushless);
+        public static final CANSparkMax elevatorSpark = new CANSparkMax(ELEVATOR_SPARK,
+                MotorType.kBrushless);        
         }
 
         public static final class drive{

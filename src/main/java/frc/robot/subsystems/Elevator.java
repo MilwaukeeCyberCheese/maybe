@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import frc.robot.Constants;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.motorcontrol.Victor;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,7 +17,7 @@ import edu.wpi.first.wpilibj2.command.PIDSubsystem;
  * values for simulation are different than in the real world do to minor differences.
  */
 public class Elevator extends PIDSubsystem {
-  private final Victor m_motor;
+  
   private final AnalogPotentiometer m_pot;
 
   private static final double kP_real = 4;
@@ -32,7 +33,7 @@ public class Elevator extends PIDSubsystem {
     }
     getController().setTolerance(0.005);
 
-    m_motor = new Victor(5);
+    
 
     // Conversion value of potentiometer varies between the real world and
     // simulation
@@ -43,8 +44,7 @@ public class Elevator extends PIDSubsystem {
     }
 
     // Let's name everything on the LiveWindow
-    addChild("Motor", m_motor);
-    addChild("Pot", m_pot);
+    
   }
 
   /** The log method puts interesting information to the SmartDashboard. */
@@ -63,7 +63,7 @@ public class Elevator extends PIDSubsystem {
   /** Use the motor as the PID output. This method is automatically called by the subsystem. */
   @Override
   public void useOutput(double output, double setpoint) {
-    m_motor.set(output);
+    Constants.controllers.elevatorSpark.set(output);
   }
 
   /** Call log method every loop. */
