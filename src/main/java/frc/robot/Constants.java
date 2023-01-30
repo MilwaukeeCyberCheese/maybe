@@ -21,6 +21,8 @@ public final class Constants {
         public static final int DRIVETRAIN_LEFT_REAR_SPARK = 2;
         public static final int DRIVETRAIN_RIGHT_FRONT_SPARK = 3;
         public static final int DRIVETRAIN_RIGHT_REAR_SPARK = 4;
+        public static final int LEFT_INTAKE_SPARK = 5;
+        public static final int RIGHT_INTAKE_SPARK = 6;
 
         /**
          * These static objects are used throughout the program.
@@ -29,17 +31,29 @@ public final class Constants {
          */
         public static final CANSparkMax leftFrontSpark = new CANSparkMax(DRIVETRAIN_LEFT_FRONT_SPARK,
                 MotorType.kBrushed);
-        public static final CANSparkMax leftRearSpark = new CANSparkMax(DRIVETRAIN_LEFT_REAR_SPARK, MotorType.kBrushed);
+        public static final CANSparkMax leftRearSpark = new CANSparkMax(DRIVETRAIN_LEFT_REAR_SPARK, 
+                MotorType.kBrushed);
         public static final CANSparkMax rightFrontSpark = new CANSparkMax(DRIVETRAIN_RIGHT_FRONT_SPARK,
                 MotorType.kBrushed);
         public static final CANSparkMax rightRearSpark = new CANSparkMax(DRIVETRAIN_RIGHT_REAR_SPARK,
                 MotorType.kBrushed);
+        public static final CANSparkMax leftIntakeSpark = new CANSparkMax(LEFT_INTAKE_SPARK, 
+                MotorType.kBrushless);
+        public static final CANSparkMax rightIntakeSpark = new CANSparkMax(RIGHT_INTAKE_SPARK, 
+                MotorType.kBrushless);
         }
 
         public static final class drive{
-            public static final MotorController m_leftMotorController = new MotorControllerGroup(controllers.leftFrontSpark, controllers.leftRearSpark);
-            public static final MotorController m_rightMotorController = new MotorControllerGroup(controllers.rightFrontSpark, controllers.rightRearSpark);
+            public static final MotorControllerGroup m_leftMotorController = new MotorControllerGroup(controllers.leftFrontSpark, controllers.leftRearSpark);
+            public static final MotorControllerGroup m_rightMotorController = new MotorControllerGroup(controllers.rightFrontSpark, controllers.rightRearSpark);
 
             public static final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotorController, m_rightMotorController);
+        }
+
+        public static final class intake{
+            public static final boolean LEFT_INVERTED = true;
+            public static final boolean RIGHT_INVERTED = false;
+
+            public static final double INTAKE_SPEED = 0.5;
         }
     }
