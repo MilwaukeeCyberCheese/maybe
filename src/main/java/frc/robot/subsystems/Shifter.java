@@ -6,8 +6,10 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.motorcontrol.Victor;
@@ -25,7 +27,7 @@ public class Shifter extends SubsystemBase {
 
   /** Create a new shifter subsystem. */
   public Shifter() {
-
+ 
    
 
     
@@ -36,23 +38,28 @@ public class Shifter extends SubsystemBase {
   }
 
 public void second(){
-Constants.pneumatics.lSolenoid.set(true);
-Constants.pneumatics.rSolenoid.set(true);
+// Constants.pneumatics.lSolenoid.set(true);
+// Constants.pneumatics.rSolenoid.set(true);
+Constants.pneumatics.lSolenoid.set(Value.kForward);
+Constants.pneumatics.rSolenoid.set(Value.kForward);
 }
 
 public void first(){
-  Constants.pneumatics.lSolenoid.set(false);
-  Constants.pneumatics.rSolenoid.set(false);
+  // Constants.pneumatics.lSolenoid.set(false);
+  // Constants.pneumatics.rSolenoid.set(false);
+  Constants.pneumatics.lSolenoid.set(Value.kReverse);
+  Constants.pneumatics.rSolenoid.set(Value.kReverse);
 }
 
 public void toggle(){
   Constants.pneumatics.lSolenoid.toggle();
   Constants.pneumatics.rSolenoid.toggle();
+  
 }
   /** The log method puts interesting information to the SmartDashboard. */
   public void log() {
-    SmartDashboard.putBoolean("Left Solenoid", Constants.pneumatics.lSolenoid.get());
-    SmartDashboard.putBoolean("Right Shifter", Constants.pneumatics.rSolenoid.get());
+    // SmartDashboard.putBoolean("Left Solenoid", Constants.pneumatics.lSolenoid.get());
+    // SmartDashboard.putBoolean("Right Shifter", Constants.pneumatics.rSolenoid.get());
   }
 
 

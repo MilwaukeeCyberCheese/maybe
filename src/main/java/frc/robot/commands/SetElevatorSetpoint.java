@@ -24,7 +24,7 @@ public class SetElevatorSetpoint extends CommandBase {
    */
   public SetElevatorSetpoint(double setpoint, Elevator elevator) {
     m_elevator = elevator;
-    m_setpoint = setpoint;
+    m_setpoint = setpoint; //lobsters4eva
     addRequirements(m_elevator);
   }
 
