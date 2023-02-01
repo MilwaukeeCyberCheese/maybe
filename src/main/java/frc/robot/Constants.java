@@ -55,6 +55,11 @@ public final class Constants {
 
             public static final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotorController, m_rightMotorController);
             public static final double DRIVE_SPEED = 0.3;
+
+                public static final boolean LEFT_FRONT_INVERTED = true;
+                public static final boolean LEFT_REAR_INVERTED = false;
+                public static final boolean RIGHT_FRONT_INVERTED = false;
+                public static final boolean RIGHT_REAR_INVERTED = true;
         }
 
         public static final class intake{
