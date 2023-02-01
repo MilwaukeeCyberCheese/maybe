@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import java.util.function.DoubleSupplier;
@@ -31,7 +32,7 @@ public class TankDrive extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    m_drivetrain.drive(m_left.getAsDouble(), m_right.getAsDouble());
+    m_drivetrain.drive(m_left.getAsDouble() * Constants.drive.DRIVE_SPEED, m_right.getAsDouble() * Constants.drive.DRIVE_SPEED);
   }
 
   // Make this return true when this Command no longer needs to run execute()
