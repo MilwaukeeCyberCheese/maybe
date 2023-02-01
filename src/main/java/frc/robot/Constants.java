@@ -12,6 +12,14 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public final class Constants {
 
+public static final class sensors{
+        public static final int LEFT_ENCODER_A = 0;
+        public static final int LEFT_ENCODER_B = 1;
+        public static final int RIGHT_ENCODER_A = 2;
+        public static final int RIGHT_ENCODER_B = 3;
+        public static final int GYRO = 0;
+}
+
     public static final class pneumatics{
         // public static final Solenoid lSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
         // public static final Solenoid rSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, 1);
@@ -54,12 +62,13 @@ public final class Constants {
             public static final MotorControllerGroup m_rightMotorController = new MotorControllerGroup(controllers.rightFrontSpark, controllers.rightRearSpark);
 
             public static final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotorController, m_rightMotorController);
+
             public static final double DRIVE_SPEED = 0.3;
 
-                public static final boolean LEFT_FRONT_INVERTED = true;
-                public static final boolean LEFT_REAR_INVERTED = false;
-                public static final boolean RIGHT_FRONT_INVERTED = false;
-                public static final boolean RIGHT_REAR_INVERTED = true;
+        public static final boolean LEFT_FRONT_INVERTED = true;
+        public static final boolean LEFT_REAR_INVERTED = false;
+        public static final boolean RIGHT_FRONT_INVERTED = false;
+        public static final boolean RIGHT_REAR_INVERTED = true;
         }
 
         public static final class intake{
