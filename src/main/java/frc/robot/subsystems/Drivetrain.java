@@ -34,9 +34,10 @@ public class Drivetrain extends SubsystemBase {
     // We need to invert one side of the drivetrain so that positive voltages
     // result in both sides moving forward. Depending on how your robot's
     // gearbox is constructed, you might have to invert the left side instead.
-    Constants.controllers.leftFrontSpark.setInverted(true);
-    Constants.controllers.rightRearSpark.setInverted(true);
-
+    Constants.controllers.leftFrontSpark.setInverted(Constants.drive.LEFT_FRONT_INVERTED);
+    Constants.controllers.leftRearSpark.setInverted(Constants.drive.LEFT_REAR_INVERTED);
+    Constants.controllers.rightFrontSpark.setInverted(Constants.drive.RIGHT_FRONT_INVERTED);
+    Constants.controllers.rightRearSpark.setInverted(Constants.drive.RIGHT_REAR_INVERTED);
     // Encoders may measure differently in the real world and in
     // simulation. In this example the robot moves 0.042 barleycorns
     // per tick in the real world, but the simulated encoders
