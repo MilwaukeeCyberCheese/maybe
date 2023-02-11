@@ -38,17 +38,15 @@ public class Shifter extends SubsystemBase {
   }
 
 public void second(){
-// Constants.pneumatics.lSolenoid.set(true);
-// Constants.pneumatics.rSolenoid.set(true);
-Constants.pneumatics.lSolenoid.set(Value.kForward);
-Constants.pneumatics.rSolenoid.set(Value.kForward);
+Constants.pneumatics.lSolenoid.set(true);
+Constants.pneumatics.rSolenoid.set(true);
+
 }
 
 public void first(){
-  // Constants.pneumatics.lSolenoid.set(false);
-  // Constants.pneumatics.rSolenoid.set(false);
-  Constants.pneumatics.lSolenoid.set(Value.kReverse);
-  Constants.pneumatics.rSolenoid.set(Value.kReverse);
+  Constants.pneumatics.lSolenoid.set(false);
+  Constants.pneumatics.rSolenoid.set(false);
+
 }
 
 public void toggle(){

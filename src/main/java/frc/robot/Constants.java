@@ -21,12 +21,11 @@ public final class Constants {
         }
 
         public static final class pneumatics {
-                // public static final Solenoid lSolenoid = new
-                // Solenoid(PneumaticsModuleType.CTREPCM, 0);
-                // public static final Solenoid rSolenoid = new
-                // Solenoid(PneumaticsModuleType.CTREPCM, 1);
-                public static final DoubleSolenoid lSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 2, 3);
-                public static final DoubleSolenoid rSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
+                public static final Solenoid lSolenoid = new
+                Solenoid(PneumaticsModuleType.CTREPCM, 0);
+                public static final Solenoid rSolenoid = new
+                Solenoid(PneumaticsModuleType.CTREPCM, 1);
+                
         }
 
         public static final class controllers {
