@@ -9,10 +9,10 @@ import frc.robot.subsystems.Shifter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** Closes the claw until the limit switch is tripped. */
-public class Shift extends CommandBase {
+public class First extends CommandBase {
   private final Shifter m_shifter;
 
-  public Shift(Shifter shifter) {
+  public First(Shifter shifter) {
     m_shifter = shifter;
     addRequirements(m_shifter);
   }
@@ -20,7 +20,7 @@ public class Shift extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    m_shifter.toggle();
+    m_shifter.first();
   }
 
   // Called once after isFinished returns true

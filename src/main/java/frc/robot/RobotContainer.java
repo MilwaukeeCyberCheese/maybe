@@ -7,7 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Autonomous;
 import frc.robot.commands.SetElevatorSetpoint;
-import frc.robot.commands.Shift;
+import frc.robot.commands.First;
+import frc.robot.commands.Second;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
@@ -28,6 +29,7 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final Elevator m_elevator = new Elevator();
   private final Shifter m_shifter = new Shifter();
+
 
   private final XboxController m_joystick = new XboxController(0);
 
@@ -84,7 +86,8 @@ public class RobotContainer {
     final JoystickButton l1 = new JoystickButton(m_joystick, 11);
     final JoystickButton r1 = new JoystickButton(m_joystick, 12);
 
-    a.onTrue(new Shift(m_shifter));
+    a.onTrue(new First(m_shifter));
+    b.onTrue(new Second(m_shifter));
     // Connect the buttons to commands
     // dpadUp.onTrue(new SetElevatorSetpoint(0.25, m_elevator));
     // dpadDown.onTrue(new SetElevatorSetpoint(0.0, m_elevator));

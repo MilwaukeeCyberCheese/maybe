@@ -36,7 +36,10 @@ public final class Constants {
                 public static final int DRIVETRAIN_RIGHT_REAR_SPARK = 4;
                 public static final int LEFT_INTAKE_SPARK = 5;
                 public static final int RIGHT_INTAKE_SPARK = 6;
-                public static final int ELEVATOR_SPARK = 7;
+                public static final int LEFT_LIFT_ONE_SPARK = 7;
+                public static final int LEFT_LIFT_TWO_SPARK = 8;
+                public static final int RIGHT_LIFT_ONE_SPARK = 9;
+                public static final int RIGHT_LIFT_TWO_SPARK = 10;
 
                 /**
                  * These static objects are used throughout the program.
@@ -51,12 +54,20 @@ public final class Constants {
                                 MotorType.kBrushed);
                 public static final CANSparkMax rightRearSpark = new CANSparkMax(DRIVETRAIN_RIGHT_REAR_SPARK,
                                 MotorType.kBrushed);
+
                 public static final CANSparkMax leftIntakeSpark = new CANSparkMax(LEFT_INTAKE_SPARK,
                                 MotorType.kBrushless);
                 public static final CANSparkMax rightIntakeSpark = new CANSparkMax(RIGHT_INTAKE_SPARK,
                                 MotorType.kBrushless);
-                public static final CANSparkMax elevatorSpark = new CANSparkMax(ELEVATOR_SPARK,
-                                MotorType.kBrushless);
+
+                public static final CANSparkMax leftLiftOneSpark = new CANSparkMax(LEFT_LIFT_ONE_SPARK, 
+                                MotorType.kBrushed);
+                public static final CANSparkMax leftLiftTwoSpark = new CANSparkMax(LEFT_LIFT_TWO_SPARK, 
+                                MotorType.kBrushed);
+                public static final CANSparkMax rightLiftOneSpark = new CANSparkMax(RIGHT_LIFT_ONE_SPARK,
+                                MotorType.kBrushed);
+                public static final CANSparkMax rightLiftTwoSpark = new CANSparkMax(RIGHT_LIFT_TWO_SPARK, 
+                                MotorType.kBrushed);
         }
 
         public static final class drive {
@@ -81,5 +92,19 @@ public final class Constants {
                 public static final boolean RIGHT_INVERTED = false;
 
                 public static final double INTAKE_SPEED = 0.5;
+        }
+
+        public static final class lift {
+                public static final boolean LEFT_ONE_INVERTED = true;
+                public static final boolean LEFT_TWO_INVERTED = false;
+                public static final boolean RIGHT_ONE_INVERTED = false;
+                public static final boolean RIGHT_TWO_INVERTED = true;
+
+                public static final MotorControllerGroup m_leftLift = new MotorControllerGroup(
+                                controllers.leftLiftOneSpark, controllers.leftLiftTwoSpark);
+                public static final MotorControllerGroup m_rightLift = new MotorControllerGroup( 
+                                controllers.rightLiftOneSpark, controllers.rightLiftTwoSpark);
+
+                public static final double LIFT_SPEED = 0.5;
         }
 }
