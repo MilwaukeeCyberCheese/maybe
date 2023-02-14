@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -13,14 +14,17 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public final class Constants {
 
         public static final class sensors {
-                public static final int LEFT_DRIVE_ENCODER_A = 1;
-                public static final int LEFT_DRIVE_ENCODER_B = 2;
-                public static final int RIGHT_DRIVE_ENCODER_A = 3;
-                public static final int RIGHT_DRIVE_ENCODER_B = 4;
-                public static final int LEFT_LIFT_ENCODER_A = 5;
-                public static final int LEFT_LIFT_ENCODER_B = 6;
-                public static final int RIGHT_LIFT_ENCODER_A = 7;
-                public static final int RIGHT_LIFT_ENCODER_B = 8;
+
+                public static final Encoder m_leftEncoder = new Encoder(1, 2);
+                public static final Encoder m_rightEncoder = new Encoder(3, 4);
+
+
+                public static final double LEFT_DRIVE_ENCODER_DISTANCE_PER_PULSE = 0.0;
+                public static final double RIGHT_DRIVE_ENCODER_DISTANCE_PER_PULSE = 0.0;
+
+                public static final Encoder leftLiftEncoder = new Encoder(5, 6);
+                public static final Encoder rightLiftEncoder = new Encoder(7, 8);
+
                 public static final int GYRO = 0;
         }
 

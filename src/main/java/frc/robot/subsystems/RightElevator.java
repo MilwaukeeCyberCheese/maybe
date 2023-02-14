@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj2.command.PIDSubsystem;
  */
 public class RightElevator extends PIDSubsystem {
   
-  private final AnalogPotentiometer m_pot;
 
   private static final double kP_real = 4;
   private static final double kI_real = 0.07;
@@ -38,9 +37,9 @@ public class RightElevator extends PIDSubsystem {
     // Conversion value of potentiometer varies between the real world and
     // simulation
     if (Robot.isReal()) {
-      m_pot = new AnalogPotentiometer(2, -2.0 / 5);
+      Constants.sensors.rightLiftEncoder.setDistancePerPulse(-2.0 / 5);
     } else {
-      m_pot = new AnalogPotentiometer(2); // Defaults to meters
+     
     }
 
     // Let's name everything on the LiveWindow
@@ -49,7 +48,7 @@ public class RightElevator extends PIDSubsystem {
 
   /** The log method puts interesting information to the SmartDashboard. */
   public void log() {
-    SmartDashboard.putData("Elevator Pot", m_pot);
+    SmartDashboard.putData("Elevator Encoder", Constants.sensors.rightLiftEncoder);
   }
 
   /**
@@ -57,13 +56,12 @@ public class RightElevator extends PIDSubsystem {
    */
   @Override
   public double getMeasurement() {
-    return m_pot.get();
+    return Constants.sensors.rightLiftEncoder.getDistance();
   }
 
   /** Use the motor as the PID output. This method is automatically called by the subsystem. */
   @Override
   public void useOutput(double output, double setpoint) {
-    Constants.lift.m_leftLift.set(output);
     Constants.lift.m_rightLift.set(output);
   }
 
