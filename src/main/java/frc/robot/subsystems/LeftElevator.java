@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.PIDSubsystem;
  * The elevator subsystem uses PID to go to a given height. Unfortunately, in it's current state PID
  * values for simulation are different than in the real world do to minor differences.
  */
-public class Elevator extends PIDSubsystem {
+public class LeftElevator extends PIDSubsystem {
   
   private final AnalogPotentiometer m_pot;
 
@@ -26,7 +26,7 @@ public class Elevator extends PIDSubsystem {
   private static final double kI_simulation = 0.2;
 
   /** Create a new elevator subsystem. */
-  public Elevator() {
+  public LeftElevator() {
     super(new PIDController(kP_real, kI_real, 0));
     if (Robot.isSimulation()) { // Check for simulation and update PID values
       getController().setPID(kP_simulation, kI_simulation, 0);

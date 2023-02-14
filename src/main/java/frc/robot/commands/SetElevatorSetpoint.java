@@ -4,7 +4,7 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.RightElevator;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  * make sure they disable PID!
  */
 public class SetElevatorSetpoint extends CommandBase {
-  private final Elevator m_elevator;
+  private final RightElevator m_elevator;
   private final double m_setpoint;
 
   /**
@@ -22,7 +22,7 @@ public class SetElevatorSetpoint extends CommandBase {
    * @param setpoint The setpoint to set the elevator to
    * @param elevator The elevator to use
    */
-  public SetElevatorSetpoint(double setpoint, Elevator elevator) {
+  public SetElevatorSetpoint(double setpoint, RightElevator elevator) {
     m_elevator = elevator;
     m_setpoint = setpoint; //lobsters4eva
     addRequirements(m_elevator);

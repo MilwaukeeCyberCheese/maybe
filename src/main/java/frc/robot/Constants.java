@@ -13,10 +13,14 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public final class Constants {
 
         public static final class sensors {
-                public static final int LEFT_ENCODER_A = 0;
-                public static final int LEFT_ENCODER_B = 1;
-                public static final int RIGHT_ENCODER_A = 2;
-                public static final int RIGHT_ENCODER_B = 3;
+                public static final int LEFT_DRIVE_ENCODER_A = 1;
+                public static final int LEFT_DRIVE_ENCODER_B = 2;
+                public static final int RIGHT_DRIVE_ENCODER_A = 3;
+                public static final int RIGHT_DRIVE_ENCODER_B = 4;
+                public static final int LEFT_LIFT_ENCODER_A = 5;
+                public static final int LEFT_LIFT_ENCODER_B = 6;
+                public static final int RIGHT_LIFT_ENCODER_A = 7;
+                public static final int RIGHT_LIFT_ENCODER_B = 8;
                 public static final int GYRO = 0;
         }
 
@@ -29,8 +33,7 @@ public final class Constants {
         }
 
         public static final class controllers {
-                public static final int DRIVETRAIN_LEFT_FRONT_SPARK = 1; // front = closest to intake, left = facing
-                                                                         // intake
+                public static final int DRIVETRAIN_LEFT_FRONT_SPARK = 1; // front = closest to intake, left = facing intake
                 public static final int DRIVETRAIN_LEFT_REAR_SPARK = 2;
                 public static final int DRIVETRAIN_RIGHT_FRONT_SPARK = 3;
                 public static final int DRIVETRAIN_RIGHT_REAR_SPARK = 4;
@@ -106,5 +109,10 @@ public final class Constants {
                                 controllers.rightLiftOneSpark, controllers.rightLiftTwoSpark);
 
                 public static final double LIFT_SPEED = 0.5;
+
+                public static final double POSITION_ZERO = 0;
+                public static final double POSITION_ONE = 1;
+                public static final double POSITION_TWO = 2;
+                public static final double POSITION_THREE = 3;
         }
 }

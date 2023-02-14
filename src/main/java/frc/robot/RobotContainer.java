@@ -11,7 +11,7 @@ import frc.robot.commands.First;
 import frc.robot.commands.Second;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.RightElevator;
 import frc.robot.subsystems.Shifter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -27,7 +27,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
-  private final Elevator m_elevator = new Elevator();
+  private final RightElevator m_elevator = new RightElevator();
   private final Shifter m_shifter = new Shifter();
 
 
