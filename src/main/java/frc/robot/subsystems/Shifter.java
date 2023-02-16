@@ -56,8 +56,10 @@ public void toggle(){
 }
   /** The log method puts interesting information to the SmartDashboard. */
   public void log() {
-    // SmartDashboard.putBoolean("Left Solenoid", Constants.pneumatics.lSolenoid.get());
-    // SmartDashboard.putBoolean("Right Shifter", Constants.pneumatics.rSolenoid.get());
+    SmartDashboard.putBoolean("Left Solenoid", Constants.pneumatics.lSolenoid.get());
+    SmartDashboard.putBoolean("Right Shifter", Constants.pneumatics.rSolenoid.get());
+    SmartDashboard.putBoolean("Pressure Switch", Constants.pneumatics.compressor.getPressureSwitchValue());
+    SmartDashboard.putNumber("Compressor Current", Constants.pneumatics.compressor.getCurrent());
   }
 
 

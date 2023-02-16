@@ -1,5 +1,7 @@
 package frc.robot;
 
+import edu.wpi.first.hal.simulation.CTREPCMDataJNI;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -33,6 +35,7 @@ public final class Constants {
                 Solenoid(PneumaticsModuleType.CTREPCM, 0);
                 public static final Solenoid rSolenoid = new
                 Solenoid(PneumaticsModuleType.CTREPCM, 1);
+                public static final Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
                 
         }
 
