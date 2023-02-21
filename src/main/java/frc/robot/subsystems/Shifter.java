@@ -58,8 +58,13 @@ public void toggle(){
   public void log() {
     SmartDashboard.putBoolean("Left Solenoid", Constants.pneumatics.lSolenoid.get());
     SmartDashboard.putBoolean("Right Shifter", Constants.pneumatics.rSolenoid.get());
+    SmartDashboard.putBoolean("Compressor Active", Constants.pneumatics.PCM.getCompressor());
+    SmartDashboard.putBoolean("Compressor Current Too High", Constants.pneumatics.PCM.getCompressorCurrentTooHighFault());
+    SmartDashboard.putBoolean("Compressor Disconnected", Constants.pneumatics.PCM.getCompressorNotConnectedFault());
+    SmartDashboard.putBoolean("Compressor Shorted", Constants.pneumatics.PCM.getCompressorShortedFault());
     SmartDashboard.putBoolean("Pressure Switch", Constants.pneumatics.compressor.getPressureSwitchValue());
     SmartDashboard.putNumber("Compressor Current", Constants.pneumatics.compressor.getCurrent());
+    SmartDashboard.putBoolean("Compressor Enabled", Constants.pneumatics.compressor.isEnabled());
   }
 
 
@@ -70,5 +75,6 @@ public void toggle(){
   @Override
   public void periodic() {
     log();
+    Constants.pneumatics.compressor.enableDigital();
   }
 }
