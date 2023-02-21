@@ -10,8 +10,7 @@ private double speed;
      * Creates a new ExampleSubsystem.
      */
     public Intake() {
-        Constants.controllers.leftIntakeSpark.setInverted(Constants.intake.LEFT_INVERTED);
-        Constants.controllers.rightIntakeSpark.setInverted(Constants.intake.RIGHT_INVERTED);
+        Constants.controllers.intakeSpark.setInverted(Constants.intake.INVERTED);
     }
 
     @Override
@@ -25,7 +24,6 @@ private double speed;
     
     public void drive(double speed) {
         this.speed = speed;
-        Constants.controllers.leftIntakeSpark.set(speed);
-        Constants.controllers.rightIntakeSpark.set(speed);
+        Constants.controllers.intakeSpark.set(speed);
     }
 }

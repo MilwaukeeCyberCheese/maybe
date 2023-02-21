@@ -62,7 +62,7 @@ public class RightElevator extends PIDSubsystem {
   /** Use the motor as the PID output. This method is automatically called by the subsystem. */
   @Override
   public void useOutput(double output, double setpoint) {
-    Constants.lift.m_rightLift.set(output);
+    Constants.controllers.rightLiftSpark.set(output);
   }
 
   /** Call log method every loop. */
