@@ -6,9 +6,11 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
+import frc.robot.Constants.intake;
 import frc.robot.commands.Autonomous;
 import frc.robot.commands.SetElevatorSetpoint;
 import frc.robot.commands.First;
+import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.Second;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.Drivetrain;
@@ -18,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.Intake;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -30,6 +33,7 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final RightElevator m_elevator = new RightElevator();
   private final Shifter m_shifter = new Shifter();
+  private final Intake m_intake = new Intake();
   
 
 
@@ -79,17 +83,13 @@ public class RobotContainer {
     final JoystickButton b = new JoystickButton(m_joystick, 2);
     final JoystickButton x = new JoystickButton(m_joystick, 3);
     final JoystickButton y = new JoystickButton(m_joystick, 4);
-    final JoystickButton dpadUp = new JoystickButton(m_joystick, 5);
-    final JoystickButton dpadRight = new JoystickButton(m_joystick, 6);
-    final JoystickButton dpadDown = new JoystickButton(m_joystick, 7);
-    final JoystickButton dpadLeft = new JoystickButton(m_joystick, 8);
-    final JoystickButton l2 = new JoystickButton(m_joystick, 9);
-    final JoystickButton r2 = new JoystickButton(m_joystick, 10);
-    final JoystickButton l1 = new JoystickButton(m_joystick, 11);
-    final JoystickButton r1 = new JoystickButton(m_joystick, 12);
+    final JoystickButton l1 = new JoystickButton(m_joystick, 5);
+    final JoystickButton r1 = new JoystickButton(m_joystick, 6);
+   
 
-    a.onTrue(new First(m_shifter));
-    b.onTrue(new Second(m_shifter));
+    l1.onTrue(new First(m_shifter));
+    r1.onTrue(new Second(m_shifter));
+    m_joystick.getRightTriggerAxis().whenActive(new IntakeCommand(m_intake, intake.kIntakeSpeed));
     // Connect the buttons to commands
     // dpadUp.onTrue(new SetElevatorSetpoint(0.25, m_elevator));
     // dpadDown.onTrue(new SetElevatorSetpoint(0.0, m_elevator));
