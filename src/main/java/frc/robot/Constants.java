@@ -45,8 +45,8 @@ public final class Constants {
 
         public static final class controllers {
                 public static final int DRIVETRAIN_LEFT_FRONT_SPARK = 1; // front = closest to intake, left = facing intake
-                public static final int DRIVETRAIN_LEFT_REAR_SPARK = 2;
-                public static final int DRIVETRAIN_RIGHT_FRONT_SPARK = 3;
+                public static final int DRIVETRAIN_RIGHT_FRONT_SPARK = 2;
+                public static final int DRIVETRAIN_LEFT_REAR_SPARK = 3;
                 public static final int DRIVETRAIN_RIGHT_REAR_SPARK = 4;
                 public static final int LEFT_LIFT_SPARK = 5;
                 public static final int RIGHT_LIFT_SPARK = 6;
@@ -84,11 +84,11 @@ public final class Constants {
                 public static final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotorController,
                                 m_rightMotorController);
 
-                public static final double DRIVE_SPEED = 0.5;
+                public static final double DRIVE_SPEED = 1;
 
-                public static final boolean LEFT_FRONT_INVERTED = true;
+                public static final boolean LEFT_FRONT_INVERTED = false;
                 public static final boolean LEFT_REAR_INVERTED = false;
-                public static final boolean RIGHT_FRONT_INVERTED = false;
+                public static final boolean RIGHT_FRONT_INVERTED = true;
                 public static final boolean RIGHT_REAR_INVERTED = true;
         }
 
