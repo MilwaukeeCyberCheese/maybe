@@ -12,7 +12,7 @@ import frc.robot.commands.SetElevatorSetpoint;
 import frc.robot.commands.First;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.Second;
-import frc.robot.commands.TankDrive;
+import frc.robot.commands.ArcadeDrive;
 import frc.robot.other.FilteredController;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.RightElevator;
@@ -62,7 +62,7 @@ public class RobotContainer {
 
     // Assign default commands
     m_drivetrain.setDefaultCommand(
-        new TankDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getYRight(.2), m_drivetrain));
+        new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getYRight(.2), m_drivetrain));
 
     // // Show what command your subsystem is running on the SmartDashboard
     // SmartDashboard.putData(m_drivetrain);

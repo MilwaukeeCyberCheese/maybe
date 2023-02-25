@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import java.util.function.DoubleSupplier;
 
 /** Have the robot drive tank style. */
-public class TankDrive extends CommandBase {
+public class ArcadeDrive extends CommandBase {
   private final Drivetrain m_drivetrain;
   private final DoubleSupplier m_left;
   private final DoubleSupplier m_right;
@@ -22,7 +22,7 @@ public class TankDrive extends CommandBase {
    * @param right The control input for the right sight of the drive
    * @param drivetrain The drivetrain subsystem to drive
    */
-  public TankDrive(DoubleSupplier left, DoubleSupplier right, Drivetrain drivetrain) {
+  public ArcadeDrive(DoubleSupplier left, DoubleSupplier right, Drivetrain drivetrain) {
     m_drivetrain = drivetrain;
     m_left = left;
     m_right = right;
@@ -32,7 +32,7 @@ public class TankDrive extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    m_drivetrain.drive(m_left.getAsDouble() * Constants.drive.DRIVE_SPEED, m_right.getAsDouble() * Constants.drive.DRIVE_SPEED);
+    m_drivetrain.drive(m_left.getAsDouble() * Constants.drive.DRIVE_SPEED, m_right.getAsDouble() * Constants.drive.TURN_SPEED);
   }
 
   // Make this return true when this Command no longer needs to run execute()
