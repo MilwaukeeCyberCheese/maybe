@@ -67,7 +67,7 @@ public final class Constants {
                                 MotorType.kBrushed);
 
                 public static final CANSparkMax intakeSpark = new CANSparkMax(INTAKE_SPARK,
-                                MotorType.kBrushed);
+                                MotorType.kBrushless);
 
                 public static final CANSparkMax leftLiftSpark = new CANSparkMax(LEFT_LIFT_SPARK, 
                                 MotorType.kBrushed);
