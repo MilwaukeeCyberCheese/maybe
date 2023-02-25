@@ -67,7 +67,7 @@ public final class Constants {
                                 MotorType.kBrushed);
 
                 public static final CANSparkMax intakeSpark = new CANSparkMax(INTAKE_SPARK,
-                                MotorType.kBrushless);
+                                MotorType.kBrushed);
 
                 public static final CANSparkMax leftLiftSpark = new CANSparkMax(LEFT_LIFT_SPARK, 
                                 MotorType.kBrushed);
@@ -96,8 +96,8 @@ public final class Constants {
         public static final class intake {
                 public static final boolean INVERTED = true;
 
-                public static final double CONE_SPEED = 0.5;
-                public static final double CUBE_SPEED = -0.5;
+                public static final double CONE_SPEED = 0.3;
+                public static final double CUBE_SPEED = -0.3;
         }
 
         public static final class lift {

@@ -87,8 +87,8 @@ public class RobotContainer {
 Trigger rightBumper = new JoystickButton(m_controller, 6);
 Trigger leftBumper = new JoystickButton(m_controller, 5);
 
-leftBumper.onTrue(new IntakeConeCommand(m_intake));
-rightBumper.onTrue(new IntakeCubeCommand(m_intake));
+leftBumper.whileTrue(new IntakeConeCommand(m_intake));
+rightBumper.whileTrue(new IntakeCubeCommand(m_intake));
 
     // Connect the buttons to commands
     // dpadUp.onTrue(new SetElevatorSetpoint(0.25, m_elevator));
