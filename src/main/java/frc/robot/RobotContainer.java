@@ -10,7 +10,8 @@ import frc.robot.Constants.intake;
 import frc.robot.commands.Autonomous;
 import frc.robot.commands.SetElevatorSetpoint;
 import frc.robot.commands.First;
-import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.IntakeConeCommand;
+import frc.robot.commands.IntakeCubeCommand;
 import frc.robot.commands.Second;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.other.FilteredController;
@@ -62,7 +63,7 @@ public class RobotContainer {
 
     // Assign default commands
     m_drivetrain.setDefaultCommand(
-        new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getYRight(.2), m_drivetrain));
+        new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getXRight(.2), m_drivetrain));
 
     // // Show what command your subsystem is running on the SmartDashboard
     // SmartDashboard.putData(m_drivetrain);
@@ -83,7 +84,11 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // Create some buttons
     
-   
+Trigger rightBumper = new JoystickButton(m_controller, 6);
+Trigger leftBumper = new JoystickButton(m_controller, 5);
+
+leftBumper.onTrue(new IntakeConeCommand(m_intake));
+rightBumper.onTrue(new IntakeCubeCommand(m_intake));
 
     // Connect the buttons to commands
     // dpadUp.onTrue(new SetElevatorSetpoint(0.25, m_elevator));

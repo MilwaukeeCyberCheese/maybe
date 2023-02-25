@@ -4,11 +4,11 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class IntakeCommand extends CommandBase {
+public class IntakeConeCommand extends CommandBase {
     private final Intake m_intake;
 
     // constructor
-    public IntakeCommand(Intake intake) {
+    public IntakeConeCommand(Intake intake) {
         this.m_intake = intake;
 
         addRequirements(m_intake);
@@ -16,7 +16,7 @@ public class IntakeCommand extends CommandBase {
 
     @Override
     public void execute() {
-        m_intake.drive(Constants.intake.INTAKE_SPEED);
+        m_intake.drive(Constants.intake.CONE_SPEED);
     }
 
     @Override

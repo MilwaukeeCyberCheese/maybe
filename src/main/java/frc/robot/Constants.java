@@ -85,7 +85,7 @@ public final class Constants {
                                 m_rightMotorController);
 
                 public static final double DRIVE_SPEED = 0.7;
-                public static final double TURN_SPEED = 0.7;
+                public static final double TURN_SPEED = 0.6;
 
                 public static final boolean LEFT_FRONT_INVERTED = false;
                 public static final boolean LEFT_REAR_INVERTED = false;
@@ -96,7 +96,8 @@ public final class Constants {
         public static final class intake {
                 public static final boolean INVERTED = true;
 
-                public static final double INTAKE_SPEED = 0.5;
+                public static final double CONE_SPEED = 0.5;
+                public static final double CUBE_SPEED = -0.5;
         }
 
         public static final class lift {
