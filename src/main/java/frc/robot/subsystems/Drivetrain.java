@@ -42,28 +42,28 @@ public class Drivetrain extends SubsystemBase {
     // simulate 360 tick encoders. This if statement allows for the
     // real robot to handle this difference in devices.
     if (Robot.isReal()) {
-      Constants.sensors.m_leftEncoder.setDistancePerPulse(Constants.sensors.LEFT_DRIVE_ENCODER_DISTANCE_PER_PULSE);
-      Constants.sensors.m_rightEncoder.setDistancePerPulse(Constants.sensors.RIGHT_DRIVE_ENCODER_DISTANCE_PER_PULSE);
+      Constants.sensors.m_leftDriveEncoder.setDistancePerPulse(Constants.sensors.LEFT_DRIVE_ENCODER_DISTANCE_PER_PULSE);
+      Constants.sensors.m_rightDriveEncoder.setDistancePerPulse(Constants.sensors.RIGHT_DRIVE_ENCODER_DISTANCE_PER_PULSE);
     } else {
       // Circumference = diameter in feet * pi. 360 tick simulated encoders.
-      Constants.sensors.m_leftEncoder.setDistancePerPulse((4.0 / 12.0 * Math.PI) / 360.0);
-      Constants.sensors.m_rightEncoder.setDistancePerPulse((4.0 / 12.0 * Math.PI) / 360.0);
+      Constants.sensors.m_leftDriveEncoder.setDistancePerPulse((4.0 / 12.0 * Math.PI) / 360.0);
+      Constants.sensors.m_rightDriveEncoder.setDistancePerPulse((4.0 / 12.0 * Math.PI) / 360.0);
     }
 
     // Let's name the sensors on the LiveWindow
     addChild("Drive", Constants.drive.m_drive);
-    addChild("Left Encoder", Constants.sensors.m_leftEncoder);
-    addChild("Right Encoder", Constants.sensors.m_rightEncoder);
+    addChild("Left Encoder", Constants.sensors.m_leftDriveEncoder);
+    addChild("Right Encoder", Constants.sensors.m_rightDriveEncoder);
     addChild("Rangefinder", m_rangefinder);
     addChild("Gyro", m_gyro);
   }
 
   /** The log method puts interesting information to the SmartDashboard. */
   public void log() {
-    SmartDashboard.putNumber("Left Distance", Constants.sensors.m_leftEncoder.getDistance());
-    SmartDashboard.putNumber("Right Distance", Constants.sensors.m_rightEncoder.getDistance());
-    SmartDashboard.putNumber("Left Speed", Constants.sensors.m_leftEncoder.getRate());
-    SmartDashboard.putNumber("Right Speed", Constants.sensors.m_rightEncoder.getRate());
+    SmartDashboard.putNumber("Left Distance", Constants.sensors.m_leftDriveEncoder.getDistance());
+    SmartDashboard.putNumber("Right Distance", Constants.sensors.m_rightDriveEncoder.getDistance());
+    SmartDashboard.putNumber("Left Speed", Constants.sensors.m_leftDriveEncoder.getRate());
+    SmartDashboard.putNumber("Right Speed", Constants.sensors.m_rightDriveEncoder.getRate());
     SmartDashboard.putNumber("Gyro", m_gyro.getAngle());
   }
 
@@ -89,8 +89,8 @@ public class Drivetrain extends SubsystemBase {
   /** Reset the robots sensors to the zero states. */
   public void reset() {
     m_gyro.reset();
-    Constants.sensors.m_leftEncoder.reset();
-    Constants.sensors.m_rightEncoder.reset();
+    Constants.sensors.m_leftDriveEncoder.reset();
+    Constants.sensors.m_rightDriveEncoder.reset();
   }
 
   /**
@@ -99,7 +99,7 @@ public class Drivetrain extends SubsystemBase {
    * @return The distance driven (average of left and right encoders).
    */
   public double getDistance() {
-    return (Constants.sensors.m_leftEncoder.getDistance() + Constants.sensors.m_rightEncoder.getDistance()) / 2;
+    return (Constants.sensors.m_leftDriveEncoder.getDistance() + Constants.sensors.m_rightDriveEncoder.getDistance()) / 2;
   }
 
   /**

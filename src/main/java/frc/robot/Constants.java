@@ -13,14 +13,20 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.EncoderType;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.SparkMaxRelativeEncoder.Type;
 
 public final class Constants {
 
         public static final class sensors {
 
-                public static final Encoder m_leftEncoder = new Encoder(1, 2);
-                public static final Encoder m_rightEncoder = new Encoder(3, 4);
+                public static final Encoder m_leftDriveEncoder = new Encoder(1, 2);
+                public static final Encoder m_rightDriveEncoder = new Encoder(3, 4);
+
+                public static final RelativeEncoder m_leftLiftEncoder = Constants.controllers.leftLiftSpark.getEncoder(Type.kHallSensor, 42);
+                public static final RelativeEncoder m_rightLiftEncoder = Constants.controllers.rightLiftSpark.getEncoder(Type.kHallSensor, 42);
 
 
                 public static final double LEFT_DRIVE_ENCODER_DISTANCE_PER_PULSE = 0.0;
@@ -112,5 +118,21 @@ public final class Constants {
                 public static final double POSITION_ONE = 1;
                 public static final double POSITION_TWO = 2;
                 public static final double POSITION_THREE = 3;
+
+                public static final double left_kP = 0.1; 
+                public static final double left_kI = 1e-4;
+                public static final double left_kD = 1; 
+                public static final double left_kIz = 0; 
+                public static final double left_kFF = 0; 
+                public static final double left_kMaxOutput = 1; 
+                public static final double left_kMinOutput = -1; 
+
+                public static final double right_kP = 0.1; 
+                public static final double right_kI = 1e-4;
+                public static final double right_kD = 1; 
+                public static final double right_kIz = 0; 
+                public static final double right_kFF = 0; 
+                public static final double right_kMaxOutput = 1; 
+                public static final double right_kMinOutput = -1; 
         }
 }
