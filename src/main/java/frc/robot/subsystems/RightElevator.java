@@ -4,66 +4,51 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
+
 import frc.robot.Constants;
 import frc.robot.Robot;
-import edu.wpi.first.wpilibj.motorcontrol.Victor;
+
+import com.revrobotics.CANSparkMax;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.PIDSubsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
  * The elevator subsystem uses PID to go to a given height. Unfortunately, in it's current state PID
  * values for simulation are different than in the real world do to minor differences.
  */
-public class RightElevator extends PIDSubsystem {
+public class RightElevator extends SubsystemBase{
   
 
-  private static final double kP_real = 4;
-  private static final double kI_real = 0.07;
-  private static final double kP_simulation = 18;
-  private static final double kI_simulation = 0.2;
+  
 
   /** Create a new elevator subsystem. */
   public RightElevator() {
-    super(new PIDController(kP_real, kI_real, 0));
-    if (Robot.isSimulation()) { // Check for simulation and update PID values
-      getController().setPID(kP_simulation, kI_simulation, 0);
-    }
-    getController().setTolerance(0.005);
+    Constants.controllers.rightLiftSpark.restoreFactoryDefaults();
 
-    
-
-    // Conversion value of potentiometer varies between the real world and
-    // simulation
-    if (Robot.isReal()) {
-      Constants.sensors.rightLiftEncoder.setDistancePerPulse(-2.0 / 5);
-    } else {
-     
-    }
-
-    // Let's name everything on the LiveWindow
-    
+    Constants.lift.right_PID.setP(Constants.lift.right_kP);
+    Constants.lift.right_PID.setI(Constants.lift.right_kI);
+    Constants.lift.right_PID.setD(Constants.lift.right_kD);
+    Constants.lift.right_PID.setIZone(Constants.lift.right_kIz);
+    Constants.lift.right_PID.setFF(Constants.lift.right_kFF);
+    Constants.lift.right_PID.setOutputRange(Constants.lift.right_kMinOutput, Constants.lift.right_kMaxOutput);
   }
+
+
+
+  public void setTargetPosition(double position) {
+    Constants.lift.right_PID.setReference(position, CANSparkMax.ControlType.kPosition);
+  }
+
+
 
   /** The log method puts interesting information to the SmartDashboard. */
   public void log() {
     SmartDashboard.putData("Elevator Encoder", Constants.sensors.rightLiftEncoder);
   }
 
-  /**
-   * Use the potentiometer as the PID sensor. This method is automatically called by the subsystem.
-   */
-  @Override
-  public double getMeasurement() {
-    return Constants.sensors.rightLiftEncoder.getDistance();
-  }
 
-  /** Use the motor as the PID output. This method is automatically called by the subsystem. */
-  @Override
-  public void useOutput(double output, double setpoint) {
-    Constants.controllers.rightLiftSpark.set(output);
-  }
+  
 
   /** Call log method every loop. */
   @Override

@@ -37,23 +37,13 @@ public class Shifter extends SubsystemBase {
     addChild("Right Solenoid", Constants.pneumatics.rSolenoid);
   }
 
-public void second(){
-Constants.pneumatics.lSolenoid.set(true);
-Constants.pneumatics.rSolenoid.set(true);
+public void setGear(boolean position){
+Constants.pneumatics.lSolenoid.set(position);
+Constants.pneumatics.rSolenoid.set(position);
 
 }
 
-public void first(){
-  Constants.pneumatics.lSolenoid.set(false);
-  Constants.pneumatics.rSolenoid.set(false);
 
-}
-
-public void toggle(){
-  Constants.pneumatics.lSolenoid.toggle();
-  Constants.pneumatics.rSolenoid.toggle();
-  
-}
   /** The log method puts interesting information to the SmartDashboard. */
   public void log() {
     SmartDashboard.putBoolean("Left Solenoid", Constants.pneumatics.lSolenoid.get());
