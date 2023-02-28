@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
 import frc.robot.Constants.intake;
 import frc.robot.commands.Autonomous;
-import frc.robot.commands.SetElevatorSetpoint;
 import frc.robot.commands.First;
 import frc.robot.commands.IntakeConeCommand;
 import frc.robot.commands.IntakeCubeCommand;

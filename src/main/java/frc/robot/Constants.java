@@ -127,20 +127,20 @@ public final class Constants {
                 public static final SparkMaxPIDController right_PID = Constants.controllers.rightLiftSpark.getPIDController();
 
 
-                public static final double left_kP = 0.1; 
-                public static final double left_kI = 1e-4;
-                public static final double left_kD = 1; 
-                public static final double left_kIz = 0; 
-                public static final double left_kFF = 0; 
-                public static final double left_kMaxOutput = 1; 
-                public static final double left_kMinOutput = -1; 
+                public static double left_kP = 0.1; 
+                public static double left_kI = 1e-4;
+                public static double left_kD = 1; 
+                public static double left_kIz = 0; 
+                public static double left_kFF = 0; 
+                public static double left_kMaxOutput = 1; 
+                public static double left_kMinOutput = -1; 
 
-                public static final double right_kP = 0.1; 
-                public static final double right_kI = 1e-4;
-                public static final double right_kD = 1; 
-                public static final double right_kIz = 0; 
-                public static final double right_kFF = 0; 
-                public static final double right_kMaxOutput = 1; 
-                public static final double right_kMinOutput = -1; 
+                public static double right_kP = 0.1; 
+                public static double right_kI = 1e-4;
+                public static double right_kD = 1; 
+                public static double right_kIz = 0; 
+                public static double right_kFF = 0; 
+                public static double right_kMaxOutput = 1; 
+                public static double right_kMinOutput = -1; 
         }
 }
