@@ -26,9 +26,12 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.Intake;
 
 /**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a
+ * "declarative" paradigm, very little robot logic should actually be handled in
+ * the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of
+ * the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
@@ -37,20 +40,21 @@ public class RobotContainer {
   private final RightElevator m_elevator = new RightElevator();
   private final Shifter m_shifter = new Shifter();
   private final Intake m_intake = new Intake();
-  
-
 
   private static final XboxController m_controller = new XboxController(0);
   public static final FilteredController m_filteredController = new FilteredController(m_controller);
 
-  private final CommandBase m_autonomousCommand =
-      new Autonomous(m_drivetrain, m_elevator);
+  private final CommandBase m_autonomousCommand = new Autonomous(m_drivetrain, m_elevator);
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  /**
+   * The container for the robot. Contains subsystems, OI devices, and commands.
+   */
   public RobotContainer() {
     // Put Some buttons on the SmartDashboard
-    // SmartDashboard.putData("Elevator Bottom", new SetElevatorSetpoint(0, m_elevator));
-    // SmartDashboard.putData("Elevator Top", new SetElevatorSetpoint(0.25, m_elevator));
+    // SmartDashboard.putData("Elevator Bottom", new SetElevatorSetpoint(0,
+    // m_elevator));
+    // SmartDashboard.putData("Elevator Top", new SetElevatorSetpoint(0.25,
+    // m_elevator));
 
     // SmartDashboard.putData("Wrist Horizontal", new SetWristSetpoint(0, m_wrist));
     // SmartDashboard.putData("Raise Wrist", new SetWristSetpoint(-45, m_wrist));
@@ -59,11 +63,12 @@ public class RobotContainer {
     // SmartDashboard.putData("Close Claw", new CloseClaw(m_claw));
 
     // SmartDashboard.putData(
-    //     "Deliver Soda", new Autonomous(m_drivetrain, m_claw, m_wrist, m_elevator));
+    // "Deliver Soda", new Autonomous(m_drivetrain, m_claw, m_wrist, m_elevator));
 
     // Assign default commands
     m_drivetrain.setDefaultCommand(
-        new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getXRight(.2), m_drivetrain));
+        new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getXRight(.2),
+            m_drivetrain));
 
     // // Show what command your subsystem is running on the SmartDashboard
     // SmartDashboard.putData(m_drivetrain);
@@ -76,23 +81,26 @@ public class RobotContainer {
   }
 
   /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link edu.wpi.first.wpilibj.GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * Use this method to define your button->command mappings. Buttons can be
+   * created by
+   * instantiating a {@link edu.wpi.first.wpilibj.GenericHID} or one of its
+   * subclasses ({@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
+   * it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
     // Create some buttons
-Trigger aButton = new JoystickButton(m_controller, 1);
-Trigger bButton = new JoystickButton(m_controller, 2);    
-Trigger rightBumper = new JoystickButton(m_controller, 6);
-Trigger leftBumper = new JoystickButton(m_controller, 5);
+    Trigger aButton = new JoystickButton(m_controller, 1);
+    Trigger bButton = new JoystickButton(m_controller, 2);
+    Trigger rightBumper = new JoystickButton(m_controller, 6);
+    Trigger leftBumper = new JoystickButton(m_controller, 5);
 
-leftBumper.whileTrue(new IntakeConeCommand(m_intake));
-rightBumper.whileTrue(new IntakeCubeCommand(m_intake));
+    leftBumper.whileTrue(new IntakeConeCommand(m_intake));
+    rightBumper.whileTrue(new IntakeCubeCommand(m_intake));
 
-aButton.onTrue(new First(m_shifter));
-bButton.onTrue(new Second(m_shifter));   
+    aButton.onTrue(new First(m_shifter));
+    bButton.onTrue(new Second(m_shifter));
   }
 
   /**
