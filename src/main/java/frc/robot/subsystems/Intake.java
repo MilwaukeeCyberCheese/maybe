@@ -8,7 +8,6 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase {
 
     private double speed;
-    private Value position;
 
     /**
      * Creates a new ExampleSubsystem.
