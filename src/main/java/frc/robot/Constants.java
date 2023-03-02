@@ -1,7 +1,5 @@
 package frc.robot;
 
-import edu.wpi.first.hal.CTREPCMJNI;
-import edu.wpi.first.hal.simulation.CTREPCMDataJNI;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
@@ -9,15 +7,12 @@ import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.EncoderType;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.SparkMaxRelativeEncoder.Type;
 
 public final class Constants {
 
@@ -44,6 +39,10 @@ public final class Constants {
                 Solenoid(PneumaticsModuleType.CTREPCM, 0);
                 public static final Solenoid rSolenoid = new
                 Solenoid(PneumaticsModuleType.CTREPCM, 1);
+
+                public static final DoubleSolenoid intakeSolenoid =  new
+                DoubleSolenoid(PneumaticsModuleType.CTREPCM, 2, 3);
+
                 public static final Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
                 
                 public static final PneumaticsControlModule PCM = new PneumaticsControlModule();
