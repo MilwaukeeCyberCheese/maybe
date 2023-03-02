@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
- * The wrist subsystem is like the elevator, but with a rotational joint instead of a linear joint.
+ * The shifter subsystem includes both of the cylinders on the gearboxes
  */
 public class Shifter extends SubsystemBase {
  
@@ -32,9 +32,7 @@ public class Shifter extends SubsystemBase {
 
     
 
-    // Let's name everything on the LiveWindow
-    addChild("Left Solenoid", Constants.pneumatics.lSolenoid);
-    addChild("Right Solenoid", Constants.pneumatics.rSolenoid);
+    
   }
 
 public void setGear(boolean position){
@@ -44,7 +42,7 @@ Constants.pneumatics.rSolenoid.set(position);
 }
 
 
-  /** The log method puts interesting information to the SmartDashboard. */
+  /** The log method puts the status of each solenoid to SmartDashboard */
   public void log() {
     SmartDashboard.putBoolean("Left Solenoid", Constants.pneumatics.lSolenoid.get());
     SmartDashboard.putBoolean("Right Shifter", Constants.pneumatics.rSolenoid.get());
