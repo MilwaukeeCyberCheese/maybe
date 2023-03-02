@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 
 import frc.robot.Constants;
-import frc.robot.Robot;
 
 import com.revrobotics.CANSparkMax;
 
@@ -75,8 +74,7 @@ public class LeftElevator extends SubsystemBase{
       Constants.lift.left_kMinOutput = min; Constants.lift.left_kMaxOutput = max; 
     }
 
-    //TODO  THIS IS FOR TESTING REMOVE FOR COMPETITION
-    Constants.lift.left_PID.setReference(rotations, CANSparkMax.ControlType.kPosition);
+    
   }
 
   
