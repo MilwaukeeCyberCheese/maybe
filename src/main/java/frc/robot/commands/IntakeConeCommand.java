@@ -14,11 +14,13 @@ public class IntakeConeCommand extends CommandBase {
         addRequirements(m_intake);
     }
 
+    //run whenever command is called
     @Override
     public void execute() {
         m_intake.drive(Constants.intake.CONE_SPEED);
     }
 
+    //stop motor when finished
     @Override
     public void end(boolean interrupted) {
         m_intake.drive(0);
