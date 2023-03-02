@@ -28,8 +28,8 @@ public class IntakeShifter extends SubsystemBase {
 
   /** The log method puts the status of each solenoid to SmartDashboard */
   public void log() {
-    SmartDashboard.putValue("Left Solenoid", Constants.pneumatics.lIntakeSolenoid.get());
-    SmartDashboard.putNumber("Right Intake Solenoid", Constants.pneumatics.rIntakeSolenoid.get());
+    SmartDashboard.putData("Left Solenoid", Constants.pneumatics.lIntakeSolenoid);
+    SmartDashboard.putData("Right Intake Solenoid", Constants.pneumatics.rIntakeSolenoid);
   }
 
   /** Call log method every loop. */
