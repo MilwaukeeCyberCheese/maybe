@@ -7,6 +7,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.IntakeOff;
+import frc.robot.subsystems.Intake;
+import frc.robot.commands.First;
+import frc.robot.subsystems.Shifter;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -18,6 +22,9 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+
+  private final Intake m_intake = new Intake();
+  private final Shifter m_shifter = new Shifter();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -49,7 +56,10 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    new IntakeOff(m_intake);
+    new First(m_shifter);
+  }
 
   @Override
   public void disabledPeriodic() {}

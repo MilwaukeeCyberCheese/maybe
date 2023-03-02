@@ -7,7 +7,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
-import frc.robot.Constants.intake;
 import frc.robot.commands.Autonomous;
 import frc.robot.commands.First;
 import frc.robot.commands.IntakeConeCommand;
