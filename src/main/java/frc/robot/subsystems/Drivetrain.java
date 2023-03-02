@@ -4,15 +4,8 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Constants;
 import frc.robot.Robot;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -22,8 +15,7 @@ public class Drivetrain extends SubsystemBase {
    * These include four drive motors, a left and right encoder and a gyro.
    */
   
-  private final AnalogInput m_rangefinder = new AnalogInput(6);
-  private final AnalogGyro m_gyro = new AnalogGyro(1);
+  
 
   /** Create a new drivetrain subsystem. */
   public Drivetrain() {
@@ -54,8 +46,6 @@ public class Drivetrain extends SubsystemBase {
     addChild("Drive", Constants.drive.m_drive);
     addChild("Left Encoder", Constants.sensors.m_leftDriveEncoder);
     addChild("Right Encoder", Constants.sensors.m_rightDriveEncoder);
-    addChild("Rangefinder", m_rangefinder);
-    addChild("Gyro", m_gyro);
   }
 
   /** The log method puts interesting information to the SmartDashboard. */
@@ -64,7 +54,6 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Right Distance", Constants.sensors.m_rightDriveEncoder.getDistance());
     SmartDashboard.putNumber("Left Speed", Constants.sensors.m_leftDriveEncoder.getRate());
     SmartDashboard.putNumber("Right Speed", Constants.sensors.m_rightDriveEncoder.getRate());
-    SmartDashboard.putNumber("Gyro", m_gyro.getAngle());
   }
 
   /**
@@ -77,18 +66,10 @@ public class Drivetrain extends SubsystemBase {
     Constants.drive.m_drive.arcadeDrive(left, right);
   }
 
-  /**
-   * Get the robot's heading.
-   *
-   * @return The robots heading in degrees.
-   */
-  public double getHeading() {
-    return m_gyro.getAngle();
-  }
+ 
 
   /** Reset the robots sensors to the zero states. */
   public void reset() {
-    m_gyro.reset();
     Constants.sensors.m_leftDriveEncoder.reset();
     Constants.sensors.m_rightDriveEncoder.reset();
   }
@@ -102,15 +83,7 @@ public class Drivetrain extends SubsystemBase {
     return (Constants.sensors.m_leftDriveEncoder.getDistance() + Constants.sensors.m_rightDriveEncoder.getDistance()) / 2;
   }
 
-  /**
-   * Get the distance to the obstacle.
-   *
-   * @return The distance to the obstacle detected by the rangefinder.
-   */
-  public double getDistanceToObstacle() {
-    // Really meters in simulation since it's a rangefinder...
-    return m_rangefinder.getAverageVoltage();
-  }
+ 
 
   /** Call log method every loop. */
   @Override
