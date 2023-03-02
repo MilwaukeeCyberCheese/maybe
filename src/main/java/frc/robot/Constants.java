@@ -40,8 +40,10 @@ public final class Constants {
                 public static final Solenoid rSolenoid = new
                 Solenoid(PneumaticsModuleType.CTREPCM, 1);
 
-                public static final DoubleSolenoid intakeSolenoid =  new
+                public static final DoubleSolenoid lIntakeSolenoid =  new
                 DoubleSolenoid(PneumaticsModuleType.CTREPCM, 2, 3);
+                public static final DoubleSolenoid rIntakeSolenoid =  new
+                DoubleSolenoid(PneumaticsModuleType.CTREPCM, 4, 5);
 
                 public static final Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
                 

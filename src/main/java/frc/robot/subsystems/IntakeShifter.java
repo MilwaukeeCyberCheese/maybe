@@ -21,12 +21,15 @@ public class IntakeShifter extends SubsystemBase {
   }
 
   public void setPosition(Value position) {
-    Constants.pneumatics.intakeSolenoid.set(position);
+    Constants.pneumatics.lIntakeSolenoid.set(position);
+    Constants.pneumatics.rIntakeSolenoid.set(postion);
+
   }
 
   /** The log method puts the status of each solenoid to SmartDashboard */
   public void log() {
-    SmartDashboard.putBoolean("Left Solenoid", Constants.pneumatics.lSolenoid.get());
+    SmartDashboard.putBoolean("Left Solenoid", Constants.pneumatics.lIntakeSolenoid.get());
+    SmartDashboard.putNumber("Right Intake Solenoid", Constants.pneumatics.rIntakeSolenoid.get());
   }
 
   /** Call log method every loop. */
