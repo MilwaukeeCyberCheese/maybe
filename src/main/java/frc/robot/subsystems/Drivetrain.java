@@ -10,11 +10,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
   /**
-   * The Drivetrain subsystem incorporates the sensors and actuators attached to the robots chassis.
+   * The Drivetrain subsystem incorporates the sensors and actuators attached to
+   * the robots chassis.
    * These include four drive motors, a left and right encoder and a gyro.
    */
-  
-  
 
   /** Create a new drivetrain subsystem. */
   public Drivetrain() {
@@ -32,9 +31,9 @@ public class Drivetrain extends SubsystemBase {
     // per tick in the real world, but the simulated encoders
     // simulate 360 tick encoders. This if statement allows for the
     // real robot to handle this difference in devices.
-    
-      Constants.sensors.m_leftDriveEncoder.setDistancePerPulse(Constants.sensors.LEFT_DRIVE_ENCODER_DISTANCE_PER_PULSE);
-      Constants.sensors.m_rightDriveEncoder.setDistancePerPulse(Constants.sensors.RIGHT_DRIVE_ENCODER_DISTANCE_PER_PULSE);
+
+    Constants.sensors.m_leftDriveEncoder.setDistancePerPulse(Constants.sensors.LEFT_DRIVE_ENCODER_DISTANCE_PER_PULSE);
+    Constants.sensors.m_rightDriveEncoder.setDistancePerPulse(Constants.sensors.RIGHT_DRIVE_ENCODER_DISTANCE_PER_PULSE);
 
     // Let's name the sensors on the LiveWindow
     addChild("Drive", Constants.drive.m_drive);
@@ -48,19 +47,18 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Right Distance", Constants.sensors.m_rightDriveEncoder.getDistance());
     SmartDashboard.putNumber("Left Speed", Constants.sensors.m_leftDriveEncoder.getRate());
     SmartDashboard.putNumber("Right Speed", Constants.sensors.m_rightDriveEncoder.getRate());
+    SmartDashboard.putData("Drivetrain", Constants.drive.m_drive);
   }
 
   /**
    * Tank style driving for the Drivetrain.
    *
-   * @param left Speed in range [-1,1]
+   * @param left  Speed in range [-1,1]
    * @param right Speed in range [-1,1]
    */
   public void drive(double left, double right) {
     Constants.drive.m_drive.arcadeDrive(left, right);
   }
-
- 
 
   /** Reset the robots sensors to the zero states. */
   public void reset() {
@@ -74,10 +72,9 @@ public class Drivetrain extends SubsystemBase {
    * @return The distance driven (average of left and right encoders).
    */
   public double getDistance() {
-    return (Constants.sensors.m_leftDriveEncoder.getDistance() + Constants.sensors.m_rightDriveEncoder.getDistance()) / 2;
+    return (Constants.sensors.m_leftDriveEncoder.getDistance() + Constants.sensors.m_rightDriveEncoder.getDistance())
+        / 2;
   }
-
- 
 
   /** Call log method every loop. */
   @Override

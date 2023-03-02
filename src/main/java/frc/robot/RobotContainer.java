@@ -70,11 +70,6 @@ public class RobotContainer {
         new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getXRight(.2),
             m_drivetrain));
 
-    // // Show what command your subsystem is running on the SmartDashboard
-    // SmartDashboard.putData(m_drivetrain);
-    // SmartDashboard.putData(m_elevator);
-    // SmartDashboard.putData(m_wrist);
-    // SmartDashboard.putData(m_claw);
 
     // Configure the button bindings
     configureButtonBindings();
