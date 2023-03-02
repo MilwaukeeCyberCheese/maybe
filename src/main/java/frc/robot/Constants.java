@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
@@ -109,6 +110,10 @@ public final class Constants {
 
                 public static final double CONE_SPEED = 0.3;
                 public static final double CUBE_SPEED = -0.3;
+
+                public static final Value intakeDown = Value.kReverse;
+                public static final Value intakeUp = Value.kForward;
+                public static final Value intakeOff = Value.kOff;
         }
 
         public static final class lift {
