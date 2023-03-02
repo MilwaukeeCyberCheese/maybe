@@ -33,14 +33,9 @@ public class Drivetrain extends SubsystemBase {
     // per tick in the real world, but the simulated encoders
     // simulate 360 tick encoders. This if statement allows for the
     // real robot to handle this difference in devices.
-    if (Robot.isReal()) {
+    
       Constants.sensors.m_leftDriveEncoder.setDistancePerPulse(Constants.sensors.LEFT_DRIVE_ENCODER_DISTANCE_PER_PULSE);
       Constants.sensors.m_rightDriveEncoder.setDistancePerPulse(Constants.sensors.RIGHT_DRIVE_ENCODER_DISTANCE_PER_PULSE);
-    } else {
-      // Circumference = diameter in feet * pi. 360 tick simulated encoders.
-      Constants.sensors.m_leftDriveEncoder.setDistancePerPulse((4.0 / 12.0 * Math.PI) / 360.0);
-      Constants.sensors.m_rightDriveEncoder.setDistancePerPulse((4.0 / 12.0 * Math.PI) / 360.0);
-    }
 
     // Let's name the sensors on the LiveWindow
     addChild("Drive", Constants.drive.m_drive);
