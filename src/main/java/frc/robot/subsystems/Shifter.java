@@ -58,6 +58,5 @@ Constants.pneumatics.rSolenoid.set(position);
   @Override
   public void periodic() {
     log();
-    Constants.pneumatics.compressor.enableDigital();
   }
 }
