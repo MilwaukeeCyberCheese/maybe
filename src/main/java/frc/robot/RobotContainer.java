@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
 import frc.robot.Constants.intake;
@@ -82,23 +83,16 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Create some buttons
-    
+Trigger aButton = new JoystickButton(m_controller, 1);
+Trigger bButton = new JoystickButton(m_controller, 2);    
 Trigger rightBumper = new JoystickButton(m_controller, 6);
 Trigger leftBumper = new JoystickButton(m_controller, 5);
 
 leftBumper.whileTrue(new IntakeConeCommand(m_intake));
 rightBumper.whileTrue(new IntakeCubeCommand(m_intake));
 
-    // Connect the buttons to commands
-    // dpadUp.onTrue(new SetElevatorSetpoint(0.25, m_elevator));
-    // dpadDown.onTrue(new SetElevatorSetpoint(0.0, m_elevator));
-    // dpadRight.onTrue(new CloseClaw(m_claw));
-    // dpadLeft.onTrue(new OpenClaw(m_claw));
-
-    // r1.onTrue(new PrepareToPickup(m_claw, m_wrist, m_elevator));
-    // r2.onTrue(new Pickup(m_claw, m_wrist, m_elevator));
-    // l1.onTrue(new Place(m_claw, m_wrist, m_elevator));
-    // l2.onTrue(new Autonomous(m_drivetrain, m_claw, m_wrist, m_elevator));
+aButton.onTrue(new First(m_shifter));
+bButton.onTrue(new Second(m_shifter));   
   }
 
   /**
