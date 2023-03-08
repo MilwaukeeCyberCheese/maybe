@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
+import com.revrobotics.*;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
@@ -19,8 +20,8 @@ public final class Constants {
 
         public static final class sensors {
 
-                public static final Encoder m_leftDriveEncoder = new Encoder(1, 2);
-                public static final Encoder m_rightDriveEncoder = new Encoder(3, 4);
+                public static final Encoder m_leftDriveEncoder = new Encoder(0, 1, false);
+                public static final Encoder m_rightDriveEncoder = new Encoder(2, 3, false);
 
                
 
