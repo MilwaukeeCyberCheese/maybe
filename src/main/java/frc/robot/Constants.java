@@ -22,8 +22,7 @@ public final class Constants {
                 public static final Encoder m_leftDriveEncoder = new Encoder(1, 2);
                 public static final Encoder m_rightDriveEncoder = new Encoder(3, 4);
 
-                public static final RelativeEncoder m_leftLiftEncoder = Constants.controllers.leftLiftSpark.getEncoder();
-                public static final RelativeEncoder m_rightLiftEncoder = Constants.controllers.rightLiftSpark.getEncoder();
+               
 
 
                 public static final double LEFT_DRIVE_ENCODER_DISTANCE_PER_PULSE = 0.0;
@@ -41,10 +40,8 @@ public final class Constants {
                 public static final Solenoid rSolenoid = new
                 Solenoid(PneumaticsModuleType.CTREPCM, 1);
 
-                public static final DoubleSolenoid lIntakeSolenoid =  new
+                public static final DoubleSolenoid intakeSolenoid =  new
                 DoubleSolenoid(PneumaticsModuleType.CTREPCM, 2, 3);
-                public static final DoubleSolenoid rIntakeSolenoid =  new
-                DoubleSolenoid(PneumaticsModuleType.CTREPCM, 4, 5);
 
                 public static final Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
                 

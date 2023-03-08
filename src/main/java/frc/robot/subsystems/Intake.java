@@ -28,14 +28,12 @@ public class Intake extends SubsystemBase {
     }
 
     public void setPosition(Value position) {
-        Constants.pneumatics.lIntakeSolenoid.set(position);
-        Constants.pneumatics.rIntakeSolenoid.set(position);
+        Constants.pneumatics.intakeSolenoid.set(position);
 
     }
 
     public void log() {
         SmartDashboard.putNumber("IntakeSpeed", speed);
-        SmartDashboard.putData(Constants.pneumatics.lIntakeSolenoid);
-        SmartDashboard.putData(Constants.pneumatics.rIntakeSolenoid);
+        SmartDashboard.putData(Constants.pneumatics.intakeSolenoid);
     }
 }

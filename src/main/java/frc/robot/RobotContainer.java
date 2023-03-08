@@ -87,14 +87,16 @@ public class RobotContainer {
     // Create some buttons
     Trigger aButton = new JoystickButton(m_controller, 1);
     Trigger bButton = new JoystickButton(m_controller, 2);
-    Trigger rightBumper = new JoystickButton(m_controller, 6);
     Trigger leftBumper = new JoystickButton(m_controller, 5);
+    Trigger rightBumper = new JoystickButton(m_controller, 6);
 
     leftBumper.whileTrue(new IntakeConeCommand(m_intake));
     rightBumper.whileTrue(new IntakeCubeCommand(m_intake));
 
     aButton.onTrue(new First(m_shifter));
     bButton.onTrue(new Second(m_shifter));
+
+
   }
 
   /**
