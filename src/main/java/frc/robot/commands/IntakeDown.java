@@ -8,7 +8,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-/* Shifts the drivetrain into first gear */
+/* actuates the pistons to flop the intake down */
 public class IntakeDown extends CommandBase {
   private final Intake m_intake;
 

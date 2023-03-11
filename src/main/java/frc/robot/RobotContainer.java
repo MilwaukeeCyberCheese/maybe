@@ -11,6 +11,8 @@ import frc.robot.commands.Autonomous;
 import frc.robot.commands.First;
 import frc.robot.commands.IntakeConeCommand;
 import frc.robot.commands.IntakeCubeCommand;
+import frc.robot.commands.IntakeDown;
+import frc.robot.commands.IntakeUp;
 import frc.robot.commands.Second;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.other.FilteredController;
@@ -87,6 +89,8 @@ public class RobotContainer {
     // Create some buttons
     Trigger aButton = new JoystickButton(m_controller, 1);
     Trigger bButton = new JoystickButton(m_controller, 2);
+    Trigger xButton = new JoystickButton(m_controller, 3);
+    Trigger yButton = new JoystickButton(m_controller, 4);
     Trigger leftBumper = new JoystickButton(m_controller, 5);
     Trigger rightBumper = new JoystickButton(m_controller, 6);
 
@@ -95,6 +99,8 @@ public class RobotContainer {
 
     aButton.onTrue(new First(m_shifter));
     bButton.onTrue(new Second(m_shifter));
+    xButton.onTrue(new IntakeDown(m_intake));
+    yButton.onTrue(new IntakeUp(m_intake));
 
 
   }
