@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.LeftElevator;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -38,14 +39,14 @@ import frc.robot.subsystems.Intake;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
-  private final RightElevator m_elevator = new RightElevator();
+  private final RightElevator m_rightElevator = new RightElevator();
+  private final LeftElevator m_leftElevator = new LeftElevator();
   private final Shifter m_shifter = new Shifter();
   private final Intake m_intake = new Intake();
 
   private static final XboxController m_controller = new XboxController(0);
   public static final FilteredController m_filteredController = new FilteredController(m_controller);
 
-  private final CommandBase m_autonomousCommand = new Autonomous(m_drivetrain, m_elevator);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -71,7 +72,6 @@ public class RobotContainer {
         new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getXRight(.2),
             m_drivetrain));
 
-
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -93,6 +93,7 @@ public class RobotContainer {
     Trigger yButton = new JoystickButton(m_controller, 4);
     Trigger leftBumper = new JoystickButton(m_controller, 5);
     Trigger rightBumper = new JoystickButton(m_controller, 6);
+    Trigger dPadUp = new Trigger(m_controller::getDPadUp);
 
     leftBumper.whileTrue(new IntakeConeCommand(m_intake));
     rightBumper.whileTrue(new IntakeCubeCommand(m_intake));
@@ -102,15 +103,7 @@ public class RobotContainer {
     xButton.onTrue(new IntakeDown(m_intake));
     yButton.onTrue(new IntakeUp(m_intake));
 
-
   }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  public Command getAutonomousCommand() {
-    return m_autonomousCommand;
-  }
+ 
 }
