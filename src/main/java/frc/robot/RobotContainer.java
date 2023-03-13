@@ -93,7 +93,6 @@ public class RobotContainer {
     Trigger yButton = new JoystickButton(m_controller, 4);
     Trigger leftBumper = new JoystickButton(m_controller, 5);
     Trigger rightBumper = new JoystickButton(m_controller, 6);
-    Trigger dPadUp = new Trigger(m_controller::getDPadUp);
 
     leftBumper.whileTrue(new IntakeConeCommand(m_intake));
     rightBumper.whileTrue(new IntakeCubeCommand(m_intake));
