@@ -10,9 +10,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
-import com.revrobotics.*;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
+
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -38,11 +37,9 @@ public final class Constants {
         public static final class pneumatics {
                 public static final Solenoid lSolenoid = new
                 Solenoid(PneumaticsModuleType.CTREPCM, 0);
-                public static final Solenoid rSolenoid = new
-                Solenoid(PneumaticsModuleType.CTREPCM, 1);
 
                 public static final DoubleSolenoid intakeSolenoid =  new
-                DoubleSolenoid(PneumaticsModuleType.CTREPCM, 2, 3);
+                DoubleSolenoid(PneumaticsModuleType.CTREPCM, 6, 7);
 
                 public static final Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
                 
@@ -115,7 +112,7 @@ public final class Constants {
         }
 
         public static final class lift {
-                public static final boolean LEFT_INVERTED = true;
+                public static final boolean LEFT_INVERTED = false;
                 public static final boolean RIGHT_INVERTED = true;
 
 

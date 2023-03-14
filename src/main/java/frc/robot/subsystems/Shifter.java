@@ -21,14 +21,14 @@ public class Shifter extends SubsystemBase {
 
   public void setGear(boolean position) {
     Constants.pneumatics.lSolenoid.set(position);
-    Constants.pneumatics.rSolenoid.set(position);
+   
 
   }
 
   /** The log method puts the status of each solenoid to SmartDashboard */
   public void log() {
     SmartDashboard.putData("Left Solenoid", Constants.pneumatics.lSolenoid);
-    SmartDashboard.putData("Right Shifter", Constants.pneumatics.rSolenoid);
+  
   }
 
   /** Call log method every loop. */

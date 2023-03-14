@@ -4,10 +4,9 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
+
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.Constants;
-import frc.robot.commands.Autonomous;
+
 import frc.robot.commands.First;
 import frc.robot.commands.IntakeConeCommand;
 import frc.robot.commands.IntakeCubeCommand;
@@ -19,12 +18,11 @@ import frc.robot.other.FilteredController;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.RightElevator;
 import frc.robot.subsystems.Shifter;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.Intake;
+import frc.robot.commands.Elevator;
 import frc.robot.subsystems.LeftElevator;
 
 /**
@@ -69,8 +67,12 @@ public class RobotContainer {
 
     // Assign default commands
     m_drivetrain.setDefaultCommand(
-        new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getXRight(.2),
+        new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getXLeft(.2),
             m_drivetrain));
+
+    m_leftElevator.setDefaultCommand(
+      new Elevator(() -> m_filteredController.getYRight(.1), m_leftElevator, m_rightElevator)
+    );
 
     // Configure the button bindings
     configureButtonBindings();
