@@ -71,7 +71,11 @@ public class RobotContainer {
             m_drivetrain));
 
     m_leftElevator.setDefaultCommand(
-      new Elevator(() -> m_filteredController.getYRight(.1), m_leftElevator, m_rightElevator)
+      new Elevator(() -> -m_filteredController.getYRight(.1), m_leftElevator, m_rightElevator)
+    );
+
+    m_rightElevator.setDefaultCommand(
+      new Elevator(() -> -m_filteredController.getYRight(.1), m_leftElevator, m_rightElevator)
     );
 
     // Configure the button bindings

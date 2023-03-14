@@ -112,8 +112,8 @@ public final class Constants {
         }
 
         public static final class lift {
-                public static final boolean LEFT_INVERTED = false;
-                public static final boolean RIGHT_INVERTED = true;
+                public static final boolean LEFT_INVERTED = true;
+                public static final boolean RIGHT_INVERTED = false;
 
 
 
