@@ -30,7 +30,7 @@ private final DoubleSupplier m_position;
   // Called just before this Command runs the first time
   @Override
   public void execute() {
-    m_leftElevator.setTargetPosition(m_position.getAsDouble());
+    // m_leftElevator.setTargetPosition(m_position.getAsDouble());
     m_rightElevator.setTargetPosition(m_position.getAsDouble());
   }
 
