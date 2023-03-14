@@ -7,7 +7,7 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 
-import com.revrobotics.CANSparkMax;
+
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -28,7 +28,7 @@ public class LeftElevator extends SubsystemBase{
 
 
 
-  public void setTargetPosition(double speed) {
+  public void setSpeed(double speed) {
     this.speed = speed;
    Constants.controllers.leftLiftSpark.set(speed);
   }

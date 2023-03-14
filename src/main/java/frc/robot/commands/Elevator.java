@@ -4,13 +4,12 @@
 
 package frc.robot.commands;
 
-import frc.robot.Constants;
+
 import frc.robot.subsystems.LeftElevator;
 import frc.robot.subsystems.RightElevator;
 
 import java.util.function.DoubleSupplier;
 
-import javax.swing.text.Position;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -30,8 +29,8 @@ private final DoubleSupplier m_position;
   // Called just before this Command runs the first time
   @Override
   public void execute() {
-    // m_leftElevator.setTargetPosition(m_position.getAsDouble());
-    m_rightElevator.setTargetPosition(m_position.getAsDouble());
+    m_leftElevator.setSpeed(m_position.getAsDouble());
+    m_rightElevator.setSpeed(m_position.getAsDouble());
   }
 
   
