@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.IntakeOff;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.LeftElevator;
+import frc.robot.subsystems.RightElevator;
 import frc.robot.commands.First;
 import frc.robot.subsystems.Shifter;
 
@@ -25,6 +27,9 @@ public class Robot extends TimedRobot {
 
   private final Intake m_intake = new Intake();
   private final Shifter m_shifter = new Shifter();
+
+  private final LeftElevator m_leftElevator = new LeftElevator();
+  private final RightElevator m_rightElevator = new RightElevator();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -88,6 +93,11 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    //zeroes out the slide position so that the position it is at when the initialization of teleop occurs is set as the lowest possible position
+    //this means the slide needs to be all the way down so the topmost limit is also accurate
+m_leftElevator.zero();
+m_rightElevator.zero();
   }
 
   /** This function is called periodically during operator control. */

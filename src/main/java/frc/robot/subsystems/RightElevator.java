@@ -39,7 +39,9 @@ public class RightElevator extends SubsystemBase{
    Constants.controllers.rightLiftSpark.set(speed);
   }
 
-
+  public void zero(){
+    Constants.sensors.rightLift.setZeroOffset(0);
+  }
 
   /** The log method puts interesting information to the SmartDashboard. */
   public void log() {
