@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 import com.revrobotics.CANSparkMax;
-
+import com.revrobotics.SparkMaxAbsoluteEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -22,14 +22,8 @@ public final class Constants {
                 public static final Encoder m_leftDriveEncoder = new Encoder(0, 1, false);
                 public static final Encoder m_rightDriveEncoder = new Encoder(2, 3, false);
 
-               
-
-
                 public static final double LEFT_DRIVE_ENCODER_DISTANCE_PER_PULSE = 0.0;
                 public static final double RIGHT_DRIVE_ENCODER_DISTANCE_PER_PULSE = 0.0;
-
-                public static final Encoder leftLiftEncoder = new Encoder(5, 6);
-                public static final Encoder rightLiftEncoder = new Encoder(7, 8);
 
                 public static final int GYRO = 0;
         }
@@ -123,6 +117,9 @@ public final class Constants {
                 public static final double POSITION_ONE = 1;
                 public static final double POSITION_TWO = 2;
                 public static final double POSITION_THREE = 3;
+
+                public static final float MIN_POSITION = 0;
+                public static final float MAX_POSITION = 3;
 
                 public static final SparkMaxPIDController left_PID = Constants.controllers.leftLiftSpark.getPIDController();
                 public static final SparkMaxPIDController right_PID = Constants.controllers.rightLiftSpark.getPIDController();
