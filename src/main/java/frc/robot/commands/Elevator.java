@@ -29,8 +29,8 @@ private final DoubleSupplier m_position;
   // Called just before this Command runs the first time
   @Override
   public void execute() {
-    // m_leftElevator.setSpeed(m_position.getAsDouble() / 2.0);
-    // m_rightElevator.setSpeed(m_position.getAsDouble() / 2.0);
+    m_leftElevator.setSpeed(m_position.getAsDouble() / 2.0);
+    m_rightElevator.setSpeed(m_position.getAsDouble() / 2.0);
   }
 
   
