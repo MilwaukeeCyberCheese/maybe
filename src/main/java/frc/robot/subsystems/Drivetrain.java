@@ -53,11 +53,11 @@ public class Drivetrain extends SubsystemBase {
   /**
    * Tank style driving for the Drivetrain.
    *
-   * @param left  Speed in range [-1,1]
-   * @param right Speed in range [-1,1]
+   * @param throttle  Speed in range [-1,1]
+   * @param turn Speed in range [-1,1]
    */
-  public void drive(double left, double right) {
-    Constants.drive.m_drive.arcadeDrive(left, right);
+  public void drive(double throttle, double turn) {
+    Constants.drive.m_drive.arcadeDrive(throttle, turn);
   }
 
   /** Reset the robots sensors to the zero states. */

@@ -28,8 +28,8 @@ public final class Constants {
 
                 public static final int GYRO = 0;
 
-                public static final AbsoluteEncoder leftLift = controllers.leftLiftSpark.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle);
-                public static final AbsoluteEncoder rightLift = controllers.rightLiftSpark.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle);
+                public static final SparkMaxAbsoluteEncoder leftLift = controllers.leftLiftSpark.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle);
+                public static final SparkMaxAbsoluteEncoder rightLift = controllers.rightLiftSpark.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle);
         }
 
         public static final class pneumatics {
@@ -86,8 +86,8 @@ public final class Constants {
                 public static final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotorController,
                                 m_rightMotorController);
 
-                public static final double DRIVE_SPEED = 0.7;
-                public static final double TURN_SPEED = 0.6;
+                public static final double DRIVE_SPEED = 1;
+                public static final double TURN_SPEED = 0.8;
 
                 public static final boolean LEFT_FRONT_INVERTED = false;
                 public static final boolean LEFT_REAR_INVERTED = false;
@@ -110,12 +110,10 @@ public final class Constants {
         }
 
         public static final class lift {
-                public static final boolean LEFT_INVERTED = true;
-                public static final boolean RIGHT_INVERTED = false;
+                public static final boolean LEFT_INVERTED = false;
+                public static final boolean RIGHT_INVERTED = true;
 
-
-
-                public static final double LIFT_SPEED = 0.25;
+                public static final double LIFT_SPEED = 0.5;
 
                 public static final double POSITION_ZERO = 0;
                 public static final double POSITION_ONE = 1;
@@ -123,11 +121,12 @@ public final class Constants {
                 public static final double POSITION_THREE = 3;
 
                 public static final float MIN_POSITION = 0;
-                public static final float MAX_POSITION = 3;
+                public static final float MAX_POSITION = 40;
+
+                public static boolean LIMITED = false;
 
                 public static final SparkMaxPIDController left_PID = Constants.controllers.leftLiftSpark.getPIDController();
                 public static final SparkMaxPIDController right_PID = Constants.controllers.rightLiftSpark.getPIDController();
-
 
                 public static double left_kP = 0.1; 
                 public static double left_kI = 1e-4;

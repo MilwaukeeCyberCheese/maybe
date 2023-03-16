@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import frc.robot.Constants;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,11 +23,17 @@ public class LeftElevator extends SubsystemBase {
 
   /** Create a new elevator subsystem. */
   public LeftElevator() {
+Constants.sensors.leftLift.setPositionConversionFactor(1);
+
+Constants.controllers.leftLiftSpark.restoreFactoryDefaults();
+
     Constants.controllers.leftLiftSpark.setInverted(Constants.lift.LEFT_INVERTED);
-    // Constants.controllers.leftLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-    // Constants.controllers.leftLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
-    // Constants.controllers.leftLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.lift.MAX_POSITION);
-    // Constants.controllers.leftLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.lift.MIN_POSITION);
+    Constants.controllers.leftLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.lift.LIMITED);
+    Constants.controllers.leftLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.lift.LIMITED);
+    Constants.controllers.leftLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward,
+        Constants.lift.MAX_POSITION);
+    Constants.controllers.leftLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse,
+        Constants.lift.MIN_POSITION);
   }
 
   public void setSpeed(double speed) {
@@ -35,18 +42,18 @@ public class LeftElevator extends SubsystemBase {
     Constants.controllers.leftLiftSpark.set(speed);
   }
 
-  public void zero(){
+  public void zero() {
     Constants.sensors.leftLift.setZeroOffset(0);
   }
 
   /** The log method puts interesting information to the SmartDashboard. */
   public void log() {
 
-
+    SmartDashboard.putNumber("Left Slide Offset", Constants.sensors.leftLift.getZeroOffset());
+    SmartDashboard.putNumber("Left Slide Position", Constants.sensors.leftLift.getPosition());
     SmartDashboard.putNumber("Speed: ", speed);
 
-    // if PID coefficients on SmartDashboard have changed, write new values to
-    // controller
+ 
 
   }
 

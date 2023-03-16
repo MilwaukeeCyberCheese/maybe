@@ -25,11 +25,15 @@ public class RightElevator extends SubsystemBase{
 
   /** Create a new elevator subsystem. */
   public RightElevator() {
+Constants.sensors.rightLift.setPositionConversionFactor(1);
+
+Constants.controllers.rightLiftSpark.restoreFactoryDefaults();
+
     Constants.controllers.rightLiftSpark.setInverted(Constants.lift.RIGHT_INVERTED);
-    // Constants.controllers.rightLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-    // Constants.controllers.rightLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
-    // Constants.controllers.rightLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.lift.MAX_POSITION);
-    // Constants.controllers.rightLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.lift.MIN_POSITION);
+    Constants.controllers.rightLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.lift.LIMITED);
+    Constants.controllers.rightLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.lift.LIMITED);
+    Constants.controllers.rightLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.lift.MAX_POSITION);
+    Constants.controllers.rightLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.lift.MIN_POSITION);
   }
 
 
@@ -46,6 +50,8 @@ public class RightElevator extends SubsystemBase{
   /** The log method puts interesting information to the SmartDashboard. */
   public void log() {
 
+    SmartDashboard.putNumber("Right Slide Offset", Constants.sensors.rightLift.getZeroOffset());
+    SmartDashboard.putNumber("Right Slide Position", Constants.sensors.rightLift.getPosition());
     SmartDashboard.putNumber("Speed: ", speed);
 
     // if PID coefficients on SmartDashboard have changed, write new values to controller

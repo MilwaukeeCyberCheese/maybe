@@ -96,8 +96,8 @@ public class Robot extends TimedRobot {
 
     //zeroes out the slide position so that the position it is at when the initialization of teleop occurs is set as the lowest possible position
     //this means the slide needs to be all the way down so the topmost limit is also accurate
-// m_leftElevator.zero();
-// m_rightElevator.zero();
+m_leftElevator.zero();
+m_rightElevator.zero();
   }
 
   /** This function is called periodically during operator control. */

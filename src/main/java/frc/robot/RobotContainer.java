@@ -67,15 +67,15 @@ public class RobotContainer {
 
     // Assign default commands
     m_drivetrain.setDefaultCommand(
-        new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getXRight(.2),
+        new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getXLeft(.2),
             m_drivetrain));
 
     m_leftElevator.setDefaultCommand(
-      new Elevator(() -> m_controller.getRightTriggerAxis(), () -> m_controller.getLeftTriggerAxis(), m_leftElevator, m_rightElevator)
+      new Elevator(() -> -m_filteredController.getYRight(0.2), m_leftElevator, m_rightElevator)
     );
 
     m_rightElevator.setDefaultCommand(
-      new Elevator(() -> m_controller.getRightTriggerAxis(), () -> m_controller.getLeftTriggerAxis(), m_leftElevator, m_rightElevator)
+      new Elevator(() -> -m_filteredController.getYRight(0.2), m_leftElevator, m_rightElevator)
     );
 
     // Configure the button bindings
@@ -100,13 +100,13 @@ public class RobotContainer {
     Trigger leftBumper = new JoystickButton(m_controller, 5);
     Trigger rightBumper = new JoystickButton(m_controller, 6);
 
-    leftBumper.whileTrue(new IntakeConeCommand(m_intake));
-    rightBumper.whileTrue(new IntakeCubeCommand(m_intake));
+    leftBumper.onTrue(new IntakeDown(m_intake));
+    rightBumper.onTrue(new IntakeUp(m_intake));
 
     aButton.onTrue(new First(m_shifter));
     bButton.onTrue(new Second(m_shifter));
-    xButton.onTrue(new IntakeDown(m_intake));
-    yButton.onTrue(new IntakeUp(m_intake));
+    xButton.whileTrue(new IntakeCubeCommand(m_intake));
+    yButton.whileTrue(new IntakeConeCommand(m_intake));
 
   }
 
