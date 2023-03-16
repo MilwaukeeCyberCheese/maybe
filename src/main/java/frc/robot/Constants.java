@@ -115,7 +115,7 @@ public final class Constants {
 
 
 
-                public static final double LIFT_SPEED = 0.5;
+                public static final double LIFT_SPEED = 0.25;
 
                 public static final double POSITION_ZERO = 0;
                 public static final double POSITION_ONE = 1;
