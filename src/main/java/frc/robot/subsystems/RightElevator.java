@@ -26,10 +26,10 @@ public class RightElevator extends SubsystemBase{
   /** Create a new elevator subsystem. */
   public RightElevator() {
     Constants.controllers.rightLiftSpark.setInverted(Constants.lift.RIGHT_INVERTED);
-    Constants.controllers.rightLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-    Constants.controllers.rightLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
-    Constants.controllers.rightLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.lift.MAX_POSITION);
-    Constants.controllers.rightLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.lift.MIN_POSITION);
+    // Constants.controllers.rightLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
+    // Constants.controllers.rightLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
+    // Constants.controllers.rightLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.lift.MAX_POSITION);
+    // Constants.controllers.rightLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.lift.MIN_POSITION);
   }
 
 

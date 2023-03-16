@@ -23,10 +23,10 @@ public class LeftElevator extends SubsystemBase {
   /** Create a new elevator subsystem. */
   public LeftElevator() {
     Constants.controllers.leftLiftSpark.setInverted(Constants.lift.LEFT_INVERTED);
-    Constants.controllers.leftLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
-    Constants.controllers.leftLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
-    Constants.controllers.leftLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.lift.MAX_POSITION);
-    Constants.controllers.leftLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.lift.MIN_POSITION);
+    // Constants.controllers.leftLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
+    // Constants.controllers.leftLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
+    // Constants.controllers.leftLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.lift.MAX_POSITION);
+    // Constants.controllers.leftLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.lift.MIN_POSITION);
   }
 
   public void setSpeed(double speed) {
