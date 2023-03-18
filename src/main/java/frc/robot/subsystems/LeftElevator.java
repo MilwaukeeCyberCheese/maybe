@@ -20,40 +20,56 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 public class LeftElevator extends SubsystemBase {
   public double speed;
+  public Boolean limited = true;
 
   /** Create a new elevator subsystem. */
   public LeftElevator() {
-Constants.sensors.leftLift.setPositionConversionFactor(1);
 
-Constants.controllers.leftLiftSpark.restoreFactoryDefaults();
+    // Constants.sensors.leftLift.setInverted(Constants.lift.LEFT_INVERTED);
+    // Constants.sensors.leftLift.setPositionConversionFactor(1);
+
+    Constants.controllers.leftLiftSpark.restoreFactoryDefaults();
 
     Constants.controllers.leftLiftSpark.setInverted(Constants.lift.LEFT_INVERTED);
-    Constants.controllers.leftLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, Constants.lift.LIMITED);
-    Constants.controllers.leftLiftSpark.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, Constants.lift.LIMITED);
-    Constants.controllers.leftLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward,
-        Constants.lift.MAX_POSITION);
-    Constants.controllers.leftLiftSpark.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse,
-        Constants.lift.MIN_POSITION);
   }
 
-  public void setSpeed(double speed) {
+  public void setSpeed(double speed, Boolean limited) {
 
     this.speed = speed;
-    Constants.controllers.leftLiftSpark.set(speed);
+    this.limited = limited;
+
+    if (limited) {
+      if ((Constants.sensors.leftLift.getPosition() >= Constants.lift.LEFT_MAX_POSITION
+          || Constants.sensors.rightLift.getPosition() >= Constants.lift.RIGHT_MAX_POSITION)
+          && speed > 0) {
+        Constants.controllers.leftLiftSpark.set(0);
+        this.speed = 0;
+      } else if ((Constants.sensors.leftLift.getPosition() <= Constants.lift.LEFT_MIN_POSITION
+          || Constants.sensors.rightLift.getPosition() <= Constants.lift.RIGHT_MIN_POSITION)
+          && speed < 0) {
+        Constants.controllers.leftLiftSpark.set(0);
+        this.speed = 0;
+      } else {
+        Constants.controllers.leftLiftSpark.set(speed);
+      }
+    } else {
+      Constants.controllers.leftLiftSpark.set(speed);
+    }
+
   }
 
   public void zero() {
-    Constants.sensors.leftLift.setZeroOffset(0);
+    Constants.sensors.leftLift.setPosition(0);
   }
 
   /** The log method puts interesting information to the SmartDashboard. */
   public void log() {
 
-    SmartDashboard.putNumber("Left Slide Offset", Constants.sensors.leftLift.getZeroOffset());
+    // SmartDashboard.putNumber("Left Slide CPR",
+    // Constants.sensors.leftLift.getCountsPerRevolution());
     SmartDashboard.putNumber("Left Slide Position", Constants.sensors.leftLift.getPosition());
+    SmartDashboard.putBoolean("Left Slide Limited", limited);
     SmartDashboard.putNumber("Speed: ", speed);
-
- 
 
   }
 

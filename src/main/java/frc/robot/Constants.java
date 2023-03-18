@@ -6,14 +6,17 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxAbsoluteEncoder;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public final class Constants {
@@ -28,8 +31,8 @@ public final class Constants {
 
                 public static final int GYRO = 0;
 
-                public static final SparkMaxAbsoluteEncoder leftLift = controllers.leftLiftSpark.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle);
-                public static final SparkMaxAbsoluteEncoder rightLift = controllers.rightLiftSpark.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle);
+                public static final RelativeEncoder leftLift = controllers.leftLiftSpark.getEncoder();
+                public static final RelativeEncoder rightLift = controllers.rightLiftSpark.getEncoder();
         }
 
         public static final class pneumatics {
@@ -86,7 +89,7 @@ public final class Constants {
                 public static final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotorController,
                                 m_rightMotorController);
 
-                public static final double DRIVE_SPEED = 1;
+                public static final double DRIVE_SPEED = 0.8;
                 public static final double TURN_SPEED = 0.8;
 
                 public static final boolean LEFT_FRONT_INVERTED = false;
@@ -120,10 +123,11 @@ public final class Constants {
                 public static final double POSITION_TWO = 2;
                 public static final double POSITION_THREE = 3;
 
-                public static final float MIN_POSITION = 0;
-                public static final float MAX_POSITION = 40;
+                public static final float LEFT_MIN_POSITION = 0;
+                public static final float LEFT_MAX_POSITION = 110;
+                public static final float RIGHT_MIN_POSITION = 0;
+                public static final float RIGHT_MAX_POSITION = 108;
 
-                public static boolean LIMITED = false;
 
                 public static final SparkMaxPIDController left_PID = Constants.controllers.leftLiftSpark.getPIDController();
                 public static final SparkMaxPIDController right_PID = Constants.controllers.rightLiftSpark.getPIDController();

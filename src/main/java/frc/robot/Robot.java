@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.IntakeOff;
+import frc.robot.commands.Second;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LeftElevator;
 import frc.robot.subsystems.RightElevator;
@@ -63,7 +64,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     new IntakeOff(m_intake);
-    new First(m_shifter);
+    new Second(m_shifter);
   }
 
   @Override
@@ -98,6 +99,7 @@ public class Robot extends TimedRobot {
     //this means the slide needs to be all the way down so the topmost limit is also accurate
 m_leftElevator.zero();
 m_rightElevator.zero();
+new First(m_shifter);
   }
 
   /** This function is called periodically during operator control. */

@@ -13,6 +13,7 @@ import frc.robot.commands.IntakeCubeCommand;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.Second;
+import frc.robot.commands.ZeroSlides;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.other.FilteredController;
 import frc.robot.subsystems.Drivetrain;
@@ -67,15 +68,15 @@ public class RobotContainer {
 
     // Assign default commands
     m_drivetrain.setDefaultCommand(
-        new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getXLeft(.2),
+        new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getXRight(.2),
             m_drivetrain));
 
     m_leftElevator.setDefaultCommand(
-      new Elevator(() -> -m_filteredController.getYRight(0.2), m_leftElevator, m_rightElevator)
+      new Elevator(() -> m_controller.getRightTriggerAxis(), () -> m_controller.getLeftTriggerAxis(), m_leftElevator, m_rightElevator, () -> !m_controller.getBackButton())
     );
 
     m_rightElevator.setDefaultCommand(
-      new Elevator(() -> -m_filteredController.getYRight(0.2), m_leftElevator, m_rightElevator)
+      new Elevator(() -> m_controller.getRightTriggerAxis(), () -> m_controller.getLeftTriggerAxis(), m_leftElevator, m_rightElevator, () -> !m_controller.getBackButton())
     );
 
     // Configure the button bindings
@@ -99,14 +100,19 @@ public class RobotContainer {
     Trigger yButton = new JoystickButton(m_controller, 4);
     Trigger leftBumper = new JoystickButton(m_controller, 5);
     Trigger rightBumper = new JoystickButton(m_controller, 6);
+    Trigger backButton = new JoystickButton(m_controller, 7);
+    Trigger startButton = new JoystickButton(m_controller, 8);
 
-    leftBumper.onTrue(new IntakeDown(m_intake));
-    rightBumper.onTrue(new IntakeUp(m_intake));
+    leftBumper.whileTrue(new IntakeCubeCommand(m_intake));
+    rightBumper.whileTrue(new IntakeConeCommand(m_intake));
+
+startButton.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
+// backButton.whileTrue(new LimitSlides(m_leftElevator, m_rightElevator));
 
     aButton.onTrue(new First(m_shifter));
     bButton.onTrue(new Second(m_shifter));
-    xButton.whileTrue(new IntakeCubeCommand(m_intake));
-    yButton.whileTrue(new IntakeConeCommand(m_intake));
+    xButton.onTrue(new IntakeDown(m_intake));
+    yButton.onTrue(new IntakeUp(m_intake));
 
   }
 
