@@ -21,7 +21,7 @@ import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.RightElevator;
 import frc.robot.subsystems.Shifter;
-
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.Intake;
@@ -47,6 +47,9 @@ public class RobotContainer {
 
   private static final XboxController m_controller = new XboxController(0);
   public static final FilteredController m_filteredController = new FilteredController(m_controller);
+  private static final XboxController m_controllerTwo = new XboxController(1);
+  private static final FilteredController m_filteredControllerTwo = new FilteredController(m_controllerTwo);
+
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
   private static final AutoCommand m_autoCommand = new AutoCommand(m_autoSubsystem);
@@ -117,7 +120,8 @@ public class RobotContainer {
     Trigger rightBumper = new JoystickButton(m_controller, 6);
     Trigger backButton = new JoystickButton(m_controller, 7);
     Trigger startButton = new JoystickButton(m_controller, 8);
-    Trigger POV = new Trigger(m_filteredController.getPOVPressed());
+    Trigger yButtonTwo = new JoystickButton(m_controllerTwo, 4);
+    Trigger bButtonTwo = new JoystickButton(m_controllerTwo, 2);
 
     leftBumper.whileTrue(new IntakeCubeCommand(m_intake));
     rightBumper.whileTrue(new IntakeConeCommand(m_intake));
@@ -130,7 +134,7 @@ public class RobotContainer {
     xButton.onTrue(new IntakeDown(m_intake));
     yButton.onTrue(new IntakeUp(m_intake));
 
-    POV.debounce(0.2).whileTrue(new RecordAuto(m_autoSubsystem));
+    yButtonTwo.onTrue(new IntakeDown(m_intake));
 
   }
 

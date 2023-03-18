@@ -104,8 +104,8 @@ public final class Constants {
         public static final class intake {
                 public static final boolean INVERTED = true;
 
-                public static final double CONE_SPEED = 0.3;
-                public static final double CUBE_SPEED = -0.3;
+                public static final double CONE_SPEED = 0.75;
+                public static final double CUBE_SPEED = -0.75;
 
                 public static final Value intakeDown = Value.kForward;
                 public static final Value intakeUp = Value.kReverse;
