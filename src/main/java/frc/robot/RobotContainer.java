@@ -10,6 +10,7 @@ import frc.robot.commands.First;
 import frc.robot.commands.IntakeConeCommand;
 import frc.robot.commands.IntakeCubeCommand;
 import frc.robot.commands.IntakeDown;
+import frc.robot.commands.IntakeSpeedy;
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.RecordAuto;
 import frc.robot.commands.Second;
@@ -79,6 +80,10 @@ public class RobotContainer {
         new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getXRight(.2),
             m_drivetrain));
 
+    m_intake.setDefaultCommand(
+        new IntakeSpeedy(() -> m_controllerTwo.getLeftTriggerAxis(), () -> m_controllerTwo.getRightTriggerAxis(),
+            m_intake));
+
     m_leftElevator.setDefaultCommand(
         new Elevator(() -> m_controllerTwo.getRightY(), m_leftElevator,
             m_rightElevator, () -> !m_controllerTwo.getBackButton()));
@@ -124,8 +129,8 @@ public class RobotContainer {
     Trigger bButtonTwo = new JoystickButton(m_controllerTwo, 2);
     Trigger xButtonTwo = new JoystickButton(m_controllerTwo, 3);
     Trigger yButtonTwo = new JoystickButton(m_controllerTwo, 4);
-    Trigger leftBumperTwo = new JoystickButton(m_controller, 5);
-    Trigger rightBumperTwo = new JoystickButton(m_controller, 6);
+    Trigger leftBumperTwo = new JoystickButton(m_controllerTwo, 5);
+    Trigger rightBumperTwo = new JoystickButton(m_controllerTwo, 6);
     Trigger startButtonTwo = new JoystickButton(m_controllerTwo, 8);
 
     leftBumperOne.whileTrue(new First(m_shifter));
