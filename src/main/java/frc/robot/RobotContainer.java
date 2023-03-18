@@ -138,8 +138,8 @@ public class RobotContainer {
 
     startButtonTwo.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
 
-    yButtonTwo.onTrue(new IntakeUp(m_intake));
-    aButtonTwo.onTrue(new IntakeDown(m_intake));
+    yButtonTwo.whileTrue(new IntakeUp(m_intake));
+    aButtonTwo.whileTrue(new IntakeDown(m_intake));
 
     leftBumperTwo.onTrue(new IntakeCubeCommand(m_intake));
     rightBumperTwo.onTrue(new IntakeConeCommand(m_intake));
