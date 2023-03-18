@@ -32,6 +32,7 @@ private Boolean position;
   /** The log method puts the status of each solenoid to SmartDashboard */
   public void log() {
     SmartDashboard.putData("Shifter", Constants.pneumatics.shifterSolenoid);
+    SmartDashboard.putNumber("Compressor Current", Constants.pneumatics.PCM.getCompressorCurrent());
   
   }
 
