@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-
 import edu.wpi.first.wpilibj.XboxController;
 
 import frc.robot.commands.First;
@@ -15,7 +14,9 @@ import frc.robot.commands.IntakeUp;
 import frc.robot.commands.Second;
 import frc.robot.commands.ZeroSlides;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.AutoCommand;
 import frc.robot.other.FilteredController;
+import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.RightElevator;
 import frc.robot.subsystems.Shifter;
@@ -46,6 +47,10 @@ public class RobotContainer {
   private static final XboxController m_controller = new XboxController(0);
   public static final FilteredController m_filteredController = new FilteredController(m_controller);
 
+  public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
+  private static final AutoCommand m_autoCommand = new AutoCommand(m_autoSubsystem);
+
+  public static boolean readAuto = false;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -72,15 +77,24 @@ public class RobotContainer {
             m_drivetrain));
 
     m_leftElevator.setDefaultCommand(
-      new Elevator(() -> m_controller.getRightTriggerAxis(), () -> m_controller.getLeftTriggerAxis(), m_leftElevator, m_rightElevator, () -> !m_controller.getBackButton())
-    );
+        new Elevator(() -> m_controller.getRightTriggerAxis(), () -> m_controller.getLeftTriggerAxis(), m_leftElevator,
+            m_rightElevator, () -> !m_controller.getBackButton()));
 
     m_rightElevator.setDefaultCommand(
-      new Elevator(() -> m_controller.getRightTriggerAxis(), () -> m_controller.getLeftTriggerAxis(), m_leftElevator, m_rightElevator, () -> !m_controller.getBackButton())
-    );
+        new Elevator(() -> m_controller.getRightTriggerAxis(), () -> m_controller.getLeftTriggerAxis(), m_leftElevator,
+            m_rightElevator, () -> !m_controller.getBackButton()));
 
     // Configure the button bindings
     configureButtonBindings();
+  }
+
+  /**
+   * Use this to pass the autonomous command to the main {@link Robot} class.
+   *
+   * @return the command to run in autonomous
+   */
+  public AutoCommand getAutonomousCommand() {
+    return m_autoCommand;
   }
 
   /**
@@ -102,12 +116,13 @@ public class RobotContainer {
     Trigger rightBumper = new JoystickButton(m_controller, 6);
     Trigger backButton = new JoystickButton(m_controller, 7);
     Trigger startButton = new JoystickButton(m_controller, 8);
+    Trigger POV = new Trigger(m_filteredController.getPOVPressed());
 
     leftBumper.whileTrue(new IntakeCubeCommand(m_intake));
     rightBumper.whileTrue(new IntakeConeCommand(m_intake));
 
-startButton.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
-// backButton.whileTrue(new LimitSlides(m_leftElevator, m_rightElevator));
+    startButton.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
+    // backButton.whileTrue(new LimitSlides(m_leftElevator, m_rightElevator));
 
     aButton.onTrue(new First(m_shifter));
     bButton.onTrue(new Second(m_shifter));
@@ -116,5 +131,4 @@ startButton.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
 
   }
 
- 
 }

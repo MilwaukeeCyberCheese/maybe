@@ -5,10 +5,14 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
+  private double throttle;
+  private double rotation;
+  
   /**
    * The Drivetrain subsystem incorporates the sensors and actuators attached to
    * the robots chassis.
@@ -56,8 +60,10 @@ public class Drivetrain extends SubsystemBase {
    * @param throttle  Speed in range [-1,1]
    * @param turn Speed in range [-1,1]
    */
-  public void drive(double throttle, double turn) {
-    Constants.drive.m_drive.arcadeDrive(throttle, turn);
+  public void drive(double throttle, double rotation) {
+    this.throttle = throttle;
+    this.rotation = rotation;
+    Constants.drive.m_drive.arcadeDrive(throttle, rotation);
   }
 
   /** Reset the robots sensors to the zero states. */
@@ -80,5 +86,9 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     log();
+
+    if(RobotContainer.readAuto){
+      RobotContainer.m_autoSubsystem.addDriveSpeeds(throttle, rotation);
+    }
   }
 }

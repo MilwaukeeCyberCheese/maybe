@@ -4,6 +4,8 @@
 
 package frc.robot.other;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj.XboxController;
 
 /** Add your docs here. */
@@ -171,8 +173,8 @@ public class FilteredController {
      * 
      * @return boolean
      */
-    public boolean getPOVPressed() {
-        return controller.getPOV() != -1;
+    public BooleanSupplier getPOVPressed() {
+        return () -> controller.getPOV() != -1;
     }
 
     /**

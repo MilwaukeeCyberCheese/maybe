@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
@@ -79,5 +80,9 @@ public class RightElevator extends SubsystemBase {
   @Override
   public void periodic() {
     log();
+
+    if(RobotContainer.readAuto){
+      RobotContainer.m_autoSubsystem.addRightLiftSpeed(speed);
+    }
   }
 }

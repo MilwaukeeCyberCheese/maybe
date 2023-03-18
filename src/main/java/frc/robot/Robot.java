@@ -4,27 +4,40 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.IntakeOff;
 import frc.robot.commands.Second;
+import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LeftElevator;
 import frc.robot.subsystems.RightElevator;
+import frc.robot.commands.AutoCommand;
 import frc.robot.commands.First;
 import frc.robot.subsystems.Shifter;
 
 /**
- * The VM is configured to automatically run this class, and to call the functions corresponding to
- * each mode, as described in the TimedRobot documentation. If you change the name of this class or
- * the package after creating this project, you must also update the build.gradle file in the
+ * The VM is configured to automatically run this class, and to call the
+ * functions corresponding to
+ * each mode, as described in the TimedRobot documentation. If you change the
+ * name of this class or
+ * the package after creating this project, you must also update the
+ * build.gradle file in the
  * project.
  */
 public class Robot extends TimedRobot {
+  SendableChooser<Integer> autoChooser = new SendableChooser<>();
+  
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+
+  public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
+  private static final AutoCommand m_autoCommand = new AutoCommand(m_autoSubsystem);
 
   private final Intake m_intake = new Intake();
   private final Shifter m_shifter = new Shifter();
@@ -33,29 +46,43 @@ public class Robot extends TimedRobot {
   private final RightElevator m_rightElevator = new RightElevator();
 
   /**
-   * This function is run when the robot is first started up and should be used for any
+   * This function is run when the robot is first started up and should be used
+   * for any
    * initialization code.
    */
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
+    autoChooser.setDefaultOption("Shooting", 1);
+    autoChooser.addOption("Driving", 2);
+    autoChooser.addOption("Nothing", 3);
+    // Instantiate our RobotContainer. This will perform all our button bindings,
+    // and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    
+
+    // CameraServer.startAutomaticCapture();
+    SmartDashboard.putData("Autonomous", autoChooser);
+
   }
 
   /**
-   * This function is called every 20 ms, no matter the mode. Use this for items like diagnostics
+   * This function is called every 20 ms, no matter the mode. Use this for items
+   * like diagnostics
    * that you want ran during disabled, autonomous, teleoperated and test.
    *
-   * <p>This runs after the mode specific periodic functions, but before LiveWindow and
+   * <p>
+   * This runs after the mode specific periodic functions, but before LiveWindow
+   * and
    * SmartDashboard integrated updating.
    */
   @Override
   public void robotPeriodic() {
-    // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
-    // commands, running already-scheduled commands, removing finished or interrupted commands,
-    // and running subsystem periodic() methods.  This must be called from the robot's periodic
+    // Runs the Scheduler. This is responsible for polling buttons, adding
+    // newly-scheduled
+    // commands, running already-scheduled commands, removing finished or
+    // interrupted commands,
+    // and running subsystem periodic() methods. This must be called from the
+    // robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
   }
@@ -68,22 +95,32 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+  }
 
-  /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
+  /**
+   * This autonomous runs the autonomous command selected by your
+   * {@link RobotContainer} class.
+   */
   @Override
   public void autonomousInit() {
-    // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    int autoMode = autoChooser.getSelected();
+
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+
+    ((AutoSubsystem) m_autonomousCommand).setAuto(autoMode);
   }
+  
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+  }
 
   @Override
   public void teleopInit() {
@@ -95,16 +132,35 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-    //zeroes out the slide position so that the position it is at when the initialization of teleop occurs is set as the lowest possible position
-    //this means the slide needs to be all the way down so the topmost limit is also accurate
-m_leftElevator.zero();
-m_rightElevator.zero();
-new First(m_shifter);
+    // zeroes out the slide position so that the position it is at when the
+    // initialization of teleop occurs is set as the lowest possible position
+    // this means the slide needs to be all the way down so the topmost limit is
+    // also accurate
+    m_leftElevator.zero();
+    m_rightElevator.zero();
+    new First(m_shifter);
   }
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    if (RobotContainer.m_filteredController.getPOVPressed().getAsBoolean()) {
+      new Runnable() {
+        @Override
+        public void run() {
+          if (!RobotContainer.readAuto) {
+            RobotContainer.readAuto = true;
+            m_autoSubsystem.clearShit();
+            System.out.println("Started - Begin Tracking Autonomous");
+          } else {
+            RobotContainer.readAuto = false;
+            System.out.println("Ended - Finished Tracking Autonomous");
+            m_autoSubsystem.printSpeeds();
+          }
+        }
+      };
+    }
+  }
 
   @Override
   public void testInit() {
@@ -114,5 +170,6 @@ new First(m_shifter);
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+  }
 }
