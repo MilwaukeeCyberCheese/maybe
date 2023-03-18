@@ -47,6 +47,8 @@ public class RobotContainer {
 
   private static final XboxController m_controller = new XboxController(0);
   public static final FilteredController m_filteredController = new FilteredController(m_controller);
+  private static final XboxController m_controllerTwo = new XboxController(1);
+  private static final FilteredController m_filteredControllerTwo = new FilteredController(m_controllerTwo);
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
   private static final AutoCommand m_autoCommand = new AutoCommand(m_autoSubsystem);
@@ -78,12 +80,12 @@ public class RobotContainer {
             m_drivetrain));
 
     m_leftElevator.setDefaultCommand(
-        new Elevator(() -> m_controller.getRightTriggerAxis(), () -> m_controller.getLeftTriggerAxis(), m_leftElevator,
-            m_rightElevator, () -> !m_controller.getBackButton()));
+        new Elevator(() -> m_controllerTwo.getRightY(), m_leftElevator,
+            m_rightElevator, () -> !m_controllerTwo.getBackButton()));
 
     m_rightElevator.setDefaultCommand(
-        new Elevator(() -> m_controller.getRightTriggerAxis(), () -> m_controller.getLeftTriggerAxis(), m_leftElevator,
-            m_rightElevator, () -> !m_controller.getBackButton()));
+        new Elevator(() -> m_controllerTwo.getRightY(), m_leftElevator,
+            m_rightElevator, () -> !m_controllerTwo.getBackButton()));
 
     // Configure the button bindings
     configureButtonBindings();
@@ -109,26 +111,33 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Create some buttons
-    Trigger aButton = new JoystickButton(m_controller, 1);
-    Trigger bButton = new JoystickButton(m_controller, 2);
-    Trigger xButton = new JoystickButton(m_controller, 3);
-    Trigger yButton = new JoystickButton(m_controller, 4);
-    Trigger leftBumper = new JoystickButton(m_controller, 5);
-    Trigger rightBumper = new JoystickButton(m_controller, 6);
-    Trigger backButton = new JoystickButton(m_controller, 7);
-    Trigger startButton = new JoystickButton(m_controller, 8);
+    Trigger aButtonOne = new JoystickButton(m_controller, 1);
+    Trigger bButtonOne = new JoystickButton(m_controller, 2);
+    Trigger xButtonOne = new JoystickButton(m_controller, 3);
+    Trigger yButtonOne = new JoystickButton(m_controller, 4);
+    Trigger leftBumperOne = new JoystickButton(m_controller, 5);
+    Trigger rightBumperOne = new JoystickButton(m_controller, 6);
+    Trigger startButtonOne = new JoystickButton(m_controller, 8);
     Trigger POV = new Trigger(m_filteredController.getPOVPressed());
 
-    leftBumper.whileTrue(new IntakeCubeCommand(m_intake));
-    rightBumper.whileTrue(new IntakeConeCommand(m_intake));
+    Trigger aButtonTwo = new JoystickButton(m_controllerTwo, 1);
+    Trigger bButtonTwo = new JoystickButton(m_controllerTwo, 2);
+    Trigger xButtonTwo = new JoystickButton(m_controllerTwo, 3);
+    Trigger yButtonTwo = new JoystickButton(m_controllerTwo, 4);
+    Trigger leftBumperTwo = new JoystickButton(m_controller, 5);
+    Trigger rightBumperTwo = new JoystickButton(m_controller, 6);
+    Trigger startButtonTwo = new JoystickButton(m_controllerTwo, 8);
 
-    startButton.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
-    // backButton.whileTrue(new LimitSlides(m_leftElevator, m_rightElevator));
+    leftBumperOne.whileTrue(new First(m_shifter));
+    rightBumperOne.whileTrue(new Second(m_shifter));
 
-    aButton.onTrue(new First(m_shifter));
-    bButton.onTrue(new Second(m_shifter));
-    xButton.onTrue(new IntakeDown(m_intake));
-    yButton.onTrue(new IntakeUp(m_intake));
+    startButtonTwo.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
+
+    yButtonTwo.onTrue(new IntakeUp(m_intake));
+    aButtonTwo.onTrue(new IntakeDown(m_intake));
+
+    leftBumperTwo.onTrue(new IntakeCubeCommand(m_intake));
+    rightBumperTwo.onTrue(new IntakeConeCommand(m_intake));
 
     POV.debounce(0.2).whileTrue(new RecordAuto(m_autoSubsystem));
 

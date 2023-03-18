@@ -17,16 +17,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class Elevator extends CommandBase {
   private final LeftElevator m_leftElevator;
   private final RightElevator m_rightElevator;
-  private final DoubleSupplier m_positionUp;
-  private final DoubleSupplier m_positionDown;
+  private final DoubleSupplier m_position;
   private final BooleanSupplier m_limited;
 
-  public Elevator(DoubleSupplier positionUp, DoubleSupplier positionDown, LeftElevator lElevator,
+  public Elevator(DoubleSupplier position, LeftElevator lElevator,
       RightElevator rElevator, BooleanSupplier limited) {
     m_leftElevator = lElevator;
     m_rightElevator = rElevator;
-    m_positionUp = positionUp;
-    m_positionDown = positionDown;
+    m_position = position;
     m_limited = limited;
     addRequirements(m_leftElevator, m_rightElevator);
   }
@@ -34,8 +32,8 @@ public class Elevator extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void execute() {
-    m_leftElevator.setSpeed((m_positionUp.getAsDouble() - m_positionDown.getAsDouble()) * Constants.lift.LIFT_SPEED, m_limited.getAsBoolean());
-    m_rightElevator.setSpeed((m_positionUp.getAsDouble() - m_positionDown.getAsDouble()) * Constants.lift.LIFT_SPEED, m_limited.getAsBoolean());
+    m_leftElevator.setSpeed(m_position.getAsDouble() * Constants.lift.LIFT_SPEED, m_limited.getAsBoolean());
+    m_rightElevator.setSpeed(m_position.getAsDouble() * Constants.lift.LIFT_SPEED, m_limited.getAsBoolean());
   }
 
 }
