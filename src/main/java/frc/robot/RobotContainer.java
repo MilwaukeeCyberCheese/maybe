@@ -11,6 +11,7 @@ import frc.robot.commands.IntakeConeCommand;
 import frc.robot.commands.IntakeCubeCommand;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeUp;
+import frc.robot.commands.RecordAuto;
 import frc.robot.commands.Second;
 import frc.robot.commands.ZeroSlides;
 import frc.robot.commands.ArcadeDrive;
@@ -128,6 +129,8 @@ public class RobotContainer {
     bButton.onTrue(new Second(m_shifter));
     xButton.onTrue(new IntakeDown(m_intake));
     yButton.onTrue(new IntakeUp(m_intake));
+
+    POV.debounce(0.2).whileTrue(new RecordAuto(m_autoSubsystem));
 
   }
 

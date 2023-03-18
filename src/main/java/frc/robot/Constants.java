@@ -87,8 +87,10 @@ public final class Constants {
                 public static final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotorController,
                                 m_rightMotorController);
 
-                public static final double DRIVE_SPEED = 0.8;
-                public static final double TURN_SPEED = 0.8;
+                public static final int CURRENT_LIMIT = 50;
+
+                public static final double DRIVE_SPEED = 1;
+                public static final double TURN_SPEED = 1;
 
                 public static final boolean LEFT_FRONT_INVERTED = false;
                 public static final boolean LEFT_REAR_INVERTED = false;
@@ -105,8 +107,8 @@ public final class Constants {
                 public static final double CONE_SPEED = 0.3;
                 public static final double CUBE_SPEED = -0.3;
 
-                public static final Value intakeDown = Value.kReverse;
-                public static final Value intakeUp = Value.kForward;
+                public static final Value intakeDown = Value.kForward;
+                public static final Value intakeUp = Value.kReverse;
                 public static final Value intakeOff = Value.kOff;
         }
 

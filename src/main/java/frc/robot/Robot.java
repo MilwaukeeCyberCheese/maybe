@@ -138,28 +138,13 @@ public class Robot extends TimedRobot {
     // also accurate
     m_leftElevator.zero();
     m_rightElevator.zero();
-    new First(m_shifter);
+    new Second(m_shifter);
   }
 
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    if (RobotContainer.m_filteredController.getPOVPressed().getAsBoolean()) {
-      new Runnable() {
-        @Override
-        public void run() {
-          if (!RobotContainer.readAuto) {
-            RobotContainer.readAuto = true;
-            m_autoSubsystem.clearShit();
-            System.out.println("Started - Begin Tracking Autonomous");
-          } else {
-            RobotContainer.readAuto = false;
-            System.out.println("Ended - Finished Tracking Autonomous");
-            m_autoSubsystem.printSpeeds();
-          }
-        }
-      };
-    }
+    
   }
 
   @Override
