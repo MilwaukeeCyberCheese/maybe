@@ -24,14 +24,14 @@ private Boolean position;
 
   public void setGear(boolean position) {
     this.position = position;
-    Constants.pneumatics.lSolenoid.set(position);
+    Constants.pneumatics.shifterSolenoid.set(position);
    
 
   }
 
   /** The log method puts the status of each solenoid to SmartDashboard */
   public void log() {
-    SmartDashboard.putData("Shifter", Constants.pneumatics.lSolenoid);
+    SmartDashboard.putData("Shifter", Constants.pneumatics.shifterSolenoid);
   
   }
 

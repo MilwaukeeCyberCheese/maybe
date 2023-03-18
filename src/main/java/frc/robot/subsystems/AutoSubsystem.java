@@ -48,6 +48,12 @@ public class AutoSubsystem extends SubsystemBase {
 
                 Constants.pneumatics.intakeSolenoid.set(intakePos);
 
+
+                //gear
+Boolean gear = AutoSubsystemValues.gear.get(stopwatchCounter);
+
+Constants.pneumatics.shifterSolenoid.set(gear);
+
                 m_throttle = AutoSubsystemValues.throttle.get(stopwatchCounter);
                 m_rotation = AutoSubsystemValues.rotation.get(stopwatchCounter);
 
