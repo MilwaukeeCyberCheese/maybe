@@ -7,26 +7,17 @@ import frc.robot.subsystems.AutoSubsystem;
 public class RecordAuto extends CommandBase {
     private final AutoSubsystem m_autoSubsystem;
 
-    //constructor
+    // constructor
     public RecordAuto(AutoSubsystem autoSubsystem) {
         this.m_autoSubsystem = autoSubsystem;
     }
 
     @Override
-    public void initialize() {
-     
-              if (!RobotContainer.readAuto) {
-                RobotContainer.readAuto = true;
-                m_autoSubsystem.clearShit();
-                System.out.println("Started - Begin Tracking Autonomous");
-              } else {
-                RobotContainer.readAuto = false;
-                System.out.println("Ended - Finished Tracking Autonomous");
-                m_autoSubsystem.printSpeeds();
-              }
-            }
-        
-    
+    public void execute() {
+
+       
+
+    }
 
     /**
      * This function ensures when the action is complete, the robot stops moving
@@ -35,6 +26,6 @@ public class RecordAuto extends CommandBase {
      */
     @Override
     public void end(boolean interrupted) {
-        
+
     }
 }

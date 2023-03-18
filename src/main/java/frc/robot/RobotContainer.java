@@ -45,10 +45,10 @@ public class RobotContainer {
   private final Shifter m_shifter = new Shifter();
   private final Intake m_intake = new Intake();
 
-  private static final XboxController m_controller = new XboxController(0);
+  public static final XboxController m_controller = new XboxController(0);
   public static final FilteredController m_filteredController = new FilteredController(m_controller);
-  private static final XboxController m_controllerTwo = new XboxController(1);
-  private static final FilteredController m_filteredControllerTwo = new FilteredController(m_controllerTwo);
+  public static final XboxController m_controllerTwo = new XboxController(1);
+  public static final FilteredController m_filteredControllerTwo = new FilteredController(m_controllerTwo);
 
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
@@ -134,7 +134,7 @@ public class RobotContainer {
     xButton.onTrue(new IntakeDown(m_intake));
     yButton.onTrue(new IntakeUp(m_intake));
 
-    yButtonTwo.onTrue(new IntakeDown(m_intake));
+    yButtonTwo.debounce(0.2).onTrue(new RecordAuto(m_autoSubsystem));
 
   }
 
