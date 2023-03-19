@@ -143,20 +143,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    if (RobotContainer.m_controllerTwo.getYButtonPressed()) {
 
-      if (!RobotContainer.readAuto) {
-        RobotContainer.readAuto = true;
-        m_autoSubsystem.clearShit();
-        System.out.println("Started - Begin Tracking Autonomous");
-
-      } else {
-        RobotContainer.readAuto = false;
-        System.out.println("Ended - Finished Tracking Autonomous");
-        m_autoSubsystem.printSpeeds();
-
-      }
-    }
 
   }
 

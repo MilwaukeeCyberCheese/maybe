@@ -21,7 +21,6 @@ import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.RightElevator;
 import frc.robot.subsystems.Shifter;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.Intake;
@@ -49,7 +48,6 @@ public class RobotContainer {
   public static final FilteredController m_filteredController = new FilteredController(m_controller);
   public static final XboxController m_controllerTwo = new XboxController(1);
   public static final FilteredController m_filteredControllerTwo = new FilteredController(m_controllerTwo);
-
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
   private static final AutoCommand m_autoCommand = new AutoCommand(m_autoSubsystem);
@@ -87,6 +85,9 @@ public class RobotContainer {
     m_rightElevator.setDefaultCommand(
         new Elevator(() -> m_controller.getRightTriggerAxis(), () -> m_controller.getLeftTriggerAxis(), m_leftElevator,
             m_rightElevator, () -> !m_controller.getBackButton()));
+
+    m_autoSubsystem.setDefaultCommand(
+        new RecordAuto(m_autoSubsystem, () -> m_controllerTwo.getYButton(), () -> m_controllerTwo.getXButton()));
 
     // Configure the button bindings
     configureButtonBindings();
@@ -133,8 +134,6 @@ public class RobotContainer {
     bButton.onTrue(new Second(m_shifter));
     xButton.onTrue(new IntakeDown(m_intake));
     yButton.onTrue(new IntakeUp(m_intake));
-
-    yButtonTwo.debounce(0.2).onTrue(new RecordAuto(m_autoSubsystem));
 
   }
 

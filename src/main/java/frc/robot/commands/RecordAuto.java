@@ -1,21 +1,38 @@
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.AutoSubsystem;
 
 public class RecordAuto extends CommandBase {
     private final AutoSubsystem m_autoSubsystem;
+    private final BooleanSupplier m_recording;
+    private final BooleanSupplier m_stopping;
 
     // constructor
-    public RecordAuto(AutoSubsystem autoSubsystem) {
+    public RecordAuto(AutoSubsystem autoSubsystem, BooleanSupplier recording, BooleanSupplier stopping) {
         this.m_autoSubsystem = autoSubsystem;
+        this.m_recording = recording;
+        this.m_stopping = stopping;
     }
 
     @Override
     public void execute() {
 
-       
+        if (m_recording.getAsBoolean()) {
+            RobotContainer.readAuto = true;
+            m_autoSubsystem.clearShit();
+            System.out.println("Started - Begin Tracking Autonomous");
+
+        } else if(m_stopping.getAsBoolean()){
+            RobotContainer.readAuto = false;
+            System.out.println("Ended - Finished Tracking Autonomous");
+            m_autoSubsystem.printSpeeds();
+
+        }
 
     }
 
