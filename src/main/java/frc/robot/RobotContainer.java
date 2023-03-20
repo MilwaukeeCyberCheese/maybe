@@ -92,6 +92,9 @@ public class RobotContainer {
         new Elevator(() -> m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
             m_rightElevator, () -> !m_controllerTwo.getBackButton()));
 
+            m_autoSubsystem.setDefaultCommand(
+        new RecordAuto(m_autoSubsystem, () -> m_controllerTwo.getYButton(), () -> m_controllerTwo.getXButton()));
+
     // Configure the button bindings
     configureButtonBindings();
   }
