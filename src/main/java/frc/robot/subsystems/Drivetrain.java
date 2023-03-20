@@ -56,14 +56,6 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Left Speed", Constants.sensors.m_leftDriveEncoder.getRate());
     SmartDashboard.putNumber("Right Speed", Constants.sensors.m_rightDriveEncoder.getRate());
     SmartDashboard.putData("Drivetrain", Constants.drive.m_drive);
-    SmartDashboard.putNumber("FrontLeft Temp", Constants.controllers.leftFrontSpark.getMotorTemperature());
-    SmartDashboard.putNumber("BackLeft Temp", Constants.controllers.leftRearSpark.getMotorTemperature());
-    SmartDashboard.putNumber("FrontRight Temp", Constants.controllers.rightFrontSpark.getMotorTemperature());
-    SmartDashboard.putNumber("BackRight Temp", Constants.controllers.rightRearSpark.getMotorTemperature());
-    SmartDashboard.putNumber("FrontLeft Current", Constants.controllers.leftFrontSpark.getOutputCurrent());
-    SmartDashboard.putNumber("BackLeft Current", Constants.controllers.leftRearSpark.getOutputCurrent());
-    SmartDashboard.putNumber("FrontRight Current", Constants.controllers.rightFrontSpark.getOutputCurrent());
-    SmartDashboard.putNumber("BackRight Current", Constants.controllers.rightRearSpark.getOutputCurrent());
   }
 
   /**
