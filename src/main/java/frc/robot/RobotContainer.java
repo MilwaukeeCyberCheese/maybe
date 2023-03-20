@@ -144,7 +144,6 @@ public class RobotContainer {
     leftBumperTwo.onTrue(new IntakeCubeCommand(m_intake));
     rightBumperTwo.onTrue(new IntakeConeCommand(m_intake));
 
-    POV.debounce(0.2).whileTrue(new RecordAuto(m_autoSubsystem));
 
   }
 
