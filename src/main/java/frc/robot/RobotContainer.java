@@ -85,11 +85,11 @@ public class RobotContainer {
             m_intake));
 
     m_leftElevator.setDefaultCommand(
-        new Elevator(() -> m_controllerTwo.getRightY(), m_leftElevator,
+        new Elevator(() -> m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
             m_rightElevator, () -> !m_controllerTwo.getBackButton()));
 
     m_rightElevator.setDefaultCommand(
-        new Elevator(() -> m_controllerTwo.getRightY(), m_leftElevator,
+        new Elevator(() -> m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
             m_rightElevator, () -> !m_controllerTwo.getBackButton()));
 
     // Configure the button bindings
