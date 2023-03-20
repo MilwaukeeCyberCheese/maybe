@@ -167,6 +167,31 @@ public void addDriveSpeeds(double throttle, double rotation){
     public void printSpeeds() {
         String toPrint = "";
 
+        // append the throttle speeds
+        toPrint += "\n\nList<Double> throttle = new LinkedList<Double>(Arrays.asList(";
+        for (int i = 0; i < AutoSubsystemValues.throttle.size(); i++) {
+            double throttle = AutoSubsystemValues.throttle.get(i);
+            toPrint += throttle;
+
+            if (i != AutoSubsystemValues.throttle.size() - 1) {
+                toPrint += ",";
+            }
+        }
+        toPrint += "));\n";
+
+        // append the rotation speeds
+        toPrint += "\n\nList<Double> rotation = new LinkedList<Double>(Arrays.asList(";
+        for (int i = 0; i < AutoSubsystemValues.rotation.size(); i++) {
+            double  rotation = AutoSubsystemValues.rotation.get(i);
+            toPrint += rotation;
+
+            if (i != AutoSubsystemValues.intaking.size() - 1) {
+                toPrint += ",";
+            }
+        }
+        toPrint += "));\n";
+
+
         // append the intake speeds
         toPrint += "\n\nList<Double> intaking = new LinkedList<Double>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.intaking.size(); i++) {

@@ -87,7 +87,7 @@ public class RobotContainer {
             m_rightElevator, () -> !m_controller.getBackButton()));
 
     m_autoSubsystem.setDefaultCommand(
-        new RecordAuto(m_autoSubsystem, () -> m_controllerTwo.getYButton(), () -> m_controllerTwo.getXButton()));
+        new RecordAuto(m_autoSubsystem, () -> m_controllerTwo.getXButton(), () -> m_controllerTwo.getBButton()));
 
     // Configure the button bindings
     configureButtonBindings();
