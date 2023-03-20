@@ -17,6 +17,7 @@ public class RecordAuto extends CommandBase {
         this.m_autoSubsystem = autoSubsystem;
         this.m_recording = recording;
         this.m_stopping = stopping;
+        addRequirements(m_autoSubsystem);
     }
 
     @Override
