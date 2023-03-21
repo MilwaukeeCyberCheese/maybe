@@ -4,10 +4,10 @@
 
 package frc.robot.commands;
 
-import frc.robot.Constants;
+
 import frc.robot.subsystems.LeftElevator;
 import frc.robot.subsystems.RightElevator;
-import frc.robot.subsystems.Shifter;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /* Shifts the drivetrain into first gear */

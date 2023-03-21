@@ -119,10 +119,7 @@ public class RobotContainer {
     Trigger yButton = new JoystickButton(m_controller, 4);
     Trigger leftBumper = new JoystickButton(m_controller, 5);
     Trigger rightBumper = new JoystickButton(m_controller, 6);
-    Trigger backButton = new JoystickButton(m_controller, 7);
     Trigger startButton = new JoystickButton(m_controller, 8);
-    Trigger yButtonTwo = new JoystickButton(m_controllerTwo, 4);
-    Trigger bButtonTwo = new JoystickButton(m_controllerTwo, 2);
 
     leftBumper.whileTrue(new IntakeCubeCommand(m_intake));
     rightBumper.whileTrue(new IntakeConeCommand(m_intake));

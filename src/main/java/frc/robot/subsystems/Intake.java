@@ -18,16 +18,6 @@ public class Intake extends SubsystemBase {
         Constants.controllers.intakeSpark.setInverted(Constants.intake.INVERTED);
     }
 
-    @Override
-    public void periodic() {
-        // This method will be called once per scheduler run
-        log();
-        if (RobotContainer.readAuto) {
-            RobotContainer.m_autoSubsystem.addIntaking(speed);
-            RobotContainer.m_autoSubsystem.addIntakePos(position);
-        }
-    }
-
     public void drive(double speed) {
         this.speed = speed;
         Constants.controllers.intakeSpark.set(speed);
@@ -37,6 +27,16 @@ public class Intake extends SubsystemBase {
         this.position = position;
         Constants.pneumatics.intakeSolenoid.set(position);
 
+    }
+
+    @Override
+    public void periodic() {
+        // This method will be called once per scheduler run
+        log();
+        if (RobotContainer.readAuto) {
+            RobotContainer.m_autoSubsystem.addIntaking(speed);
+            RobotContainer.m_autoSubsystem.addIntakePos(position);
+        }
     }
 
     public void log() {
