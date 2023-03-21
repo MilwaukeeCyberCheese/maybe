@@ -89,8 +89,8 @@ public final class Constants {
 
                 public static final int CURRENT_LIMIT = 50;
 
-                public static final double DRIVE_SPEED = 1;
-                public static final double TURN_SPEED = 1;
+                public static final double DRIVE_SPEED = 0.8;
+                public static final double TURN_SPEED = 0.8;
 
                 public static final boolean LEFT_FRONT_INVERTED = false;
                 public static final boolean LEFT_REAR_INVERTED = false;
