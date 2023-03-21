@@ -59,7 +59,7 @@ Constants.pneumatics.shifterSolenoid.set(gear);
 
                 // drive using m_chassisSpeeds
                 // get the wheel speeds
-                new ArcadeDrive(() -> m_throttle, () -> m_rotation, m_drivetrain);
+                m_drivetrain.drive(m_throttle, m_rotation);
 
             } else if (DriverStation.isAutonomousEnabled()
                     && stopwatchCounter >= AutoSubsystemValues.throttle.throttle.size() - 1) {
@@ -99,7 +99,7 @@ Constants.pneumatics.shifterSolenoid.set(gear);
 
                 // drive using m_chassisSpeeds
                 // get the wheel speeds
-                new ArcadeDrive(() -> m_throttle, () -> m_rotation, m_drivetrain);
+                m_drivetrain.drive(m_throttle, m_rotation);;
             } else if (DriverStation.isAutonomousEnabled()
                     && stopwatchCounter >= AutoSubsystemValues.throttle.throttle.size() - 1) {
                 // if we run out of code to run in auto, make sure everything is not moving
@@ -167,8 +167,9 @@ public void addDriveSpeeds(double throttle, double rotation){
     public void printSpeeds() {
         String toPrint = "";
 
+
         // append the throttle speeds
-        toPrint += "\n\npublic static class throttle {\nList<Double> throttle = new LinkedList<Double>(Arrays.asList(";
+        toPrint += "\n\npublic static class throttle {\nstatic List<Double> throttle = new LinkedList<Double>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.throttle.throttle.size(); i++) {
             double throttle = AutoSubsystemValues.throttle.throttle.get(i);
             toPrint += throttle;
@@ -180,7 +181,7 @@ public void addDriveSpeeds(double throttle, double rotation){
         toPrint += "));}\n";
 
         // append the rotation speeds
-        toPrint += "\n\npublic static class rotation {\nList<Double> rotation = new LinkedList<Double>(Arrays.asList(";
+        toPrint += "\n\npublic static class rotation {\nstatic List<Double> rotation = new LinkedList<Double>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.rotation.rotation.size(); i++) {
             double  rotation = AutoSubsystemValues.rotation.rotation.get(i);
             toPrint += rotation;
@@ -193,7 +194,7 @@ public void addDriveSpeeds(double throttle, double rotation){
 
 
         // append the intake speeds
-        toPrint += "\n\npublic static class intaking {\nList<Double> intaking = new LinkedList<Double>(Arrays.asList(";
+        toPrint += "\n\npublic static class intaking {\nstatic List<Double> intaking = new LinkedList<Double>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.intaking.intaking.size(); i++) {
             double intake = AutoSubsystemValues.intaking.intaking.get(i);
             toPrint += intake;
@@ -205,7 +206,7 @@ public void addDriveSpeeds(double throttle, double rotation){
         toPrint += "));}\n";
 
         // append the shifter gear
-        toPrint += "\n\npublic static class gear {\nList<Boolean> gear = new LinkedList<Boolean>(Arrays.asList(";
+        toPrint += "\n\npublic static class gear {\nstatic List<Boolean> gear = new LinkedList<Boolean>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.gear.gear.size(); i++) {
             Boolean gear = AutoSubsystemValues.gear.gear.get(i);
             toPrint += gear;
@@ -217,7 +218,7 @@ public void addDriveSpeeds(double throttle, double rotation){
         toPrint += "));}\n";
 
         // append the left lift speeds
-        toPrint += "\n\npublic static class leftLiftSpeeds {\nList<Double> leftLiftSpeeds = new LinkedList<Double>(Arrays.asList(";
+        toPrint += "\n\npublic static class leftLiftSpeeds {\nstatic List<Double> leftLiftSpeeds = new LinkedList<Double>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.size(); i++) {
             double lift = AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.get(i);
             toPrint += lift;
@@ -229,7 +230,7 @@ public void addDriveSpeeds(double throttle, double rotation){
         toPrint += "));}\n";
 
         // append the right lift speeds
-        toPrint += "\n\npublic static class rightLiftSpeeds {\nList<Double> rightLiftSpeeds = new LinkedList<Double>(Arrays.asList(";
+        toPrint += "\n\npublic static class rightLiftSpeeds {\nstatic List<Double> rightLiftSpeeds = new LinkedList<Double>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.size(); i++) {
             double lift = AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.get(i);
             toPrint += lift;
@@ -241,7 +242,7 @@ public void addDriveSpeeds(double throttle, double rotation){
         toPrint += "));}\n";
 
         // append the intake position
-        toPrint += "\n\npublic static class intakePos {\nList<Value> intakePos = new LinkedList<Value>(Arrays.asList(";
+        toPrint += "\n\npublic static class intakePos {\nstatic List<Value> intakePos = new LinkedList<Value>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.intakePos.intakePos.size(); i++) {
             Value position = AutoSubsystemValues.intakePos.intakePos.get(i);
             toPrint += position;
@@ -250,7 +251,7 @@ public void addDriveSpeeds(double throttle, double rotation){
                 toPrint += ",";
             }
         }
-        toPrint += "));}\n";
+        toPrint += "));}\n\n";
 
         System.out.println("\n");
         System.out.println("\n");
