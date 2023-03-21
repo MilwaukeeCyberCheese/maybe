@@ -4,11 +4,9 @@
 
 package frc.robot;
 
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.IntakeOff;
 import frc.robot.commands.Second;
@@ -17,7 +15,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LeftElevator;
 import frc.robot.subsystems.RightElevator;
 import frc.robot.commands.AutoCommand;
-import frc.robot.commands.First;
+
 import frc.robot.subsystems.Shifter;
 
 /**
@@ -32,12 +30,12 @@ import frc.robot.subsystems.Shifter;
 public class Robot extends TimedRobot {
   SendableChooser<Integer> autoChooser = new SendableChooser<>();
   
-  private Command m_autonomousCommand;
+  private AutoCommand m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
-  private static final AutoCommand m_autoCommand = new AutoCommand(m_autoSubsystem);
+
 
   private final Intake m_intake = new Intake();
   private final Shifter m_shifter = new Shifter();
@@ -113,7 +111,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.schedule();
     }
 
-    ((AutoSubsystem) m_autonomousCommand).setAuto(autoMode);
+    (m_autonomousCommand).setAuto(autoMode);
   }
   
 
