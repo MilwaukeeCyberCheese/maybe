@@ -119,18 +119,10 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Create some buttons
-    Trigger aButtonOne = new JoystickButton(m_controller, 1);
-    Trigger bButtonOne = new JoystickButton(m_controller, 2);
-    Trigger xButtonOne = new JoystickButton(m_controller, 3);
-    Trigger yButtonOne = new JoystickButton(m_controller, 4);
     Trigger leftBumperOne = new JoystickButton(m_controller, 5);
     Trigger rightBumperOne = new JoystickButton(m_controller, 6);
-    Trigger startButtonOne = new JoystickButton(m_controller, 8);
-    Trigger POV = new Trigger(m_filteredController.getPOVPressed());
 
     Trigger aButtonTwo = new JoystickButton(m_controllerTwo, 1);
-    Trigger bButtonTwo = new JoystickButton(m_controllerTwo, 2);
-    Trigger xButtonTwo = new JoystickButton(m_controllerTwo, 3);
     Trigger yButtonTwo = new JoystickButton(m_controllerTwo, 4);
     Trigger leftBumperTwo = new JoystickButton(m_controllerTwo, 5);
     Trigger rightBumperTwo = new JoystickButton(m_controllerTwo, 6);
