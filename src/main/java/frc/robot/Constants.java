@@ -89,8 +89,8 @@ public final class Constants {
 
                 public static final int CURRENT_LIMIT = 50;
 
-                public static final double DRIVE_SPEED = 0.8;
-                public static final double TURN_SPEED = 0.8;
+                public static final double DRIVE_SPEED = 1;
+                public static final double TURN_SPEED = 0.9;
 
                 public static final boolean LEFT_FRONT_INVERTED = false;
                 public static final boolean LEFT_REAR_INVERTED = false;
@@ -104,8 +104,8 @@ public final class Constants {
         public static final class intake {
                 public static final boolean INVERTED = true;
 
-                public static final double CONE_SPEED = 0.3;
-                public static final double CUBE_SPEED = -0.3;
+                public static final double CONE_SPEED = 0.7;
+                public static final double CUBE_SPEED = -0.5;
 
                 public static final Value intakeDown = Value.kForward;
                 public static final Value intakeUp = Value.kReverse;

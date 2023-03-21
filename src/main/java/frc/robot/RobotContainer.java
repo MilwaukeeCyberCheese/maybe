@@ -85,14 +85,14 @@ public class RobotContainer {
             m_intake));
 
     m_leftElevator.setDefaultCommand(
-        new Elevator(() -> m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
+        new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
             m_rightElevator, () -> !m_controllerTwo.getBackButton()));
 
     m_rightElevator.setDefaultCommand(
-        new Elevator(() -> m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
+        new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
             m_rightElevator, () -> !m_controllerTwo.getBackButton()));
 
-            m_autoSubsystem.setDefaultCommand(
+    m_autoSubsystem.setDefaultCommand(
         new RecordAuto(m_autoSubsystem, () -> m_controllerTwo.getXButton(), () -> m_controllerTwo.getBButton()));
 
     // Configure the button bindings
@@ -128,17 +128,16 @@ public class RobotContainer {
     Trigger rightBumperTwo = new JoystickButton(m_controllerTwo, 6);
     Trigger startButtonTwo = new JoystickButton(m_controllerTwo, 8);
 
-    leftBumperOne.whileTrue(new First(m_shifter));
-    rightBumperOne.whileTrue(new Second(m_shifter));
+    leftBumperOne.onTrue(new First(m_shifter));
+    rightBumperOne.onTrue(new Second(m_shifter));
 
     startButtonTwo.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
 
     yButtonTwo.whileTrue(new IntakeUp(m_intake));
     aButtonTwo.whileTrue(new IntakeDown(m_intake));
 
-    leftBumperTwo.onTrue(new IntakeCubeCommand(m_intake));
-    rightBumperTwo.onTrue(new IntakeConeCommand(m_intake));
-
+    leftBumperTwo.whileTrue(new IntakeCubeCommand(m_intake));
+    rightBumperTwo.whileTrue(new IntakeConeCommand(m_intake));
 
   }
 
