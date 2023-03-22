@@ -8,8 +8,7 @@ import frc.robot.commands.ArcadeDrive;
 
 public class AutoSubsystem extends SubsystemBase {
 
-    // 36 and 3/4 is how far from the edge of the tape we need to line up, we also
-    // need to have the left bumper slightly off the line
+    // side to love handles is 10, ass to line is 23 inches
 
     private double m_throttle = 0;
     private double m_rotation = 0;
