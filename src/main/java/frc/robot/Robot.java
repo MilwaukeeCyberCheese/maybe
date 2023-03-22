@@ -36,6 +36,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
+  public static int stopwatchCounter = -1;
 
 
   private final Intake m_intake = new Intake();
@@ -43,6 +44,9 @@ public class Robot extends TimedRobot {
 
   private final LeftElevator m_leftElevator = new LeftElevator();
   private final RightElevator m_rightElevator = new RightElevator();
+
+
+ 
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -83,6 +87,7 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods. This must be called from the
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
+    stopwatchCounter++;
     CommandScheduler.getInstance().run();
   }
 

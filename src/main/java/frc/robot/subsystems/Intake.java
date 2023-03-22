@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 public class Intake extends SubsystemBase {
@@ -21,7 +22,7 @@ public class Intake extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        if (RobotContainer.readAuto) {
+        if (RobotContainer.readAuto && Robot.stopwatchCounter % 6 == 0) {
             RobotContainer.m_autoSubsystem.addIntaking(speed);
             RobotContainer.m_autoSubsystem.addIntakePos(position);
         }

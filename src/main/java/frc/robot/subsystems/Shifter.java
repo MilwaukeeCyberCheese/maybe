@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -14,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 public class Shifter extends SubsystemBase {
 
-private Boolean position;
+  private Boolean position;
 
   /** Create a new shifter subsystem. */
   public Shifter() {
@@ -25,7 +26,6 @@ private Boolean position;
   public void setGear(boolean position) {
     this.position = position;
     Constants.pneumatics.shifterSolenoid.set(position);
-   
 
   }
 
@@ -35,16 +35,13 @@ private Boolean position;
     SmartDashboard.putBoolean("Gear", Constants.pneumatics.shifterSolenoid.get());
     SmartDashboard.putNumber("Compressor Current", Constants.pneumatics.PCM.getCompressorCurrent());
 
-  
   }
 
   /** Call log method every loop. */
   @Override
   public void periodic() {
-    if(RobotContainer.readAuto){
+    if (RobotContainer.readAuto && Robot.stopwatchCounter % 6 == 0) {
       RobotContainer.m_autoSubsystem.addShifter(position);
     }
-    log();
-    
   }
 }

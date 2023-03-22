@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -99,7 +100,7 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
     log();
 
-    if(RobotContainer.readAuto){
+    if(RobotContainer.readAuto && Robot.stopwatchCounter % 6 == 0){
       RobotContainer.m_autoSubsystem.addDriveSpeeds(throttle, rotation);
     }
   }

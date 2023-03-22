@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 
@@ -79,7 +80,7 @@ public class RightElevator extends SubsystemBase {
   public void periodic() {
     log();
 
-    if(RobotContainer.readAuto){
+    if(RobotContainer.readAuto && Robot.stopwatchCounter % 6 == 0){
       RobotContainer.m_autoSubsystem.addRightLiftSpeed(speed);
     }
   }

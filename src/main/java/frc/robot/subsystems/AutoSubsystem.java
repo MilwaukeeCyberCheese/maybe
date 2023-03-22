@@ -19,7 +19,7 @@ public class AutoSubsystem extends SubsystemBase {
     private Drivetrain m_drivetrain = new Drivetrain();
 
     /**
-     * This function is called every few milliseconds when the robot is enabled
+     * This function is called every twenty milliseconds when the robot is enabled
      * 
      * For this subsystem, this function drives all auto paths
      */
