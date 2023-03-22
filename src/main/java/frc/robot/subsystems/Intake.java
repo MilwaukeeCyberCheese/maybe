@@ -21,11 +21,12 @@ public class Intake extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        log();
         if (RobotContainer.readAuto) {
             RobotContainer.m_autoSubsystem.addIntaking(speed);
             RobotContainer.m_autoSubsystem.addIntakePos(position);
         }
+        log();
+        
     }
 
     public void drive(double speed) {

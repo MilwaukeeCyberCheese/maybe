@@ -41,9 +41,10 @@ private Boolean position;
   /** Call log method every loop. */
   @Override
   public void periodic() {
-    log();
     if(RobotContainer.readAuto){
       RobotContainer.m_autoSubsystem.addShifter(position);
     }
+    log();
+    
   }
 }
