@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.IntakeConeCommand;
 
 public class AutoSubsystem extends SubsystemBase {
 
@@ -12,9 +13,15 @@ public class AutoSubsystem extends SubsystemBase {
 
     private int auto = 1;
 
-    private int stopwatchCounter = -1;
+    private int stopwatchCounter = 0;
 
     private Drivetrain m_drivetrain = new Drivetrain();
+
+    private Boolean ended = true;
+
+    private Intake m_intake = new Intake();
+
+    private double prevState = 0.0;
 
     /**
      * This function is called every twenty milliseconds when the robot is enabled
@@ -25,85 +32,123 @@ public class AutoSubsystem extends SubsystemBase {
     public void periodic() {
 
         if (auto == 1) {
-            if (DriverStation.isAutonomousEnabled() && stopwatchCounter < AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
-                stopwatchCounter++;
+            // if (DriverStation.isAutonomousEnabled()
+            // && stopwatchCounter <
+            // AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
+            // stopwatchCounter++;
 
-                // lift
-                double leftLiftSpeed = AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.get(stopwatchCounter);
-                double rightLiftSpeed = AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.get(stopwatchCounter);
+            // // lift
+            // double leftLiftSpeed =
+            // AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.get(stopwatchCounter);
+            // double rightLiftSpeed =
+            // AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.get(stopwatchCounter);
 
-                Constants.controllers.leftLiftSpark.set(leftLiftSpeed);
-                Constants.controllers.rightLiftSpark.set(rightLiftSpeed);
+            // Constants.controllers.leftLiftSpark.set(leftLiftSpeed);
+            // Constants.controllers.rightLiftSpark.set(rightLiftSpeed);
 
-                // intake
-                double intake = AutoSubsystemValues.intaking.intaking.get(stopwatchCounter);
+            // // intake
+            // double intake = AutoSubsystemValues.intaking.intaking.get(stopwatchCounter);
 
-                Constants.controllers.intakeSpark.set(intake);
+            // Constants.controllers.intakeSpark.set(intake);
 
-                // intake pos
-                Value intakePos = AutoSubsystemValues.intakePos.intakePos.get(stopwatchCounter);
+            // // intake pos
+            // Value intakePos =
+            // AutoSubsystemValues.intakePos.intakePos.get(stopwatchCounter);
 
-                Constants.pneumatics.intakeSolenoid.set(intakePos);
+            // Constants.pneumatics.intakeSolenoid.set(intakePos);
 
+            // // gear
+            // Boolean gear = AutoSubsystemValues.gear.gear.get(stopwatchCounter);
 
-                //gear
-Boolean gear = AutoSubsystemValues.gear.gear.get(stopwatchCounter);
+            // Constants.pneumatics.shifterSolenoid.set(gear);
+            // // get speeds for wheels
+            // double frontLeft =
+            // AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(stopwatchCounter);
+            // double frontRight =
+            // AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(stopwatchCounter);
+            // double backLeft =
+            // AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(stopwatchCounter);
+            // double backRight =
+            // AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(stopwatchCounter);
 
-Constants.pneumatics.shifterSolenoid.set(gear);
+            // // set wheel speeds
+            // Constants.controllers.leftFrontSpark.set(frontLeft);
+            // Constants.controllers.rightFrontSpark.set(frontRight);
+            // Constants.controllers.leftRearSpark.set(backLeft);
+            // Constants.controllers.rightRearSpark.set(backRight);
 
-                // double m_throttle = AutoSubsystemValues.throttle.throttle.get(stopwatchCounter);
-                // double m_rotation = AutoSubsystemValues.rotation.rotation.get(stopwatchCounter);
+            // } else if (DriverStation.isAutonomousEnabled()
+            // && stopwatchCounter >=
+            // AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
+            // // if we run out of code to run in auto, make sure everything is not moving
+            // Constants.controllers.leftLiftSpark.set(0.0);
+            // Constants.controllers.rightLiftSpark.set(0.0);
+            // Constants.controllers.intakeSpark.set(0.0);
 
-                // drive using m_chassisSpeeds
-                // get the wheel speeds
-                // m_drivetrain.drive(m_throttle, m_rotation);
-
-            } else if (DriverStation.isAutonomousEnabled()
-                    && stopwatchCounter >= AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
-                // if we run out of code to run in auto, make sure everything is not moving
-                Constants.controllers.leftLiftSpark.set(0.0);
-                Constants.controllers.rightLiftSpark.set(0.0);
-                Constants.controllers.intakeSpark.set(0.0);
-
-                Constants.controllers.leftFrontSpark.set(0.0);
-                Constants.controllers.leftRearSpark.set(0.0);
-                Constants.controllers.rightFrontSpark.set(0.0);
-                Constants.controllers.rightRearSpark.set(0.0);
-            }
+            // Constants.controllers.leftFrontSpark.set(0.0);
+            // Constants.controllers.leftRearSpark.set(0.0);
+            // Constants.controllers.rightFrontSpark.set(0.0);
+            // Constants.controllers.rightRearSpark.set(0.0);
+            // }
         } else if (auto == 2) {
-            if (DriverStation.isAutonomousEnabled() && stopwatchCounter < AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
+            if (DriverStation.isAutonomousEnabled()
+                    && stopwatchCounter < (AutoSubsystemValues.intaking.intaking.size() - 5) && ended) {
                 stopwatchCounter++;
 
-                // shoot
-                double leftLiftSpeed = AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.get(stopwatchCounter);
-                double rightLiftSpeed = AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.get(stopwatchCounter);
+                // // shoot
+                // double leftLiftSpeed =
+                // AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.get(stopwatchCounter);
+                // double rightLiftSpeed =
+                // AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.get(stopwatchCounter);
 
-                Constants.controllers.leftLiftSpark.set(leftLiftSpeed);
-                Constants.controllers.rightLiftSpark.set(rightLiftSpeed);
-
+                // Constants.controllers.leftLiftSpark.set(leftLiftSpeed);
+                // Constants.controllers.rightLiftSpark.set(rightLiftSpeed);
+                // System.out.println(AutoSubsystemValues.intaking.intaking.size());
+                // System.out.println(stopwatchCounter);
                 // intake
                 double intake = AutoSubsystemValues.intaking.intaking.get(stopwatchCounter);
-
+                
+                // if (intake != prevState) {
+                //     System.out.println("Switching State");
+                //     System.out.println(intake);
+                //     System.out.println(stopwatchCounter);
+                //     Constants.controllers.intakeSpark.set(intake);
+                //     prevState = intake; 
+                // }
                 Constants.controllers.intakeSpark.set(intake);
+                // System.out.println(intake);
 
-                // intake pos
-                Value intakePos = AutoSubsystemValues.intakePos.intakePos.get(stopwatchCounter);
-
+                // // intake pos
+                Value intakePos =
+                AutoSubsystemValues.intakePos.intakePos.get(stopwatchCounter);
+                // System.out.println(intakePos);
                 Constants.pneumatics.intakeSolenoid.set(intakePos);
 
-                // double m_throttle = AutoSubsystemValues.throttle.throttle.get(stopwatchCounter);
-                // double m_rotation = AutoSubsystemValues.rotation.rotation.get(stopwatchCounter);
+                // if(stopwatchCounter >= 175){
+                // ended = false;
+                // }
+                // // get speeds for wheels
+                // double frontLeft =
+                // AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(stopwatchCounter);
+                // double frontRight =
+                // AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(stopwatchCounter);
+                // double backLeft =
+                // AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(stopwatchCounter);
+                // double backRight =
+                // AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(stopwatchCounter);
 
-                // drive using m_chassisSpeeds
-                // get the wheel speeds
-                // m_drivetrain.drive(m_throttle, m_rotation);
+                // // set wheel speeds
+                // Constants.controllers.leftFrontSpark.set(frontLeft);
+                // Constants.controllers.rightFrontSpark.set(frontRight);
+                // Constants.controllers.leftRearSpark.set(backLeft);
+                // Constants.controllers.rightRearSpark.set(backRight);
             } else if (DriverStation.isAutonomousEnabled()
-                    && stopwatchCounter >= AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
+                    && stopwatchCounter >= AutoSubsystemValues.intaking.intaking.size() - 6) {
                 // if we run out of code to run in auto, make sure everything is not moving
                 Constants.controllers.leftLiftSpark.set(0.0);
                 Constants.controllers.rightLiftSpark.set(0.0);
                 Constants.controllers.intakeSpark.set(0.0);
-
+                System.out.println("Stopped Robot");
                 Constants.controllers.leftFrontSpark.set(0.0);
                 Constants.controllers.leftRearSpark.set(0.0);
                 Constants.controllers.rightFrontSpark.set(0.0);
@@ -125,12 +170,12 @@ Constants.pneumatics.shifterSolenoid.set(gear);
         this.auto = auto;
     }
 
-public void addDriveSpeeds(double frontLeft, double frontRight, double backLeft, double backRight){
-    AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.add(frontLeft);
-    AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.add(frontRight);
-    AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.add(backLeft);
-    AutoSubsystemValues.backRightSpeeds.backRightSpeeds.add(backRight);
-}
+    public void addDriveSpeeds(double frontLeft, double frontRight, double backLeft, double backRight) {
+        AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.add(frontLeft);
+        AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.add(frontRight);
+        AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.add(backLeft);
+        AutoSubsystemValues.backRightSpeeds.backRightSpeeds.add(backRight);
+    }
 
     public void addIntakePos(Value position) {
         AutoSubsystemValues.intakePos.intakePos.add(position);
@@ -162,12 +207,11 @@ public void addDriveSpeeds(double frontLeft, double frontRight, double backLeft,
         AutoSubsystemValues.backRightSpeeds.backRightSpeeds.clear();
         AutoSubsystemValues.intakePos.intakePos.clear();
         AutoSubsystemValues.gear.gear.clear();
-        stopwatchCounter = -1;
+        stopwatchCounter = 0;
     }
 
     public void printSpeeds() {
         String toPrint = "";
-
 
         // append the frontLeft speeds
         toPrint += "\n\npublic static class frontLeftSpeeds {\nstatic List<Double> frontLeftSpeeds = new LinkedList<Double>(Arrays.asList(";
@@ -184,7 +228,7 @@ public void addDriveSpeeds(double frontLeft, double frontRight, double backLeft,
         // append the rotation speeds
         toPrint += "\n\npublic static class frontRightSpeeds {\nstatic List<Double> frontRightSpeeds = new LinkedList<Double>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.size(); i++) {
-            double  frontRightSpeeds = AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(i);
+            double frontRightSpeeds = AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(i);
             toPrint += frontRightSpeeds;
 
             if (i != AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.size() - 1) {
@@ -208,7 +252,7 @@ public void addDriveSpeeds(double frontLeft, double frontRight, double backLeft,
         // append the backRight speeds
         toPrint += "\n\npublic static class backRightSpeeds {\nstatic List<Double> backRightSpeeds = new LinkedList<Double>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.backRightSpeeds.backRightSpeeds.size(); i++) {
-            double  backRightSpeeds = AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(i);
+            double backRightSpeeds = AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(i);
             toPrint += backRightSpeeds;
 
             if (i != AutoSubsystemValues.backRightSpeeds.backRightSpeeds.size() - 1) {
@@ -216,7 +260,6 @@ public void addDriveSpeeds(double frontLeft, double frontRight, double backLeft,
             }
         }
         toPrint += "));}\n";
-
 
         // append the intake speeds
         toPrint += "\n\npublic static class intaking {\nstatic List<Double> intaking = new LinkedList<Double>(Arrays.asList(";
