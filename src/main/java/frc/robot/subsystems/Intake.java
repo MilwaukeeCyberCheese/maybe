@@ -22,11 +22,12 @@ public class Intake extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        if (RobotContainer.readAuto && Robot.stopwatchCounter % 6 == 0) {
-            RobotContainer.m_autoSubsystem.addIntaking(speed);
-            RobotContainer.m_autoSubsystem.addIntakePos(position);
+        if (RobotContainer.readAuto) {
+            RobotContainer.m_autoSubsystem.addIntaking(Constants.controllers.intakeSpark.get());
+            RobotContainer.m_autoSubsystem.addIntakePos(Constants.pneumatics.intakeSolenoid.get());
         }
         log();
+        
         
     }
 
@@ -43,6 +44,5 @@ public class Intake extends SubsystemBase {
 
     public void log() {
         SmartDashboard.putNumber("IntakeSpeed", speed);
-        SmartDashboard.putData(Constants.pneumatics.intakeSolenoid);
     }
 }

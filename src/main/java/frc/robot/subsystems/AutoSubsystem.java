@@ -10,8 +10,6 @@ public class AutoSubsystem extends SubsystemBase {
 
     // side to love handles is 10, ass to line is 23 inches
 
-    private double m_throttle = 0;
-    private double m_rotation = 0;
     private int auto = 1;
 
     private int stopwatchCounter = -1;
@@ -27,7 +25,7 @@ public class AutoSubsystem extends SubsystemBase {
     public void periodic() {
 
         if (auto == 1) {
-            if (DriverStation.isAutonomousEnabled() && stopwatchCounter < AutoSubsystemValues.throttle.throttle.size() - 1) {
+            if (DriverStation.isAutonomousEnabled() && stopwatchCounter < AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
                 stopwatchCounter++;
 
                 // lift
@@ -53,15 +51,15 @@ Boolean gear = AutoSubsystemValues.gear.gear.get(stopwatchCounter);
 
 Constants.pneumatics.shifterSolenoid.set(gear);
 
-                m_throttle = AutoSubsystemValues.throttle.throttle.get(stopwatchCounter);
-                m_rotation = AutoSubsystemValues.rotation.rotation.get(stopwatchCounter);
+                // double m_throttle = AutoSubsystemValues.throttle.throttle.get(stopwatchCounter);
+                // double m_rotation = AutoSubsystemValues.rotation.rotation.get(stopwatchCounter);
 
                 // drive using m_chassisSpeeds
                 // get the wheel speeds
-                m_drivetrain.drive(m_throttle, m_rotation);
+                // m_drivetrain.drive(m_throttle, m_rotation);
 
             } else if (DriverStation.isAutonomousEnabled()
-                    && stopwatchCounter >= AutoSubsystemValues.throttle.throttle.size() - 1) {
+                    && stopwatchCounter >= AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
                 // if we run out of code to run in auto, make sure everything is not moving
                 Constants.controllers.leftLiftSpark.set(0.0);
                 Constants.controllers.rightLiftSpark.set(0.0);
@@ -73,7 +71,7 @@ Constants.pneumatics.shifterSolenoid.set(gear);
                 Constants.controllers.rightRearSpark.set(0.0);
             }
         } else if (auto == 2) {
-            if (DriverStation.isAutonomousEnabled() && stopwatchCounter < AutoSubsystemValues.throttle.throttle.size() - 1) {
+            if (DriverStation.isAutonomousEnabled() && stopwatchCounter < AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
                 stopwatchCounter++;
 
                 // shoot
@@ -93,14 +91,14 @@ Constants.pneumatics.shifterSolenoid.set(gear);
 
                 Constants.pneumatics.intakeSolenoid.set(intakePos);
 
-                m_throttle = AutoSubsystemValues.throttle.throttle.get(stopwatchCounter);
-                m_rotation = AutoSubsystemValues.rotation.rotation.get(stopwatchCounter);
+                // double m_throttle = AutoSubsystemValues.throttle.throttle.get(stopwatchCounter);
+                // double m_rotation = AutoSubsystemValues.rotation.rotation.get(stopwatchCounter);
 
                 // drive using m_chassisSpeeds
                 // get the wheel speeds
-                m_drivetrain.drive(m_throttle, m_rotation);;
+                // m_drivetrain.drive(m_throttle, m_rotation);
             } else if (DriverStation.isAutonomousEnabled()
-                    && stopwatchCounter >= AutoSubsystemValues.throttle.throttle.size() - 1) {
+                    && stopwatchCounter >= AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
                 // if we run out of code to run in auto, make sure everything is not moving
                 Constants.controllers.leftLiftSpark.set(0.0);
                 Constants.controllers.rightLiftSpark.set(0.0);
@@ -127,9 +125,11 @@ Constants.pneumatics.shifterSolenoid.set(gear);
         this.auto = auto;
     }
 
-public void addDriveSpeeds(double throttle, double rotation){
-    AutoSubsystemValues.throttle.throttle.add(throttle);
-    AutoSubsystemValues.rotation.rotation.add(rotation);
+public void addDriveSpeeds(double frontLeft, double frontRight, double backLeft, double backRight){
+    AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.add(frontLeft);
+    AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.add(frontRight);
+    AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.add(backLeft);
+    AutoSubsystemValues.backRightSpeeds.backRightSpeeds.add(backRight);
 }
 
     public void addIntakePos(Value position) {
@@ -156,8 +156,10 @@ public void addDriveSpeeds(double throttle, double rotation){
         AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.clear();
         AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.clear();
         AutoSubsystemValues.intaking.intaking.clear();
-        AutoSubsystemValues.throttle.throttle.clear();
-        AutoSubsystemValues.rotation.rotation.clear();
+        AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.clear();
+        AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.clear();
+        AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.clear();
+        AutoSubsystemValues.backRightSpeeds.backRightSpeeds.clear();
         AutoSubsystemValues.intakePos.intakePos.clear();
         AutoSubsystemValues.gear.gear.clear();
         stopwatchCounter = -1;
@@ -167,25 +169,49 @@ public void addDriveSpeeds(double throttle, double rotation){
         String toPrint = "";
 
 
-        // append the throttle speeds
-        toPrint += "\n\npublic static class throttle {\nstatic List<Double> throttle = new LinkedList<Double>(Arrays.asList(";
-        for (int i = 0; i < AutoSubsystemValues.throttle.throttle.size(); i++) {
-            double throttle = AutoSubsystemValues.throttle.throttle.get(i);
-            toPrint += throttle;
+        // append the frontLeft speeds
+        toPrint += "\n\npublic static class frontLeftSpeeds {\nstatic List<Double> frontLeftSpeeds = new LinkedList<Double>(Arrays.asList(";
+        for (int i = 0; i < AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size(); i++) {
+            double frontLeftSpeeds = AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(i);
+            toPrint += frontLeftSpeeds;
 
-            if (i != AutoSubsystemValues.throttle.throttle.size() - 1) {
+            if (i != AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
                 toPrint += ",";
             }
         }
         toPrint += "));}\n";
 
         // append the rotation speeds
-        toPrint += "\n\npublic static class rotation {\nstatic List<Double> rotation = new LinkedList<Double>(Arrays.asList(";
-        for (int i = 0; i < AutoSubsystemValues.rotation.rotation.size(); i++) {
-            double  rotation = AutoSubsystemValues.rotation.rotation.get(i);
-            toPrint += rotation;
+        toPrint += "\n\npublic static class frontRightSpeeds {\nstatic List<Double> frontRightSpeeds = new LinkedList<Double>(Arrays.asList(";
+        for (int i = 0; i < AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.size(); i++) {
+            double  frontRightSpeeds = AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(i);
+            toPrint += frontRightSpeeds;
 
-            if (i != AutoSubsystemValues.rotation.rotation.size() - 1) {
+            if (i != AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.size() - 1) {
+                toPrint += ",";
+            }
+        }
+        toPrint += "));}\n";
+
+        // append the backLeft speeds
+        toPrint += "\n\npublic static class backLeftSpeeds {\nstatic List<Double> backLeftSpeeds = new LinkedList<Double>(Arrays.asList(";
+        for (int i = 0; i < AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.size(); i++) {
+            double backLeftSpeeds = AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(i);
+            toPrint += backLeftSpeeds;
+
+            if (i != AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.size() - 1) {
+                toPrint += ",";
+            }
+        }
+        toPrint += "));}\n";
+
+        // append the backRight speeds
+        toPrint += "\n\npublic static class backRightSpeeds {\nstatic List<Double> backRightSpeeds = new LinkedList<Double>(Arrays.asList(";
+        for (int i = 0; i < AutoSubsystemValues.backRightSpeeds.backRightSpeeds.size(); i++) {
+            double  backRightSpeeds = AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(i);
+            toPrint += backRightSpeeds;
+
+            if (i != AutoSubsystemValues.backRightSpeeds.backRightSpeeds.size() - 1) {
                 toPrint += ",";
             }
         }
@@ -244,7 +270,7 @@ public void addDriveSpeeds(double throttle, double rotation){
         toPrint += "\n\npublic static class intakePos {\nstatic List<Value> intakePos = new LinkedList<Value>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.intakePos.intakePos.size(); i++) {
             Value position = AutoSubsystemValues.intakePos.intakePos.get(i);
-            toPrint += position;
+            toPrint += "Value." + position;
 
             if (i != AutoSubsystemValues.intakePos.intakePos.size() - 1) {
                 toPrint += ",";
@@ -261,8 +287,10 @@ public void addDriveSpeeds(double throttle, double rotation){
         AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.clear();
         AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.clear();
         AutoSubsystemValues.intaking.intaking.clear();
-        AutoSubsystemValues.throttle.throttle.clear();
-        AutoSubsystemValues.rotation.rotation.clear();
+        AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.clear();
+        AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.clear();
+        AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.clear();
+        AutoSubsystemValues.backRightSpeeds.backRightSpeeds.clear();
         AutoSubsystemValues.intakePos.intakePos.clear();
         AutoSubsystemValues.gear.gear.clear();
     }

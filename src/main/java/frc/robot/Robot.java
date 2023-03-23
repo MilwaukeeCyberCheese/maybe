@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.IntakeOff;
+import frc.robot.commands.IntakeUp;
 import frc.robot.commands.Second;
 import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Intake;
@@ -65,6 +66,8 @@ public class Robot extends TimedRobot {
 
     CameraServer.startAutomaticCapture();
     SmartDashboard.putData("Autonomous", autoChooser);
+
+    new IntakeUp(m_intake);
 
   }
 

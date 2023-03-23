@@ -78,8 +78,8 @@ public class LeftElevator extends SubsystemBase {
   public void periodic() {
     log();
 
-    if(RobotContainer.readAuto && Robot.stopwatchCounter % 6 == 0){
-      RobotContainer.m_autoSubsystem.addLeftLiftSpeed(speed);
+    if(RobotContainer.readAuto){
+      RobotContainer.m_autoSubsystem.addLeftLiftSpeed(Constants.controllers.leftLiftSpark.get());
     }
     
   }

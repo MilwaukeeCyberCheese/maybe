@@ -100,8 +100,8 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
     log();
 
-    if(RobotContainer.readAuto && Robot.stopwatchCounter % 6 == 0){
-      RobotContainer.m_autoSubsystem.addDriveSpeeds(throttle, rotation);
+    if(RobotContainer.readAuto){
+      RobotContainer.m_autoSubsystem.addDriveSpeeds(Constants.controllers.leftFrontSpark.get(), Constants.controllers.rightFrontSpark.get(), Constants.controllers.leftRearSpark.get(), Constants.controllers.rightRearSpark.get());
     }
   }
 }

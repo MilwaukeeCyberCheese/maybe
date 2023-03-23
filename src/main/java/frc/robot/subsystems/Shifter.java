@@ -40,8 +40,8 @@ public class Shifter extends SubsystemBase {
   /** Call log method every loop. */
   @Override
   public void periodic() {
-    if (RobotContainer.readAuto && Robot.stopwatchCounter % 6 == 0) {
-      RobotContainer.m_autoSubsystem.addShifter(position);
+    if (RobotContainer.readAuto) {
+      RobotContainer.m_autoSubsystem.addShifter(Constants.pneumatics.shifterSolenoid.get());
     }
   }
 }

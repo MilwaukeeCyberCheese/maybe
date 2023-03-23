@@ -80,8 +80,8 @@ public class RightElevator extends SubsystemBase {
   public void periodic() {
     log();
 
-    if(RobotContainer.readAuto && Robot.stopwatchCounter % 6 == 0){
-      RobotContainer.m_autoSubsystem.addRightLiftSpeed(speed);
+    if(RobotContainer.readAuto){
+      RobotContainer.m_autoSubsystem.addRightLiftSpeed(Constants.controllers.rightLiftSpark.get());
     }
   }
 }
