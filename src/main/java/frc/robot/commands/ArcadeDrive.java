@@ -14,7 +14,6 @@ import java.util.function.DoubleSupplier;
 
 /** Have the robot drive arcade style. */
 public class ArcadeDrive extends CommandBase {
-  private static final Intake m_intake = new Intake();
   private final Drivetrain m_drivetrain;
   private final DoubleSupplier m_throttle;
   private final DoubleSupplier m_rotation;
@@ -28,6 +27,8 @@ public class ArcadeDrive extends CommandBase {
    *
    * @param throttle   The control input for the left side of the drive
    * @param rotation   The control input for the right sight of the drive
+   * @param slow  whether or not to enable slow mode
+   * @param turbo whether or not to enable turbo mode
    * @param drivetrain The drivetrain subsystem to drive
    */
   public ArcadeDrive(DoubleSupplier throttle, DoubleSupplier rotation, BooleanSupplier slow, BooleanSupplier turbo,
