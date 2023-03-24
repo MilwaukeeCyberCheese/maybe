@@ -92,6 +92,9 @@ public final class Constants {
                 public static final double DRIVE_SPEED = 1;
                 public static final double TURN_SPEED = 0.9;
 
+                public static final double SLOW_SPEED = 0.5;
+                public static final double TURBO_SPEED = 1.2;
+
                 public static final boolean LEFT_FRONT_INVERTED = false;
                 public static final boolean LEFT_REAR_INVERTED = false;
                 public static final boolean RIGHT_FRONT_INVERTED = true;
