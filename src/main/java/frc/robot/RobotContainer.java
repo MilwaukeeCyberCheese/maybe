@@ -84,13 +84,13 @@ public class RobotContainer {
         new IntakeSpeedy(() -> m_controllerTwo.getLeftTriggerAxis(), () -> m_controllerTwo.getRightTriggerAxis(),
             m_intake));
 
-    m_leftElevator.setDefaultCommand(
-        new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
-            m_rightElevator, () -> !m_controllerTwo.getBackButton()));
+    // m_leftElevator.setDefaultCommand(
+    //     new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
+    //         m_rightElevator, () -> !m_controllerTwo.getBackButton()));
 
-    m_rightElevator.setDefaultCommand(
-        new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
-            m_rightElevator, () -> !m_controllerTwo.getBackButton()));
+    // m_rightElevator.setDefaultCommand(
+    //     new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
+    //         m_rightElevator, () -> !m_controllerTwo.getBackButton()));
 
     m_autoSubsystem.setDefaultCommand(
         new RecordAuto(m_autoSubsystem, () -> m_controllerTwo.getXButton(), () -> m_controllerTwo.getBButton()));
@@ -127,9 +127,12 @@ public class RobotContainer {
     Trigger leftBumperTwo = new JoystickButton(m_controllerTwo, 5);
     Trigger rightBumperTwo = new JoystickButton(m_controllerTwo, 6);
     Trigger startButtonTwo = new JoystickButton(m_controllerTwo, 8);
+    Trigger rightTriggerOne = new Trigger(() -> m_filteredController.getRightTriggerActive());
 
     leftBumperOne.onTrue(new First(m_shifter));
     rightBumperOne.onTrue(new Second(m_shifter));
+
+rightTriggerOne.onTrue(new IntakeUp(m_intake));
 
     startButtonTwo.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
 

@@ -34,7 +34,7 @@ import frc.robot.subsystems.Shifter;
  */
 public class Robot extends TimedRobot {
   SendableChooser<Integer> autoChooser = new SendableChooser<>();
-  
+
   private AutoCommand m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
@@ -42,13 +42,13 @@ public class Robot extends TimedRobot {
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
   public static int stopwatchCounter = -1;
 
-
   private final Intake m_intake = new Intake();
   private final Shifter m_shifter = new Shifter();
 
   private final LeftElevator m_leftElevator = new LeftElevator();
   private final RightElevator m_rightElevator = new RightElevator();
 
+  private static Boolean autoEnabled = false;
   private static double testStartTime = 0;
   private static double testCurrentTime = 0;
   private static double testTimeDiff = 0;
@@ -94,8 +94,11 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods. This must be called from the
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
-    stopwatchCounter++;
-    CommandScheduler.getInstance().run();
+    if (!autoEnabled) {
+      stopwatchCounter++;
+      CommandScheduler.getInstance().run();
+    }
+
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -116,25 +119,44 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     stopwatchCounter = -1;
-    //  int autoMode = autoChooser.getSelected();
+    // int autoMode = autoChooser.getSelected();
 
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
-   
+    testStartTime = System.currentTimeMillis();
+    autoEnabled = true;
+    Constants.pneumatics.intakeSolenoid.set(Constants.intake.intakeUp);
 
-    //  m_autonomousCommand.setAuto(autoMode);
-    
+    // m_autonomousCommand.setAuto(autoMode);
+
     // // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
-    }
+    // if (m_autonomousCommand != null) {
+    // m_autonomousCommand.schedule();
+    // }
   }
-  
 
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
- 
+    testCurrentTime = System.currentTimeMillis();
+    testTimeDiff = (testCurrentTime - testStartTime) / 1000;
+
+    if (testTimeDiff >= 1.0 && testTimeDiff <= 3.0) {
+      m_intake.drive(0.7);
+    } else {
+      m_intake.drive(0.0);
+    }
+    if (testTimeDiff >= 3.5 && testTimeDiff <= 6.0) {
+      Constants.controllers.leftFrontSpark.set(-0.5);
+      Constants.controllers.leftRearSpark.set(-0.5);
+      Constants.controllers.rightFrontSpark.set(-0.5);
+      Constants.controllers.rightRearSpark.set(-0.5);
+    } else {
+      Constants.controllers.leftFrontSpark.set(0.0);
+      Constants.controllers.leftRearSpark.set(0.0);
+      Constants.controllers.rightFrontSpark.set(0.0);
+      Constants.controllers.rightRearSpark.set(0.0);
+    }
   }
 
   @Override
@@ -143,9 +165,10 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
+    // if (m_autonomousCommand != null) {
+    // m_autonomousCommand.cancel();
+    // }
+    autoEnabled = false;
 
     // zeroes out the slide position so that the position it is at when the
     // initialization of teleop occurs is set as the lowest possible position
@@ -159,14 +182,14 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    
+
   }
 
   @Override
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
-    testStartTime = System.currentTimeMillis(); 
+    testStartTime = System.currentTimeMillis();
 
   }
 
@@ -175,18 +198,20 @@ public class Robot extends TimedRobot {
   public void testPeriodic() {
 
     testCurrentTime = System.currentTimeMillis();
-    testTimeDiff = testCurrentTime - testStartTime;
+    testTimeDiff = (testCurrentTime - testStartTime) / 1000;
 
     if (testTimeDiff >= 1.0 && testTimeDiff <= 2.0) {
-
+      m_intake.drive(0.7);
     } else if (testTimeDiff >= 3.0 && testTimeDiff <= 6.0) {
-
-    } else if (testTimeDiff >= 7.0 && testTimeDiff <= 8.0) {
-
+      Constants.controllers.leftFrontSpark.set(0.5);
+      Constants.controllers.leftRearSpark.set(0.5);
+    } else if (testTimeDiff >= 7.0 && testTimeDiff <= 7.3) {
+      System.out.println("Test Done");
     } else {
-
+      Constants.controllers.leftFrontSpark.set(0.0);
+      Constants.controllers.leftRearSpark.set(0.0);
+      m_intake.drive(0.0);
+      // m_drivetrain.drive(0.5, 0);
     }
-    Constants.controllers.leftFrontSpark.set(0.5);
-    Constants.controllers.leftRearSpark.set(0.5);
   }
 }

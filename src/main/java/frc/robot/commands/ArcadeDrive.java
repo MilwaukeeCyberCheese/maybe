@@ -20,16 +20,18 @@ public class ArcadeDrive extends CommandBase {
   private final DoubleSupplier m_rotation;
   private final BooleanSupplier m_slow;
   private final BooleanSupplier m_turbo;
-  private  double m_speedMod = 1;
+  private double m_turnSpeedMod = 1;
+  private double m_driveSpeedMod = 1;
 
   /**
    * Creates a new ArcadeDrive command.
    *
-   * @param throttle The control input for the left side of the drive
-   * @param rotation The control input for the right sight of the drive
+   * @param throttle   The control input for the left side of the drive
+   * @param rotation   The control input for the right sight of the drive
    * @param drivetrain The drivetrain subsystem to drive
    */
-  public ArcadeDrive(DoubleSupplier throttle, DoubleSupplier rotation, BooleanSupplier slow, BooleanSupplier turbo, Drivetrain drivetrain) {
+  public ArcadeDrive(DoubleSupplier throttle, DoubleSupplier rotation, BooleanSupplier slow, BooleanSupplier turbo,
+      Drivetrain drivetrain) {
     m_drivetrain = drivetrain;
     m_throttle = throttle;
     m_rotation = rotation;
@@ -38,27 +40,23 @@ public class ArcadeDrive extends CommandBase {
     addRequirements(m_drivetrain);
   }
 
-
-
-  @Override
-  public void initialize(){
-    if(m_turbo.getAsBoolean() && Constants.pneumatics.intakeSolenoid.get() != Constants.intake.intakeUp){
-new IntakeUp(m_intake);
-    }
-  }
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    if(m_slow.getAsBoolean()){
-m_speedMod = 0.5;
+    if (m_slow.getAsBoolean()) {
+      m_turnSpeedMod = Constants.drive.SLOW_TURN_SPEED;
+      m_driveSpeedMod = Constants.drive.SLOW_DRIVE_SPEED;
+    } else if (m_turbo.getAsBoolean()) {
+      m_turnSpeedMod = Constants.drive.TURBO_TURN_SPEED;
+      m_driveSpeedMod = Constants.drive.TURBO_DRIVE_SPEED;
     } else {
-      m_speedMod = Constants.drive.SLOW_SPEED;
+      m_turnSpeedMod = 1;
+      m_driveSpeedMod = 1;
     }
-    if(m_turbo.getAsBoolean()){
-      m_speedMod = Constants.drive.TURBO_SPEED;
-    }
-    //set speeds of drivetrain relative to limits
-    m_drivetrain.drive(m_throttle.getAsDouble() * Constants.drive.DRIVE_SPEED * m_speedMod, m_rotation.getAsDouble() * Constants.drive.TURN_SPEED * m_speedMod);
+
+    // set speeds of drivetrain relative to limits
+    m_drivetrain.drive(m_throttle.getAsDouble() * Constants.drive.DRIVE_SPEED * m_driveSpeedMod,
+        m_rotation.getAsDouble() * Constants.drive.TURN_SPEED * m_turnSpeedMod);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -70,7 +68,7 @@ m_speedMod = 0.5;
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    //sets motors to 0 so they don't keep moving
+    // sets motors to 0 so they don't keep moving
     m_drivetrain.drive(0, 0);
   }
 }
