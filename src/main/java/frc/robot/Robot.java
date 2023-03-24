@@ -5,7 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -17,6 +19,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LeftElevator;
 import frc.robot.subsystems.RightElevator;
 import frc.robot.commands.AutoCommand;
+import frc.robot.subsystems.AutoSubsystemValues;
 
 import frc.robot.subsystems.Shifter;
 
@@ -46,8 +49,9 @@ public class Robot extends TimedRobot {
   private final LeftElevator m_leftElevator = new LeftElevator();
   private final RightElevator m_rightElevator = new RightElevator();
 
-
- 
+  private static double testStartTime = 0;
+  private static double testCurrentTime = 0;
+  private static double testTimeDiff = 0;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -111,15 +115,16 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    int autoMode = autoChooser.getSelected();
+    stopwatchCounter = -1;
+    //  int autoMode = autoChooser.getSelected();
 
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
    
 
-    m_autonomousCommand.setAuto(autoMode);
+    //  m_autonomousCommand.setAuto(autoMode);
     
-    // schedule the autonomous command (example)
+    // // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
@@ -129,6 +134,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
+ 
   }
 
   @Override
@@ -160,10 +166,27 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
+    testStartTime = System.currentTimeMillis(); 
+
   }
 
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {
+
+    testCurrentTime = System.currentTimeMillis();
+    testTimeDiff = testCurrentTime - testStartTime;
+
+    if (testTimeDiff >= 1.0 && testTimeDiff <= 2.0) {
+
+    } else if (testTimeDiff >= 3.0 && testTimeDiff <= 6.0) {
+
+    } else if (testTimeDiff >= 7.0 && testTimeDiff <= 8.0) {
+
+    } else {
+
+    }
+    Constants.controllers.leftFrontSpark.set(0.5);
+    Constants.controllers.leftRearSpark.set(0.5);
   }
 }

@@ -32,7 +32,7 @@ public class Intake extends SubsystemBase {
     }
 
     public void drive(double speed) {
-        this.speed = speed;
+    
         Constants.controllers.intakeSpark.set(speed);
     }
 
