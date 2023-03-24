@@ -128,20 +128,20 @@ public class AutoSubsystem extends SubsystemBase {
                 // ended = false;
                 // }
                 // // get speeds for wheels
-                // double frontLeft =
-                // AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(stopwatchCounter);
-                // double frontRight =
-                // AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(stopwatchCounter);
-                // double backLeft =
-                // AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(stopwatchCounter);
-                // double backRight =
-                // AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(stopwatchCounter);
+                double frontLeft =
+                AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(stopwatchCounter);
+                double frontRight =
+                AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(stopwatchCounter);
+                double backLeft =
+                AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(stopwatchCounter);
+                double backRight =
+                AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(stopwatchCounter);
 
                 // // set wheel speeds
-                // Constants.controllers.leftFrontSpark.set(frontLeft);
-                // Constants.controllers.rightFrontSpark.set(frontRight);
-                // Constants.controllers.leftRearSpark.set(backLeft);
-                // Constants.controllers.rightRearSpark.set(backRight);
+                Constants.controllers.leftFrontSpark.set(frontLeft);
+                Constants.controllers.rightFrontSpark.set(frontRight);
+                Constants.controllers.leftRearSpark.set(backLeft);
+                Constants.controllers.rightRearSpark.set(backRight);
             } else if (DriverStation.isAutonomousEnabled()
                     && stopwatchCounter >= AutoSubsystemValues.intaking.intaking.size() - 6) {
                 // if we run out of code to run in auto, make sure everything is not moving
