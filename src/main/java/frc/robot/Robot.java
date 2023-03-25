@@ -60,8 +60,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    autoChooser.setDefaultOption("Shooting", 1);
-    autoChooser.addOption("Driving", 2);
+    autoChooser.setDefaultOption("Driving", 1);
+    autoChooser.addOption("Ramping", 2);
     autoChooser.addOption("Nothing", 3);
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
@@ -141,21 +141,24 @@ public class Robot extends TimedRobot {
     testCurrentTime = System.currentTimeMillis();
     testTimeDiff = (testCurrentTime - testStartTime) / 1000;
 
+    if(Constants.pneumatics.shifterSolenoid.get() != Constants.drive.FIRST_GEAR){
+      Constants.pneumatics.shifterSolenoid.set(Constants.drive.FIRST_GEAR);
+    }
     if (testTimeDiff >= 1.0 && testTimeDiff <= 3.0) {
       m_intake.drive(0.7);
     } else {
       m_intake.drive(0.0);
     }
-    if (testTimeDiff >= 3.5 && testTimeDiff <= 6.0) {
+    if (testTimeDiff >= 3.5 && testTimeDiff <= 6.5) {
       Constants.controllers.leftFrontSpark.set(-0.5);
       Constants.controllers.leftRearSpark.set(-0.5);
       Constants.controllers.rightFrontSpark.set(-0.5);
       Constants.controllers.rightRearSpark.set(-0.5);
     } else {
-      Constants.controllers.leftFrontSpark.set(0.0);
-      Constants.controllers.leftRearSpark.set(0.0);
-      Constants.controllers.rightFrontSpark.set(0.0);
-      Constants.controllers.rightRearSpark.set(0.0);
+      Constants.controllers.leftFrontSpark.set(-0.0);
+      Constants.controllers.leftRearSpark.set(-0.0);
+      Constants.controllers.rightFrontSpark.set(-0.0);
+      Constants.controllers.rightRearSpark.set(-0.0);
     }
   }
 

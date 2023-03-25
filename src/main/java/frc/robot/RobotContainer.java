@@ -77,20 +77,20 @@ public class RobotContainer {
 
     // Assign default commands
     m_drivetrain.setDefaultCommand(
-        new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getXRight(.2), () -> m_filteredController.getLeftTriggerActive(0.2), () -> m_filteredController.getRightTriggerActive(0.2),
+        new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getXRight(.2), () -> m_filteredController.getLeftTriggerActive(0.2), () -> false/*m_filteredController.getRightTriggerActive(0.2)*/,
             m_drivetrain));
 
     m_intake.setDefaultCommand(
         new IntakeSpeedy(() -> m_controllerTwo.getLeftTriggerAxis(), () -> m_controllerTwo.getRightTriggerAxis(),
             m_intake));
 
-    // m_leftElevator.setDefaultCommand(
-    //     new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
-    //         m_rightElevator, () -> !m_controllerTwo.getBackButton()));
+    m_leftElevator.setDefaultCommand(
+        new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
+            m_rightElevator, () -> !m_controllerTwo.getBackButton()));
 
-    // m_rightElevator.setDefaultCommand(
-    //     new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
-    //         m_rightElevator, () -> !m_controllerTwo.getBackButton()));
+    m_rightElevator.setDefaultCommand(
+        new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
+            m_rightElevator, () -> !m_controllerTwo.getBackButton()));
 
     m_autoSubsystem.setDefaultCommand(
         new RecordAuto(m_autoSubsystem, () -> m_controllerTwo.getXButton(), () -> m_controllerTwo.getBButton()));
