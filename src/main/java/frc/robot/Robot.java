@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.IntakeOff;
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.Second;
+import frc.robot.commands.ZeroSlides;
 import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Intake;
@@ -36,7 +37,7 @@ import frc.robot.subsystems.Shifter;
 public class Robot extends TimedRobot {
   SendableChooser<Integer> autoChooser = new SendableChooser<>();
 
-  private AutoCommand m_autonomousCommand;
+  private AutoCommand m_autoCommand;
 
   private RobotContainer m_robotContainer;
 
@@ -62,9 +63,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    autoChooser.setDefaultOption("Driving", 1);
-    autoChooser.addOption("Ramping", 2);
-    autoChooser.addOption("Nothing", 3);
+    autoChooser.setDefaultOption("Nothing", 1);
+    autoChooser.addOption("Driving", 2);
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
@@ -96,8 +96,7 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods. This must be called from the
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
-    
-      
+   
       CommandScheduler.getInstance().run();
     
 
@@ -120,9 +119,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    // int autoMode = autoChooser.getSelected();
+    // stopwatchCounter = -1;
+    int autoMode = autoChooser.getSelected();
 
-    // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_autoCommand = m_robotContainer.getAutonomousCommand();
 
     timer.stop();
     timer.reset();
@@ -130,12 +130,12 @@ public class Robot extends TimedRobot {
     autoEnabled = true;
     Constants.pneumatics.intakeSolenoid.set(Constants.intake.intakeUp);
 
-    // m_autonomousCommand.setAuto(autoMode);
+    m_autoCommand.setAuto(autoMode);
 
     // // schedule the autonomous command (example)
-    // if (m_autonomousCommand != null) {
-    // m_autonomousCommand.schedule();
-    // }
+    if (m_autoCommand != null) {
+    m_autoCommand.schedule();
+    }
   }
 
   /** This function is called periodically during autonomous. */
@@ -178,8 +178,7 @@ public class Robot extends TimedRobot {
     // initialization of teleop occurs is set as the lowest possible position
     // this means the slide needs to be all the way down so the topmost limit is
     // also accurate
-    m_leftElevator.zero();
-    m_rightElevator.zero();
+    new ZeroSlides(m_leftElevator, m_rightElevator);
     new Second(m_shifter);
   }
 
