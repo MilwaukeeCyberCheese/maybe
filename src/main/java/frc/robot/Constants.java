@@ -31,9 +31,6 @@ public final class Constants {
 
         public static final class sensors {
 
-                public static final Encoder m_leftDriveEncoder = new Encoder(0, 1, false);
-                public static final Encoder m_rightDriveEncoder = new Encoder(2, 3, false);
-
                 public static final double LEFT_DRIVE_ENCODER_DISTANCE_PER_PULSE = 0.0;
                 public static final double RIGHT_DRIVE_ENCODER_DISTANCE_PER_PULSE = 0.0;
 
