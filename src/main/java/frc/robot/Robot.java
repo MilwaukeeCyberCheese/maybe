@@ -119,16 +119,16 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    // stopwatchCounter = -1;
+    
     int autoMode = autoChooser.getSelected();
 
     m_autoCommand = m_robotContainer.getAutonomousCommand();
 
-    timer.stop();
-    timer.reset();
-    timer.start();
-    autoEnabled = true;
-    Constants.pneumatics.intakeSolenoid.set(Constants.intake.intakeUp);
+    // timer.stop();
+    // timer.reset();
+    // timer.start();
+    // autoEnabled = true;
+    // Constants.pneumatics.intakeSolenoid.set(Constants.intake.intakeUp);
 
     m_autoCommand.setAuto(autoMode);
 
@@ -142,25 +142,25 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
 
-    if(Constants.pneumatics.shifterSolenoid.get() != Constants.drive.FIRST_GEAR){
-      Constants.pneumatics.shifterSolenoid.set(Constants.drive.FIRST_GEAR);
-    }
-    if (timer.getTime() >= 1.0 && timer.getTime() <= 3.0) {
-      m_intake.drive(0.7);
-    } else {
-      m_intake.drive(0.0);
-    }
-    if (timer.getTime() >= 3.5 && timer.getTime() <= 6.5) {
-      Constants.controllers.leftFrontSpark.set(-0.5);
-      Constants.controllers.leftRearSpark.set(-0.5);
-      Constants.controllers.rightFrontSpark.set(-0.5);
-      Constants.controllers.rightRearSpark.set(-0.5);
-    } else {
-      Constants.controllers.leftFrontSpark.set(-0.0);
-      Constants.controllers.leftRearSpark.set(-0.0);
-      Constants.controllers.rightFrontSpark.set(-0.0);
-      Constants.controllers.rightRearSpark.set(-0.0);
-    }
+    // if(Constants.pneumatics.shifterSolenoid.get() != Constants.drive.FIRST_GEAR){
+    //   Constants.pneumatics.shifterSolenoid.set(Constants.drive.FIRST_GEAR);
+    // }
+    // if (timer.getTime() >= 1.0 && timer.getTime() <= 3.0) {
+    //   m_intake.drive(0.7);
+    // } else {
+    //   m_intake.drive(0.0);
+    // }
+    // if (timer.getTime() >= 3.5 && timer.getTime() <= 6.5) {
+    //   Constants.controllers.leftFrontSpark.set(-0.5);
+    //   Constants.controllers.leftRearSpark.set(-0.5);
+    //   Constants.controllers.rightFrontSpark.set(-0.5);
+    //   Constants.controllers.rightRearSpark.set(-0.5);
+    // } else {
+    //   Constants.controllers.leftFrontSpark.set(-0.0);
+    //   Constants.controllers.leftRearSpark.set(-0.0);
+    //   Constants.controllers.rightFrontSpark.set(-0.0);
+    //   Constants.controllers.rightRearSpark.set(-0.0);
+    // }
   }
 
   @Override

@@ -26,81 +26,30 @@ public class AutoSubsystem extends SubsystemBase {
     public void periodic() {
 
         if (auto == 1) {
+            Constants.controllers.leftLiftSpark.set(0.0);
+            Constants.controllers.rightLiftSpark.set(0.0);
+            Constants.controllers.intakeSpark.set(0.0);
             System.out.println("Auto 1");
-            // if (DriverStation.isAutonomousEnabled()
-            // && stopwatchCounter <
-            // AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
-            // stopwatchCounter++;
-
-            // // lift
-            // double leftLiftSpeed =
-            // AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.get(stopwatchCounter);
-            // double rightLiftSpeed =
-            // AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.get(stopwatchCounter);
-
-            // Constants.controllers.leftLiftSpark.set(leftLiftSpeed);
-            // Constants.controllers.rightLiftSpark.set(rightLiftSpeed);
-
-            // // intake
-            // double intake = AutoSubsystemValues.intaking.intaking.get(stopwatchCounter);
-
-            // Constants.controllers.intakeSpark.set(intake);
-
-            // // intake pos
-            // Value intakePos =
-            // AutoSubsystemValues.intakePos.intakePos.get(stopwatchCounter);
-
-            // Constants.pneumatics.intakeSolenoid.set(intakePos);
-
-            // // gear
-            // Boolean gear = AutoSubsystemValues.gear.gear.get(stopwatchCounter);
-
-            // Constants.pneumatics.shifterSolenoid.set(gear);
-            // // get speeds for wheels
-            // double frontLeft =
-            // AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(stopwatchCounter);
-            // double frontRight =
-            // AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(stopwatchCounter);
-            // double backLeft =
-            // AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(stopwatchCounter);
-            // double backRight =
-            // AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(stopwatchCounter);
-
-            // // set wheel speeds
-            // Constants.controllers.leftFrontSpark.set(frontLeft);
-            // Constants.controllers.rightFrontSpark.set(frontRight);
-            // Constants.controllers.leftRearSpark.set(backLeft);
-            // Constants.controllers.rightRearSpark.set(backRight);
-
-            // } else if (DriverStation.isAutonomousEnabled()
-            // && stopwatchCounter >=
-            // AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
-            // // if we run out of code to run in auto, make sure everything is not moving
-            // Constants.controllers.leftLiftSpark.set(0.0);
-            // Constants.controllers.rightLiftSpark.set(0.0);
-            // Constants.controllers.intakeSpark.set(0.0);
-
-            // Constants.controllers.leftFrontSpark.set(0.0);
-            // Constants.controllers.leftRearSpark.set(0.0);
-            // Constants.controllers.rightFrontSpark.set(0.0);
-            // Constants.controllers.rightRearSpark.set(0.0);
-            // }
+            Constants.controllers.leftFrontSpark.set(0.0);
+            Constants.controllers.leftRearSpark.set(0.0);
+            Constants.controllers.rightFrontSpark.set(0.0);
+            Constants.controllers.rightRearSpark.set(0.0);
         } else if (auto == 2) {
             if (DriverStation.isAutonomousEnabled()
-                    && stopwatchCounter < (AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 5)) {
+                    && stopwatchCounter < (AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1)) {
                 stopwatchCounter++;
 
                 // gear
                 Boolean gear = AutoSubsystemValues.gear.gear.get(stopwatchCounter);
                 Constants.pneumatics.shifterSolenoid.set(gear);
-                // // shoot
-                // double leftLiftSpeed =
-                // AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.get(stopwatchCounter);
-                // double rightLiftSpeed =
-                // AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.get(stopwatchCounter);
+                // actuate lift
+                double leftLiftSpeed =
+                AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.get(stopwatchCounter);
+                double rightLiftSpeed =
+                AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.get(stopwatchCounter);
 
-                // Constants.controllers.leftLiftSpark.set(leftLiftSpeed);
-                // Constants.controllers.rightLiftSpark.set(rightLiftSpeed);
+                Constants.controllers.leftLiftSpark.set(leftLiftSpeed);
+                Constants.controllers.rightLiftSpark.set(rightLiftSpeed);
                 // System.out.println(AutoSubsystemValues.intaking.intaking.size());
                 // System.out.println(stopwatchCounter);
                 // intake
@@ -137,7 +86,7 @@ public class AutoSubsystem extends SubsystemBase {
                 Constants.controllers.leftRearSpark.set(backLeft);
                 Constants.controllers.rightRearSpark.set(backRight);
             } else if (DriverStation.isAutonomousEnabled()
-                    && stopwatchCounter >= AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 6) {
+                    && stopwatchCounter >= AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
                 // if we run out of code to run in auto, make sure everything is not moving
                 Constants.controllers.leftLiftSpark.set(0.0);
                 Constants.controllers.rightLiftSpark.set(0.0);
@@ -148,15 +97,6 @@ public class AutoSubsystem extends SubsystemBase {
                 Constants.controllers.rightFrontSpark.set(0.0);
                 Constants.controllers.rightRearSpark.set(0.0);
             }
-        } else if (auto == 3) { // do nothing
-            Constants.controllers.leftLiftSpark.set(0.0);
-            Constants.controllers.rightLiftSpark.set(0.0);
-            Constants.controllers.intakeSpark.set(0.0);
-            System.out.println("Auto 3");
-            Constants.controllers.leftFrontSpark.set(0.0);
-            Constants.controllers.leftRearSpark.set(0.0);
-            Constants.controllers.rightFrontSpark.set(0.0);
-            Constants.controllers.rightRearSpark.set(0.0);
         }
     }
 
