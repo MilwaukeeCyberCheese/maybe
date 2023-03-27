@@ -39,28 +39,14 @@ public class Drivetrain extends SubsystemBase {
     Constants.controllers.leftRearSpark.setIdleMode(Constants.drive.IDLE_MODE);
     Constants.controllers.rightFrontSpark.setIdleMode(Constants.drive.IDLE_MODE);
     Constants.controllers.rightRearSpark.setIdleMode(Constants.drive.IDLE_MODE);
-  
-    // Encoders may measure differently in the real world and in
-    // simulation. In this example the robot moves 0.042 barleycorns
-    // per tick in the real world, but the simulated encoders
-    // simulate 360 tick encoders. This if statement allows for the
-    // real robot to handle this difference in devices.
-
-    Constants.sensors.m_leftDriveEncoder.setDistancePerPulse(Constants.sensors.LEFT_DRIVE_ENCODER_DISTANCE_PER_PULSE);
-    Constants.sensors.m_rightDriveEncoder.setDistancePerPulse(Constants.sensors.RIGHT_DRIVE_ENCODER_DISTANCE_PER_PULSE);
 
     // Let's name the sensors on the LiveWindow
     addChild("Drive", Constants.drive.m_drive);
-    addChild("Left Encoder", Constants.sensors.m_leftDriveEncoder);
-    addChild("Right Encoder", Constants.sensors.m_rightDriveEncoder);
   }
 
   /** The log method puts interesting information to the SmartDashboard. */
   public void log() {
-    SmartDashboard.putNumber("Left Distance", Constants.sensors.m_leftDriveEncoder.getDistance());
-    SmartDashboard.putNumber("Right Distance", Constants.sensors.m_rightDriveEncoder.getDistance());
-    SmartDashboard.putNumber("Left Speed", Constants.sensors.m_leftDriveEncoder.getRate());
-    SmartDashboard.putNumber("Right Speed", Constants.sensors.m_rightDriveEncoder.getRate());
+ 
     SmartDashboard.putData("Drivetrain", Constants.drive.m_drive);
     SmartDashboard.putNumber("FrontLeft Temp", Constants.controllers.leftFrontSpark.getMotorTemperature());
     SmartDashboard.putNumber("BackLeft Temp", Constants.controllers.leftRearSpark.getMotorTemperature());
@@ -84,21 +70,8 @@ public class Drivetrain extends SubsystemBase {
     Constants.drive.m_drive.arcadeDrive(throttle, rotation);
   }
 
-  /** Reset the robots sensors to the zero states. */
-  public void reset() {
-    Constants.sensors.m_leftDriveEncoder.reset();
-    Constants.sensors.m_rightDriveEncoder.reset();
-  }
 
-  /**
-   * Get the average distance of the encoders since the last reset.
-   *
-   * @return The distance driven (average of left and right encoders).
-   */
-  public double getDistance() {
-    return (Constants.sensors.m_leftDriveEncoder.getDistance() + Constants.sensors.m_rightDriveEncoder.getDistance())
-        / 2;
-  }
+ 
 
   /** Call log method every loop. */
   @Override
