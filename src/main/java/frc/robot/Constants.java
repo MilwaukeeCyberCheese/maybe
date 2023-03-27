@@ -5,10 +5,12 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import com.kauailabs.navx.frc.AHRS;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -27,7 +29,7 @@ public final class Constants {
                 public static final double LEFT_DRIVE_ENCODER_DISTANCE_PER_PULSE = 0.0;
                 public static final double RIGHT_DRIVE_ENCODER_DISTANCE_PER_PULSE = 0.0;
 
-                public static final int GYRO = 0;
+                public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
 
                 public static final RelativeEncoder leftLift = controllers.leftLiftSpark.getEncoder();
                 public static final RelativeEncoder rightLift = controllers.rightLiftSpark.getEncoder();
