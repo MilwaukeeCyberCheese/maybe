@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.IntakeOff;
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.Second;
+import frc.robot.commands.ZeroSlides;
 import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LeftElevator;
@@ -60,9 +61,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    autoChooser.setDefaultOption("Shooting", 1);
+    autoChooser.setDefaultOption("Nothing", 1);
     autoChooser.addOption("Driving", 2);
-    autoChooser.addOption("Nothing", 3);
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
@@ -94,10 +94,9 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods. This must be called from the
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
-    if (!autoEnabled) {
-      stopwatchCounter++;
+   
       CommandScheduler.getInstance().run();
-    }
+    
 
   }
 
@@ -156,8 +155,7 @@ public class Robot extends TimedRobot {
     // initialization of teleop occurs is set as the lowest possible position
     // this means the slide needs to be all the way down so the topmost limit is
     // also accurate
-    m_leftElevator.zero();
-    m_rightElevator.zero();
+    new ZeroSlides(m_leftElevator, m_rightElevator);
     new Second(m_shifter);
   }
 
