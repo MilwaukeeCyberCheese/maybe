@@ -12,17 +12,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
+import frc.robot.Constants;
+
 /** Have the robot drive arcade style. */
 public class AutoBalancer extends CommandBase {
   private final Drivetrain m_drivetrain;
+  private final Boolean autoBalanceMode;
+  private final double throttle;
 
   /**
    * Creates a new ArcadeDrive command.
    *
-   * @param throttle   The control input for the left side of the drive
-   * @param rotation   The control input for the right sight of the drive
-   * @param slow  whether or not to enable slow mode
-   * @param turbo whether or not to enable turbo mode
    * @param drivetrain The drivetrain subsystem to drive
    */
   public AutoBalancer(Drivetrain drivetrain) {
@@ -33,9 +33,28 @@ public class AutoBalancer extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    
+    double pitchAngleDegrees = Constants.balance.gyro.getPitch();
 
-    // set speeds of drivetrain relative to limits
+    if ( !autoBalanceMode && 
+    (Math.abs(pitchAngleDegrees) >= 
+     Math.abs(Constants.balance.kOffBalanceAngleThresholdDegrees))) {
+   autoBalanceMode = true;
+}
+else if ( autoBalanceMode && 
+         (Math.abs(pitchAngleDegrees) <= 
+          Math.abs(Constants.balance.kOonBalanceAngleThresholdDegrees))) {
+   autoBalanceMode = false;
+}
+
+if ( autoBalanceMode ) {
+  double pitchAngleRadians = pitchAngleDegrees * (Math.PI / 180.0);
+  throttle = Math.sin(pitchAngleRadians) * -1;
+}
+
+m_drivetrain.drive(throttle, 0);
+
+}
+    
     
   }
 
@@ -51,4 +70,4 @@ public class AutoBalancer extends CommandBase {
     // sets motors to 0 so they don't keep moving
     m_drivetrain.drive(0, 0);
   }
-}
+
