@@ -35,6 +35,10 @@ public class Drivetrain extends SubsystemBase {
     Constants.controllers.rightFrontSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
     Constants.controllers.leftRearSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
     Constants.controllers.rightRearSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
+    Constants.controllers.leftFrontSpark.setIdleMode(Constants.drive.IDLE_MODE);
+    Constants.controllers.leftRearSpark.setIdleMode(Constants.drive.IDLE_MODE);
+    Constants.controllers.rightFrontSpark.setIdleMode(Constants.drive.IDLE_MODE);
+    Constants.controllers.rightRearSpark.setIdleMode(Constants.drive.IDLE_MODE);
   
     // Encoders may measure differently in the real world and in
     // simulation. In this example the robot moves 0.042 barleycorns

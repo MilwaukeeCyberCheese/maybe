@@ -16,15 +16,15 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
 import com.revrobotics.SparkMaxPIDController;
-
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public final class Constants {
 
-        public static final class balance{
+        public static final class balance {
                 public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
                 public static final double IMBALANCED_THRESHOLD_DEGREES = 2.5;
-                public static final double BALANCED_THRESHOLD_DEGREES  = 1.0;
+                public static final double BALANCED_THRESHOLD_DEGREES = 1.0;
                 public static final double BALANCE_SPEED_MOD = 1;
 
         }
@@ -80,7 +80,6 @@ public final class Constants {
                 public static final CANSparkMax intakeSpark = new CANSparkMax(INTAKE_SPARK,
                                 MotorType.kBrushless);
 
-
                 public static final CANSparkMax leftLiftSpark = new CANSparkMax(LEFT_LIFT_SPARK,
                                 MotorType.kBrushless);
                 public static final CANSparkMax rightLiftSpark = new CANSparkMax(RIGHT_LIFT_SPARK,
@@ -96,6 +95,8 @@ public final class Constants {
 
                 public static final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotorController,
                                 m_rightMotorController);
+
+                public static final IdleMode IDLE_MODE = IdleMode.kBrake;
 
                 public static final int CURRENT_LIMIT = 70;
 

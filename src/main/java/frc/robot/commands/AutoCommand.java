@@ -56,6 +56,7 @@ public class AutoCommand extends CommandBase {
 
             if (timer.getTime() > 0.7
                     && Math.abs(Constants.balance.gyro.getPitch()) > Constants.balance.IMBALANCED_THRESHOLD_DEGREES) {
+                balanceStarted = true;        
                 new AutoBalancer(m_drivetrain);
             }
         }

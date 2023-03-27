@@ -64,7 +64,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     autoChooser.setDefaultOption("Nothing", 1);
-    autoChooser.addOption("Driving", 2);
+    autoChooser.addOption("Drive out", 2);
+    autoChooser.addOption("Balance", 3);
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
@@ -169,7 +170,7 @@ public class Robot extends TimedRobot {
     // continue until interrupted by another command, remove
     // this line or comment it out.
     if (m_autoCommand != null) {
-    m_autoCommand.cancel();
+      m_autoCommand.cancel();
     }
     autoEnabled = false;
 
@@ -191,7 +192,6 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
-    testStartTime = System.currentTimeMillis();
 
   }
 
@@ -199,21 +199,5 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
 
-    testCurrentTime = System.currentTimeMillis();
-    testTimeDiff = (testCurrentTime - testStartTime) / 1000;
-
-    if (testTimeDiff >= 1.0 && testTimeDiff <= 2.0) {
-      m_intake.drive(0.7);
-    } else if (testTimeDiff >= 3.0 && testTimeDiff <= 6.0) {
-      Constants.controllers.leftFrontSpark.set(0.5);
-      Constants.controllers.leftRearSpark.set(0.5);
-    } else if (testTimeDiff >= 7.0 && testTimeDiff <= 7.3) {
-      System.out.println("Test Done");
-    } else {
-      Constants.controllers.leftFrontSpark.set(0.0);
-      Constants.controllers.leftRearSpark.set(0.0);
-      m_intake.drive(0.0);
-      // m_drivetrain.drive(0.5, 0);
-    }
   }
 }
