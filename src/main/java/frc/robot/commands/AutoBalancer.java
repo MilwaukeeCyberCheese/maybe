@@ -21,7 +21,7 @@ public class AutoBalancer extends CommandBase {
   private double throttle;
 
   /**
-   * Creates a new ArcadeDrive command.
+   * Creates a new AutoBalance Command.
    *
    * @param drivetrain The drivetrain subsystem to drive
    */
@@ -60,11 +60,6 @@ public class AutoBalancer extends CommandBase {
     return false; // Runs until interrupted since should run till auto is over
   }
 
-  // Called once after isFinished returns true
-  @Override
-  public void end(boolean interrupted) {
-    // sets motors to 0 so they don't keep moving
-    m_drivetrain.drive(0, 0);
-  }
+ 
 
 }
