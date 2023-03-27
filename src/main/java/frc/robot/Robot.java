@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
-  
+
   public static final Stopwatch timer = new Stopwatch();
 
   private final Intake m_intake = new Intake();
@@ -96,9 +96,8 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods. This must be called from the
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
-   
-      CommandScheduler.getInstance().run();
-    
+
+    CommandScheduler.getInstance().run();
 
   }
 
@@ -119,7 +118,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    
+
     int autoMode = autoChooser.getSelected();
 
     m_autoCommand = m_robotContainer.getAutonomousCommand();
@@ -134,7 +133,7 @@ public class Robot extends TimedRobot {
 
     // // schedule the autonomous command (example)
     if (m_autoCommand != null) {
-    m_autoCommand.schedule();
+      m_autoCommand.schedule();
     }
   }
 
@@ -143,23 +142,23 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
 
     // if(Constants.pneumatics.shifterSolenoid.get() != Constants.drive.FIRST_GEAR){
-    //   Constants.pneumatics.shifterSolenoid.set(Constants.drive.FIRST_GEAR);
+    // Constants.pneumatics.shifterSolenoid.set(Constants.drive.FIRST_GEAR);
     // }
     // if (timer.getTime() >= 1.0 && timer.getTime() <= 3.0) {
-    //   m_intake.drive(0.7);
+    // m_intake.drive(0.7);
     // } else {
-    //   m_intake.drive(0.0);
+    // m_intake.drive(0.0);
     // }
     // if (timer.getTime() >= 3.5 && timer.getTime() <= 6.5) {
-    //   Constants.controllers.leftFrontSpark.set(-0.5);
-    //   Constants.controllers.leftRearSpark.set(-0.5);
-    //   Constants.controllers.rightFrontSpark.set(-0.5);
-    //   Constants.controllers.rightRearSpark.set(-0.5);
+    // Constants.controllers.leftFrontSpark.set(-0.5);
+    // Constants.controllers.leftRearSpark.set(-0.5);
+    // Constants.controllers.rightFrontSpark.set(-0.5);
+    // Constants.controllers.rightRearSpark.set(-0.5);
     // } else {
-    //   Constants.controllers.leftFrontSpark.set(-0.0);
-    //   Constants.controllers.leftRearSpark.set(-0.0);
-    //   Constants.controllers.rightFrontSpark.set(-0.0);
-    //   Constants.controllers.rightRearSpark.set(-0.0);
+    // Constants.controllers.leftFrontSpark.set(-0.0);
+    // Constants.controllers.leftRearSpark.set(-0.0);
+    // Constants.controllers.rightFrontSpark.set(-0.0);
+    // Constants.controllers.rightRearSpark.set(-0.0);
     // }
   }
 
@@ -169,9 +168,9 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    // if (m_autonomousCommand != null) {
-    // m_autonomousCommand.cancel();
-    // }
+    if (m_autoCommand != null) {
+    m_autoCommand.cancel();
+    }
     autoEnabled = false;
 
     // zeroes out the slide position so that the position it is at when the

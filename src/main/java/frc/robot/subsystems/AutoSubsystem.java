@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import java.sql.Driver;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -11,11 +13,9 @@ public class AutoSubsystem extends SubsystemBase {
 
     // side to love handles is 10, ass to line is 23 inches
 
-    private int auto = 2;
+    private int auto = 1;
 
     private int stopwatchCounter = -1;
-
-    private Boolean ended = true;
 
     /**
      * This function is called every twenty milliseconds when the robot is enabled
@@ -26,6 +26,7 @@ public class AutoSubsystem extends SubsystemBase {
     public void periodic() {
 
         if (auto == 1) {
+            if(DriverStation.isAutonomousEnabled())
             Constants.controllers.leftLiftSpark.set(0.0);
             Constants.controllers.rightLiftSpark.set(0.0);
             Constants.controllers.intakeSpark.set(0.0);

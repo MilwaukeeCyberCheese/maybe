@@ -40,11 +40,11 @@ import frc.robot.subsystems.LeftElevator;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final Drivetrain m_drivetrain = new Drivetrain();
-  private final RightElevator m_rightElevator = new RightElevator();
-  private final LeftElevator m_leftElevator = new LeftElevator();
-  private final Shifter m_shifter = new Shifter();
-  private final Intake m_intake = new Intake();
+  private static final Drivetrain m_drivetrain = new Drivetrain();
+  private static final RightElevator m_rightElevator = new RightElevator();
+  private static final LeftElevator m_leftElevator = new LeftElevator();
+  private static final Shifter m_shifter = new Shifter();
+  private static final Intake m_intake = new Intake();
 
   private static final XboxController m_controller = new XboxController(0);
   public static final FilteredController m_filteredController = new FilteredController(m_controller);
@@ -52,7 +52,7 @@ public class RobotContainer {
   private static final FilteredController m_filteredControllerTwo = new FilteredController(m_controllerTwo);
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
-  private static final AutoCommand m_autoCommand = new AutoCommand(m_autoSubsystem);
+  private static final AutoCommand m_autoCommand = new AutoCommand(m_autoSubsystem, m_intake, m_drivetrain);
 
   public static boolean readAuto = false;
 
