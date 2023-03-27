@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.IntakeOff;
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.Second;
+import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LeftElevator;
@@ -40,7 +41,8 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
-  public static int stopwatchCounter = -1;
+  
+  public static final Stopwatch timer = new Stopwatch();
 
   private final Intake m_intake = new Intake();
   private final Shifter m_shifter = new Shifter();
@@ -95,7 +97,7 @@ public class Robot extends TimedRobot {
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
     if (!autoEnabled) {
-      stopwatchCounter++;
+      
       CommandScheduler.getInstance().run();
     }
 
@@ -118,12 +120,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    stopwatchCounter = -1;
     // int autoMode = autoChooser.getSelected();
 
     // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
-    testStartTime = System.currentTimeMillis();
+    timer.stop();
+    timer.reset();
+    timer.start();
     autoEnabled = true;
     Constants.pneumatics.intakeSolenoid.set(Constants.intake.intakeUp);
 
@@ -138,18 +141,16 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    testCurrentTime = System.currentTimeMillis();
-    testTimeDiff = (testCurrentTime - testStartTime) / 1000;
 
     if(Constants.pneumatics.shifterSolenoid.get() != Constants.drive.FIRST_GEAR){
       Constants.pneumatics.shifterSolenoid.set(Constants.drive.FIRST_GEAR);
     }
-    if (testTimeDiff >= 1.0 && testTimeDiff <= 3.0) {
+    if (timer.getTime() >= 1.0 && timer.getTime() <= 3.0) {
       m_intake.drive(0.7);
     } else {
       m_intake.drive(0.0);
     }
-    if (testTimeDiff >= 3.5 && testTimeDiff <= 6.5) {
+    if (timer.getTime() >= 3.5 && timer.getTime() <= 6.5) {
       Constants.controllers.leftFrontSpark.set(-0.5);
       Constants.controllers.leftRearSpark.set(-0.5);
       Constants.controllers.rightFrontSpark.set(-0.5);
