@@ -79,9 +79,11 @@ public final class Constants {
                 public static final CANSparkMax intakeSpark = new CANSparkMax(INTAKE_SPARK,
                                 MotorType.kBrushless);
 
+
                 public static final CANSparkMax leftLiftSpark = new CANSparkMax(LEFT_LIFT_SPARK,
                                 MotorType.kBrushless);
                 public static final CANSparkMax rightLiftSpark = new CANSparkMax(RIGHT_LIFT_SPARK,
+
                                 MotorType.kBrushless);
         }
 
