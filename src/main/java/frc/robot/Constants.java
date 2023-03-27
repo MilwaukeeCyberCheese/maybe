@@ -23,8 +23,9 @@ public final class Constants {
 
         public static final class balance{
                 public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
-                public static final double kOffBalanceAngleThresholdDegrees = 2.5;
-                public static final double kOonBalanceAngleThresholdDegrees  = 1.0;
+                public static final double IMBALANCED_THRESHOLD_DEGREES = 2.5;
+                public static final double BALANCED_THRESHOLD_DEGREES  = 1.0;
+                public static final double BALANCE_SPEED_MOD = 1;
 
         }
 

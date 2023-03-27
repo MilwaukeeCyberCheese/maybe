@@ -17,8 +17,8 @@ import frc.robot.Constants;
 /** Have the robot drive arcade style. */
 public class AutoBalancer extends CommandBase {
   private final Drivetrain m_drivetrain;
-  private final Boolean autoBalanceMode;
-  private final double throttle;
+  private Boolean autoBalanceMode;
+  private double throttle;
 
   /**
    * Creates a new ArcadeDrive command.
@@ -35,28 +35,24 @@ public class AutoBalancer extends CommandBase {
   public void execute() {
     double pitchAngleDegrees = Constants.balance.gyro.getPitch();
 
-    if ( !autoBalanceMode && 
-    (Math.abs(pitchAngleDegrees) >= 
-     Math.abs(Constants.balance.kOffBalanceAngleThresholdDegrees))) {
-   autoBalanceMode = true;
-}
-else if ( autoBalanceMode && 
-         (Math.abs(pitchAngleDegrees) <= 
-          Math.abs(Constants.balance.kOonBalanceAngleThresholdDegrees))) {
-   autoBalanceMode = false;
-}
+    if (!autoBalanceMode &&
+        (Math.abs(pitchAngleDegrees) >= Math.abs(Constants.balance.IMBALANCED_THRESHOLD_DEGREES))) {
+      autoBalanceMode = true;
+    } else if (autoBalanceMode &&
+        (Math.abs(pitchAngleDegrees) <= Math.abs(Constants.balance.BALANCED_THRESHOLD_DEGREES))) {
+      autoBalanceMode = false;
+    }
 
-if ( autoBalanceMode ) {
-  double pitchAngleRadians = pitchAngleDegrees * (Math.PI / 180.0);
-  throttle = Math.sin(pitchAngleRadians) * -1;
-}
+    if (autoBalanceMode) {
+      double pitchAngleRadians = pitchAngleDegrees * (Math.PI / 180.0);
+      throttle = Math.sin(pitchAngleRadians) * -1;
+    }
 
-m_drivetrain.drive(throttle, 0);
+    m_drivetrain.drive(throttle * Constants.balance.BALANCE_SPEED_MOD, 0);
 
-}
-    
-    
   }
+
+  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -71,3 +67,4 @@ m_drivetrain.drive(throttle, 0);
     m_drivetrain.drive(0, 0);
   }
 
+}
