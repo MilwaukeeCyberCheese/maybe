@@ -4,27 +4,29 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.Constants;
-import frc.robot.commands.Autonomous;
+
 import frc.robot.commands.First;
 import frc.robot.commands.IntakeConeCommand;
 import frc.robot.commands.IntakeCubeCommand;
 import frc.robot.commands.IntakeDown;
+import frc.robot.commands.IntakeSpeedy;
 import frc.robot.commands.IntakeUp;
+import frc.robot.commands.RecordAuto;
 import frc.robot.commands.Second;
+import frc.robot.commands.ZeroSlides;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.AutoCommand;
 import frc.robot.other.FilteredController;
+import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.RightElevator;
 import frc.robot.subsystems.Shifter;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.Intake;
+import frc.robot.commands.Elevator;
 import frc.robot.subsystems.LeftElevator;
 
 /**
@@ -46,7 +48,13 @@ public class RobotContainer {
 
   private static final XboxController m_controller = new XboxController(0);
   public static final FilteredController m_filteredController = new FilteredController(m_controller);
+  private static final XboxController m_controllerTwo = new XboxController(1);
+  private static final FilteredController m_filteredControllerTwo = new FilteredController(m_controllerTwo);
 
+  public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
+  private static final AutoCommand m_autoCommand = new AutoCommand(m_autoSubsystem);
+
+  public static boolean readAuto = false;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -69,11 +77,35 @@ public class RobotContainer {
 
     // Assign default commands
     m_drivetrain.setDefaultCommand(
-        new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getXRight(.2),
+        new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getXRight(.2), () -> m_filteredController.getLeftTriggerActive(0.2), () -> false/*m_filteredController.getRightTriggerActive(0.2)*/,
             m_drivetrain));
+
+    m_intake.setDefaultCommand(
+        new IntakeSpeedy(() -> m_controllerTwo.getLeftTriggerAxis(), () -> m_controllerTwo.getRightTriggerAxis(),
+            m_intake));
+
+    m_leftElevator.setDefaultCommand(
+        new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
+            m_rightElevator, () -> !m_controllerTwo.getBackButton()));
+
+    m_rightElevator.setDefaultCommand(
+        new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
+            m_rightElevator, () -> !m_controllerTwo.getBackButton()));
+
+    m_autoSubsystem.setDefaultCommand(
+        new RecordAuto(m_autoSubsystem, () -> m_controllerTwo.getXButton(), () -> m_controllerTwo.getBButton()));
 
     // Configure the button bindings
     configureButtonBindings();
+  }
+
+  /**
+   * Use this to pass the autonomous command to the main {@link Robot} class.
+   *
+   * @return the command to run in autonomous
+   */
+  public AutoCommand getAutonomousCommand() {
+    return m_autoCommand;
   }
 
   /**
@@ -87,22 +119,29 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // Create some buttons
-    Trigger aButton = new JoystickButton(m_controller, 1);
-    Trigger bButton = new JoystickButton(m_controller, 2);
-    Trigger xButton = new JoystickButton(m_controller, 3);
-    Trigger yButton = new JoystickButton(m_controller, 4);
-    Trigger leftBumper = new JoystickButton(m_controller, 5);
-    Trigger rightBumper = new JoystickButton(m_controller, 6);
+    Trigger leftBumperOne = new JoystickButton(m_controller, 5);
+    Trigger rightBumperOne = new JoystickButton(m_controller, 6);
 
-    leftBumper.whileTrue(new IntakeConeCommand(m_intake));
-    rightBumper.whileTrue(new IntakeCubeCommand(m_intake));
+    Trigger aButtonTwo = new JoystickButton(m_controllerTwo, 1);
+    Trigger yButtonTwo = new JoystickButton(m_controllerTwo, 4);
+    Trigger leftBumperTwo = new JoystickButton(m_controllerTwo, 5);
+    Trigger rightBumperTwo = new JoystickButton(m_controllerTwo, 6);
+    Trigger startButtonTwo = new JoystickButton(m_controllerTwo, 8);
+    Trigger rightTriggerOne = new Trigger(() -> m_filteredController.getRightTriggerActive());
 
-    aButton.onTrue(new First(m_shifter));
-    bButton.onTrue(new Second(m_shifter));
-    xButton.onTrue(new IntakeDown(m_intake));
-    yButton.onTrue(new IntakeUp(m_intake));
+    leftBumperOne.onTrue(new First(m_shifter));
+    rightBumperOne.onTrue(new Second(m_shifter));
+
+rightTriggerOne.onTrue(new IntakeUp(m_intake));
+
+    startButtonTwo.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
+
+    yButtonTwo.whileTrue(new IntakeUp(m_intake));
+    aButtonTwo.whileTrue(new IntakeDown(m_intake));
+
+    leftBumperTwo.whileTrue(new IntakeCubeCommand(m_intake));
+    rightBumperTwo.whileTrue(new IntakeConeCommand(m_intake));
 
   }
 
- 
 }

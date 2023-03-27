@@ -5,6 +5,8 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -13,6 +15,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 public class Shifter extends SubsystemBase {
 
+  private Boolean position;
+
   /** Create a new shifter subsystem. */
   public Shifter() {
     /* empty because there's nothing to put into it */
@@ -20,20 +24,24 @@ public class Shifter extends SubsystemBase {
   }
 
   public void setGear(boolean position) {
-    Constants.pneumatics.lSolenoid.set(position);
-    Constants.pneumatics.rSolenoid.set(position);
+    this.position = position;
+    Constants.pneumatics.shifterSolenoid.set(position);
 
   }
 
   /** The log method puts the status of each solenoid to SmartDashboard */
   public void log() {
-    SmartDashboard.putData("Left Solenoid", Constants.pneumatics.lSolenoid);
-    SmartDashboard.putData("Right Shifter", Constants.pneumatics.rSolenoid);
+    SmartDashboard.putData("Shifter", Constants.pneumatics.shifterSolenoid);
+    SmartDashboard.putBoolean("Gear", Constants.pneumatics.shifterSolenoid.get());
+    SmartDashboard.putNumber("Compressor Current", Constants.pneumatics.PCM.getCompressorCurrent());
+
   }
 
   /** Call log method every loop. */
   @Override
   public void periodic() {
-    log();
+    if (RobotContainer.readAuto) {
+      RobotContainer.m_autoSubsystem.addShifter(Constants.pneumatics.shifterSolenoid.get());
+    }
   }
 }
