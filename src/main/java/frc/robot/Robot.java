@@ -51,11 +51,6 @@ public class Robot extends TimedRobot {
   private final LeftElevator m_leftElevator = new LeftElevator();
   private final RightElevator m_rightElevator = new RightElevator();
 
-  private static Boolean autoEnabled = false;
-  private static double testStartTime = 0;
-  private static double testCurrentTime = 0;
-  private static double testTimeDiff = 0;
-
   /**
    * This function is run when the robot is first started up and should be used
    * for any
@@ -63,9 +58,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    autoChooser.setDefaultOption("Nothing", 1);
-    autoChooser.addOption("Drive out", 2);
-    autoChooser.addOption("Balance", 3);
+    autoChooser.setDefaultOption("Drive", 1);
+    autoChooser.addOption("Balance", 2);
+    autoChooser.addOption("Nothing", 3);
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
@@ -127,7 +122,6 @@ public class Robot extends TimedRobot {
     // timer.stop();
     // timer.reset();
     // timer.start();
-    // autoEnabled = true;
     // Constants.pneumatics.intakeSolenoid.set(Constants.intake.intakeUp);
 
     m_autoCommand.setAuto(autoMode);
@@ -172,7 +166,7 @@ public class Robot extends TimedRobot {
     if (m_autoCommand != null) {
       m_autoCommand.cancel();
     }
-    autoEnabled = false;
+  
 
     // zeroes out the slide position so that the position it is at when the
     // initialization of teleop occurs is set as the lowest possible position

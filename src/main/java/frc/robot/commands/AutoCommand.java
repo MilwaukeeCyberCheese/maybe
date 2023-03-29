@@ -27,9 +27,9 @@ public class AutoCommand extends CommandBase {
     }
 
     public void setAuto(int auto) {
-        if (auto != 3) {
-            m_autoSubsystem.setAuto(auto);
-        }
+
+        m_autoSubsystem.setAuto(auto);
+
         this.auto = auto;
     }
 
@@ -56,7 +56,7 @@ public class AutoCommand extends CommandBase {
 
             if (timer.getTime() > 0.7
                     && Math.abs(Constants.balance.gyro.getPitch()) > Constants.balance.IMBALANCED_THRESHOLD_DEGREES) {
-                balanceStarted = true;        
+                balanceStarted = true;
                 new AutoBalancer(m_drivetrain);
             }
         }
