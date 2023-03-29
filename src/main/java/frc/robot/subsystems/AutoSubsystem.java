@@ -4,9 +4,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutoBalancer;
-import frc.robot.commands.IntakeConeCommand;
+
 
 public class AutoSubsystem extends SubsystemBase {
 

@@ -5,9 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -21,7 +19,6 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LeftElevator;
 import frc.robot.subsystems.RightElevator;
 import frc.robot.commands.AutoCommand;
-import frc.robot.subsystems.AutoSubsystemValues;
 
 import frc.robot.subsystems.Shifter;
 
@@ -61,6 +58,7 @@ public class Robot extends TimedRobot {
     autoChooser.setDefaultOption("Drive", 1);
     autoChooser.addOption("Balance", 2);
     autoChooser.addOption("Nothing", 3);
+    autoChooser.addOption("True Auto", 4);
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.

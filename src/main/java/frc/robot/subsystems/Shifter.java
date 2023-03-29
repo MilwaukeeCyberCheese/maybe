@@ -5,7 +5,6 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -15,7 +14,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 public class Shifter extends SubsystemBase {
 
-  private Boolean position;
 
   /** Create a new shifter subsystem. */
   public Shifter() {
@@ -24,7 +22,6 @@ public class Shifter extends SubsystemBase {
   }
 
   public void setGear(boolean position) {
-    this.position = position;
     Constants.pneumatics.shifterSolenoid.set(position);
 
   }

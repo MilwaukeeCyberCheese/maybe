@@ -1,13 +1,11 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.AutoSubsystem;
-import frc.robot.subsystems.AutoSubsystemValues;
+
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 
@@ -35,15 +33,17 @@ public class AutoCommand extends CommandBase {
 
     @Override
     public void initialize() {
-        timer.stop();
-        timer.reset();
-        timer.start();
-        balanceStarted = false;
+        if (auto == 4) {
+            timer.stop();
+            timer.reset();
+            timer.start();
+            balanceStarted = false;
+        }
     }
 
     @Override
     public void execute() {
-        if (auto == 3) {
+        if (auto == 4) {
             if (timer.getTime() < 0.7) {
                 m_intake.drive(0.7);
             }
