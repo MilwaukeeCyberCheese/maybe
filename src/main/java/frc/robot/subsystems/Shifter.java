@@ -40,5 +40,6 @@ public class Shifter extends SubsystemBase {
     if (RobotContainer.readAuto) {
       RobotContainer.m_autoSubsystem.addShifter(Constants.pneumatics.shifterSolenoid.get());
     }
+    log();
   }
 }

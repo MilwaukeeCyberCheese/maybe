@@ -5,9 +5,12 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.IntakeOff;
 import frc.robot.commands.IntakeUp;
@@ -15,6 +18,7 @@ import frc.robot.commands.Second;
 import frc.robot.commands.ZeroSlides;
 import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.AutoSubsystem;
+import frc.robot.subsystems.AutoSubsystemValues;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LeftElevator;
 import frc.robot.subsystems.RightElevator;
@@ -34,7 +38,9 @@ import frc.robot.subsystems.Shifter;
 public class Robot extends TimedRobot {
   SendableChooser<Integer> autoChooser = new SendableChooser<>();
 
+  private int stopwatchCounter = -1;
   private AutoCommand m_autoCommand;
+  private int autoMode = 3;
 
   private RobotContainer m_robotContainer;
 
@@ -64,7 +70,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    CameraServer.startAutomaticCapture();
+    // CameraServer.startAutomaticCapture();
     SmartDashboard.putData("Autonomous", autoChooser);
 
     new IntakeUp(m_intake);
@@ -92,7 +98,6 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
 
     CommandScheduler.getInstance().run();
-
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -113,46 +118,86 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
 
-    int autoMode = autoChooser.getSelected();
+    autoMode = autoChooser.getSelected();
 
-    m_autoCommand = m_robotContainer.getAutonomousCommand();
+    
 
     // timer.stop();
     // timer.reset();
     // timer.start();
     // Constants.pneumatics.intakeSolenoid.set(Constants.intake.intakeUp);
 
-    m_autoCommand.setAuto(autoMode);
+    
 
     // // schedule the autonomous command (example)
-    if (m_autoCommand != null) {
-      m_autoCommand.schedule();
-    }
+    
   }
 
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
+    if (autoMode == 1) {
+      if (DriverStation.isAutonomousEnabled()
+              && stopwatchCounter < (AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 2)) {
+          stopwatchCounter++;
+System.out.println(stopwatchCounter);
+          // gear
+          Boolean gear = AutoSubsystemValues.gear.gear.get(stopwatchCounter);
+          Constants.pneumatics.shifterSolenoid.set(gear);
+          // actuate lift
+          double leftLiftSpeed = AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.get(stopwatchCounter);
+          double rightLiftSpeed = AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.get(stopwatchCounter);
 
-    // if(Constants.pneumatics.shifterSolenoid.get() != Constants.drive.FIRST_GEAR){
-    // Constants.pneumatics.shifterSolenoid.set(Constants.drive.FIRST_GEAR);
-    // }
-    // if (timer.getTime() >= 1.0 && timer.getTime() <= 3.0) {
-    // m_intake.drive(0.7);
-    // } else {
-    // m_intake.drive(0.0);
-    // }
-    // if (timer.getTime() >= 3.5 && timer.getTime() <= 6.5) {
-    // Constants.controllers.leftFrontSpark.set(-0.5);
-    // Constants.controllers.leftRearSpark.set(-0.5);
-    // Constants.controllers.rightFrontSpark.set(-0.5);
-    // Constants.controllers.rightRearSpark.set(-0.5);
-    // } else {
-    // Constants.controllers.leftFrontSpark.set(-0.0);
-    // Constants.controllers.leftRearSpark.set(-0.0);
-    // Constants.controllers.rightFrontSpark.set(-0.0);
-    // Constants.controllers.rightRearSpark.set(-0.0);
-    // }
+          Constants.controllers.leftLiftSpark.set(leftLiftSpeed);
+          Constants.controllers.rightLiftSpark.set(rightLiftSpeed);
+          // System.out.println(AutoSubsystemValues.intaking.intaking.size());
+          // System.out.println(stopwatchCounter);
+          // intake
+          double intake = AutoSubsystemValues.intaking.intaking.get(stopwatchCounter);
+
+          // if (intake != prevState) {
+          // System.out.println("Switching State");
+          // System.out.println(intake);
+          // System.out.println(stopwatchCounter);
+          // Constants.controllers.intakeSpark.set(intake);
+          // prevState = intake;
+          // }
+          Constants.controllers.intakeSpark.set(intake);
+          // System.out.println(intake);
+
+          // // intake pos
+          Value intakePos = AutoSubsystemValues.intakePos.intakePos.get(stopwatchCounter);
+          // System.out.println(intakePos);
+          Constants.pneumatics.intakeSolenoid.set(intakePos);
+
+          // if(stopwatchCounter >= 175){
+          // ended = false;
+          // }
+          // get speeds for wheels
+          double frontLeft = AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(stopwatchCounter);
+          double frontRight = AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(stopwatchCounter);
+          double backLeft = AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(stopwatchCounter);
+          double backRight = AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(stopwatchCounter);
+
+          // System.out.println(frontLeft);
+          // // set wheel speeds
+          Constants.controllers.leftFrontSpark.set(frontLeft);
+          Constants.controllers.rightFrontSpark.set(frontRight);
+          Constants.controllers.leftRearSpark.set(backLeft);
+          Constants.controllers.rightRearSpark.set(backRight);
+      } else if (DriverStation.isAutonomousEnabled()
+              && stopwatchCounter >= AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
+          // if we run out of code to run in auto, make sure everything is not moving
+          // Constants.controllers.leftLiftSpark.set(0.0);
+          // Constants.controllers.rightLiftSpark.set(0.0);
+          // Constants.controllers.intakeSpark.set(0.0);
+          // // System.out.println("Stopped Robot");
+          // Constants.controllers.leftFrontSpark.set(0.0);
+          // Constants.controllers.leftRearSpark.set(0.0);
+          // Constants.controllers.rightFrontSpark.set(0.0);
+          // Constants.controllers.rightRearSpark.set(0.0);
+              }
+   }
   }
 
   @Override
@@ -164,7 +209,6 @@ public class Robot extends TimedRobot {
     if (m_autoCommand != null) {
       m_autoCommand.cancel();
     }
-  
 
     // zeroes out the slide position so that the position it is at when the
     // initialization of teleop occurs is set as the lowest possible position
