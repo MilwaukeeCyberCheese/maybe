@@ -94,7 +94,7 @@ public class RobotContainer {
 
     m_autoSubsystem.setDefaultCommand(
         new RecordAuto(m_autoSubsystem, () -> m_controllerTwo.getXButton(), () -> m_controllerTwo.getBButton()));
-
+    
     // Configure the button bindings
     configureButtonBindings();
   }

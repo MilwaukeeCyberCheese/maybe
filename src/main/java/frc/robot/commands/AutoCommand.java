@@ -22,13 +22,14 @@ public class AutoCommand extends CommandBase {
         this.m_autoSubsystem = autoSubsystem;
         this.m_intake = intake;
         this.m_drivetrain = drivetrain;
+        addRequirements(m_drivetrain);
     }
 
     public void setAuto(int auto) {
 
         m_autoSubsystem.setAuto(auto);
 
-        this.auto = auto;
+        //this.auto = auto;
     }
 
     @Override

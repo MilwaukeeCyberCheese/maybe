@@ -192,7 +192,7 @@ System.out.println(stopwatchCounter);
         AutoSubsystemValues.backRightSpeeds.backRightSpeeds.clear();
         AutoSubsystemValues.intakePos.intakePos.clear();
         AutoSubsystemValues.gear.gear.clear();
-        stopwatchCounter = 0;
+        stopwatchCounter = -1;
     }
 
     public void printSpeeds() {
