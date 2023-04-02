@@ -52,7 +52,8 @@ public class RobotContainer {
   private static final FilteredController m_filteredControllerTwo = new FilteredController(m_controllerTwo);
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
-  private static final AutoCommand m_autoCommand = new AutoCommand(m_autoSubsystem, m_intake, m_drivetrain, m_leftElevator, m_rightElevator, m_shifter);
+  private static final AutoCommand m_autoCommand = new AutoCommand(m_autoSubsystem, m_intake, m_drivetrain,
+      m_leftElevator, m_rightElevator, m_shifter);
 
   public static boolean readAuto = false;
 
@@ -77,7 +78,13 @@ public class RobotContainer {
 
     // Assign default commands
     m_drivetrain.setDefaultCommand(
-        new ArcadeDrive(() -> -m_filteredController.getYLeft(.2), () -> -m_filteredController.getXRight(.2), () -> m_filteredController.getLeftTriggerActive(0.2), () -> false/*m_filteredController.getRightTriggerActive(0.2)*/, () -> m_controller.getBackButton(),
+        new ArcadeDrive(
+            () -> -m_filteredController.getYLeft(.2), () -> -m_filteredController
+                .getXRight(.2),
+            () -> m_filteredController.getLeftTriggerActive(0.2), () -> false/*
+                                                                              * m_filteredController.
+                                                                              * getRightTriggerActive(0.2)
+                                                                              */, () -> m_controller.getBackButton(),
             m_drivetrain));
 
     m_intake.setDefaultCommand(
@@ -94,7 +101,7 @@ public class RobotContainer {
 
     m_autoSubsystem.setDefaultCommand(
         new RecordAuto(m_autoSubsystem, () -> m_controllerTwo.getXButton(), () -> m_controllerTwo.getBButton()));
-    
+
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -132,7 +139,7 @@ public class RobotContainer {
     leftBumperOne.onTrue(new First(m_shifter));
     rightBumperOne.onTrue(new Second(m_shifter));
 
-rightTriggerOne.onTrue(new IntakeUp(m_intake));
+    rightTriggerOne.onTrue(new IntakeUp(m_intake));
 
     startButtonTwo.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
 
