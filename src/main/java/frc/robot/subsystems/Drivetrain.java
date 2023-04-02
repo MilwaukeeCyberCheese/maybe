@@ -10,8 +10,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
-  private double throttle;
-  private double rotation;
   
   /**
    * The Drivetrain subsystem incorporates the sensors and actuators attached to
@@ -68,8 +66,6 @@ public class Drivetrain extends SubsystemBase {
    * @param rotation Speed in range [-1,1]
    */
   public void drive(double throttle, double rotation) {
-    this.throttle = throttle;
-    this.rotation = rotation;
     Constants.drive.m_drive.arcadeDrive(throttle, rotation);
   }
 

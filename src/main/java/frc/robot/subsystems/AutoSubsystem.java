@@ -12,7 +12,6 @@ public class AutoSubsystem extends SubsystemBase {
     // side to love handles is 10, ass to line is 23 inches
 
     private int auto = 1;
-    private Drivetrain m_drivetrain = new Drivetrain();
     private int stopwatchCounter = -1;
 
     /**

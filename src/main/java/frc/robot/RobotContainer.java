@@ -52,7 +52,7 @@ public class RobotContainer {
   private static final FilteredController m_filteredControllerTwo = new FilteredController(m_controllerTwo);
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
-  private static final AutoCommand m_autoCommand = new AutoCommand(m_autoSubsystem, m_intake, m_drivetrain);
+  private static final AutoCommand m_autoCommand = new AutoCommand(m_autoSubsystem, m_intake, m_drivetrain, m_leftElevator, m_rightElevator, m_shifter);
 
   public static boolean readAuto = false;
 
