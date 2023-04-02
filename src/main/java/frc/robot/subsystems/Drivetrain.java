@@ -6,11 +6,21 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.other.Stopwatch;
+
+import com.revrobotics.CANSparkMax.IdleMode;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
-  
+  private double throttle;
+  private double rotation;
+  private double previousThrottle = 0;
+  private double previousRotation = 0;
+  private boolean brakeMode = false;
+  private Stopwatch brakingTimer = new Stopwatch();
+
   /**
    * The Drivetrain subsystem incorporates the sensors and actuators attached to
    * the robots chassis.
@@ -43,7 +53,7 @@ public class Drivetrain extends SubsystemBase {
 
   /** The log method puts interesting information to the SmartDashboard. */
   public void log() {
- 
+
     SmartDashboard.putData("Drivetrain", Constants.drive.m_drive);
     SmartDashboard.putNumber("FrontLeft Speed", Constants.controllers.leftFrontSpark.get());
     SmartDashboard.putNumber("FrontRight Speed", Constants.controllers.rightFrontSpark.get());
@@ -62,23 +72,43 @@ public class Drivetrain extends SubsystemBase {
   /**
    * Arcade style driving for the Drivetrain.
    *
-   * @param throttle  Speed in range [-1,1]
+   * @param throttle Speed in range [-1,1]
    * @param rotation Speed in range [-1,1]
    */
-  public void drive(double throttle, double rotation) {
+  public void drive(double throttle, double rotation, boolean brakeMode) {
+    this.rotation = rotation;
+    this.throttle = throttle;
+    this.brakeMode = brakeMode;
     Constants.drive.m_drive.arcadeDrive(throttle, rotation);
   }
-
-
- 
 
   /** Call log method every loop. */
   @Override
   public void periodic() {
     log();
 
-    if(RobotContainer.readAuto){
-      RobotContainer.m_autoSubsystem.addDriveSpeeds(Constants.controllers.leftFrontSpark.get(), Constants.controllers.rightFrontSpark.get(), Constants.controllers.leftRearSpark.get(), Constants.controllers.rightRearSpark.get());
+    if (RobotContainer.readAuto) {
+      RobotContainer.m_autoSubsystem.addDriveSpeeds(Constants.controllers.leftFrontSpark.get(),
+          Constants.controllers.rightFrontSpark.get(), Constants.controllers.leftRearSpark.get(),
+          Constants.controllers.rightRearSpark.get());
+    }
+
+    if (throttle == 0 && rotation == 0 && previousRotation != 0 && previousThrottle != 0) {
+      brakingTimer.stop();
+      brakingTimer.reset();
+      brakingTimer.start();
+    }
+
+    if((throttle == 0 && rotation == 0 && brakingTimer.getTime() >= 300) || brakeMode){
+      Constants.controllers.leftFrontSpark.setIdleMode(IdleMode.kBrake);
+      Constants.controllers.leftRearSpark.setIdleMode(IdleMode.kBrake);
+      Constants.controllers.rightFrontSpark.setIdleMode(IdleMode.kBrake);
+      Constants.controllers.rightRearSpark.setIdleMode(IdleMode.kBrake);
+    }else{
+      Constants.controllers.leftFrontSpark.setIdleMode(IdleMode.kCoast);
+      Constants.controllers.leftRearSpark.setIdleMode(IdleMode.kCoast);
+      Constants.controllers.rightFrontSpark.setIdleMode(IdleMode.kCoast);
+      Constants.controllers.rightRearSpark.setIdleMode(IdleMode.kCoast);
     }
   }
 }

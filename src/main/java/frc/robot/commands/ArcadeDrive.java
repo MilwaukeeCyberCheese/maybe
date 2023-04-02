@@ -18,6 +18,7 @@ public class ArcadeDrive extends CommandBase {
   private final DoubleSupplier m_rotation;
   private final BooleanSupplier m_slow;
   private final BooleanSupplier m_turbo;
+  private final BooleanSupplier m_brakeMode;
   private double m_turnSpeedMod = 1;
   private double m_driveSpeedMod = 1;
 
@@ -30,13 +31,14 @@ public class ArcadeDrive extends CommandBase {
    * @param turbo whether or not to enable turbo mode
    * @param drivetrain The drivetrain subsystem to drive
    */
-  public ArcadeDrive(DoubleSupplier throttle, DoubleSupplier rotation, BooleanSupplier slow, BooleanSupplier turbo,
+  public ArcadeDrive(DoubleSupplier throttle, DoubleSupplier rotation, BooleanSupplier slow, BooleanSupplier turbo, BooleanSupplier brakeMode,
       Drivetrain drivetrain) {
     m_drivetrain = drivetrain;
     m_throttle = throttle;
     m_rotation = rotation;
     m_slow = slow;
     m_turbo = turbo;
+m_brakeMode = brakeMode;
     addRequirements(m_drivetrain);
   }
 
@@ -56,7 +58,7 @@ public class ArcadeDrive extends CommandBase {
 
     // set speeds of drivetrain relative to limits
     m_drivetrain.drive(m_throttle.getAsDouble() * Constants.drive.DRIVE_SPEED * m_driveSpeedMod,
-        m_rotation.getAsDouble() * Constants.drive.TURN_SPEED * m_turnSpeedMod);
+        m_rotation.getAsDouble() * Constants.drive.TURN_SPEED * m_turnSpeedMod, m_brakeMode.getAsBoolean());
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -69,6 +71,6 @@ public class ArcadeDrive extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // sets motors to 0 so they don't keep moving
-    m_drivetrain.drive(0, 0);
+    m_drivetrain.drive(0, 0, true);
   }
 }

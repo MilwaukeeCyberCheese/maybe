@@ -44,7 +44,7 @@ public class AutoBalancer extends CommandBase {
       throttle = Math.sin(pitchAngleRadians) * -1;
     }
 
-    m_drivetrain.drive(throttle * Constants.balance.BALANCE_SPEED_MOD, 0);
+    m_drivetrain.drive(throttle * Constants.balance.BALANCE_SPEED_MOD, 0, true);
 
   }
 
