@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
+import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -13,8 +14,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /** Have the robot drive arcade style. */
 public class AutoBalancer extends CommandBase {
   private final Drivetrain m_drivetrain;
-  private Boolean autoBalanceMode;
+  private Boolean autoBalanceMode = false;
   private double throttle;
+  private Stopwatch timer = new Stopwatch();
 
   /**
    * Creates a new AutoBalance Command.
@@ -24,6 +26,14 @@ public class AutoBalancer extends CommandBase {
   public AutoBalancer(Drivetrain drivetrain) {
     m_drivetrain = drivetrain;
     addRequirements(m_drivetrain);
+  }
+
+
+  @Override
+  public void initialize(){
+timer.stop();
+timer.reset();
+timer.start();
   }
 
   // Called repeatedly when this Command is scheduled to run

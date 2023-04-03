@@ -1,9 +1,6 @@
 package frc.robot.commands;
 
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.AutoSubsystem;
 
 import frc.robot.subsystems.Drivetrain;
@@ -14,17 +11,15 @@ import frc.robot.subsystems.Shifter;
 
 public class AutoCommand extends CommandBase {
     private final AutoSubsystem m_autoSubsystem;
-    private double auto;
     private final Intake m_intake;
     private final Drivetrain m_drivetrain;
     private final LeftElevator m_leftElevator;
     private final RightElevator m_rightElevator;
     private final Shifter m_shifter;
-    private final Stopwatch timer = new Stopwatch();
-    private boolean balanceStarted = false;
 
     // constructor
-    public AutoCommand(AutoSubsystem autoSubsystem, Intake intake, Drivetrain drivetrain, LeftElevator leftElevator, RightElevator rightElevator, Shifter shifter) {
+    public AutoCommand(AutoSubsystem autoSubsystem, Intake intake, Drivetrain drivetrain, LeftElevator leftElevator,
+            RightElevator rightElevator, Shifter shifter) {
         this.m_autoSubsystem = autoSubsystem;
         this.m_intake = intake;
         this.m_drivetrain = drivetrain;
@@ -38,38 +33,15 @@ public class AutoCommand extends CommandBase {
 
         m_autoSubsystem.setAuto(auto);
 
-        //this.auto = auto;
-    }
-
-    @Override
-    public void initialize() {
-        if (auto == 4) {
-            timer.stop();
-            timer.reset();
-            timer.start();
-            balanceStarted = false;
-        }
+        // this.auto = auto;
     }
 
     @Override
     public void execute() {
-        if (auto == 4) {
-            if (timer.getTime() < 0.7) {
-                m_intake.drive(0.7);
-            }
-
-            if (timer.getTime() > 0.7
-                    && Math.abs(Constants.balance.gyro.getPitch()) < Constants.balance.IMBALANCED_THRESHOLD_DEGREES
-                    && !balanceStarted) {
-                m_drivetrain.drive(0.1, 0, false);
-            }
-
-            if (timer.getTime() > 0.7
-                    && Math.abs(Constants.balance.gyro.getPitch()) > Constants.balance.IMBALANCED_THRESHOLD_DEGREES) {
-                balanceStarted = true;
-                new AutoBalancer(m_drivetrain);
-            }
+        if (m_autoSubsystem.balance) {
+            new AutoBalancer(m_drivetrain);
         }
+
     }
 
     /**
@@ -79,6 +51,11 @@ public class AutoCommand extends CommandBase {
      */
     @Override
     public void end(boolean interrupted) {
-        timer.stop();
+
+    }
+
+    @Override
+    public boolean isFinished(){
+        return false;
     }
 }

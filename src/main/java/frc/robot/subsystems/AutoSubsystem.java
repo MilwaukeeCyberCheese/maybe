@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.commands.AutoBalancer;
 
 public class AutoSubsystem extends SubsystemBase {
 
@@ -11,6 +12,7 @@ public class AutoSubsystem extends SubsystemBase {
 
     private int auto = 1;
     private int stopwatchCounter = -1;
+    public Boolean balance = false;
 
     /**
      * This function is called every twenty milliseconds when the robot is enabled
@@ -22,7 +24,7 @@ public class AutoSubsystem extends SubsystemBase {
 
         if (auto == 1) {
             if (DriverStation.isAutonomousEnabled()
-                    && stopwatchCounter < (AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 2)) {
+                    && stopwatchCounter < (AutoSubsystemValues.gear.gear.size() - 2)) {
                 stopwatchCounter++;
                 System.out.println(stopwatchCounter);
                 // gear
@@ -70,16 +72,8 @@ public class AutoSubsystem extends SubsystemBase {
                 Constants.controllers.leftRearSpark.set(backLeft);
                 Constants.controllers.rightRearSpark.set(backRight);
             } else if (DriverStation.isAutonomousEnabled()
-                    && stopwatchCounter >= AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
-                // if we run out of code to run in auto, make sure everything is not moving
-                // Constants.controllers.leftLiftSpark.set(0.0);
-                // Constants.controllers.rightLiftSpark.set(0.0);
-                // Constants.controllers.intakeSpark.set(0.0);
-                // // System.out.println("Stopped Robot");
-                // Constants.controllers.leftFrontSpark.set(0.0);
-                // Constants.controllers.leftRearSpark.set(0.0);
-                // Constants.controllers.rightFrontSpark.set(0.0);
-                // Constants.controllers.rightRearSpark.set(0.0);
+                    && stopwatchCounter >= AutoSubsystemValues.gear.gear.size() - 1) {
+                balance = true;
             }
         } /* else if (auto == 2) { */
         // if (DriverStation.isAutonomousEnabled()

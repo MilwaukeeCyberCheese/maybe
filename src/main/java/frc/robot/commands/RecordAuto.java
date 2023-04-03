@@ -23,8 +23,8 @@ public class RecordAuto extends CommandBase {
     public void execute() {
 
         if (m_recording.getAsBoolean()) {
-            RobotContainer.readAuto = true;
             m_autoSubsystem.clearShit();
+            RobotContainer.readAuto = true;
             System.out.println("Started - Begin Tracking Autonomous");
 
         } else if(m_stopping.getAsBoolean()){

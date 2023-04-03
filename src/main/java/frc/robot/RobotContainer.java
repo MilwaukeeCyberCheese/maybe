@@ -16,6 +16,7 @@ import frc.robot.commands.RecordAuto;
 import frc.robot.commands.Second;
 import frc.robot.commands.ZeroSlides;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.AutoBalancer;
 import frc.robot.commands.AutoCommand;
 import frc.robot.other.FilteredController;
 import frc.robot.subsystems.AutoSubsystem;
@@ -81,10 +82,8 @@ public class RobotContainer {
         new ArcadeDrive(
             () -> -m_filteredController.getYLeft(.2), () -> -m_filteredController
                 .getXRight(.2),
-            () -> m_filteredController.getLeftTriggerActive(0.2), () -> false/*
-                                                                              * m_filteredController.
-                                                                              * getRightTriggerActive(0.2)
-                                                                              */, () -> m_controller.getBackButton(),
+            () -> m_filteredController.getLeftTriggerActive(0.2), () -> m_filteredController.getRightTriggerActive(0.2),
+            () -> m_controller.getBackButton(),
             m_drivetrain));
 
     m_intake.setDefaultCommand(
@@ -134,14 +133,18 @@ public class RobotContainer {
     Trigger leftBumperTwo = new JoystickButton(m_controllerTwo, 5);
     Trigger rightBumperTwo = new JoystickButton(m_controllerTwo, 6);
     Trigger startButtonTwo = new JoystickButton(m_controllerTwo, 8);
-    Trigger rightTriggerOne = new Trigger(() -> m_filteredController.getRightTriggerActive());
+    // Trigger rightTriggerOne = new Trigger(() ->
+    // m_filteredController.getRightTriggerActive());
+    Trigger startButtonOne = new JoystickButton(m_controller, 8);
 
     leftBumperOne.onTrue(new First(m_shifter));
     rightBumperOne.onTrue(new Second(m_shifter));
 
-    rightTriggerOne.onTrue(new IntakeUp(m_intake));
+    // rightTriggerOne.onTrue(new IntakeUp(m_intake));
 
     startButtonTwo.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
+
+    startButtonOne.onTrue(new AutoBalancer(m_drivetrain));
 
     yButtonTwo.whileTrue(new IntakeUp(m_intake));
     aButtonTwo.whileTrue(new IntakeDown(m_intake));

@@ -64,10 +64,10 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    CameraServer.startAutomaticCapture();
+    // CameraServer.startAutomaticCapture();
     SmartDashboard.putData("Autonomous", autoChooser);
 
-    SmartDashboard.putData(CommandScheduler.getInstance());
+    // SmartDashboard.putData(CommandScheduler.getInstance());
     //SmartDashboard.putData("Autonomous Command", m_autoCommand);
 
     new IntakeUp(m_intake);
