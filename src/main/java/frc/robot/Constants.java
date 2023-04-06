@@ -65,13 +65,13 @@ public final class Constants {
                  * Constants.controllers.leftFrontSpark
                  */
                 public static final CANSparkMax leftFrontSpark = new CANSparkMax(DRIVETRAIN_LEFT_FRONT_SPARK,
-                                MotorType.kBrushed);
+                                MotorType.kBrushless);
                 public static final CANSparkMax leftRearSpark = new CANSparkMax(DRIVETRAIN_LEFT_REAR_SPARK,
-                                MotorType.kBrushed);
+                                MotorType.kBrushless);
                 public static final CANSparkMax rightFrontSpark = new CANSparkMax(DRIVETRAIN_RIGHT_FRONT_SPARK,
-                                MotorType.kBrushed);
+                                MotorType.kBrushless);
                 public static final CANSparkMax rightRearSpark = new CANSparkMax(DRIVETRAIN_RIGHT_REAR_SPARK,
-                                MotorType.kBrushed);
+                                MotorType.kBrushless);
 
                 public static final CANSparkMax intakeSpark = new CANSparkMax(INTAKE_SPARK,
                                 MotorType.kBrushless);
@@ -94,7 +94,7 @@ public final class Constants {
 
                 public static final IdleMode IDLE_MODE = IdleMode.kBrake;
 
-                public static final int CURRENT_LIMIT = 70;
+                public static final int CURRENT_LIMIT = 60;
 
                 public static final double DRIVE_SPEED = 1;
                 public static final double TURN_SPEED = 0.9;
