@@ -104,10 +104,10 @@ public final class Constants {
                 public static final double TURBO_DRIVE_SPEED = 1.4;
                 public static final double TURBO_TURN_SPEED = 0.7;
 
-                public static final boolean LEFT_FRONT_INVERTED = false;
-                public static final boolean LEFT_REAR_INVERTED = false;
-                public static final boolean RIGHT_FRONT_INVERTED = true;
-                public static final boolean RIGHT_REAR_INVERTED = true;
+                public static final boolean LEFT_FRONT_INVERTED = true;
+                public static final boolean LEFT_REAR_INVERTED = true;
+                public static final boolean RIGHT_FRONT_INVERTED = false;
+                public static final boolean RIGHT_REAR_INVERTED = false;
 
                 public static final boolean SECOND_GEAR = false;
                 public static final boolean FIRST_GEAR = true;
