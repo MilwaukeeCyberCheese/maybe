@@ -39,7 +39,7 @@ public class AutoCommand extends CommandBase {
     @Override
     public void execute() {
         if (m_autoSubsystem.balance) {
-            new AutoBalancer(m_drivetrain);
+            new AutoBalancer(m_drivetrain, m_shifter);
         }
 
     }

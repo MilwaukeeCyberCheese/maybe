@@ -64,6 +64,9 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
+    //calibrate gyro
+    Constants.balance.gyro.calibrate();
+
     CameraServer.startAutomaticCapture();
     SmartDashboard.putData("Autonomous", autoChooser);
 

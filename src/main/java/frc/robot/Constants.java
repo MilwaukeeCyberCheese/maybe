@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -21,10 +22,13 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public final class Constants {
 
         public static final class balance {
-                public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
+                public static final AHRS gyro = new AHRS(SerialPort.Port.kUSB);
                 public static final double IMBALANCED_THRESHOLD_DEGREES = 2.5;
                 public static final double BALANCED_THRESHOLD_DEGREES = 1.0;
                 public static final double BALANCE_SPEED_MOD = 1;
+                public static final double P = 0.04;
+                public static final double I = 0.0;
+                public static final double D = 0.002;
 
         }
 
@@ -65,13 +69,13 @@ public final class Constants {
                  * Constants.controllers.leftFrontSpark
                  */
                 public static final CANSparkMax leftFrontSpark = new CANSparkMax(DRIVETRAIN_LEFT_FRONT_SPARK,
-                                MotorType.kBrushless);
+                                MotorType.kBrushed);
                 public static final CANSparkMax leftRearSpark = new CANSparkMax(DRIVETRAIN_LEFT_REAR_SPARK,
-                                MotorType.kBrushless);
+                                MotorType.kBrushed);
                 public static final CANSparkMax rightFrontSpark = new CANSparkMax(DRIVETRAIN_RIGHT_FRONT_SPARK,
-                                MotorType.kBrushless);
+                                MotorType.kBrushed);
                 public static final CANSparkMax rightRearSpark = new CANSparkMax(DRIVETRAIN_RIGHT_REAR_SPARK,
-                                MotorType.kBrushless);
+                                MotorType.kBrushed);
 
                 public static final CANSparkMax intakeSpark = new CANSparkMax(INTAKE_SPARK,
                                 MotorType.kBrushless);
@@ -96,18 +100,18 @@ public final class Constants {
 
                 public static final int CURRENT_LIMIT = 60;
 
-                public static final double DRIVE_SPEED = 0.7;
-                public static final double TURN_SPEED = 0.6;
+                public static final double DRIVE_SPEED = 1.0;
+                public static final double TURN_SPEED = 0.9;
 
                 public static final double SLOW_DRIVE_SPEED = 0.5;
                 public static final double SLOW_TURN_SPEED = 0.5;
                 public static final double TURBO_DRIVE_SPEED = 1.4;
                 public static final double TURBO_TURN_SPEED = 0.7;
 
-                public static final boolean LEFT_FRONT_INVERTED = true;
-                public static final boolean LEFT_REAR_INVERTED = true;
-                public static final boolean RIGHT_FRONT_INVERTED = false;
-                public static final boolean RIGHT_REAR_INVERTED = false;
+                public static final boolean LEFT_FRONT_INVERTED = false;
+                public static final boolean LEFT_REAR_INVERTED = false;
+                public static final boolean RIGHT_FRONT_INVERTED = true;
+                public static final boolean RIGHT_REAR_INVERTED = true;
 
                 public static final boolean SECOND_GEAR = false;
                 public static final boolean FIRST_GEAR = true;
@@ -125,8 +129,8 @@ public final class Constants {
         }
 
         public static final class lift {
-                public static final boolean LEFT_INVERTED = false;
-                public static final boolean RIGHT_INVERTED = true;
+                public static final boolean LEFT_INVERTED = true;
+                public static final boolean RIGHT_INVERTED = false;
 
                 public static final double LIFT_SPEED = 0.5;
 

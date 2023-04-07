@@ -50,7 +50,7 @@ public class RobotContainer {
   private static final XboxController m_controller = new XboxController(0);
   public static final FilteredController m_filteredController = new FilteredController(m_controller);
   private static final XboxController m_controllerTwo = new XboxController(1);
-  private static final FilteredController m_filteredControllerTwo = new FilteredController(m_controllerTwo);
+  public static final FilteredController m_filteredControllerTwo = new FilteredController(m_controllerTwo);
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
   private static final AutoCommand m_autoCommand = new AutoCommand(m_autoSubsystem, m_intake, m_drivetrain,
@@ -133,18 +133,19 @@ public class RobotContainer {
     Trigger leftBumperTwo = new JoystickButton(m_controllerTwo, 5);
     Trigger rightBumperTwo = new JoystickButton(m_controllerTwo, 6);
     Trigger startButtonTwo = new JoystickButton(m_controllerTwo, 8);
-    // Trigger rightTriggerOne = new Trigger(() ->
-    // m_filteredController.getRightTriggerActive());
-    Trigger startButtonOne = new JoystickButton(m_controller, 8);
+ 
+    Trigger rightTriggerOne = new Trigger(() -> m_filteredController.getRightTriggerActive());
+    Trigger rightStickButtonOne = new JoystickButton(m_controller, 10);
 
     leftBumperOne.onTrue(new First(m_shifter));
     rightBumperOne.onTrue(new Second(m_shifter));
 
-    // rightTriggerOne.onTrue(new IntakeUp(m_intake));
+    rightTriggerOne.onTrue(new IntakeUp(m_intake));
 
     startButtonTwo.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
 
-    startButtonOne.onTrue(new AutoBalancer(m_drivetrain));
+
+    rightStickButtonOne.onTrue(new AutoBalancer(m_drivetrain, m_shifter));
 
     yButtonTwo.whileTrue(new IntakeUp(m_intake));
     aButtonTwo.whileTrue(new IntakeDown(m_intake));

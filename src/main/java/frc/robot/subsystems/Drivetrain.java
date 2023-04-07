@@ -67,10 +67,7 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("BackLeft Current", Constants.controllers.leftRearSpark.getOutputCurrent());
     SmartDashboard.putNumber("FrontRight Current", Constants.controllers.rightFrontSpark.getOutputCurrent());
     SmartDashboard.putNumber("BackRight Current", Constants.controllers.rightRearSpark.getOutputCurrent());
-    Constants.controllers.leftFrontSpark.setIdleMode(Constants.drive.IDLE_MODE);
-    Constants.controllers.leftRearSpark.setIdleMode(Constants.drive.IDLE_MODE);
-    Constants.controllers.rightFrontSpark.setIdleMode(Constants.drive.IDLE_MODE);
-    Constants.controllers.rightRearSpark.setIdleMode(Constants.drive.IDLE_MODE);
+    SmartDashboard.putNumber("Gyro Pitch", Constants.balance.gyro.getRoll());
   }
 
   /**
