@@ -16,6 +16,7 @@ import frc.robot.commands.RecordAuto;
 import frc.robot.commands.Second;
 import frc.robot.commands.ZeroSlides;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.AutoBalanceDrive;
 import frc.robot.commands.AutoBalancer;
 import frc.robot.commands.AutoCommand;
 import frc.robot.other.FilteredController;
@@ -145,7 +146,7 @@ public class RobotContainer {
     startButtonTwo.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
 
 
-    rightStickButtonOne.onTrue(new AutoBalancer(m_drivetrain, m_shifter));
+    rightStickButtonOne.onTrue(new AutoBalanceDrive(m_drivetrain, m_shifter));
 
     yButtonTwo.whileTrue(new IntakeUp(m_intake));
     aButtonTwo.whileTrue(new IntakeDown(m_intake));

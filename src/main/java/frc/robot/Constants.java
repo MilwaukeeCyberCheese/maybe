@@ -26,8 +26,8 @@ public final class Constants {
                 public static final double IMBALANCED_THRESHOLD_DEGREES = 2.5;
                 public static final double BALANCED_THRESHOLD_DEGREES = 1.0;
                 public static final double BALANCE_SPEED_MOD = 1;
-                public static final double P = 0.04;
-                public static final double I = 0.0;
+                public static final double P = 0.043;
+                public static final double I = 0.000;
                 public static final double D = 0.002;
 
         }
@@ -150,19 +150,13 @@ public final class Constants {
                                 .getPIDController();
 
                 public static double left_kP = 0.1;
-                public static double left_kI = 1e-4;
-                public static double left_kD = 1;
-                public static double left_kIz = 0;
-                public static double left_kFF = 0;
-                public static double left_kMaxOutput = 1;
-                public static double left_kMinOutput = -1;
+                public static double left_kI = 0;
+                public static double left_kD = 0;
+               
 
                 public static double right_kP = 0.1;
-                public static double right_kI = 1e-4;
-                public static double right_kD = 1;
-                public static double right_kIz = 0;
-                public static double right_kFF = 0;
-                public static double right_kMaxOutput = 1;
-                public static double right_kMinOutput = -1;
+                public static double right_kI = 0;
+                public static double right_kD = 0;
+            
         }
 }
