@@ -4,11 +4,11 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ConeOutSpeedy extends CommandBase {
+public class IntakeConeSlow extends CommandBase {
     private final Intake m_intake;
 
     // constructor
-    public ConeOutSpeedy(Intake intake) {
+    public IntakeConeSlow(Intake intake) {
         this.m_intake = intake;
 
         addRequirements(m_intake);
@@ -17,7 +17,7 @@ public class ConeOutSpeedy extends CommandBase {
     //run whenever command is called
     @Override
     public void execute() {
-        m_intake.drive(Constants.intake.CONE_SPEEDY);
+        m_intake.drive(Constants.intake.CONE_SLOW);
     }
 
     //stop motor when finished

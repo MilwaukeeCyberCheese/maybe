@@ -123,8 +123,8 @@ public final class Constants {
                 public static final double CONE_SPEED = 0.7;
                 public static final double CUBE_SPEED = -0.5;
 
-                public static final double CONE_SPEEDY = 1.5;
-                public static final double CUBE_SPEEDY = -1;
+                public static final double CONE_SLOW = 0.3;
+                public static final double CUBE_SLOW = -0.2;
 
                 public static final Value intakeDown = Value.kForward;
                 public static final Value intakeUp = Value.kReverse;

@@ -18,8 +18,8 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutoBalanceDrive;
 import frc.robot.commands.AutoBalancer;
 import frc.robot.commands.AutoCommand;
-import frc.robot.commands.ConeOutSpeedy;
-import frc.robot.commands.CubeOutSpeedy;
+import frc.robot.commands.IntakeCubeSlow;
+import frc.robot.commands.IntakeConeSlow;
 import frc.robot.other.FilteredController;
 import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Drivetrain;
@@ -142,9 +142,6 @@ public class RobotContainer {
     leftBumperOne.onTrue(new First(m_shifter));
     rightBumperOne.onTrue(new Second(m_shifter));
 
-    leftTriggerTwo.whileTrue(new CubeOutSpeedy(m_intake));
-    rightTriggerTwo.whileTrue(new ConeOutSpeedy(m_intake));
-
     rightTriggerOne.onTrue(new IntakeUp(m_intake));
 
     startButtonTwo.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
@@ -156,6 +153,9 @@ public class RobotContainer {
 
     leftBumperTwo.whileTrue(new IntakeCubeCommand(m_intake));
     rightBumperTwo.whileTrue(new IntakeConeCommand(m_intake));
+
+    leftTriggerTwo.whileTrue(new IntakeCubeSlow(m_intake));
+    rightTriggerTwo.whileTrue(new IntakeConeSlow(m_intake));
 
   }
 
