@@ -26,7 +26,7 @@ public final class Constants {
                 public static final double IMBALANCED_THRESHOLD_DEGREES = 2.5;
                 public static final double BALANCED_THRESHOLD_DEGREES = 1.0;
                 public static final double BALANCE_SPEED_MOD = 1;
-                public static final double P = 0.043;
+                public static final double P = 0.021;
                 public static final double I = 0.000;
                 public static final double D = 0.002;
 
@@ -69,13 +69,13 @@ public final class Constants {
                  * Constants.controllers.leftFrontSpark
                  */
                 public static final CANSparkMax leftFrontSpark = new CANSparkMax(DRIVETRAIN_LEFT_FRONT_SPARK,
-                                MotorType.kBrushed);
+                                MotorType.kBrushless);
                 public static final CANSparkMax leftRearSpark = new CANSparkMax(DRIVETRAIN_LEFT_REAR_SPARK,
-                                MotorType.kBrushed);
+                                MotorType.kBrushless);
                 public static final CANSparkMax rightFrontSpark = new CANSparkMax(DRIVETRAIN_RIGHT_FRONT_SPARK,
-                                MotorType.kBrushed);
+                                MotorType.kBrushless);
                 public static final CANSparkMax rightRearSpark = new CANSparkMax(DRIVETRAIN_RIGHT_REAR_SPARK,
-                                MotorType.kBrushed);
+                                MotorType.kBrushless);
 
                 public static final CANSparkMax intakeSpark = new CANSparkMax(INTAKE_SPARK,
                                 MotorType.kBrushless);
@@ -83,7 +83,6 @@ public final class Constants {
                 public static final CANSparkMax leftLiftSpark = new CANSparkMax(LEFT_LIFT_SPARK,
                                 MotorType.kBrushless);
                 public static final CANSparkMax rightLiftSpark = new CANSparkMax(RIGHT_LIFT_SPARK,
-
                                 MotorType.kBrushless);
         }
 
@@ -152,11 +151,10 @@ public final class Constants {
                 public static double left_kP = 0.1;
                 public static double left_kI = 0;
                 public static double left_kD = 0;
-               
 
                 public static double right_kP = 0.1;
                 public static double right_kI = 0;
                 public static double right_kD = 0;
-            
+
         }
 }
