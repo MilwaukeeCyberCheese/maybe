@@ -1,21 +1,15 @@
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
-
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class IntakeSpeedy extends CommandBase {
+public class ConeOutSpeedy extends CommandBase {
     private final Intake m_intake;
-    private final Double forward;
-    private final Double reverse;
 
     // constructor
-    public IntakeSpeedy(DoubleSupplier forward, DoubleSupplier reverse, Intake intake) {
+    public ConeOutSpeedy(Intake intake) {
         this.m_intake = intake;
-        this.forward = forward.getAsDouble();
-        this.reverse = reverse.getAsDouble();
 
         addRequirements(m_intake);
     }
@@ -23,7 +17,7 @@ public class IntakeSpeedy extends CommandBase {
     //run whenever command is called
     @Override
     public void execute() {
-        m_intake.drive(forward - reverse);
+        m_intake.drive(Constants.intake.CONE_SPEEDY);
     }
 
     //stop motor when finished

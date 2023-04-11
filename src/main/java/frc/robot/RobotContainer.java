@@ -10,7 +10,6 @@ import frc.robot.commands.First;
 import frc.robot.commands.IntakeConeCommand;
 import frc.robot.commands.IntakeCubeCommand;
 import frc.robot.commands.IntakeDown;
-import frc.robot.commands.IntakeSpeedy;
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.RecordAuto;
 import frc.robot.commands.Second;
@@ -19,6 +18,8 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutoBalanceDrive;
 import frc.robot.commands.AutoBalancer;
 import frc.robot.commands.AutoCommand;
+import frc.robot.commands.ConeOutSpeedy;
+import frc.robot.commands.CubeOutSpeedy;
 import frc.robot.other.FilteredController;
 import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Drivetrain;
@@ -87,10 +88,6 @@ public class RobotContainer {
             () -> m_controller.getBackButton(),
             m_drivetrain));
 
-    m_intake.setDefaultCommand(
-        new IntakeSpeedy(() -> m_controllerTwo.getLeftTriggerAxis(), () -> m_controllerTwo.getRightTriggerAxis(),
-            m_intake));
-
     m_leftElevator.setDefaultCommand(
         new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
             m_rightElevator, () -> !m_controllerTwo.getBackButton()));
@@ -134,17 +131,23 @@ public class RobotContainer {
     Trigger leftBumperTwo = new JoystickButton(m_controllerTwo, 5);
     Trigger rightBumperTwo = new JoystickButton(m_controllerTwo, 6);
     Trigger startButtonTwo = new JoystickButton(m_controllerTwo, 8);
- 
+
     Trigger rightTriggerOne = new Trigger(() -> m_filteredController.getRightTriggerActive());
+
+    Trigger leftTriggerTwo = new Trigger(() -> m_filteredControllerTwo.getLeftTriggerActive());
+    Trigger rightTriggerTwo = new Trigger(() -> m_filteredControllerTwo.getRightTriggerActive());
+
     Trigger rightStickButtonOne = new JoystickButton(m_controller, 10);
 
     leftBumperOne.onTrue(new First(m_shifter));
     rightBumperOne.onTrue(new Second(m_shifter));
 
+    leftTriggerTwo.whileTrue(new CubeOutSpeedy(m_intake));
+    rightTriggerTwo.whileTrue(new ConeOutSpeedy(m_intake));
+
     rightTriggerOne.onTrue(new IntakeUp(m_intake));
 
     startButtonTwo.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
-
 
     rightStickButtonOne.onTrue(new AutoBalanceDrive(m_drivetrain, m_shifter));
 
