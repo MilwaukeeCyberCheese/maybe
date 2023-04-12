@@ -104,7 +104,7 @@ public final class Constants {
                 public static final double TURN_SPEED = 0.9;
 
                 public static final double SLOW_DRIVE_SPEED = 0.5;
-                public static final double SLOW_TURN_SPEED = 0.5;
+                public static final double SLOW_TURN_SPEED = 0.7;
                 public static final double TURBO_DRIVE_SPEED = 1.4;
                 public static final double TURBO_TURN_SPEED = 0.7;
 
