@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Constants.balance;
 import frc.robot.commands.AutoBalancer;
 
 public class AutoSubsystem extends SubsystemBase {
@@ -24,7 +25,7 @@ public class AutoSubsystem extends SubsystemBase {
 
         if (auto == 1) {
             if (DriverStation.isAutonomousEnabled()
-                    && stopwatchCounter < (AutoSubsystemValues.gear.gear.size() - 2)) {
+                    && stopwatchCounter < (AutoSubsystemValues.gear.gear.size() - 2) && !balance) {
                 stopwatchCounter++;
                 System.out.println(stopwatchCounter);
                 // gear
@@ -71,6 +72,10 @@ public class AutoSubsystem extends SubsystemBase {
                 Constants.controllers.rightFrontSpark.set(frontRight);
                 Constants.controllers.leftRearSpark.set(backLeft);
                 Constants.controllers.rightRearSpark.set(backRight);
+
+                if(Math.abs(Constants.balance.gyro.getRoll()) > 12){
+                    balance = true;
+                }
             } else if (DriverStation.isAutonomousEnabled()
                     && stopwatchCounter >= AutoSubsystemValues.gear.gear.size() - 1) {
                 balance = true;

@@ -54,7 +54,7 @@ public class AutoBalanceDrive extends CommandBase {
     double pitchAngleDegrees = Constants.balance.gyro.getRoll();
 
     if (!autoBalanceStarted) {
-      m_drivetrain.drive(-0.55, 0, true);
+      m_drivetrain.drive(-0.35, 0, true);
       if (pitchAngleDegrees >= 12) {
         autoBalanceStarted = true;
       }

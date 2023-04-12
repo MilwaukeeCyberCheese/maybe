@@ -26,7 +26,7 @@ public final class Constants {
                 public static final double IMBALANCED_THRESHOLD_DEGREES = 2.5;
                 public static final double BALANCED_THRESHOLD_DEGREES = 1.0;
                 public static final double BALANCE_SPEED_MOD = 1;
-                public static final double P = 0.021;
+                public static final double P = 0.023;
                 public static final double I = 0.000;
                 public static final double D = 0.002;
 
@@ -107,10 +107,10 @@ public final class Constants {
                 public static final double TURBO_DRIVE_SPEED = 1.4;
                 public static final double TURBO_TURN_SPEED = 0.7;
 
-                public static final boolean LEFT_FRONT_INVERTED = false;
-                public static final boolean LEFT_REAR_INVERTED = false;
-                public static final boolean RIGHT_FRONT_INVERTED = true;
-                public static final boolean RIGHT_REAR_INVERTED = true;
+                public static final boolean LEFT_FRONT_INVERTED = true;
+                public static final boolean LEFT_REAR_INVERTED = true;
+                public static final boolean RIGHT_FRONT_INVERTED = false;
+                public static final boolean RIGHT_REAR_INVERTED = false;
 
                 public static final boolean SECOND_GEAR = false;
                 public static final boolean FIRST_GEAR = true;

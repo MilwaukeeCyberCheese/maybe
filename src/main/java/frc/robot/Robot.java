@@ -144,6 +144,8 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     CommandScheduler.getInstance().run();
 
+    
+
     // if(Constants.pneumatics.shifterSolenoid.get() != Constants.drive.FIRST_GEAR){
     // Constants.pneumatics.shifterSolenoid.set(Constants.drive.FIRST_GEAR);
     // }
