@@ -137,6 +137,7 @@ public class RobotContainer {
     Trigger leftTriggerTwo = new Trigger(() -> m_filteredControllerTwo.getLeftTriggerActive());
     Trigger rightTriggerTwo = new Trigger(() -> m_filteredControllerTwo.getRightTriggerActive());
 
+    Trigger leftStickButtonOne = new JoystickButton(m_controller, 9);
     Trigger rightStickButtonOne = new JoystickButton(m_controller, 10);
 
     leftBumperOne.onTrue(new First(m_shifter));
@@ -146,6 +147,7 @@ public class RobotContainer {
 
     startButtonTwo.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
 
+    leftStickButtonOne.onTrue(new AutoBalancer(m_drivetrain, m_shifter));
     rightStickButtonOne.onTrue(new AutoBalanceDrive(m_drivetrain, m_shifter));
 
     yButtonTwo.whileTrue(new IntakeUp(m_intake));
