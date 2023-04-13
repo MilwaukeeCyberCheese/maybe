@@ -21,7 +21,9 @@ public class Drivetrain extends SubsystemBase {
   private double previousRotation = 0;
   private boolean brakeMode = false;
   private Stopwatch brakingTimer = new Stopwatch();
-  private SlewRateLimiter throttleLimiter = new SlewRateLimiter(Constants.drive.ACCELERATION_LIMITER);
+  
+
+
 
   /**
    * The Drivetrain subsystem incorporates the sensors and actuators attached to
@@ -82,7 +84,7 @@ public class Drivetrain extends SubsystemBase {
     this.rotation = rotation;
     this.throttle = throttle;
     this.brakeMode = brakeMode;
-    Constants.drive.m_drive.arcadeDrive(throttleLimiter.calculate(throttle), rotation);
+    Constants.drive.m_drive.arcadeDrive(throttle, rotation);
   }
 
   /** Call log method every loop. */

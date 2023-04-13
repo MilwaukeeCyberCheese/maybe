@@ -42,4 +42,5 @@ public class Intake extends SubsystemBase {
     public void log() {
         SmartDashboard.putNumber("IntakeSpeed", speed);
     }
+
 }

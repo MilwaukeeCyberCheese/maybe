@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class RightElevator extends SubsystemBase {
   public double speed;
   public Boolean limited = true;
-  private SlewRateLimiter speedLimiter = new SlewRateLimiter(Constants.lift.SPEED_LIMITER);
+  // private SlewRateLimiter speedLimiter = new SlewRateLimiter(Constants.lift.SPEED_LIMITER);
 
   /** Create a new elevator subsystem. */
   public RightElevator() {
@@ -48,12 +48,12 @@ public class RightElevator extends SubsystemBase {
         Constants.controllers.rightLiftSpark.set(0);
         this.speed = 0;
       } else {
-        Constants.controllers.rightLiftSpark.set(speedLimiter.calculate(speed));
-        this.speed = speedLimiter.calculate(speed);
+        Constants.controllers.rightLiftSpark.set(speed);
+        // this.speed = speedLimiter.calculate(speed);
       }
     } else {
-      Constants.controllers.rightLiftSpark.set(speedLimiter.calculate(speed));
-      this.speed = speedLimiter.calculate(speed);
+      Constants.controllers.rightLiftSpark.set(speed);
+      // this.speed = speedLimiter.calculate(speed);
     }
   }
 

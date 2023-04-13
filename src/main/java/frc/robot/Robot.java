@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,9 +16,11 @@ import frc.robot.commands.Second;
 import frc.robot.commands.ZeroSlides;
 import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.AutoSubsystem;
+import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LeftElevator;
 import frc.robot.subsystems.RightElevator;
+import frc.robot.commands.AutoBalanceDrive;
 import frc.robot.commands.AutoCommand;
 
 import frc.robot.subsystems.Shifter;
@@ -32,8 +35,9 @@ import frc.robot.subsystems.Shifter;
  * project.
  */
 public class Robot extends TimedRobot {
-  SendableChooser<Integer> autoChooser = new SendableChooser<>();
+  public static SendableChooser<Integer> autoChooser = new SendableChooser<>();
 
+  private boolean balanceStarted = false;
   private AutoCommand m_autoCommand;
 
   private RobotContainer m_robotContainer;
@@ -42,6 +46,7 @@ public class Robot extends TimedRobot {
 
   public static final Stopwatch timer = new Stopwatch();
 
+  private final Drivetrain m_drivetrain = new Drivetrain();
   private final Intake m_intake = new Intake();
   private final Shifter m_shifter = new Shifter();
 
@@ -64,14 +69,14 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    //calibrate gyro
+    // calibrate gyro
     Constants.balance.gyro.calibrate();
 
     CameraServer.startAutomaticCapture();
     SmartDashboard.putData("Autonomous", autoChooser);
 
     // SmartDashboard.putData(CommandScheduler.getInstance());
-    //SmartDashboard.putData("Autonomous Command", m_autoCommand);
+    // SmartDashboard.putData("Autonomous Command", m_autoCommand);
 
     new IntakeUp(m_intake);
 
@@ -96,8 +101,11 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods. This must be called from the
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
+    
+      CommandScheduler.getInstance().run();
+    
 
-    CommandScheduler.getInstance().run();
+    // System.out.println(m_autoSubsystem.balance);
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -129,23 +137,20 @@ public class Robot extends TimedRobot {
     // timer.start();
     // Constants.pneumatics.intakeSolenoid.set(Constants.intake.intakeUp);
 
-   
-
     // // schedule the autonomous command (example)
     if (m_autoCommand != null) {
       m_autoCommand.schedule();
     }
-    
-    m_autoCommand.setAuto(autoMode);
+
+    m_autoCommand.setAuto(2);
   }
 
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    CommandScheduler.getInstance().run();
-
     
 
+   
     // if(Constants.pneumatics.shifterSolenoid.get() != Constants.drive.FIRST_GEAR){
     // Constants.pneumatics.shifterSolenoid.set(Constants.drive.FIRST_GEAR);
     // }
