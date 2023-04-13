@@ -96,24 +96,24 @@ public class Drivetrain extends SubsystemBase {
           Constants.controllers.rightRearSpark.get());
     }
 
-    if (throttle == 0 && rotation == 0 && previousRotation != 0 &&
-    previousThrottle != 0) {
-    brakingTimer.stop();
-    brakingTimer.reset();
-    brakingTimer.start();
-    }
+    // if (throttle == 0 && rotation == 0 && previousRotation != 0 &&
+    // previousThrottle != 0) {
+    // brakingTimer.stop();
+    // brakingTimer.reset();
+    // brakingTimer.start();
+    // }
 
-    if((throttle == 0 && rotation == 0 && brakingTimer.getTime() >= 300) ||
-    brakeMode){
-    Constants.controllers.leftFrontSpark.setIdleMode(IdleMode.kBrake);
-    Constants.controllers.leftRearSpark.setIdleMode(IdleMode.kBrake);
-    Constants.controllers.rightFrontSpark.setIdleMode(IdleMode.kBrake);
-    Constants.controllers.rightRearSpark.setIdleMode(IdleMode.kBrake);
-    }else{
-    Constants.controllers.leftFrontSpark.setIdleMode(IdleMode.kCoast);
-    Constants.controllers.leftRearSpark.setIdleMode(IdleMode.kCoast);
-    Constants.controllers.rightFrontSpark.setIdleMode(IdleMode.kCoast);
-    Constants.controllers.rightRearSpark.setIdleMode(IdleMode.kCoast);
-    }
+    // if((throttle == 0 && rotation == 0 && brakingTimer.getTime() >= 300) ||
+    // brakeMode){
+    // Constants.controllers.leftFrontSpark.setIdleMode(IdleMode.kBrake);
+    // Constants.controllers.leftRearSpark.setIdleMode(IdleMode.kBrake);
+    // Constants.controllers.rightFrontSpark.setIdleMode(IdleMode.kBrake);
+    // Constants.controllers.rightRearSpark.setIdleMode(IdleMode.kBrake);
+    // }else{
+    // Constants.controllers.leftFrontSpark.setIdleMode(IdleMode.kCoast);
+    // Constants.controllers.leftRearSpark.setIdleMode(IdleMode.kCoast);
+    // Constants.controllers.rightFrontSpark.setIdleMode(IdleMode.kCoast);
+    // Constants.controllers.rightRearSpark.setIdleMode(IdleMode.kCoast);
+    // }
   }
 }
