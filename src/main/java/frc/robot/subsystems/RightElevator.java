@@ -6,8 +6,7 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-
-
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -20,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class RightElevator extends SubsystemBase {
   public double speed;
   public Boolean limited = true;
+  private SlewRateLimiter speedLimiter = new SlewRateLimiter(Constants.lift.SPEED_LIMITER);
 
   /** Create a new elevator subsystem. */
   public RightElevator() {
@@ -34,7 +34,6 @@ public class RightElevator extends SubsystemBase {
   }
 
   public void setSpeed(double speed, Boolean limited) {
-    this.speed = speed;
     this.limited = limited;
 
     if (limited) {
@@ -49,10 +48,12 @@ public class RightElevator extends SubsystemBase {
         Constants.controllers.rightLiftSpark.set(0);
         this.speed = 0;
       } else {
-        Constants.controllers.rightLiftSpark.set(speed);
+        Constants.controllers.rightLiftSpark.set(speedLimiter.calculate(speed));
+        this.speed = speedLimiter.calculate(speed);
       }
     } else {
-      Constants.controllers.rightLiftSpark.set(speed);
+      Constants.controllers.rightLiftSpark.set(speedLimiter.calculate(speed));
+      this.speed = speedLimiter.calculate(speed);
     }
   }
 
