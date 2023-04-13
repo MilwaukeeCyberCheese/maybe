@@ -87,6 +87,7 @@ public final class Constants {
         }
 
         public static final class drive {
+
                 public static final MotorControllerGroup m_leftMotorController = new MotorControllerGroup(
                                 controllers.leftFrontSpark, controllers.leftRearSpark);
                 public static final MotorControllerGroup m_rightMotorController = new MotorControllerGroup(
@@ -98,6 +99,8 @@ public final class Constants {
                 public static final IdleMode IDLE_MODE = IdleMode.kBrake;
 
                 public static final int CURRENT_LIMIT = 60;
+
+                public static final double ACCELERATION_LIMITER = 0.7;
 
                 public static final double DRIVE_SPEED = 1.0;
                 public static final double TURN_SPEED = 0.9;
