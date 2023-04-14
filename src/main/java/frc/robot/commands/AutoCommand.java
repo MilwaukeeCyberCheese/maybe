@@ -1,6 +1,5 @@
 package frc.robot.commands;
 
-import java.lang.constant.Constable;
 import java.util.function.IntSupplier;
 
 import com.fasterxml.jackson.databind.introspect.ConcreteBeanPropertyBase;
@@ -40,13 +39,6 @@ public class AutoCommand extends CommandBase {
         this.m_shifter = shifter;
         this.m_autoMode = autoMode;
         addRequirements(m_drivetrain, m_intake, m_leftElevator, m_rightElevator, m_shifter);
-    }
-
-    public void setAuto(int auto) {
-
-        m_autoSubsystem.setAuto(auto);
-
-        // this.auto = auto;
     }
 
     @Override
