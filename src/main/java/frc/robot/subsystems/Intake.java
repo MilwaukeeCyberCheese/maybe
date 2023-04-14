@@ -39,6 +39,10 @@ public class Intake extends SubsystemBase {
 
     }
 
+    public Value getPosition(){
+        return Constants.pneumatics.intakeSolenoid.get();
+    }
+
     public void log() {
         SmartDashboard.putNumber("IntakeSpeed", speed);
     }

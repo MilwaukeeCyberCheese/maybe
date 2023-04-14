@@ -90,11 +90,11 @@ public class RobotContainer {
 
     m_leftElevator.setDefaultCommand(
         new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
-            m_rightElevator, () -> !m_controllerTwo.getBackButton()));
+            m_rightElevator, m_intake, () -> !m_controllerTwo.getBackButton()));
 
     m_rightElevator.setDefaultCommand(
         new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
-            m_rightElevator, () -> !m_controllerTwo.getBackButton()));
+            m_rightElevator, m_intake, () -> !m_controllerTwo.getBackButton()));
 
     m_autoSubsystem.setDefaultCommand(
         new RecordAuto(m_autoSubsystem, () -> m_controllerTwo.getXButton(), () -> m_controllerTwo.getBButton()));
