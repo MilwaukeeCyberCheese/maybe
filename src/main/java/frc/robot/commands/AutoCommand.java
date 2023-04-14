@@ -50,6 +50,7 @@ public class AutoCommand extends CommandBase {
         timer.stop();
         timer.reset();
         timer.start();
+        balanceStarted = false;
         stopwatchCounter = -1;
     }
 
@@ -90,7 +91,6 @@ public class AutoCommand extends CommandBase {
 
             Constants.pneumatics.shifterSolenoid.set(Constants.drive.FIRST_GEAR);
             if (timer.getTime() <= 2000) {
-                balanceStarted = false;
                 System.out.println("Out");
                 m_intake.drive(Constants.intake.CONE_SPEED);
             } else {
