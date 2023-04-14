@@ -94,8 +94,8 @@ public class AutoCommand extends CommandBase {
                 double pitchAngleDegrees = Constants.balance.gyro.getRoll();
 
                 if (!balanceStarted) {
-                    m_drivetrain.drive(-0.45, 0, true);
-                    if (pitchAngleDegrees >= 13) {
+                    m_drivetrain.drive(Constants.balance.DRIVE_SPEED, 0, true);
+                    if (pitchAngleDegrees >= Constants.balance.START_BALANCE_ANGLE) {
                         balanceStarted = true;
                     }
                 } else {
