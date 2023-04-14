@@ -30,6 +30,10 @@ public final class Constants {
                 public static final double I = 0.000;
                 public static final double D = 0.002;
 
+                public static final double DRIVE_SPEED = -0.45;
+
+                public static final double START_BALANCE_ANGLE = 13;
+
         }
 
         public static final class sensors {
