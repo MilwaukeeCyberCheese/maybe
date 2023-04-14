@@ -42,8 +42,10 @@ public class ElevatorPID extends CommandBase {
   public void execute() {
 
     if (m_PIDActive.getAsBoolean()) {
-      m_elevatorSubsystem.setPosition(m_elevatorSubsystem.position + m_positionChange.getAsDouble(),
+      m_elevatorSubsystem.setPosition(m_elevatorSubsystem.position + m_positionChange.getAsDouble() * Constants.lift.LIFT_SPEED,
           m_PIDActive.getAsBoolean());
+    } else{
+      m_elevatorSubsystem.setSpeed(m_positionChange.getAsDouble() * Constants.lift.LIFT_SPEED, m_PIDActive.getAsBoolean());
     }
   }
 
