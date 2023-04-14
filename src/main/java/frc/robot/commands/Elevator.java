@@ -34,7 +34,7 @@ public class Elevator extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void execute() {
-    if (RobotContainer.m_intake.position == Constants.intake.intakeDown) {
+    if (RobotContainer.m_intake.position == Constants.intake.intakeDown || (30 < Constants.sensors.leftLift.getPosition() && 30 < Constants.sensors.rightLift.getPosition() && !m_limited.getAsBoolean())) {
       m_leftElevator.setSpeed(m_position.getAsDouble() * Constants.lift.LIFT_SPEED, m_limited.getAsBoolean());
       m_rightElevator.setSpeed(m_position.getAsDouble() * Constants.lift.LIFT_SPEED, m_limited.getAsBoolean());
     }
