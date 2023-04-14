@@ -38,11 +38,14 @@ public class ElevatorPID extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void execute() {
-
-    if (m_PIDActive.getAsBoolean()) {
-      m_elevatorSubsystem.setPosition(m_elevatorSubsystem.position + m_positionChange.getAsDouble() * Constants.lift.LIFT_SPEED);
-    } else{
-      m_elevatorSubsystem.setSpeed(m_positionChange.getAsDouble() * Constants.lift.LIFT_SPEED);
+    if (RobotContainer.m_intake.position == Constants.intake.intakeDown
+        || (Constants.lift.MAX_INTAKE < m_elevatorSubsystem.position && m_PIDActive.getAsBoolean())) {
+      if (m_PIDActive.getAsBoolean()) {
+        m_elevatorSubsystem
+            .setPosition(m_elevatorSubsystem.position + m_positionChange.getAsDouble() * Constants.lift.LIFT_SPEED);
+      } else {
+        m_elevatorSubsystem.setSpeed(m_positionChange.getAsDouble() * Constants.lift.LIFT_SPEED);
+      }
     }
   }
 
