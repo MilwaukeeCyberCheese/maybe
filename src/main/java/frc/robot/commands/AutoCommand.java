@@ -5,11 +5,13 @@ import java.util.function.IntSupplier;
 import com.fasterxml.jackson.databind.introspect.ConcreteBeanPropertyBase;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.Constants.lift;
 import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.AutoSubsystem;
-
+import frc.robot.subsystems.AutoSubsystemValues;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LeftElevator;
@@ -26,10 +28,12 @@ public class AutoCommand extends CommandBase {
     private final IntSupplier m_autoMode;
     private final Stopwatch timer = new Stopwatch();
     private boolean balanceStarted = false;
+    private int stopwatchCounter = -1;
     private PIDController balancePid = new PIDController(Constants.balance.P, Constants.balance.I, Constants.balance.D);
 
     // constructor
-    public AutoCommand(AutoSubsystem autoSubsystem, Intake intake, Drivetrain drivetrain, LeftElevator leftElevator,
+    public AutoCommand(AutoSubsystem autoSubsystem, Intake intake, Drivetrain drivetrain,
+            LeftElevator leftElevator,
             RightElevator rightElevator, Shifter shifter, IntSupplier autoMode) {
         this.m_autoSubsystem = autoSubsystem;
         this.m_intake = intake;
@@ -46,12 +50,43 @@ public class AutoCommand extends CommandBase {
         timer.stop();
         timer.reset();
         timer.start();
+        stopwatchCounter = -1;
     }
 
     @Override
     public void execute() {
+        if (m_autoMode.getAsInt() == 1) {
+            if (stopwatchCounter < AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
+                stopwatchCounter++;
 
-        if (m_autoMode.getAsInt() == 2) {
+                double frontLeft = AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(stopwatchCounter);
+                double frontRight = AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(stopwatchCounter);
+                double backLeft = AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(stopwatchCounter);
+                double backRight = AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(stopwatchCounter);
+
+                m_drivetrain.setWheelSpeeds(frontLeft, frontRight, backLeft, backRight);
+
+                double intakeSpeed = AutoSubsystemValues.intaking.intaking.get(stopwatchCounter);
+
+                m_intake.drive(intakeSpeed);
+
+                double leftLift = AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.get(stopwatchCounter);
+                double rightLift = AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.get(stopwatchCounter);
+
+                m_leftElevator.setSpeed(intakeSpeed, true);
+                m_rightElevator.setSpeed(rightLift, true);
+
+                Value intakePos = AutoSubsystemValues.intakePos.intakePos.get(stopwatchCounter);
+
+                m_intake.setPosition(intakePos);
+
+                boolean gear = AutoSubsystemValues.gear.gear.get(stopwatchCounter);
+
+                m_shifter.setGear(gear);
+            } else {
+                end(false);
+            }
+        } else if (m_autoMode.getAsInt() == 2) {
 
             Constants.pneumatics.shifterSolenoid.set(Constants.drive.FIRST_GEAR);
             if (timer.getTime() <= 2000) {
@@ -59,7 +94,7 @@ public class AutoCommand extends CommandBase {
                 System.out.println("Out");
                 m_intake.drive(Constants.intake.CONE_SPEED);
             } else {
-                
+
                 m_intake.drive(0);
                 double pitchAngleDegrees = Constants.balance.gyro.getRoll();
 
@@ -89,7 +124,10 @@ public class AutoCommand extends CommandBase {
      */
     @Override
     public void end(boolean interrupted) {
-
+        m_intake.drive(0);
+        m_drivetrain.drive(0, 0, true);
+        m_leftElevator.setSpeed(0, true);
+        m_rightElevator.setSpeed(0, true);
     }
 
     @Override
