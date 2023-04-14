@@ -26,7 +26,7 @@ public final class Constants {
                 public static final double IMBALANCED_THRESHOLD_DEGREES = 2.5;
                 public static final double BALANCED_THRESHOLD_DEGREES = 1.0;
                 public static final double BALANCE_SPEED_MOD = 1;
-                public static final double P = 0.025;
+                public static final double P = 0.023;
                 public static final double I = 0.000;
                 public static final double D = 0.002;
 
@@ -105,7 +105,7 @@ public final class Constants {
                 public static final int CURRENT_LIMIT = 60;
 
                 public static final double THROTTLE_LIMITER = 0.8;
-                public static final double ROTATION_LIMITER = 0.8;
+                public static final double ROTATION_LIMITER = 0.7;
 
                 public static final double DRIVE_SPEED = 0.8;
                 public static final double TURN_SPEED = 0.9;
@@ -140,7 +140,7 @@ public final class Constants {
 
         public static final class lift {
                 public static final double MIN_INTAKE = 0;
-                public static final double MAX_INTAKE = 30;
+                public static final double MAX_INTAKE = 25;
 
                 public static final boolean LEFT_INVERTED = true;
                 public static final boolean RIGHT_INVERTED = false;
@@ -158,9 +158,9 @@ public final class Constants {
                 public static final double POSITION_THREE = 108;
 
                 public static final float LEFT_MIN_POSITION = 0;
-                public static final float LEFT_MAX_POSITION = 110;
+                public static final float LEFT_MAX_POSITION = 108;
                 public static final float RIGHT_MIN_POSITION = 0;
-                public static final float RIGHT_MAX_POSITION = 108;
+                public static final float RIGHT_MAX_POSITION = 106;
 
                 public static final double MIN_POSITION = 0;
                 public static final double MAX_POSITION = 109;

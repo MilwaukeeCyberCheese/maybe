@@ -47,6 +47,9 @@ public class AutoCommand extends CommandBase {
 
     @Override
     public void initialize() {
+        balancePid.setSetpoint(0);
+        balancePid.setTolerance(Constants.balance.BALANCED_THRESHOLD_DEGREES);
+        
         timer.stop();
         timer.reset();
         timer.start();

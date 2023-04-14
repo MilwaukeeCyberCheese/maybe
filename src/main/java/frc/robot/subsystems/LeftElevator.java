@@ -57,7 +57,7 @@ public class LeftElevator extends SubsystemBase {
       speedActual = speed;
     }
 
-    Constants.controllers.leftFrontSpark.set(speedActual);
+    Constants.controllers.leftLiftSpark.set(speedActual);
 
   }
 
