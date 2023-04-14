@@ -18,8 +18,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 public class RightElevator extends SubsystemBase {
   public double speed;
+  private double speedActual;
+  private double speedPrevious;
   public Boolean limited = true;
-  // private SlewRateLimiter speedLimiter = new SlewRateLimiter(Constants.lift.SPEED_LIMITER);
+  private SlewRateLimiter speedLimiter = new SlewRateLimiter(Constants.lift.SPEED_LIMITER);
 
   /** Create a new elevator subsystem. */
   public RightElevator() {
@@ -40,21 +42,25 @@ public class RightElevator extends SubsystemBase {
       if ((Constants.sensors.leftLift.getPosition() >= Constants.lift.LEFT_MAX_POSITION
           || Constants.sensors.rightLift.getPosition() >= Constants.lift.RIGHT_MAX_POSITION)
           && speed > 0) {
-        Constants.controllers.rightLiftSpark.set(0);
         this.speed = 0;
+        speed = 0;
       } else if ((Constants.sensors.leftLift.getPosition() <= Constants.lift.LEFT_MIN_POSITION
           || Constants.sensors.rightLift.getPosition() <= Constants.lift.RIGHT_MIN_POSITION)
           && speed < 0) {
-        Constants.controllers.rightLiftSpark.set(0);
         this.speed = 0;
-      } else {
-        Constants.controllers.rightLiftSpark.set(speed);
-        // this.speed = speedLimiter.calculate(speed);
+        speed = 0;
       }
-    } else {
-      Constants.controllers.rightLiftSpark.set(speed);
-      // this.speed = speedLimiter.calculate(speed);
     }
+
+    if (Math.abs(speed) > Math.abs(speedPrevious)) {
+      speedActual = speedLimiter.calculate(speed);
+    } else {
+      speedActual = speed;
+    }
+
+    Constants.controllers.rightLiftSpark.set(speedActual);
+    // this.speed = speedLimiter.calculate(speed);
+
   }
 
   public void zero() {
@@ -80,8 +86,10 @@ public class RightElevator extends SubsystemBase {
   public void periodic() {
     log();
 
-    if(RobotContainer.readAuto){
+    if (RobotContainer.readAuto) {
       RobotContainer.m_autoSubsystem.addRightLiftSpeed(Constants.controllers.rightLiftSpark.get());
     }
+
+    speedPrevious = speed;
   }
 }
