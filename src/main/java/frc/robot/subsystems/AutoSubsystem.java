@@ -13,7 +13,6 @@ public class AutoSubsystem extends SubsystemBase {
     // side to love handles is 10, ass to line is 23 inches
 
     private int auto;
-    private int stopwatchCounter = -1;
     public Boolean balance = false;
 
     /**
@@ -109,11 +108,6 @@ public class AutoSubsystem extends SubsystemBase {
         // }
     }
 
-    public void setAuto(int auto) {
-        this.auto = auto;
-        stopwatchCounter = -1;
-    }
-
     public void addDriveSpeeds(double frontLeft, double frontRight, double backLeft, double backRight) {
         AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.add(frontLeft);
         AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.add(frontRight);
@@ -133,17 +127,12 @@ public class AutoSubsystem extends SubsystemBase {
         AutoSubsystemValues.intaking.intaking.add(intake);
     }
 
-    public void addLeftLiftSpeed(double leftLiftSpeed) {
-        AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.add(leftLiftSpeed);
-    }
-
-    public void addRightLiftSpeed(double rightLiftSpeed) {
-        AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.add(rightLiftSpeed);
+    public void addLiftPos(double liftPos) {
+        AutoSubsystemValues.liftPos.liftPos.add(liftPos);
     }
 
     public void clearShit() {
-        AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.clear();
-        AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.clear();
+        AutoSubsystemValues.liftPos.liftPos.clear();
         AutoSubsystemValues.intaking.intaking.clear();
         AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.clear();
         AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.clear();
@@ -151,11 +140,12 @@ public class AutoSubsystem extends SubsystemBase {
         AutoSubsystemValues.backRightSpeeds.backRightSpeeds.clear();
         AutoSubsystemValues.intakePos.intakePos.clear();
         AutoSubsystemValues.gear.gear.clear();
-        stopwatchCounter = -1;
     }
 
     public void printSpeeds() {
         String toPrint = "";
+//header and whatnot
+toPrint += "package frc.robot.subsystems; import java.util.Arrays; import java.util.LinkedList; import edu.wpi.first.wpilibj.DoubleSolenoid.Value; import java.util.List; import edu.wpi.first.wpilibj.DoubleSolenoid.Value; public final class AutoSubsystemValues{ public static class frontLeftSpeeds {";
 
         // append the frontLeft speeds
         toPrint += "\n\npublic static class frontLeftSpeeds {\nstatic List<Double> frontLeftSpeeds = new LinkedList<Double>(Arrays.asList(";
@@ -230,24 +220,12 @@ public class AutoSubsystem extends SubsystemBase {
         toPrint += "));}\n";
 
         // append the left lift speeds
-        toPrint += "\n\npublic static class leftLiftSpeeds {\nstatic List<Double> leftLiftSpeeds = new LinkedList<Double>(Arrays.asList(";
-        for (int i = 0; i < AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.size(); i++) {
-            double lift = AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.get(i);
+        toPrint += "\n\npublic static class liftPos {\nstatic List<Double> liftPos = new LinkedList<Double>(Arrays.asList(";
+        for (int i = 0; i < AutoSubsystemValues.liftPos.liftPos.size(); i++) {
+            double lift = AutoSubsystemValues.liftPos.liftPos.get(i);
             toPrint += lift;
 
-            if (i != AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.size() - 1) {
-                toPrint += ",";
-            }
-        }
-        toPrint += "));}\n";
-
-        // append the right lift speeds
-        toPrint += "\n\npublic static class rightLiftSpeeds {\nstatic List<Double> rightLiftSpeeds = new LinkedList<Double>(Arrays.asList(";
-        for (int i = 0; i < AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.size(); i++) {
-            double lift = AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.get(i);
-            toPrint += lift;
-
-            if (i != AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.size() - 1) {
+            if (i != AutoSubsystemValues.liftPos.liftPos.size() - 1) {
                 toPrint += ",";
             }
         }
@@ -264,6 +242,7 @@ public class AutoSubsystem extends SubsystemBase {
             }
         }
         toPrint += "));}\n\n";
+        toPrint += "}";
 
         System.out.println("\n");
         System.out.println("\n");
@@ -271,8 +250,7 @@ public class AutoSubsystem extends SubsystemBase {
         System.out.println("\n");
         System.out.println("\n");
 
-        AutoSubsystemValues.leftLiftSpeeds.leftLiftSpeeds.clear();
-        AutoSubsystemValues.rightLiftSpeeds.rightLiftSpeeds.clear();
+        AutoSubsystemValues.liftPos.liftPos.clear();
         AutoSubsystemValues.intaking.intaking.clear();
         AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.clear();
         AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.clear();

@@ -8,8 +8,6 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.LeftElevator;
-import frc.robot.subsystems.RightElevator;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
@@ -42,10 +40,9 @@ public class ElevatorPID extends CommandBase {
   public void execute() {
 
     if (m_PIDActive.getAsBoolean()) {
-      m_elevatorSubsystem.setPosition(m_elevatorSubsystem.position + m_positionChange.getAsDouble() * Constants.lift.LIFT_SPEED,
-          m_PIDActive.getAsBoolean());
+      m_elevatorSubsystem.setPosition(m_elevatorSubsystem.position + m_positionChange.getAsDouble() * Constants.lift.LIFT_SPEED);
     } else{
-      m_elevatorSubsystem.setSpeed(m_positionChange.getAsDouble() * Constants.lift.LIFT_SPEED, m_PIDActive.getAsBoolean());
+      m_elevatorSubsystem.setSpeed(m_positionChange.getAsDouble() * Constants.lift.LIFT_SPEED);
     }
   }
 

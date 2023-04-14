@@ -4,27 +4,23 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.LeftElevator;
-import frc.robot.subsystems.RightElevator;
+import frc.robot.subsystems.ElevatorSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /* Shifts the drivetrain into first gear */
 public class ZeroSlides extends CommandBase {
-    private final LeftElevator m_leftElevator;
-    private final RightElevator m_rightElevator;
+    private final ElevatorSubsystem m_elevatorSubsystem;
     
-      public ZeroSlides(LeftElevator lElevator, RightElevator rElevator) {
-        m_leftElevator = lElevator;
-        m_rightElevator = rElevator;
-        addRequirements(m_leftElevator, m_rightElevator);
+      public ZeroSlides(ElevatorSubsystem elevatorSubsystem) {
+        this.m_elevatorSubsystem = elevatorSubsystem;
+        addRequirements(m_elevatorSubsystem);
       }
 
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    m_leftElevator.zero();
-    m_rightElevator.zero();
+    m_elevatorSubsystem.zero();
   }
 
   

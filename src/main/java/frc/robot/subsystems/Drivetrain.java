@@ -98,6 +98,13 @@ public class Drivetrain extends SubsystemBase {
     Constants.drive.m_drive.arcadeDrive(throttleActual, rotationActual);
   }
 
+  public void setWheelSpeeds(double frontLeft, double frontRight, double backLeft, double backRight) {
+Constants.controllers.leftFrontSpark.set(frontLeft);
+Constants.controllers.rightFrontSpark.set(frontRight);
+Constants.controllers.leftRearSpark.set(backLeft);
+Constants.controllers.rightRearSpark.set(backRight);
+  }
+
   /** Call log method every loop. */
   @Override
   public void periodic() {

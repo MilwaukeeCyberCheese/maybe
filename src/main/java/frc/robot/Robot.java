@@ -17,9 +17,8 @@ import frc.robot.commands.ZeroSlides;
 import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.LeftElevator;
-import frc.robot.subsystems.RightElevator;
 import frc.robot.commands.AutoBalanceDrive;
 import frc.robot.commands.AutoCommand;
 
@@ -46,12 +45,8 @@ public class Robot extends TimedRobot {
 
   public static final Stopwatch timer = new Stopwatch();
 
-  private final Drivetrain m_drivetrain = new Drivetrain();
-  private final Intake m_intake = new Intake();
-  private final Shifter m_shifter = new Shifter();
+ 
 
-  private final LeftElevator m_leftElevator = new LeftElevator();
-  private final RightElevator m_rightElevator = new RightElevator();
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -78,7 +73,7 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putData(CommandScheduler.getInstance());
     // SmartDashboard.putData("Autonomous Command", m_autoCommand);
 
-    new IntakeUp(m_intake);
+    new IntakeUp(RobotContainer.m_intake);
 
   }
 
@@ -111,8 +106,8 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
-    new IntakeOff(m_intake);
-    new Second(m_shifter);
+    new IntakeOff(RobotContainer.m_intake);
+    new Second(RobotContainer.m_shifter);
   }
 
   @Override
@@ -141,8 +136,6 @@ public class Robot extends TimedRobot {
     if (m_autoCommand != null) {
       m_autoCommand.schedule();
     }
-
-    m_autoCommand.setAuto(2);
   }
 
   /** This function is called periodically during autonomous. */
@@ -186,8 +179,8 @@ public class Robot extends TimedRobot {
     // initialization of teleop occurs is set as the lowest possible position
     // this means the slide needs to be all the way down so the topmost limit is
     // also accurate
-    new ZeroSlides(m_leftElevator, m_rightElevator);
-    new Second(m_shifter);
+    new ZeroSlides(RobotContainer.m_elevatorSubsystem);
+    new Second(RobotContainer.m_shifter);
   }
 
   /** This function is called periodically during operator control. */

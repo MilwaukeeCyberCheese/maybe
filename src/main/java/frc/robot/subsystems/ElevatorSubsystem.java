@@ -40,9 +40,9 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     }
 
-    public void setSpeed(double speed, boolean PIDenabled) {
+    public void setSpeed(double speed) {
         this.speed = speed;
-        this.PIDenabled = PIDenabled;
+        PIDenabled = false;
         Constants.controllers.leftLiftSpark.set(speed);
         Constants.controllers.rightLiftSpark.set(speed);
     }
@@ -52,9 +52,9 @@ public class ElevatorSubsystem extends SubsystemBase {
         Constants.sensors.rightLift.setPosition(0);
     }
 
-    public void setPosition(double setPosition, boolean PIDenabled) {
+    public void setPosition(double setPosition) {
         this.setPosition = setPosition;
-        this.PIDenabled = PIDenabled;
+        PIDenabled = true;
     }
 
     /** The log method puts interesting information to the SmartDashboard. */
@@ -81,7 +81,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         }
 
         if (RobotContainer.readAuto) {
-            RobotContainer.m_autoSubsystem.addLeftLiftSpeed(Constants.controllers.leftLiftSpark.get());
+            RobotContainer.m_autoSubsystem.addLiftPos(setPosition);
         }
 
         position = (Constants.sensors.leftLift.getPosition() + Constants.sensors.rightLift.getPosition()) / 2;

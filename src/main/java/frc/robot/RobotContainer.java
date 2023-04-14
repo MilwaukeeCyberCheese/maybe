@@ -24,14 +24,13 @@ import frc.robot.commands.IntakeConeSlow;
 import frc.robot.other.FilteredController;
 import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.RightElevator;
+import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Shifter;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.Intake;
-import frc.robot.commands.Elevator;
-import frc.robot.subsystems.LeftElevator;
+import frc.robot.commands.ElevatorPID;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -45,10 +44,9 @@ import frc.robot.subsystems.LeftElevator;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static final Drivetrain m_drivetrain = new Drivetrain();
-  private static final RightElevator m_rightElevator = new RightElevator();
-  private static final LeftElevator m_leftElevator = new LeftElevator();
-  static final Shifter m_shifter = new Shifter();
+  static final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
   public static final Intake m_intake = new Intake();
+  public static final Shifter m_shifter = new Shifter();
 
   private static final XboxController m_controller = new XboxController(0);
   public static final FilteredController m_filteredController = new FilteredController(m_controller);
@@ -57,7 +55,7 @@ public class RobotContainer {
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
   private static final AutoCommand m_autoCommand = new AutoCommand(m_autoSubsystem, m_intake, m_drivetrain,
-      m_leftElevator, m_rightElevator, m_shifter, () -> Robot.autoChooser.getSelected());
+      m_elevatorSubsystem, m_shifter, () -> Robot.autoChooser.getSelected());
 
   public static boolean readAuto = false;
 
@@ -65,21 +63,6 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    // Put Some buttons on the SmartDashboard
-    // SmartDashboard.putData("Elevator Bottom", new SetElevatorSetpoint(0,
-    // m_elevator));
-    // SmartDashboard.putData("Elevator Top", new SetElevatorSetpoint(0.25,
-    // m_elevator));
-
-    // SmartDashboard.putData("Wrist Horizontal", new SetWristSetpoint(0, m_wrist));
-    // SmartDashboard.putData("Raise Wrist", new SetWristSetpoint(-45, m_wrist));
-
-    // SmartDashboard.putData("Open Claw", new OpenClaw(m_claw));
-    // SmartDashboard.putData("Close Claw", new CloseClaw(m_claw));
-
-    // SmartDashboard.putData(
-    // "Deliver Soda", new Autonomous(m_drivetrain, m_claw, m_wrist, m_elevator));
-
     // Assign default commands
     m_drivetrain.setDefaultCommand(
         new ArcadeDrive(
@@ -89,13 +72,9 @@ public class RobotContainer {
             () -> m_controller.getBackButton(),
             m_drivetrain));
 
-    m_leftElevator.setDefaultCommand(
-        new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
-            m_rightElevator, () -> !m_controllerTwo.getBackButton()));
-
-    m_rightElevator.setDefaultCommand(
-        new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
-            m_rightElevator, () -> !m_controllerTwo.getBackButton()));
+    m_elevatorSubsystem.setDefaultCommand(
+        new ElevatorPID(() -> -m_filteredControllerTwo.getYRight(0.2), m_elevatorSubsystem,
+            () -> !m_controllerTwo.getBackButton()));
 
     m_intake.setDefaultCommand(new ProtectIntake(m_intake));
 
@@ -143,15 +122,12 @@ public class RobotContainer {
     Trigger leftStickButtonOne = new JoystickButton(m_controller, 9);
     Trigger rightStickButtonOne = new JoystickButton(m_controller, 10);
 
-
-    
-
     leftBumperOne.onTrue(new First(m_shifter));
     rightBumperOne.onTrue(new Second(m_shifter));
 
     rightTriggerOne.onTrue(new IntakeUp(m_intake));
 
-    startButtonTwo.whileTrue(new ZeroSlides(m_leftElevator, m_rightElevator));
+    startButtonTwo.whileTrue(new ZeroSlides(m_elevatorSubsystem));
 
     leftStickButtonOne.onTrue(new AutoBalancer(m_drivetrain, m_shifter));
     rightStickButtonOne.onTrue(new AutoBalanceDrive(m_drivetrain, m_shifter));
