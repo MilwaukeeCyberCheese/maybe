@@ -143,27 +143,23 @@ public final class Constants {
                 public static final double SPEED_LIMITER = 0.3;
 
                 public static final double POSITION_ZERO = 0;
-                public static final double POSITION_ONE = 1;
-                public static final double POSITION_TWO = 2;
-                public static final double POSITION_THREE = 3;
+
+                public static final double POSITION_ONE = 7;
+
+                public static final double POSITION_TWO = 50;
+
+                public static final double POSITION_THREE = 108;
 
                 public static final float LEFT_MIN_POSITION = 0;
                 public static final float LEFT_MAX_POSITION = 110;
                 public static final float RIGHT_MIN_POSITION = 0;
                 public static final float RIGHT_MAX_POSITION = 108;
 
-                public static final SparkMaxPIDController left_PID = Constants.controllers.leftLiftSpark
-                                .getPIDController();
-                public static final SparkMaxPIDController right_PID = Constants.controllers.rightLiftSpark
-                                .getPIDController();
+                public static final double MIN_POSITION = 0;
+                public static final double MAX_POSITION = 109;
 
-                public static double left_kP = 0.1;
-                public static double left_kI = 0;
-                public static double left_kD = 0;
-
-                public static double right_kP = 0.1;
-                public static double right_kI = 0;
-                public static double right_kD = 0;
-
+                public static double P = 0.001;
+                public static double I = 0;
+                public static double D = 0;
         }
 }
