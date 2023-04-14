@@ -80,6 +80,7 @@ public class Drivetrain extends SubsystemBase {
    *
    * @param throttle Speed in range [-1,1]
    * @param rotation Speed in range [-1,1]
+   * @param brakeMode whether brakes should be engaged or not
    */
   public void drive(double throttle, double rotation, boolean brakeMode) {
     this.rotation = rotation;
