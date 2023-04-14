@@ -11,6 +11,7 @@ import frc.robot.commands.IntakeConeCommand;
 import frc.robot.commands.IntakeCubeCommand;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeUp;
+import frc.robot.commands.ProtectIntake;
 import frc.robot.commands.RecordAuto;
 import frc.robot.commands.Second;
 import frc.robot.commands.ZeroSlides;
@@ -43,11 +44,11 @@ import frc.robot.subsystems.LeftElevator;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  static final Drivetrain m_drivetrain = new Drivetrain();
+  public static final Drivetrain m_drivetrain = new Drivetrain();
   private static final RightElevator m_rightElevator = new RightElevator();
   private static final LeftElevator m_leftElevator = new LeftElevator();
   static final Shifter m_shifter = new Shifter();
-  private static final Intake m_intake = new Intake();
+  public static final Intake m_intake = new Intake();
 
   private static final XboxController m_controller = new XboxController(0);
   public static final FilteredController m_filteredController = new FilteredController(m_controller);
@@ -90,11 +91,13 @@ public class RobotContainer {
 
     m_leftElevator.setDefaultCommand(
         new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
-            m_rightElevator, m_intake, () -> !m_controllerTwo.getBackButton()));
+            m_rightElevator, () -> !m_controllerTwo.getBackButton()));
 
     m_rightElevator.setDefaultCommand(
         new Elevator(() -> -m_filteredControllerTwo.getYRight(0.2), m_leftElevator,
-            m_rightElevator, m_intake, () -> !m_controllerTwo.getBackButton()));
+            m_rightElevator, () -> !m_controllerTwo.getBackButton()));
+
+    m_intake.setDefaultCommand(new ProtectIntake(m_intake));
 
     m_autoSubsystem.setDefaultCommand(
         new RecordAuto(m_autoSubsystem, () -> m_controllerTwo.getXButton(), () -> m_controllerTwo.getBButton()));

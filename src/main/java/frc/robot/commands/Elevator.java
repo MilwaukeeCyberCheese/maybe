@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LeftElevator;
 import frc.robot.subsystems.RightElevator;
@@ -20,22 +21,20 @@ public class Elevator extends CommandBase {
   private final RightElevator m_rightElevator;
   private final DoubleSupplier m_position;
   private final BooleanSupplier m_limited;
-  private final Intake m_intake;
 
   public Elevator(DoubleSupplier position, LeftElevator lElevator,
-      RightElevator rElevator, Intake intake, BooleanSupplier limited) {
+      RightElevator rElevator, BooleanSupplier limited) {
     m_leftElevator = lElevator;
     m_rightElevator = rElevator;
     m_position = position;
     m_limited = limited;
-    m_intake = intake;
     addRequirements(m_leftElevator, m_rightElevator);
   }
 
   // Called just before this Command runs the first time
   @Override
   public void execute() {
-    if (m_intake.getPosition() == Constants.intake.intakeDown) {
+    if (RobotContainer.m_intake.position == Constants.intake.intakeDown) {
       m_leftElevator.setSpeed(m_position.getAsDouble() * Constants.lift.LIFT_SPEED, m_limited.getAsBoolean());
       m_rightElevator.setSpeed(m_position.getAsDouble() * Constants.lift.LIFT_SPEED, m_limited.getAsBoolean());
     }

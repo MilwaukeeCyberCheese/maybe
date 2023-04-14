@@ -15,13 +15,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
-  private double m_throttle;
-  private double m_rotation;
-  private double m_throttleActual;
-  private double m_rotationActual;
-  private double m_previousThrottle = 0;
-  private double m_previousRotation = 0;
-  private boolean m_brakeMode = false;
+  private double throttle;
+  private double rotation;
+  public double throttleActual;
+  private double rotationActual;
+  private double previousThrottle = 0;
+  private double previousRotation = 0;
+  private boolean brakeMode = false;
   private Stopwatch brakingTimer = new Stopwatch();
   private SlewRateLimiter throttleLimiter = new SlewRateLimiter(Constants.drive.THROTTLE_LIMITER);
   private SlewRateLimiter rotationLimiter = new SlewRateLimiter(Constants.drive.ROTATION_LIMITER);
@@ -82,20 +82,20 @@ public class Drivetrain extends SubsystemBase {
    * @param rotation Speed in range [-1,1]
    */
   public void drive(double throttle, double rotation, boolean brakeMode) {
-    this.m_rotation = rotation;
-    this.m_throttle = throttle;
-    this.m_brakeMode = brakeMode;
-    if (Math.abs(throttle) > Math.abs(m_previousThrottle)) {
-      m_throttleActual = throttleLimiter.calculate(throttle);
+    this.rotation = rotation;
+    this.throttle = throttle;
+    this.brakeMode = brakeMode;
+    if (Math.abs(throttle) > Math.abs(previousThrottle)) {
+      throttleActual = throttleLimiter.calculate(throttle);
     } else {
-      m_throttleActual = throttle;
+      throttleActual = throttle;
     }
-    if (Math.abs(rotation) > Math.abs(m_previousRotation)) {
-      m_rotationActual = rotationLimiter.calculate(rotation);
+    if (Math.abs(rotation) > Math.abs(previousRotation)) {
+      rotationActual = rotationLimiter.calculate(rotation);
     } else {
-      m_rotationActual = rotation;
+      rotationActual = rotation;
     }
-    Constants.drive.m_drive.arcadeDrive(m_throttleActual, m_rotationActual);
+    Constants.drive.m_drive.arcadeDrive(throttleActual, rotationActual);
   }
 
   /** Call log method every loop. */
@@ -109,8 +109,8 @@ public class Drivetrain extends SubsystemBase {
           Constants.controllers.rightRearSpark.get());
     }
 
-    m_previousThrottle = m_throttle;
-    m_previousRotation = m_rotation;
+    previousThrottle = throttle;
+    previousRotation = rotation;
     // if (throttle == 0 && rotation == 0 && previousRotation != 0 &&
     // previousThrottle != 0) {
     // brakingTimer.stop();
