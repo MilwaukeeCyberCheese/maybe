@@ -151,7 +151,8 @@ public final class Constants {
                 public static final double LIFT_SPEED = 0.35;
                 public static final double PID_CHANGE_SPEED = 1.2;
 
-                public static final double SPEED_LIMITER = 0.3;
+                public static final double SPEED_LIMITER_UPPER = 0.45;
+                public static final double SPEED_LIMITER_LOWER = -0.45;
 
                 public static final double POSITION_ZERO = 0;
 
@@ -161,13 +162,8 @@ public final class Constants {
 
                 public static final double POSITION_THREE = 108;
 
-                public static final float LEFT_MIN_POSITION = 0;
-                public static final float LEFT_MAX_POSITION = 108;
-                public static final float RIGHT_MIN_POSITION = 0;
-                public static final float RIGHT_MAX_POSITION = 106;
-
                 public static final double MIN_POSITION = 0;
-                public static final double MAX_POSITION = 102;
+                public static final double MAX_POSITION = 105;
 
                 public static double P = 0.5;
                 public static double I = 0;

@@ -84,7 +84,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         position = (Constants.sensors.leftLift.getPosition() + Constants.sensors.rightLift.getPosition()) / 2;
       
         if (PIDenabled) {
-            speed = MathUtil.clamp(slidePid.calculate(position, setPosition), -0.35, 0.35);
+            speed = MathUtil.clamp(slidePid.calculate(position, setPosition), Constants.lift.SPEED_LIMITER_LOWER, Constants.lift.SPEED_LIMITER_UPPER);
             Constants.controllers.leftLiftSpark.set(speed);
             Constants.controllers.rightLiftSpark.set(speed);
 

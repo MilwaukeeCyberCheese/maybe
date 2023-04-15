@@ -45,7 +45,7 @@ import frc.robot.commands.ElevatorPID;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static final Drivetrain m_drivetrain = new Drivetrain();
-  static final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
+  public static final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
   public static final Intake m_intake = new Intake();
   public static final Shifter m_shifter = new Shifter();
 
