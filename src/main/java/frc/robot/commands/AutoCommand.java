@@ -45,7 +45,7 @@ public class AutoCommand extends CommandBase {
     public void initialize() {
         balancePid.setSetpoint(0);
         balancePid.setTolerance(Constants.balance.BALANCED_THRESHOLD_DEGREES);
-        
+
         timer.stop();
         timer.reset();
         timer.start();
@@ -87,25 +87,25 @@ public class AutoCommand extends CommandBase {
         } else if (m_autoMode.getAsInt() == 2) {
 
             m_intake.setPosition(Constants.intake.intakeUp);
-                m_intake.drive(0);
-                double pitchAngleDegrees = Constants.balance.gyro.getRoll();
+            m_intake.drive(0);
+            double pitchAngleDegrees = Constants.balance.gyro.getRoll();
 
-                if (!balanceStarted) {
-                    m_drivetrain.drive(Constants.balance.DRIVE_SPEED, 0, true);
-                    if (pitchAngleDegrees >= Constants.balance.START_BALANCE_ANGLE) {
-                        balanceStarted = true;
-                    }
-                } else {
-
-                    // double pitchAngleDegrees = -1 *
-                    // RobotContainer.m_filteredControllerTwo.getYLeft(0.1) * 10;
-
-                    double throttle = balancePid.calculate(pitchAngleDegrees);
-
-                    m_drivetrain.drive(throttle * Constants.balance.BALANCE_SPEED_MOD, 0, true);
+            if (!balanceStarted) {
+                m_drivetrain.drive(Constants.balance.DRIVE_SPEED, 0, true);
+                if (pitchAngleDegrees >= Constants.balance.START_BALANCE_ANGLE) {
+                    balanceStarted = true;
                 }
+            } else {
+
+                // double pitchAngleDegrees = -1 *
+                // RobotContainer.m_filteredControllerTwo.getYLeft(0.1) * 10;
+
+                double throttle = balancePid.calculate(pitchAngleDegrees);
+
+                m_drivetrain.drive(throttle * Constants.balance.BALANCE_SPEED_MOD, 0, true);
             }
         }
+    }
 
     /**
      * This function ensures when the action is complete, the robot stops moving
