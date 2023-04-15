@@ -5,13 +5,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.other.Stopwatch;
 
 public class Intake extends SubsystemBase {
 
     private double speed;
     public Value position;
-    private Stopwatch timer = new Stopwatch();
 
     /**
      * Creates a new ExampleSubsystem.

@@ -5,22 +5,20 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
+
 import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.subsystems.Intake;
+
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /* actuates the pistons to flop the intake down */
 public class ElevatorPID extends CommandBase {
   private final ElevatorSubsystem m_elevatorSubsystem;
   private final DoubleSupplier m_positionChange;
-  private Double m_speed;
-  private Double m_position;
+
   private final BooleanSupplier m_PIDActive;
 
   public ElevatorPID(DoubleSupplier positionChange, ElevatorSubsystem elevatorSubsystem, BooleanSupplier PIDActive) {

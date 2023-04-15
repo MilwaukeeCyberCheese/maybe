@@ -58,7 +58,7 @@ public class RobotContainer {
   public static final FilteredController m_filteredControllerTwo = new FilteredController(m_controllerTwo);
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
-  private static final AutoCommand m_autoCommand = new AutoCommand(m_autoSubsystem, m_intake, m_drivetrain,
+  private static final AutoCommand m_autoCommand = new AutoCommand(m_intake, m_drivetrain,
       m_elevatorSubsystem, m_shifter, () -> Robot.autoChooser.getSelected());
 
   public static boolean readAuto = false;
@@ -73,7 +73,6 @@ public class RobotContainer {
             () -> -m_filteredController.getYLeft(.2), () -> -m_filteredController
                 .getXRight(.2),
             () -> m_filteredController.getLeftTriggerActive(0.2), () -> m_filteredController.getRightTriggerActive(0.2),
-            () -> m_controller.getStartButton(),
             m_drivetrain));
 
     m_elevatorSubsystem.setDefaultCommand(

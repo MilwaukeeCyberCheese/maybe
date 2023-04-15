@@ -5,7 +5,6 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,13 +15,7 @@ import frc.robot.commands.Second;
 import frc.robot.commands.ZeroSlides;
 import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.AutoSubsystem;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.subsystems.Intake;
-import frc.robot.commands.AutoBalanceDrive;
 import frc.robot.commands.AutoCommand;
-
-import frc.robot.subsystems.Shifter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -36,7 +29,7 @@ import frc.robot.subsystems.Shifter;
 public class Robot extends TimedRobot {
   public static SendableChooser<Integer> autoChooser = new SendableChooser<>();
 
-  private boolean balanceStarted = false;
+
   private AutoCommand m_autoCommand;
 
   private RobotContainer m_robotContainer;

@@ -2,14 +2,12 @@ package frc.robot.commands;
 
 import java.util.function.IntSupplier;
 
-import com.fasterxml.jackson.databind.introspect.ConcreteBeanPropertyBase;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.other.Stopwatch;
-import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.AutoSubsystemValues;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -17,7 +15,6 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shifter;
 
 public class AutoCommand extends CommandBase {
-    private final AutoSubsystem m_autoSubsystem;
     private final Intake m_intake;
     private final Drivetrain m_drivetrain;
     private final ElevatorSubsystem m_elevatorSubsystem;
@@ -29,10 +26,9 @@ public class AutoCommand extends CommandBase {
     private PIDController balancePid = new PIDController(Constants.balance.P, Constants.balance.I, Constants.balance.D);
 
     // constructor
-    public AutoCommand(AutoSubsystem autoSubsystem, Intake intake, Drivetrain drivetrain,
+    public AutoCommand(Intake intake, Drivetrain drivetrain,
             ElevatorSubsystem elevatorSubsystem,
             Shifter shifter, IntSupplier autoMode) {
-        this.m_autoSubsystem = autoSubsystem;
         this.m_intake = intake;
         this.m_drivetrain = drivetrain;
         this.m_elevatorSubsystem = elevatorSubsystem;
@@ -91,7 +87,7 @@ public class AutoCommand extends CommandBase {
             double pitchAngleDegrees = Constants.balance.gyro.getRoll();
 
             if (!balanceStarted) {
-                m_drivetrain.drive(Constants.balance.DRIVE_SPEED, 0, true);
+                m_drivetrain.drive(Constants.balance.DRIVE_SPEED, 0);
                 if (pitchAngleDegrees >= Constants.balance.START_BALANCE_ANGLE) {
                     balanceStarted = true;
                 }
@@ -102,7 +98,7 @@ public class AutoCommand extends CommandBase {
 
                 double throttle = balancePid.calculate(pitchAngleDegrees);
 
-                m_drivetrain.drive(throttle * Constants.balance.BALANCE_SPEED_MOD, 0, true);
+                m_drivetrain.drive(throttle * Constants.balance.BALANCE_SPEED_MOD, 0);
             }
         }
     }
@@ -115,7 +111,7 @@ public class AutoCommand extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         m_intake.drive(0);
-        m_drivetrain.drive(0, 0, true);
+        m_drivetrain.drive(0, 0);
         m_elevatorSubsystem.setPosition(0);
     }
 

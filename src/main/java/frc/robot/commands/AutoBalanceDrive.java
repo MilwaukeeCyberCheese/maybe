@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class AutoBalanceDrive extends CommandBase {
   private final Drivetrain m_drivetrain;
   private final Shifter m_shifter;
-  private Boolean autoBalanceMode = false;
   private boolean autoBalanceStarted = false;
   private double throttle;
   private Stopwatch timer = new Stopwatch();
@@ -54,7 +53,7 @@ public class AutoBalanceDrive extends CommandBase {
     double pitchAngleDegrees = Constants.balance.gyro.getRoll();
 
     if (!autoBalanceStarted) {
-      m_drivetrain.drive(Constants.balance.DRIVE_SPEED, 0, true);
+      m_drivetrain.drive(Constants.balance.DRIVE_SPEED, 0);
       if (pitchAngleDegrees >= Constants.balance.START_BALANCE_ANGLE) {
         autoBalanceStarted = true;
       }
@@ -65,7 +64,7 @@ public class AutoBalanceDrive extends CommandBase {
 
       throttle = balancePid.calculate(pitchAngleDegrees);
 
-      m_drivetrain.drive(throttle * Constants.balance.BALANCE_SPEED_MOD, 0, true);
+      m_drivetrain.drive(throttle * Constants.balance.BALANCE_SPEED_MOD, 0);
     }
 
   }

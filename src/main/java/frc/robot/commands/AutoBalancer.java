@@ -5,7 +5,6 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shifter;
@@ -17,7 +16,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class AutoBalancer extends CommandBase {
   private final Drivetrain m_drivetrain;
   private final Shifter m_shifter;
-  private Boolean autoBalanceMode = false;
   private double throttle;
   private Stopwatch timer = new Stopwatch();
   private PIDController balancePid = new PIDController(Constants.balance.P, Constants.balance.I, Constants.balance.D);
@@ -58,7 +56,7 @@ balancePid.setTolerance(Constants.balance.BALANCED_THRESHOLD_DEGREES);
 
     throttle = balancePid.calculate(pitchAngleDegrees);
 
-    m_drivetrain.drive(throttle * Constants.balance.BALANCE_SPEED_MOD, 0, true);
+    m_drivetrain.drive(throttle * Constants.balance.BALANCE_SPEED_MOD, 0);
 
   }
 

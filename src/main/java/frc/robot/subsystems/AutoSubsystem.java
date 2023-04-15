@@ -1,19 +1,11 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
-import frc.robot.Robot;
-import frc.robot.Constants.balance;
-import frc.robot.commands.AutoBalancer;
 
 public class AutoSubsystem extends SubsystemBase {
 
-    // side to love handles is 10, ass to line is 23 inches
-
-    private int auto;
-    public Boolean balance = false;
+    
 
     /**
      * This function is called every twenty milliseconds when the robot is enabled

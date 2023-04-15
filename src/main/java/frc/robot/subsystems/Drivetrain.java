@@ -6,9 +6,6 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.other.Stopwatch;
-
-import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,8 +18,6 @@ public class Drivetrain extends SubsystemBase {
   private double rotationActual;
   private double previousThrottle = 0;
   private double previousRotation = 0;
-  private boolean brakeMode = false;
-  private Stopwatch brakingTimer = new Stopwatch();
   private SlewRateLimiter throttleLimiter = new SlewRateLimiter(Constants.drive.THROTTLE_LIMITER);
   private SlewRateLimiter rotationLimiter = new SlewRateLimiter(Constants.drive.ROTATION_LIMITER);
 
@@ -82,10 +77,9 @@ public class Drivetrain extends SubsystemBase {
    * @param rotation  Speed in range [-1,1]
    * @param brakeMode whether brakes should be engaged or not
    */
-  public void drive(double throttle, double rotation, boolean brakeMode) {
+  public void drive(double throttle, double rotation) {
     this.rotation = rotation;
     this.throttle = throttle;
-    this.brakeMode = brakeMode;
     if (Math.abs(throttle) > Math.abs(previousThrottle)) {
       throttleActual = throttleLimiter.calculate(throttle);
     } else {

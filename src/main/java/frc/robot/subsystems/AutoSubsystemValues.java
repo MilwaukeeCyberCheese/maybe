@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import java.util.List;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public final class AutoSubsystemValues {
         
