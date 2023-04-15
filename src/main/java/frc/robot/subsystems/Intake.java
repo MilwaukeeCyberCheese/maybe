@@ -28,6 +28,7 @@ public class Intake extends SubsystemBase {
             RobotContainer.m_autoSubsystem.addIntakePos(Constants.pneumatics.intakeSolenoid.get());
         }
         log();
+        position = Constants.pneumatics.intakeSolenoid.get();
         
         
     }
@@ -38,7 +39,6 @@ public class Intake extends SubsystemBase {
     }
 
     public void setPosition(Value position) {
-        this.position = position;
         Constants.pneumatics.intakeSolenoid.set(position);
 
     }

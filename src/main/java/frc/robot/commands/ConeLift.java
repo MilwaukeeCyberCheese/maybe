@@ -16,17 +16,13 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /* actuates the pistons to flop the intake down */
-public class ElevatorPID extends CommandBase {
+public class ConeLift extends CommandBase {
   private final ElevatorSubsystem m_elevatorSubsystem;
-  private final DoubleSupplier m_positionChange;
   private Double m_speed;
   private Double m_position;
-  private final BooleanSupplier m_PIDActive;
 
-  public ElevatorPID(DoubleSupplier positionChange, ElevatorSubsystem elevatorSubsystem, BooleanSupplier PIDActive) {
+  public ConeLift(ElevatorSubsystem elevatorSubsystem) {
     m_elevatorSubsystem = elevatorSubsystem;
-    m_positionChange = positionChange;
-    m_PIDActive = PIDActive;
     addRequirements(m_elevatorSubsystem);
   }
 
@@ -39,12 +35,10 @@ public class ElevatorPID extends CommandBase {
   @Override
   public void execute() {
     if (RobotContainer.m_intake.position == Constants.intake.intakeDown
-        || (Constants.lift.MAX_INTAKE < m_elevatorSubsystem.position && m_PIDActive.getAsBoolean())) {
-      if (m_PIDActive.getAsBoolean()) {
+        || (Constants.lift.MAX_INTAKE < m_elevatorSubsystem.position && m_elevatorSubsystem.PIDenabled)) {
+      if (m_elevatorSubsystem.PIDenabled) {
         m_elevatorSubsystem
-            .setPosition(m_elevatorSubsystem.position + m_positionChange.getAsDouble() * Constants.lift.PID_CHANGE_SPEED);
-      } else {
-        m_elevatorSubsystem.setSpeed(m_positionChange.getAsDouble() * Constants.lift.LIFT_SPEED);
+            .setPosition(Constants.lift.POSITION_TWO);
       }
     }
   }

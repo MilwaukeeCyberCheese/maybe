@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class ElevatorSubsystem extends SubsystemBase {
     public double speed;
     public double position;
-    public double setPosition;
+    public double setPosition = 0;
     public boolean PIDenabled;
     private PIDController slidePid = new PIDController(Constants.lift.P, Constants.lift.I, Constants.lift.D);
 
@@ -63,6 +63,9 @@ public class ElevatorSubsystem extends SubsystemBase {
         // SmartDashboard.putNumber("Left Slide CPR",
         // Constants.sensors.leftLift.getCountsPerRevolution());
         SmartDashboard.putNumber("Slide Position", position);
+        SmartDashboard.putNumber("Slide Set Position", setPosition);
+        SmartDashboard.putNumber("Left Slide Speed", Constants.controllers.leftLiftSpark.get());
+        SmartDashboard.putNumber("Right Slide Speed", Constants.controllers.rightLiftSpark.get());
         SmartDashboard.putNumber("Speed: ", speed);
 
     }
@@ -72,18 +75,21 @@ public class ElevatorSubsystem extends SubsystemBase {
     public void periodic() {
         log();
 
-        setPosition = MathUtil.clamp(setPosition, Constants.lift.MAX_POSITION, Constants.lift.MIN_POSITION);
-
-        if (PIDenabled) {
-            speed = slidePid.calculate(position, setPosition);
-            Constants.controllers.leftLiftSpark.set(speed);
-            Constants.controllers.rightLiftSpark.set(speed);
-        }
+        setPosition = MathUtil.clamp(setPosition, Constants.lift.MIN_POSITION, Constants.lift.MAX_POSITION);
 
         if (RobotContainer.readAuto) {
             RobotContainer.m_autoSubsystem.addLiftPos(setPosition);
         }
 
         position = (Constants.sensors.leftLift.getPosition() + Constants.sensors.rightLift.getPosition()) / 2;
+      
+        if (PIDenabled) {
+            speed = MathUtil.clamp(slidePid.calculate(position, setPosition), -0.35, 0.35);
+            Constants.controllers.leftLiftSpark.set(speed);
+            Constants.controllers.rightLiftSpark.set(speed);
+
+        } else {
+            setPosition = position;
+        }
     }
 }

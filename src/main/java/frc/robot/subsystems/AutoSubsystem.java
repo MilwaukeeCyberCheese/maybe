@@ -145,10 +145,10 @@ public class AutoSubsystem extends SubsystemBase {
     public void printSpeeds() {
         String toPrint = "";
 //header and whatnot
-toPrint += "package frc.robot.subsystems; import java.util.Arrays; import java.util.LinkedList; import edu.wpi.first.wpilibj.DoubleSolenoid.Value; import java.util.List; import edu.wpi.first.wpilibj.DoubleSolenoid.Value; public final class AutoSubsystemValues{ public static class frontLeftSpeeds {";
+toPrint += "package frc.robot.subsystems; import java.util.Arrays; import java.util.LinkedList; import edu.wpi.first.wpilibj.DoubleSolenoid.Value; import java.util.List; import edu.wpi.first.wpilibj.DoubleSolenoid.Value; public final class AutoSubsystemValues{ ";
 
         // append the frontLeft speeds
-        toPrint += "\n\npublic static class frontLeftSpeeds {\nstatic List<Double> frontLeftSpeeds = new LinkedList<Double>(Arrays.asList(";
+        toPrint += "\n\npublic static class frontLeftSpeeds {\npublic static List<Double> frontLeftSpeeds = new LinkedList<Double>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size(); i++) {
             double frontLeftSpeeds = AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(i);
             toPrint += frontLeftSpeeds;
@@ -160,7 +160,7 @@ toPrint += "package frc.robot.subsystems; import java.util.Arrays; import java.u
         toPrint += "));}\n";
 
         // append the rotation speeds
-        toPrint += "\n\npublic static class frontRightSpeeds {\nstatic List<Double> frontRightSpeeds = new LinkedList<Double>(Arrays.asList(";
+        toPrint += "\n\npublic static class frontRightSpeeds {\npublic static List<Double> frontRightSpeeds = new LinkedList<Double>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.size(); i++) {
             double frontRightSpeeds = AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(i);
             toPrint += frontRightSpeeds;
@@ -172,7 +172,7 @@ toPrint += "package frc.robot.subsystems; import java.util.Arrays; import java.u
         toPrint += "));}\n";
 
         // append the backLeft speeds
-        toPrint += "\n\npublic static class backLeftSpeeds {\nstatic List<Double> backLeftSpeeds = new LinkedList<Double>(Arrays.asList(";
+        toPrint += "\n\npublic static class backLeftSpeeds {\npublic static List<Double> backLeftSpeeds = new LinkedList<Double>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.size(); i++) {
             double backLeftSpeeds = AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(i);
             toPrint += backLeftSpeeds;
@@ -184,7 +184,7 @@ toPrint += "package frc.robot.subsystems; import java.util.Arrays; import java.u
         toPrint += "));}\n";
 
         // append the backRight speeds
-        toPrint += "\n\npublic static class backRightSpeeds {\nstatic List<Double> backRightSpeeds = new LinkedList<Double>(Arrays.asList(";
+        toPrint += "\n\npublic static class backRightSpeeds {\npublic static List<Double> backRightSpeeds = new LinkedList<Double>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.backRightSpeeds.backRightSpeeds.size(); i++) {
             double backRightSpeeds = AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(i);
             toPrint += backRightSpeeds;
@@ -196,7 +196,7 @@ toPrint += "package frc.robot.subsystems; import java.util.Arrays; import java.u
         toPrint += "));}\n";
 
         // append the intake speeds
-        toPrint += "\n\npublic static class intaking {\nstatic List<Double> intaking = new LinkedList<Double>(Arrays.asList(";
+        toPrint += "\n\npublic static class intaking {\npublic static List<Double> intaking = new LinkedList<Double>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.intaking.intaking.size(); i++) {
             double intake = AutoSubsystemValues.intaking.intaking.get(i);
             toPrint += intake;
@@ -208,7 +208,7 @@ toPrint += "package frc.robot.subsystems; import java.util.Arrays; import java.u
         toPrint += "));}\n";
 
         // append the shifter gear
-        toPrint += "\n\npublic static class gear {\nstatic List<Boolean> gear = new LinkedList<Boolean>(Arrays.asList(";
+        toPrint += "\n\npublic static class gear {\npublic static List<Boolean> gear = new LinkedList<Boolean>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.gear.gear.size(); i++) {
             Boolean gear = AutoSubsystemValues.gear.gear.get(i);
             toPrint += gear;
@@ -220,7 +220,7 @@ toPrint += "package frc.robot.subsystems; import java.util.Arrays; import java.u
         toPrint += "));}\n";
 
         // append the left lift speeds
-        toPrint += "\n\npublic static class liftPos {\nstatic List<Double> liftPos = new LinkedList<Double>(Arrays.asList(";
+        toPrint += "\n\npublic static class liftPos {\npublic static List<Double> liftPos = new LinkedList<Double>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.liftPos.liftPos.size(); i++) {
             double lift = AutoSubsystemValues.liftPos.liftPos.get(i);
             toPrint += lift;
@@ -232,7 +232,7 @@ toPrint += "package frc.robot.subsystems; import java.util.Arrays; import java.u
         toPrint += "));}\n";
 
         // append the intake position
-        toPrint += "\n\npublic static class intakePos {\nstatic List<Value> intakePos = new LinkedList<Value>(Arrays.asList(";
+        toPrint += "\n\npublic static class intakePos {\npublic static List<Value> intakePos = new LinkedList<Value>(Arrays.asList(";
         for (int i = 0; i < AutoSubsystemValues.intakePos.intakePos.size(); i++) {
             Value position = AutoSubsystemValues.intakePos.intakePos.get(i);
             toPrint += "Value." + position;

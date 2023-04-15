@@ -145,7 +145,8 @@ public final class Constants {
                 public static final boolean LEFT_INVERTED = true;
                 public static final boolean RIGHT_INVERTED = false;
 
-                public static final double LIFT_SPEED = 0.5;
+                public static final double LIFT_SPEED = 0.35;
+                public static final double PID_CHANGE_SPEED = 1.2;
 
                 public static final double SPEED_LIMITER = 0.3;
 
@@ -155,17 +156,12 @@ public final class Constants {
 
                 public static final double POSITION_TWO = 50;
 
-                public static final double POSITION_THREE = 108;
-
-                public static final float LEFT_MIN_POSITION = 0;
-                public static final float LEFT_MAX_POSITION = 110;
-                public static final float RIGHT_MIN_POSITION = 0;
-                public static final float RIGHT_MAX_POSITION = 108;
+                public static final double POSITION_THREE = 100;
 
                 public static final double MIN_POSITION = 0;
-                public static final double MAX_POSITION = 109;
+                public static final double MAX_POSITION = 102;
 
-                public static double P = 0.001;
+                public static double P = 0.5;
                 public static double I = 0;
                 public static double D = 0;
         }

@@ -48,6 +48,7 @@ public class AutoCommand extends CommandBase {
         timer.reset();
         timer.start();
         stopwatchCounter = -1;
+        balanceStarted = false;
     }
 
     @Override
@@ -83,13 +84,7 @@ public class AutoCommand extends CommandBase {
             }
         } else if (m_autoMode.getAsInt() == 2) {
 
-            Constants.pneumatics.shifterSolenoid.set(Constants.drive.FIRST_GEAR);
-            if (timer.getTime() <= 2000) {
-                balanceStarted = false;
-                System.out.println("Out");
-                m_intake.drive(Constants.intake.CONE_SPEED);
-            } else {
-
+            m_intake.setPosition(Constants.intake.intakeUp);
                 m_intake.drive(0);
                 double pitchAngleDegrees = Constants.balance.gyro.getRoll();
 
@@ -109,8 +104,6 @@ public class AutoCommand extends CommandBase {
                 }
             }
         }
-
-    }
 
     /**
      * This function ensures when the action is complete, the robot stops moving

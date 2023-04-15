@@ -19,6 +19,7 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutoBalanceDrive;
 import frc.robot.commands.AutoBalancer;
 import frc.robot.commands.AutoCommand;
+import frc.robot.commands.ConeLift;
 import frc.robot.commands.IntakeCubeSlow;
 import frc.robot.commands.IntakeConeSlow;
 import frc.robot.other.FilteredController;
@@ -69,11 +70,11 @@ public class RobotContainer {
             () -> -m_filteredController.getYLeft(.2), () -> -m_filteredController
                 .getXRight(.2),
             () -> m_filteredController.getLeftTriggerActive(0.2), () -> m_filteredController.getRightTriggerActive(0.2),
-            () -> m_controller.getBackButton(),
+            () -> m_controller.getStartButton(),
             m_drivetrain));
 
     m_elevatorSubsystem.setDefaultCommand(
-        new ElevatorPID(() -> -m_filteredControllerTwo.getYRight(0.2), m_elevatorSubsystem,
+        new ElevatorPID(() -> -m_filteredControllerTwo.getYLeft(0.2), m_elevatorSubsystem,
             () -> !m_controllerTwo.getBackButton()));
 
     m_intake.setDefaultCommand(new ProtectIntake(m_intake));
@@ -112,12 +113,14 @@ public class RobotContainer {
     Trigger yButtonTwo = new JoystickButton(m_controllerTwo, 4);
     Trigger leftBumperTwo = new JoystickButton(m_controllerTwo, 5);
     Trigger rightBumperTwo = new JoystickButton(m_controllerTwo, 6);
-    Trigger startButtonTwo = new JoystickButton(m_controllerTwo, 8);
+    Trigger backButtonTwo = new JoystickButton(m_controllerTwo, 7);
 
     Trigger rightTriggerOne = new Trigger(() -> m_filteredController.getRightTriggerActive());
 
     Trigger leftTriggerTwo = new Trigger(() -> m_filteredControllerTwo.getLeftTriggerActive());
     Trigger rightTriggerTwo = new Trigger(() -> m_filteredControllerTwo.getRightTriggerActive());
+
+    Trigger dpapUpTwo = new Trigger(() -> m_filteredControllerTwo.getPOVButton() == 2);
 
     Trigger leftStickButtonOne = new JoystickButton(m_controller, 9);
     Trigger rightStickButtonOne = new JoystickButton(m_controller, 10);
@@ -127,7 +130,7 @@ public class RobotContainer {
 
     rightTriggerOne.onTrue(new IntakeUp(m_intake));
 
-    startButtonTwo.whileTrue(new ZeroSlides(m_elevatorSubsystem));
+    backButtonTwo.whileTrue(new ZeroSlides(m_elevatorSubsystem));
 
     leftStickButtonOne.onTrue(new AutoBalancer(m_drivetrain, m_shifter));
     rightStickButtonOne.onTrue(new AutoBalanceDrive(m_drivetrain, m_shifter));
@@ -140,6 +143,8 @@ public class RobotContainer {
 
     leftTriggerTwo.whileTrue(new IntakeCubeSlow(m_intake));
     rightTriggerTwo.whileTrue(new IntakeConeSlow(m_intake));
+
+    dpapUpTwo.whileTrue(new ConeLift(m_elevatorSubsystem));
 
   }
 
