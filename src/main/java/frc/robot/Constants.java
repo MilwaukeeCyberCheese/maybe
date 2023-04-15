@@ -28,7 +28,9 @@ public final class Constants {
                 public static final double I = 0.000;
                 public static final double D = 0.002;
 
-                public static final double DRIVE_SPEED = -0.45;
+                public static final double DRIVE_SPEED = -0.4;
+
+                public static final double BOUNCE_THRESHOLD = 20;
 
                 public static final double START_BALANCE_ANGLE = 13;
 
@@ -102,8 +104,8 @@ public final class Constants {
 
                 public static final int CURRENT_LIMIT = 60;
 
-                public static final double THROTTLE_LIMITER = 0.8;
-                public static final double ROTATION_LIMITER = 0.7;
+                public static final double THROTTLE_LIMITER = 0.7;
+                public static final double ROTATION_LIMITER = 0.5;
 
                 public static final double DRIVE_SPEED = 0.8;
                 public static final double TURN_SPEED = 0.9;
@@ -137,6 +139,8 @@ public final class Constants {
 
                 public static final int STALL_LIMIT = 30;
                 public static final int FREE_LIMIT = 60;
+
+                public static final double PROTECT_INTAKE_THRESHOLD = 0.03;
         }
 
         public static final class lift {

@@ -2,7 +2,7 @@ package frc.robot.commands;
 
 import java.util.function.IntSupplier;
 
-
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -22,6 +22,7 @@ public class AutoCommand extends CommandBase {
     private final IntSupplier m_autoMode;
     private final Stopwatch timer = new Stopwatch();
     private boolean balanceStarted = false;
+    private boolean bounced = false;
     private int stopwatchCounter = -1;
     private PIDController balancePid = new PIDController(Constants.balance.P, Constants.balance.I, Constants.balance.D);
 
@@ -47,6 +48,7 @@ public class AutoCommand extends CommandBase {
         timer.start();
         stopwatchCounter = -1;
         balanceStarted = false;
+        bounced = false;
     }
 
     @Override
@@ -81,24 +83,30 @@ public class AutoCommand extends CommandBase {
                 end(false);
             }
         } else if (m_autoMode.getAsInt() == 2) {
-
-            m_intake.setPosition(Constants.intake.intakeUp);
-            m_intake.drive(0);
-            double pitchAngleDegrees = Constants.balance.gyro.getRoll();
-
-            if (!balanceStarted) {
-                m_drivetrain.drive(Constants.balance.DRIVE_SPEED, 0);
-                if (pitchAngleDegrees >= Constants.balance.START_BALANCE_ANGLE) {
-                    balanceStarted = true;
-                }
+            Constants.pneumatics.shifterSolenoid.set(Constants.drive.FIRST_GEAR);
+            if (timer.getTime() <= 2000) {
+                System.out.println("Out");
+                m_intake.drive(Constants.intake.CONE_SPEED);
             } else {
+                m_intake.setPosition(Constants.intake.intakeUp);
+                m_intake.drive(0);
+                double pitchAngleDegrees = MathUtil.clamp(Constants.balance.gyro.getRoll(), -14.6, 14.6);
 
-                // double pitchAngleDegrees = -1 *
-                // RobotContainer.m_filteredControllerTwo.getYLeft(0.1) * 10;
+                if (!balanceStarted) {
+                    m_drivetrain.drive(Constants.balance.DRIVE_SPEED, 0);
+                    if (pitchAngleDegrees >= Constants.balance.START_BALANCE_ANGLE) {
+                        balanceStarted = true;
+                    }
+                   
+                } else {
 
-                double throttle = balancePid.calculate(pitchAngleDegrees);
+                    // double pitchAngleDegrees = -1 *
+                    // RobotContainer.m_filteredControllerTwo.getYLeft(0.1) * 10;
 
-                m_drivetrain.drive(throttle * Constants.balance.BALANCE_SPEED_MOD, 0);
+                    double throttle = balancePid.calculate(pitchAngleDegrees);
+
+                    m_drivetrain.drive(throttle * Constants.balance.BALANCE_SPEED_MOD, 0);
+                }
             }
         }
     }

@@ -63,7 +63,7 @@ Constants.controllers.rightLiftSpark.setSmartCurrentLimit(Constants.lift.MAX_STA
         SmartDashboard.putNumber("Slide Set Position", setPosition);
         SmartDashboard.putNumber("Left Slide Speed", Constants.controllers.leftLiftSpark.get());
         SmartDashboard.putNumber("Right Slide Speed", Constants.controllers.rightLiftSpark.get());
-        SmartDashboard.putNumber("Speed: ", speed);
+        SmartDashboard.putNumber("Elevator Speed: ", speed);
 
     }
 

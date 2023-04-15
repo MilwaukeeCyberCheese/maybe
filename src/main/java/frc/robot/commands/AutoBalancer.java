@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shifter;
@@ -65,7 +66,11 @@ balancePid.setTolerance(Constants.balance.BALANCED_THRESHOLD_DEGREES);
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    return false; // Runs until interrupted since should run till auto is over
+    if(RobotContainer.m_filteredController.getYButton()){
+      return true; // Runs until interrupted since should run till auto is over
+    } else{
+      return false;
+    }
   }
 
  

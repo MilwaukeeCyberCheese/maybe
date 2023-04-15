@@ -22,7 +22,7 @@ public class ProtectIntake extends CommandBase {
 
   @Override
   public void execute() {
-    m_liftMoving = RobotContainer.m_elevatorSubsystem.speed != 0.0;
+    m_liftMoving = Math.abs(RobotContainer.m_elevatorSubsystem.speed) > Constants.intake.PROTECT_INTAKE_THRESHOLD;
 
     if (RobotContainer.m_drivetrain.throttleActual > 0.4){
       m_intake.setPosition(Constants.intake.intakeUp);
@@ -30,6 +30,7 @@ public class ProtectIntake extends CommandBase {
     if ((m_liftMoving && Constants.lift.MAX_INTAKE > RobotContainer.m_elevatorSubsystem.position)
         || !RobotContainer.m_elevatorSubsystem.PIDenabled) {
           m_intake.setPosition(Constants.intake.intakeDown);
+          System.out.println(RobotContainer.m_elevatorSubsystem.speed);
     }
   }
 
