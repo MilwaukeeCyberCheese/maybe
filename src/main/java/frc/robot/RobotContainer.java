@@ -20,6 +20,9 @@ import frc.robot.commands.AutoBalanceDrive;
 import frc.robot.commands.AutoBalancer;
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ConeIntakePosition;
+import frc.robot.commands.ConePlacePosition;
+import frc.robot.commands.CubeIntakePosition;
+import frc.robot.commands.CubePlacePosition;
 import frc.robot.commands.IntakeCubeDown;
 import frc.robot.commands.IntakeConeDown;
 import frc.robot.other.FilteredController;
@@ -120,7 +123,10 @@ public class RobotContainer {
     Trigger leftTriggerTwo = new Trigger(() -> m_filteredControllerTwo.getLeftTriggerActive());
     Trigger rightTriggerTwo = new Trigger(() -> m_filteredControllerTwo.getRightTriggerActive());
 
-    Trigger dpapUpTwo = new Trigger(() -> m_filteredControllerTwo.getPOVButton() == 2);
+    Trigger dpadUpTwo = new Trigger(() -> m_filteredControllerTwo.getPOVButton() == 8);
+    Trigger dpadDownTwo = new Trigger(() -> m_filteredControllerTwo.getPOVButton() == 2);
+    Trigger dpadLeftTwo = new Trigger(() -> m_filteredControllerTwo.getPOVButton() == 6);
+    Trigger dpadRightTwo = new Trigger(() -> m_filteredControllerTwo.getPOVButton() == 4);
 
     Trigger leftStickButtonOne = new JoystickButton(m_controller, 9);
     Trigger rightStickButtonOne = new JoystickButton(m_controller, 10);
@@ -144,7 +150,10 @@ public class RobotContainer {
     leftTriggerTwo.whileTrue(new IntakeCubeDown(m_intake));
     rightTriggerTwo.whileTrue(new IntakeConeDown(m_intake));
 
-    dpapUpTwo.whileTrue(new ConeIntakePosition(m_elevatorSubsystem));
+    dpadUpTwo.onTrue(new ConePlacePosition(m_elevatorSubsystem));
+    dpadDownTwo.onTrue(new ConeIntakePosition(m_elevatorSubsystem));
+    dpadLeftTwo.onTrue(new CubePlacePosition(m_elevatorSubsystem));
+    dpadRightTwo.onTrue(new CubeIntakePosition(m_elevatorSubsystem));
 
   }
 
