@@ -136,6 +136,9 @@ public final class Constants {
                 public static final Value intakeDown = Value.kForward;
                 public static final Value intakeUp = Value.kReverse;
                 public static final Value intakeOff = Value.kOff;
+
+                public static final int STALL_LIMIT = 30;
+                public static final int FREE_LIMIT = 60;
         }
 
         public static final class lift {

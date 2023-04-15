@@ -18,6 +18,7 @@ public class Intake extends SubsystemBase {
      */
     public Intake() {
         Constants.controllers.intakeSpark.setInverted(Constants.intake.INVERTED);
+        Constants.controllers.intakeSpark.setSmartCurrentLimit(Constants.intake.STALL_LIMIT, Constants.intake.FREE_LIMIT);
     }
 
     @Override
