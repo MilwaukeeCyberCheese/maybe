@@ -154,16 +154,20 @@ public final class Constants {
                 public static final double SPEED_LIMITER_UPPER = 0.45;
                 public static final double SPEED_LIMITER_LOWER = -0.45;
 
-                public static final double POSITION_ZERO = 0;
+                public static final double CUBE_INTAKE_POSITION = 0;
 
-                public static final double POSITION_ONE = 7;
+                public static final double CONE_INTAKE_POSITION = 7;
 
-                public static final double POSITION_TWO = 50;
+                public static final double CUBE_PLACE_POSITION = 90;
 
-                public static final double POSITION_THREE = 108;
+                public static final double CONE_PLACE_POSITION = 102;
 
                 public static final double MIN_POSITION = 0;
                 public static final double MAX_POSITION = 105;
+
+                public static final int MAX_FREE_AMPS = 60;
+                public static final int MAX_STALL_AMPS = 5;
+                public static final int STALL_RPM = 20;
 
                 public static double P = 0.5;
                 public static double I = 0;

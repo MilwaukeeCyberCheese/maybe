@@ -16,12 +16,12 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /* actuates the pistons to flop the intake down */
-public class ConeLift extends CommandBase {
+public class ConePlacePosition extends CommandBase {
   private final ElevatorSubsystem m_elevatorSubsystem;
   private Double m_speed;
   private Double m_position;
 
-  public ConeLift(ElevatorSubsystem elevatorSubsystem) {
+  public ConePlacePosition(ElevatorSubsystem elevatorSubsystem) {
     m_elevatorSubsystem = elevatorSubsystem;
     addRequirements(m_elevatorSubsystem);
   }
@@ -34,13 +34,9 @@ public class ConeLift extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void execute() {
-    if (RobotContainer.m_intake.position == Constants.intake.intakeDown
-        || (Constants.lift.MAX_INTAKE < m_elevatorSubsystem.position && m_elevatorSubsystem.PIDenabled)) {
-      if (m_elevatorSubsystem.PIDenabled) {
-        m_elevatorSubsystem
-            .setPosition(Constants.lift.POSITION_TWO);
-      }
-    }
-  }
 
+    m_elevatorSubsystem
+        .setPosition(Constants.lift.CONE_PLACE_POSITION);
+
+  }
 }

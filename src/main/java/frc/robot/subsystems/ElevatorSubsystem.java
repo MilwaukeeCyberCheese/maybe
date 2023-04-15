@@ -28,10 +28,10 @@ public class ElevatorSubsystem extends SubsystemBase {
     /** Create a new elevator subsystem. */
     public ElevatorSubsystem() {
 
-        // Constants.sensors.leftLift.setInverted(Constants.lift.LEFT_INVERTED);
-        // Constants.sensors.leftLift.setPositionConversionFactor(1);
 
-        Constants.controllers.leftLiftSpark.restoreFactoryDefaults();
+
+        
+        Constants.controllers.leftLiftSpark.setSmartCurrentLimit(Constants.lift.MAX_STALL_AMPS, Constants.lift.MAX_FREE_AMPS, Constants.lift.STALL_RPM);
 
         Constants.controllers.leftLiftSpark.setInverted(Constants.lift.LEFT_INVERTED);
         Constants.controllers.rightLiftSpark.setInverted(Constants.lift.RIGHT_INVERTED);

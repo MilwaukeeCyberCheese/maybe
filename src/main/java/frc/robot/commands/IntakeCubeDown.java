@@ -22,7 +22,7 @@ public class IntakeCubeDown extends CommandBase {
     // run whenever command is called
     @Override
     public void execute() {
-        m_intake.drive(Constants.intake.CUBE_SLOW);
+        m_intake.drive(Constants.intake.CUBE_SPEED);
     }
 
     // stop motor when finished

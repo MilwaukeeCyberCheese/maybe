@@ -19,7 +19,7 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutoBalanceDrive;
 import frc.robot.commands.AutoBalancer;
 import frc.robot.commands.AutoCommand;
-import frc.robot.commands.ConeLift;
+import frc.robot.commands.ConeIntakePosition;
 import frc.robot.commands.IntakeCubeDown;
 import frc.robot.commands.IntakeConeDown;
 import frc.robot.other.FilteredController;
@@ -144,7 +144,7 @@ public class RobotContainer {
     leftTriggerTwo.whileTrue(new IntakeCubeDown(m_intake));
     rightTriggerTwo.whileTrue(new IntakeConeDown(m_intake));
 
-    dpapUpTwo.whileTrue(new ConeLift(m_elevatorSubsystem));
+    dpapUpTwo.whileTrue(new ConeIntakePosition(m_elevatorSubsystem));
 
   }
 
