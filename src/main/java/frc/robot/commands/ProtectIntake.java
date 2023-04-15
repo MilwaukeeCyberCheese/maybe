@@ -24,7 +24,7 @@ public class ProtectIntake extends CommandBase {
   public void execute() {
     m_liftMoving = Math.abs(RobotContainer.m_elevatorSubsystem.speed) > Constants.intake.PROTECT_INTAKE_THRESHOLD;
 
-    if (RobotContainer.m_drivetrain.throttleActual > 0.4){
+    if (Math.abs(RobotContainer.m_drivetrain.throttleActual) > 0.4){
       m_intake.setPosition(Constants.intake.intakeUp);
     }
     if ((m_liftMoving && Constants.lift.MAX_INTAKE > RobotContainer.m_elevatorSubsystem.position)

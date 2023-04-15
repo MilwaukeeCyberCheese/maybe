@@ -145,7 +145,7 @@ public final class Constants {
 
         public static final class lift {
                 public static final double MIN_INTAKE = 0;
-                public static final double MAX_INTAKE = 25;
+                public static final double MAX_INTAKE = 30;
 
                 public static final boolean LEFT_INVERTED = false;
                 public static final boolean RIGHT_INVERTED = true;
