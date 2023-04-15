@@ -61,8 +61,8 @@ public final class Constants {
                 public static final int DRIVETRAIN_RIGHT_FRONT_SPARK = 2;
                 public static final int DRIVETRAIN_LEFT_REAR_SPARK = 3;
                 public static final int DRIVETRAIN_RIGHT_REAR_SPARK = 4;
-                public static final int LEFT_LIFT_SPARK = 6;
-                public static final int RIGHT_LIFT_SPARK = 5;
+                public static final int LEFT_LIFT_SPARK = 5;
+                public static final int RIGHT_LIFT_SPARK = 6;
                 public static final int INTAKE_SPARK = 7;
 
                 /**
@@ -143,8 +143,8 @@ public final class Constants {
                 public static final double MIN_INTAKE = 0;
                 public static final double MAX_INTAKE = 25;
 
-                public static final boolean LEFT_INVERTED = true;
-                public static final boolean RIGHT_INVERTED = false;
+                public static final boolean LEFT_INVERTED = false;
+                public static final boolean RIGHT_INVERTED = true;
 
                 public static final double LIFT_SPEED = 0.35;
                 public static final double PID_CHANGE_SPEED = 1.2;
@@ -154,7 +154,7 @@ public final class Constants {
 
                 public static final double CUBE_INTAKE_POSITION = 0;
 
-                public static final double CONE_INTAKE_POSITION = 7;
+                public static final double CONE_INTAKE_POSITION = 5;
 
                 public static final double CUBE_PLACE_POSITION = 90;
 

@@ -27,10 +27,8 @@ public class ElevatorSubsystem extends SubsystemBase {
     /** Create a new elevator subsystem. */
     public ElevatorSubsystem() {
 
-
-
-        
-        Constants.controllers.leftLiftSpark.setSmartCurrentLimit(Constants.lift.MAX_STALL_AMPS, Constants.lift.MAX_FREE_AMPS, Constants.lift.STALL_RPM);
+Constants.controllers.leftLiftSpark.setSmartCurrentLimit(Constants.lift.MAX_STALL_AMPS, Constants.lift.MAX_FREE_AMPS, Constants.lift.STALL_RPM);
+Constants.controllers.rightLiftSpark.setSmartCurrentLimit(Constants.lift.MAX_STALL_AMPS, Constants.lift.MAX_FREE_AMPS, Constants.lift.STALL_RPM);
 
         Constants.controllers.leftLiftSpark.setInverted(Constants.lift.LEFT_INVERTED);
         Constants.controllers.rightLiftSpark.setInverted(Constants.lift.RIGHT_INVERTED);
@@ -79,7 +77,9 @@ public class ElevatorSubsystem extends SubsystemBase {
         if (RobotContainer.readAuto) {
             RobotContainer.m_autoSubsystem.addLiftPos(setPosition);
         }
+        if(Constants.controllers.leftLiftSpark.getOutputCurrent() > 15){
 
+        }
         position = (Constants.sensors.leftLift.getPosition() + Constants.sensors.rightLift.getPosition()) / 2;
       
         if (PIDenabled) {
