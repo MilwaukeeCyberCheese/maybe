@@ -167,6 +167,8 @@ public final class Constants {
                 public static final double MIN_POSITION = 0;
                 public static final double MAX_POSITION = 105;
 
+                public static final double TOLERANCE = 0.3;
+
                 public static final int MAX_FREE_AMPS = 60;
                 public static final int MAX_STALL_AMPS = 5;
                 public static final int STALL_RPM = 20;

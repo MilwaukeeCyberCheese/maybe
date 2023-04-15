@@ -33,7 +33,7 @@ Constants.controllers.rightLiftSpark.setSmartCurrentLimit(Constants.lift.MAX_STA
         Constants.controllers.leftLiftSpark.setInverted(Constants.lift.LEFT_INVERTED);
         Constants.controllers.rightLiftSpark.setInverted(Constants.lift.RIGHT_INVERTED);
 
-        slidePid.setTolerance(0.3);
+        slidePid.setTolerance(Constants.lift.TOLERANCE);
 
     }
 

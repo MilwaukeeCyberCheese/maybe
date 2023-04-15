@@ -30,4 +30,13 @@ public class ConePlacePosition extends CommandBase {
         .setPosition(Constants.lift.CONE_PLACE_POSITION);
 
   }
+
+  @Override
+  public boolean isFinished() {
+    if(Math.abs(m_elevatorSubsystem.position - Constants.lift.CONE_INTAKE_POSITION) < Constants.lift.TOLERANCE){
+      return true;
+    }else {
+      return false;
+    }
+  }
 }
