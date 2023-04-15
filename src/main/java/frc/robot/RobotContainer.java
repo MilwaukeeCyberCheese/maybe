@@ -20,8 +20,8 @@ import frc.robot.commands.AutoBalanceDrive;
 import frc.robot.commands.AutoBalancer;
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ConeLift;
-import frc.robot.commands.IntakeCubeSlow;
-import frc.robot.commands.IntakeConeSlow;
+import frc.robot.commands.IntakeCubeDown;
+import frc.robot.commands.IntakeConeDown;
 import frc.robot.other.FilteredController;
 import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Drivetrain;
@@ -141,8 +141,8 @@ public class RobotContainer {
     leftBumperTwo.whileTrue(new IntakeCubeCommand(m_intake));
     rightBumperTwo.whileTrue(new IntakeConeCommand(m_intake));
 
-    leftTriggerTwo.whileTrue(new IntakeCubeSlow(m_intake));
-    rightTriggerTwo.whileTrue(new IntakeConeSlow(m_intake));
+    leftTriggerTwo.whileTrue(new IntakeCubeDown(m_intake));
+    rightTriggerTwo.whileTrue(new IntakeConeDown(m_intake));
 
     dpapUpTwo.whileTrue(new ConeLift(m_elevatorSubsystem));
 

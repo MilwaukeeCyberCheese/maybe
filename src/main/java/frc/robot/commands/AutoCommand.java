@@ -8,7 +8,6 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.Constants.lift;
 import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.AutoSubsystemValues;
@@ -44,6 +43,9 @@ public class AutoCommand extends CommandBase {
 
     @Override
     public void initialize() {
+        balancePid.setSetpoint(0);
+        balancePid.setTolerance(Constants.balance.BALANCED_THRESHOLD_DEGREES);
+        
         timer.stop();
         timer.reset();
         timer.start();

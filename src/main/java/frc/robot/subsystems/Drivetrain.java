@@ -78,8 +78,9 @@ public class Drivetrain extends SubsystemBase {
   /**
    * Arcade style driving for the Drivetrain.
    *
-   * @param throttle Speed in range [-1,1]
-   * @param rotation Speed in range [-1,1]
+   * @param throttle  Speed in range [-1,1]
+   * @param rotation  Speed in range [-1,1]
+   * @param brakeMode whether brakes should be engaged or not
    */
   public void drive(double throttle, double rotation, boolean brakeMode) {
     this.rotation = rotation;
@@ -99,10 +100,10 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void setWheelSpeeds(double frontLeft, double frontRight, double backLeft, double backRight) {
-Constants.controllers.leftFrontSpark.set(frontLeft);
-Constants.controllers.rightFrontSpark.set(frontRight);
-Constants.controllers.leftRearSpark.set(backLeft);
-Constants.controllers.rightRearSpark.set(backRight);
+    Constants.controllers.leftFrontSpark.set(frontLeft);
+    Constants.controllers.rightFrontSpark.set(frontRight);
+    Constants.controllers.leftRearSpark.set(backLeft);
+    Constants.controllers.rightRearSpark.set(backRight);
   }
 
   /** Call log method every loop. */
