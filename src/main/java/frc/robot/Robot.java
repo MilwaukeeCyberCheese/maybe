@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    autoChooser.setDefaultOption("Drive", 1);
+    autoChooser.setDefaultOption("Middle Cone & Balance", 1);
     autoChooser.addOption("Balance", 2);
     autoChooser.addOption("Nothing", 3);
     autoChooser.addOption("True Auto", 4);
