@@ -1,6 +1,5 @@
 package frc.robot.commands;
 
-import frc.robot.Constants;
 import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.Intake;
 

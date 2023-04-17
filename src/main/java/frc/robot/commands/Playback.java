@@ -4,7 +4,6 @@ import java.util.function.IntSupplier;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.drive;
 import frc.robot.subsystems.AutoSubsystemValues;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -20,8 +19,8 @@ public class Playback extends CommandBase {
     private final IntSupplier m_whichOne;
 
     public Playback(Intake intake, Drivetrain drivetrain,
-    ElevatorSubsystem elevatorSubsystem,
-    Shifter shifter, IntSupplier whichOne) {
+            ElevatorSubsystem elevatorSubsystem,
+            Shifter shifter, IntSupplier whichOne) {
         this.m_intake = intake;
         this.m_drivetrain = drivetrain;
         this.m_elevatorSubsystem = elevatorSubsystem;
@@ -31,26 +30,32 @@ public class Playback extends CommandBase {
     }
 
     @Override
-    public void execute(){
-if (stopwatchCounter < AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
-    stopwatchCounter++;
+    public void execute() {
+        if (stopwatchCounter < AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
+            stopwatchCounter++;
 
-    double frontLeft = AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(stopwatchCounter);
-    double frontRight = AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(stopwatchCounter);
-    double backLeft = AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(stopwatchCounter);
-    double backRight = AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(stopwatchCounter);
+            double frontLeft = AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(stopwatchCounter);
+            double frontRight = AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(stopwatchCounter);
+            double backLeft = AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(stopwatchCounter);
+            double backRight = AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(stopwatchCounter);
 
-    m_drivetrain.setWheelSpeeds(frontLeft, frontRight, backLeft, backRight);
+            m_drivetrain.setWheelSpeeds(frontLeft, frontRight, backLeft, backRight);
 
-    double intakeSpeed = AutoSubsystemValues.intaking.intaking.get(stopwatchCounter);
+            double intakeSpeed = AutoSubsystemValues.intaking.intaking.get(stopwatchCounter);
 
-    m_intake.drive(intakeSpeed);
+            m_intake.drive(intakeSpeed);
 
-    double liftPos = AutoSubsystemValues.liftPos.liftPos.get(stopwatchCounter);
+            double liftPos = AutoSubsystemValues.liftPos.liftPos.get(stopwatchCounter);
 
-    m_elevatorSubsystem.setPosition(liftPos);
+            m_elevatorSubsystem.setPosition(liftPos);
 
-    Value intakePos = AutoSubsystemValues.intakePos.intakePos.get(stopwatchCounter);
+            Value intakePos = AutoSubsystemValues.intakePos.intakePos.get(stopwatchCounter);
 
-    m_intake.setPosition(intakePos);
-}}}
+            m_intake.setPosition(intakePos);
+
+            boolean gear = AutoSubsystemValues.gear.gear.get(stopwatchCounter);
+
+            m_shifter.setGear(gear);
+        }
+    }
+}

@@ -24,7 +24,6 @@ public class AutoBalanceDrive extends CommandBase {
   private boolean firstEdge = false;
   private boolean secondEdge = false;
   private boolean bottom = false;
-  private double throttle;
   private Stopwatch timer = new Stopwatch();
   private PIDController balancePid = new PIDController(Constants.balance.P, Constants.balance.I, Constants.balance.D);
 

@@ -114,8 +114,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
 
-    int autoMode = autoChooser.getSelected();
-
     m_autoCommand = m_robotContainer.getAutonomousCommand();
 
     SmartDashboard.putData("Autonomous Command", m_autoCommand);
