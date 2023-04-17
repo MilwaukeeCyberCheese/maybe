@@ -9,6 +9,8 @@ import frc.robot.RobotContainer;
 import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shifter;
+import frc.robot.subsystems.Intake;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -16,7 +18,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class AutoBalanceDrive extends CommandBase {
   private final Drivetrain m_drivetrain;
   private final Shifter m_shifter;
-  private boolean autoBalanceStarted = false;
+  private final Intake m_intake;
+  private boolean balanceStarted = false;
+  private boolean top = false;
+  private boolean firstEdge = false;
+  private boolean secondEdge = false;
+  private boolean bottom = false;
   private double throttle;
   private Stopwatch timer = new Stopwatch();
   private PIDController balancePid = new PIDController(Constants.balance.P, Constants.balance.I, Constants.balance.D);
@@ -26,10 +33,11 @@ public class AutoBalanceDrive extends CommandBase {
    *
    * @param drivetrain The drivetrain subsystem to drive
    */
-  public AutoBalanceDrive(Drivetrain drivetrain, Shifter shifter) {
+  public AutoBalanceDrive(Drivetrain drivetrain, Shifter shifter, Intake intake) {
     m_drivetrain = drivetrain;
     m_shifter = shifter;
-    addRequirements(m_drivetrain);
+    m_intake = intake;
+    addRequirements(m_drivetrain, m_shifter, m_intake);
 
   }
 
@@ -40,7 +48,7 @@ public class AutoBalanceDrive extends CommandBase {
     timer.reset();
     timer.start();
 
-    autoBalanceStarted = false;
+    balanceStarted = false;
 
     balancePid.setSetpoint(0);
 
@@ -50,19 +58,38 @@ public class AutoBalanceDrive extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    double pitchAngleDegrees = Constants.balance.gyro.getRoll();
+    m_intake.setPosition(Constants.intake.intakeUp);
+    m_intake.drive(0);
+    double pitchAngleDegrees = MathUtil.clamp(Constants.balance.gyro.getRoll(), -14.6, 14.6);
 
-    if (!autoBalanceStarted) {
+    if (!firstEdge || !top || !secondEdge || !bottom) {
       m_drivetrain.drive(Constants.balance.DRIVE_SPEED, 0);
-      if (pitchAngleDegrees >= Constants.balance.START_BALANCE_ANGLE) {
-        autoBalanceStarted = true;
+      if (Math.abs(pitchAngleDegrees) >= Constants.balance.START_BALANCE_ANGLE) {
+        firstEdge = true;
       }
+      if (Math.abs(pitchAngleDegrees) <= 0.5 && firstEdge) {
+        top = true;
+      }
+      if (Math.abs(pitchAngleDegrees) <= Constants.balance.START_BALANCE_ANGLE &&
+          top) {
+        secondEdge = true;
+      }
+      if (Math.abs(pitchAngleDegrees) <= 0.5 && secondEdge) {
+        bottom = true;
+      }
+
+    } else if (!balanceStarted) {
+      m_drivetrain.drive(-Constants.balance.DRIVE_SPEED, 0);
+      if (Math.abs(pitchAngleDegrees) >= Constants.balance.START_BALANCE_ANGLE) {
+        balanceStarted = true;
+      }
+
     } else {
 
       // double pitchAngleDegrees = -1 *
       // RobotContainer.m_filteredControllerTwo.getYLeft(0.1) * 10;
 
-      throttle = balancePid.calculate(pitchAngleDegrees);
+      double throttle = balancePid.calculate(pitchAngleDegrees);
 
       m_drivetrain.drive(throttle * Constants.balance.BALANCE_SPEED_MOD, 0);
     }
@@ -72,10 +99,10 @@ public class AutoBalanceDrive extends CommandBase {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    if(RobotContainer.m_filteredController.getYButton()){
-    return true; // Runs until interrupted since should run till auto is over
-  } else{
-    return false;
+    if (RobotContainer.m_filteredController.getYButton()) {
+      return true; // Runs until interrupted since should run till auto is over
+    } else {
+      return false;
+    }
   }
-}
 }

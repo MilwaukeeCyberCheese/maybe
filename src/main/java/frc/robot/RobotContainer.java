@@ -138,7 +138,7 @@ public class RobotContainer {
     backButtonTwo.whileTrue(new ZeroSlides(m_elevatorSubsystem));
 
     leftStickButtonOne.onTrue(new AutoBalancer(m_drivetrain, m_shifter));
-    rightStickButtonOne.onTrue(new AutoBalanceDrive(m_drivetrain, m_shifter));
+    rightStickButtonOne.onTrue(new AutoBalanceDrive(m_drivetrain, m_shifter, m_intake));
 
     yButtonTwo.whileTrue(new IntakeUp(m_intake));
     aButtonTwo.whileTrue(new IntakeDown(m_intake));
