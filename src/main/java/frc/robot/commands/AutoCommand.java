@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import java.util.function.IntSupplier;
 
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
@@ -21,11 +22,11 @@ public class AutoCommand extends SequentialCommandGroup {
         }
         if (autoMode.getAsInt() == 2) {
             addCommands(
-                    new ConePlacePosition(elevatorSubsystem),
+                    Commands.race(new ConePlacePosition(elevatorSubsystem), new ProtectIntake(intake)),
 
                     new IntakeAuto(intake, Constants.intake.intakeUp, () -> Constants.intake.CUBE_SPEED, () -> 1500),
 
-                    new CubeIntakePosition(elevatorSubsystem),
+                    Commands.race(new CubeIntakePosition(elevatorSubsystem), new ProtectIntake(intake)),
 
                     new AutoBalanceDrive(drivetrain, shifter, intake));
         }
