@@ -43,11 +43,8 @@ public class IntakeAuto extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        if (timer.getTime() > m_runtime.getAsInt()) {
-            return true;
-        } else {
-            return false;
-        }
+        return timer.getTime() > m_runtime.getAsInt();
+            
     }
 
     // stop motor when finished
