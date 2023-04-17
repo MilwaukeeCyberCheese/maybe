@@ -21,7 +21,10 @@ public class AutoCommand extends SequentialCommandGroup {
     public AutoCommand(Intake intake, Drivetrain drivetrain,
             ElevatorSubsystem elevatorSubsystem,
             Shifter shifter, IntSupplier autoMode) {
-                
+        if (autoMode.getAsInt() == 1) {
+            addCommands(
+                    new Playback(intake, drivetrain, elevatorSubsystem, shifter, () -> 1));
+        }
         if (autoMode.getAsInt() == 2) {
             addCommands(
                     new ConePlacePosition(elevatorSubsystem),
