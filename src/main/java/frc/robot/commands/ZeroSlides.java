@@ -8,20 +8,26 @@ import frc.robot.subsystems.ElevatorSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-/* Shifts the drivetrain into first gear */
+/* Zeroes out the encoders for the slides */
 public class ZeroSlides extends CommandBase {
-    private final ElevatorSubsystem m_elevatorSubsystem;
-    
-      public ZeroSlides(ElevatorSubsystem elevatorSubsystem) {
-        this.m_elevatorSubsystem = elevatorSubsystem;
-        addRequirements(m_elevatorSubsystem);
-      }
+  private final ElevatorSubsystem m_elevatorSubsystem;
+
+  /**
+   * Creates a new intake Command.
+   *
+   * @param elevatorSubsystem subsystem controlling the lift
+   * 
+   */
+  public ZeroSlides(ElevatorSubsystem elevatorSubsystem) {
+    this.m_elevatorSubsystem = elevatorSubsystem;
+    addRequirements(m_elevatorSubsystem);
+  }
 
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
+    //zeroes out the encoders
     m_elevatorSubsystem.zero();
   }
 
-  
 }

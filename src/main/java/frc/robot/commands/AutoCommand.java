@@ -16,6 +16,7 @@ public class AutoCommand extends SequentialCommandGroup {
     public AutoCommand(Intake intake, Drivetrain drivetrain,
             ElevatorSubsystem elevatorSubsystem,
             Shifter shifter, IntSupplier autoMode) {
+
         if (autoMode.getAsInt() == 1) {
             addCommands(
                     new Playback(intake, drivetrain, elevatorSubsystem, shifter, () -> Constants.autos.DRIVE_OUT));

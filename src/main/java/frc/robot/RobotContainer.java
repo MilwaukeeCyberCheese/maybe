@@ -24,7 +24,7 @@ import frc.robot.commands.ConePlacePosition;
 import frc.robot.commands.CubeIntakePosition;
 import frc.robot.commands.CubePlacePosition;
 import frc.robot.commands.IntakeCubeDown;
-import frc.robot.commands.IntakeConeDown;
+import frc.robot.commands.IntakeConeUp;
 import frc.robot.other.FilteredController;
 import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Drivetrain;
@@ -107,7 +107,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // Create some buttons
+    // Create the triggers
     Trigger leftBumperOne = new JoystickButton(m_controller, 5);
     Trigger rightBumperOne = new JoystickButton(m_controller, 6);
 
@@ -128,6 +128,7 @@ public class RobotContainer {
     Trigger leftStickButtonOne = new JoystickButton(m_controller, 9);
     Trigger rightStickButtonOne = new JoystickButton(m_controller, 10);
 
+    // map the trigers to commands
     leftBumperOne.onTrue(new First(m_shifter));
     rightBumperOne.onTrue(new Second(m_shifter));
 
@@ -143,7 +144,7 @@ public class RobotContainer {
     rightBumperTwo.whileTrue(new IntakeConeCommand(m_intake));
 
     leftTriggerTwo.whileTrue(new IntakeCubeDown(m_intake));
-    rightTriggerTwo.whileTrue(new IntakeConeDown(m_intake));
+    rightTriggerTwo.whileTrue(new IntakeConeUp(m_intake));
 
     dpadUpTwo.onTrue(new ConePlacePosition(m_elevatorSubsystem));
     dpadDownTwo.onTrue(new ConeIntakePosition(m_elevatorSubsystem));

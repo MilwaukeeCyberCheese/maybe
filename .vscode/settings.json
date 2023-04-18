@@ -26,5 +26,6 @@
     },
   ],
   "java.test.defaultConfig": "WPIlibUnitTests",
-  "files.autoSave": "onFocusChange"
+  "files.autoSave": "onFocusChange",
+  "java.format.settings.url": "eclipse-formatter.xml"
 }

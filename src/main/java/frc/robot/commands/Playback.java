@@ -18,6 +18,18 @@ public class Playback extends CommandBase {
     private int stopwatchCounter = -1;
     private final IntSupplier m_whichOne;
 
+    /**
+     * Creates a new intake Command.
+     *
+     * @param intake           subsystem controlling the intake
+     * @param drivetrain       system to control the drivetrain
+     * @param elevatorSubsytem system to control the lift
+     * @param shifter          system to control the gearboxes
+     * @param whichOne         determines which recorded autonomous is played back,
+     *                         recordings can be found in
+     *                         {@link AutoSubsystemValues}
+     * 
+     */
     public Playback(Intake intake, Drivetrain drivetrain,
             ElevatorSubsystem elevatorSubsystem,
             Shifter shifter, IntSupplier whichOne) {
@@ -31,30 +43,47 @@ public class Playback extends CommandBase {
 
     @Override
     public void execute() {
-        if (stopwatchCounter < AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(m_whichOne.getAsInt()).size() - 1) {
+        // check for time running to exceed size
+        if (stopwatchCounter < AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(m_whichOne.getAsInt()).size()
+                - 1) {
+            // increment counter
             stopwatchCounter++;
 
-            double frontLeft = AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(m_whichOne.getAsInt()).get(stopwatchCounter);
-            double frontRight = AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(m_whichOne.getAsInt()).get(stopwatchCounter);
-            double backLeft = AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(m_whichOne.getAsInt()).get(stopwatchCounter);
-            double backRight = AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(m_whichOne.getAsInt()).get(stopwatchCounter);
+            // get speeds for drivetrain wheels
+            double frontLeft = AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(m_whichOne.getAsInt())
+                    .get(stopwatchCounter);
+            double frontRight = AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(m_whichOne.getAsInt())
+                    .get(stopwatchCounter);
+            double backLeft = AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(m_whichOne.getAsInt())
+                    .get(stopwatchCounter);
+            double backRight = AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(m_whichOne.getAsInt())
+                    .get(stopwatchCounter);
 
+            // set speeds of wheels
             m_drivetrain.setWheelSpeeds(frontLeft, frontRight, backLeft, backRight);
 
+            //get speed of intake
             double intakeSpeed = AutoSubsystemValues.intaking.intaking.get(m_whichOne.getAsInt()).get(stopwatchCounter);
 
+            //set speed of intake
             m_intake.drive(intakeSpeed);
 
+            //get position of lift
             double liftPos = AutoSubsystemValues.liftPos.liftPos.get(m_whichOne.getAsInt()).get(stopwatchCounter);
 
+            //set position of lift
             m_elevatorSubsystem.setPosition(liftPos);
 
+            //get position of intake
             Value intakePos = AutoSubsystemValues.intakePos.intakePos.get(m_whichOne.getAsInt()).get(stopwatchCounter);
 
+            //set postiion of intake
             m_intake.setPosition(intakePos);
 
+            //get gear of gearboxes
             boolean gear = AutoSubsystemValues.gear.gear.get(m_whichOne.getAsInt()).get(stopwatchCounter);
 
+            //set gear of gearboxes
             m_shifter.setGear(gear);
         }
     }

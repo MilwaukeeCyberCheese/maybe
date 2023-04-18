@@ -12,6 +12,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class IntakeDown extends CommandBase {
   private final Intake m_intake;
 
+  /**
+   * Creates a new intake Command.
+   *
+   * @param intake subsystem controlling the intake
+   * 
+   */
   public IntakeDown(Intake intake) {
     m_intake = intake;
     addRequirements(m_intake);
@@ -20,8 +26,8 @@ public class IntakeDown extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
+    // sets intake to down
     m_intake.setPosition(Constants.intake.intakeDown);
   }
 
-  
 }

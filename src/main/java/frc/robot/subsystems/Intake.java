@@ -12,41 +12,51 @@ public class Intake extends SubsystemBase {
     public Value position;
 
     /**
-     * Creates a new ExampleSubsystem.
+     * Creates a subsystem to control the intake
      */
     public Intake() {
         Constants.controllers.intakeSpark.setInverted(Constants.intake.INVERTED);
-        Constants.controllers.intakeSpark.setSmartCurrentLimit(Constants.intake.STALL_LIMIT, Constants.intake.FREE_LIMIT);
+        Constants.controllers.intakeSpark.setSmartCurrentLimit(Constants.intake.STALL_LIMIT,
+                Constants.intake.FREE_LIMIT);
     }
 
     @Override
     public void periodic() {
-        // This method will be called once per scheduler run
+        // adds position and speed to recording
         if (RobotContainer.readAuto) {
             RobotContainer.m_autoSubsystem.addIntaking(Constants.controllers.intakeSpark.get());
             RobotContainer.m_autoSubsystem.addIntakePos(Constants.pneumatics.intakeSolenoid.get());
         }
+
         log();
-        position = Constants.pneumatics.intakeSolenoid.get();
-        
-        
+
     }
 
+    /**
+     * Run intake at given speed
+     *
+     * @param speed Speed in range [-1,1]
+     * 
+     */
     public void drive(double speed) {
-    
+
         Constants.controllers.intakeSpark.set(speed);
     }
 
+    /**
+     * Set position of the intake
+     *
+     * @param position
+     * 
+     */
     public void setPosition(Value position) {
+        this.position = position;
         Constants.pneumatics.intakeSolenoid.set(position);
 
     }
 
-    public Value getPosition(){
-        return Constants.pneumatics.intakeSolenoid.get();
-    }
-
     public void log() {
+        //log intake speed
         SmartDashboard.putNumber("IntakeSpeed", speed);
     }
 

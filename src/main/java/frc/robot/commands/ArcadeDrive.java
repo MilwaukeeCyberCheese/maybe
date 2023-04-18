@@ -43,6 +43,8 @@ public class ArcadeDrive extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
+
+    //set to slow, turbo, or regular drive speed
     if (m_slow.getAsBoolean()) {
       m_turnSpeedMod = Constants.drive.SLOW_TURN_SPEED;
       m_driveSpeedMod = Constants.drive.SLOW_DRIVE_SPEED;
@@ -50,13 +52,13 @@ public class ArcadeDrive extends CommandBase {
       m_turnSpeedMod = Constants.drive.TURBO_TURN_SPEED;
       m_driveSpeedMod = Constants.drive.TURBO_DRIVE_SPEED;
     } else {
-      m_turnSpeedMod = 1;
-      m_driveSpeedMod = 1;
+      m_turnSpeedMod = Constants.drive.TURN_SPEED;
+      m_driveSpeedMod = Constants.drive.DRIVE_SPEED;
     }
 
-    // set speeds of drivetrain relative to limits
-    m_drivetrain.drive(m_throttle.getAsDouble() * Constants.drive.DRIVE_SPEED * m_driveSpeedMod,
-        m_rotation.getAsDouble() * Constants.drive.TURN_SPEED * m_turnSpeedMod);
+    // set speeds of drivetrain relative to regular, turbo, or slow
+    m_drivetrain.drive(m_throttle.getAsDouble() * m_driveSpeedMod,
+        m_rotation.getAsDouble() * m_turnSpeedMod);
   }
 
   // Make this return true when this Command no longer needs to run execute()

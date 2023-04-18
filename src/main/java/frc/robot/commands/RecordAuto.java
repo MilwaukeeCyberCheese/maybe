@@ -11,7 +11,14 @@ public class RecordAuto extends CommandBase {
     private final BooleanSupplier m_recording;
     private final BooleanSupplier m_stopping;
 
-    // constructor
+    /**
+     * Creates a new recording Command.
+     *
+     * @param autoSubsystem subsystem used for recording autonomous
+     * @param recording     returns true if recording should start
+     * @param stopping      returns true when recording ends
+     * 
+     */
     public RecordAuto(AutoSubsystem autoSubsystem, BooleanSupplier recording, BooleanSupplier stopping) {
         this.m_autoSubsystem = autoSubsystem;
         this.m_recording = recording;
@@ -22,27 +29,19 @@ public class RecordAuto extends CommandBase {
     @Override
     public void execute() {
 
+        // clear prior values and set readAuto to true
         if (m_recording.getAsBoolean()) {
             m_autoSubsystem.clearShit();
             RobotContainer.readAuto = true;
             System.out.println("Started - Begin Tracking Autonomous");
 
-        } else if(m_stopping.getAsBoolean()){
+        } // set readAuto to false and print out values
+        else if (m_stopping.getAsBoolean()) {
             RobotContainer.readAuto = false;
             System.out.println("Ended - Finished Tracking Autonomous");
-            m_autoSubsystem.printSpeeds();
+            m_autoSubsystem.printShit();
 
         }
-
-    }
-
-    /**
-     * This function ensures when the action is complete, the robot stops moving
-     * 
-     * @param interrupted
-     */
-    @Override
-    public void end(boolean interrupted) {
 
     }
 }

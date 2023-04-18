@@ -10,10 +10,16 @@ import frc.robot.subsystems.ElevatorSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-/* actuates the pistons to flop the intake down */
+/* runs the lift to the position to intake a cone from the single substation */
 public class ConeIntakePosition extends CommandBase {
   private final ElevatorSubsystem m_elevatorSubsystem;
 
+
+   /**
+   * Creates a new lift position Command.
+   *
+   * @param elevatorSubsystem subsystem controlling the elevators
+   */
   public ConeIntakePosition(ElevatorSubsystem elevatorSubsystem) {
     m_elevatorSubsystem = elevatorSubsystem;
     addRequirements(m_elevatorSubsystem);
@@ -28,15 +34,18 @@ public class ConeIntakePosition extends CommandBase {
   @Override
   public void execute() {
 
+    // set elevator to the correct position
     m_elevatorSubsystem
         .setPosition(Constants.lift.CONE_INTAKE_POSITION);
   }
 
   @Override
   public boolean isFinished() {
-    if(Math.abs(m_elevatorSubsystem.position - Constants.lift.CONE_INTAKE_POSITION) < Constants.lift.TOLERANCE){
+
+    // finishes when the lift is at the proper position
+    if (Math.abs(m_elevatorSubsystem.position - Constants.lift.CONE_INTAKE_POSITION) < Constants.lift.TOLERANCE) {
       return true;
-    }else {
+    } else {
       return false;
     }
   }

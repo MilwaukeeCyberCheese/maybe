@@ -10,11 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.IntakeOff;
-import frc.robot.commands.IntakeUp;
 import frc.robot.commands.Second;
 import frc.robot.commands.ZeroSlides;
-import frc.robot.other.Stopwatch;
-import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.commands.AutoCommand;
 
 /**
@@ -27,19 +24,12 @@ import frc.robot.commands.AutoCommand;
  * project.
  */
 public class Robot extends TimedRobot {
+  // creates sendable for choosing autonomous
   public static SendableChooser<Integer> autoChooser = new SendableChooser<>();
-
 
   private AutoCommand m_autoCommand;
 
   private RobotContainer m_robotContainer;
-
-  public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
-
-  public static final Stopwatch timer = new Stopwatch();
-
- 
-
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -48,10 +38,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    // initialize auto options
     autoChooser.setDefaultOption("Drive on Out", 1);
     autoChooser.addOption("Balance", 2);
     autoChooser.addOption("Somethin Else", 3);
     autoChooser.addOption("Middle Cone and Balance", 4);
+
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
@@ -60,13 +52,19 @@ public class Robot extends TimedRobot {
     // calibrate gyro
     Constants.balance.gyro.calibrate();
 
+    // send camera video to dashboard
     CameraServer.startAutomaticCapture();
+
+    // put auto picker on dashboard
     SmartDashboard.putData("Autonomous", autoChooser);
 
-    // SmartDashboard.putData(CommandScheduler.getInstance());
-    // SmartDashboard.putData("Autonomous Command", m_autoCommand);
+    // send command running to dashboard
+    SmartDashboard.putData(CommandScheduler.getInstance());
 
-    new IntakeUp(RobotContainer.m_intake);
+    // zeroes out the slide position so that the position it is at when the
+    // robot turns on is set as the lowest possible position
+    // which means the slide needs to be all the way down
+    new ZeroSlides(RobotContainer.m_elevatorSubsystem);
 
   }
 
@@ -75,7 +73,7 @@ public class Robot extends TimedRobot {
    * like diagnostics
    * that you want ran during disabled, autonomous, teleoperated and test.
    *
-   * <p>
+   * 
    * This runs after the mode specific periodic functions, but before LiveWindow
    * and
    * SmartDashboard integrated updating.
@@ -89,11 +87,8 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods. This must be called from the
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
-    
-      CommandScheduler.getInstance().run();
-    
 
-    // System.out.println(m_autoSubsystem.balance);
+    CommandScheduler.getInstance().run();
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -101,10 +96,6 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     new IntakeOff(RobotContainer.m_intake);
     new Second(RobotContainer.m_shifter);
-  }
-
-  @Override
-  public void disabledPeriodic() {
   }
 
   /**
@@ -118,78 +109,29 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putData("Autonomous Command", m_autoCommand);
 
-    // timer.stop();
-    // timer.reset();
-    // timer.start();
-    // Constants.pneumatics.intakeSolenoid.set(Constants.intake.intakeUp);
-
-    // // schedule the autonomous command (example)
+    // schedule the autonomous command
     if (m_autoCommand != null) {
       m_autoCommand.schedule();
     }
-  }
 
-  /** This function is called periodically during autonomous. */
-  @Override
-  public void autonomousPeriodic() {
-    
-
-   
-    // if(Constants.pneumatics.shifterSolenoid.get() != Constants.drive.FIRST_GEAR){
-    // Constants.pneumatics.shifterSolenoid.set(Constants.drive.FIRST_GEAR);
-    // }
-    // if (timer.getTime() >= 1.0 && timer.getTime() <= 3.0) {
-    // m_intake.drive(0.7);
-    // } else {
-    // m_intake.drive(0.0);
-    // }
-    // if (timer.getTime() >= 3.5 && timer.getTime() <= 6.5) {
-    // Constants.controllers.leftFrontSpark.set(-0.5);
-    // Constants.controllers.leftRearSpark.set(-0.5);
-    // Constants.controllers.rightFrontSpark.set(-0.5);
-    // Constants.controllers.rightRearSpark.set(-0.5);
-    // } else {
-    // Constants.controllers.leftFrontSpark.set(-0.0);
-    // Constants.controllers.leftRearSpark.set(-0.0);
-    // Constants.controllers.rightFrontSpark.set(-0.0);
-    // Constants.controllers.rightRearSpark.set(-0.0);
-    // }
   }
 
   @Override
   public void teleopInit() {
     // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
+    // teleop starts running.
     if (m_autoCommand != null) {
       m_autoCommand.cancel();
     }
 
-    // zeroes out the slide position so that the position it is at when the
-    // initialization of teleop occurs is set as the lowest possible position
-    // this means the slide needs to be all the way down so the topmost limit is
-    // also accurate
-    new ZeroSlides(RobotContainer.m_elevatorSubsystem);
+    //put robot in second gear at the start of teleop
     new Second(RobotContainer.m_shifter);
-  }
-
-  /** This function is called periodically during operator control. */
-  @Override
-  public void teleopPeriodic() {
-
   }
 
   @Override
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
-
-  }
-
-  /** This function is called periodically during test mode. */
-  @Override
-  public void testPeriodic() {
 
   }
 }

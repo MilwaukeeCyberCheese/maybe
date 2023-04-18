@@ -137,6 +137,8 @@ public final class Constants {
                 public static final double CONE_SLOW = 0.3;
                 public static final double CUBE_SLOW = -0.2;
 
+                public static final double DRIVE_SPEED_THRESHOLD = 0.4;
+
                 public static final Value intakeDown = Value.kForward;
                 public static final Value intakeUp = Value.kReverse;
                 public static final Value intakeOff = Value.kOff;
@@ -144,7 +146,7 @@ public final class Constants {
                 public static final int STALL_LIMIT = 5;
                 public static final int FREE_LIMIT = 60;
 
-                public static final double PROTECT_INTAKE_THRESHOLD = 0.03;
+                public static final double LIFT_SPEED_THRESHOLD = 0.03;
         }
 
         public static final class lift {
@@ -164,7 +166,7 @@ public final class Constants {
 
                 public static final double CUBE_INTAKE_POSITION = 0;
 
-                public static final double CONE_INTAKE_POSITION = 5;
+                public static final double CONE_INTAKE_POSITION = 80; //TODO
 
                 public static final double CUBE_PLACE_POSITION = 90;
 

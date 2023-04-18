@@ -8,10 +8,16 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-/* Shifts the drivetrain into first gear */
+/* actuates the pistons to pull the intake up */
 public class IntakeUp extends CommandBase {
   private final Intake m_intake;
 
+    /**
+   * Creates a new intake Command.
+   *
+   * @param intake subsystem controlling the intake
+   * 
+   */
   public IntakeUp(Intake intake) {
     m_intake = intake;
     addRequirements(m_intake);
@@ -20,6 +26,7 @@ public class IntakeUp extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
+    //sets position of intake to up
     m_intake.setPosition(Constants.intake.intakeUp);
   }
 

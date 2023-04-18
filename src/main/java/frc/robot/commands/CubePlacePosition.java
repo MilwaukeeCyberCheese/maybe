@@ -10,11 +10,15 @@ import frc.robot.subsystems.ElevatorSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-/* actuates the pistons to flop the intake down */
+/* set lift to position to place cube */
 public class CubePlacePosition extends CommandBase {
   private final ElevatorSubsystem m_elevatorSubsystem;
 
-
+  /**
+   * Creates a new lift position Command.
+   *
+   * @param elevatorSubsystem subsystem controlling the elevators
+   */
   public CubePlacePosition(ElevatorSubsystem elevatorSubsystem) {
     m_elevatorSubsystem = elevatorSubsystem;
     addRequirements(m_elevatorSubsystem);
@@ -29,15 +33,17 @@ public class CubePlacePosition extends CommandBase {
   @Override
   public void execute() {
 
+    // set lift position
     m_elevatorSubsystem
         .setPosition(Constants.lift.CUBE_PLACE_POSITION);
   }
 
   @Override
+  // return true when at position
   public boolean isFinished() {
-    if(Math.abs(m_elevatorSubsystem.position - Constants.lift.CONE_INTAKE_POSITION) < Constants.lift.TOLERANCE){
+    if (Math.abs(m_elevatorSubsystem.position - Constants.lift.CONE_INTAKE_POSITION) < Constants.lift.TOLERANCE) {
       return true;
-    }else {
+    } else {
       return false;
     }
   }
