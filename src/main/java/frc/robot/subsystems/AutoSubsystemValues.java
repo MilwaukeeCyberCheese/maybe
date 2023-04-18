@@ -6,7 +6,10 @@ import java.util.LinkedList;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import java.util.List;
 
-/* big class to hold all the recordings for auto */
+/*
+* big class to hold all the recordings for auto 
+* 
+*/
 
 public final class AutoSubsystemValues {
 

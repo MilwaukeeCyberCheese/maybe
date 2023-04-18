@@ -5,6 +5,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class AutoSubsystem extends SubsystemBase {
 
+    @Override
+    public void periodic(){
+        
+    }
+
     // adds drive speeds to recording
     public void addDriveSpeeds(double frontLeft, double frontRight, double backLeft, double backRight) {
         AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(0).add(frontLeft);
