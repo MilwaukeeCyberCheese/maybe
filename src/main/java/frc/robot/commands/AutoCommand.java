@@ -18,7 +18,7 @@ public class AutoCommand extends SequentialCommandGroup {
             Shifter shifter, IntSupplier autoMode) {
         if (autoMode.getAsInt() == 1) {
             addCommands(
-                    new Playback(intake, drivetrain, elevatorSubsystem, shifter, () -> 1));
+                    new Playback(intake, drivetrain, elevatorSubsystem, shifter, () -> Constants.autos.DRIVE_OUT));
         }
         if (autoMode.getAsInt() == 2) {
             addCommands(

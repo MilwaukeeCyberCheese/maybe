@@ -19,6 +19,10 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public final class Constants {
 
+        public static final class autos{
+                public static final int DRIVE_OUT = 0;
+        }
+
         public static final class balance {
                 public static final AHRS gyro = new AHRS(SerialPort.Port.kUSB);
                 public static final double IMBALANCED_THRESHOLD_DEGREES = 2.5;
