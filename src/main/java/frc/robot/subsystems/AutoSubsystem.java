@@ -101,8 +101,8 @@ public class AutoSubsystem extends SubsystemBase {
     }
 
     public void addDriveSpeeds(double frontLeft, double frontRight, double backLeft, double backRight) {
-        AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.add(frontLeft);
-        AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.add(frontRight);
+        AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(0).add(frontLeft);
+        AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(0).add(frontRight);
         AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.add(backLeft);
         AutoSubsystemValues.backRightSpeeds.backRightSpeeds.add(backRight);
     }

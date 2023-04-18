@@ -133,8 +133,6 @@ public class RobotContainer {
     leftBumperOne.onTrue(new First(m_shifter));
     rightBumperOne.onTrue(new Second(m_shifter));
 
-    rightTriggerOne.onTrue(new IntakeUp(m_intake));
-
     backButtonTwo.whileTrue(new ZeroSlides(m_elevatorSubsystem));
 
     leftStickButtonOne.onTrue(new AutoBalancer(m_drivetrain, m_shifter));

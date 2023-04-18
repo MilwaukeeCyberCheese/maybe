@@ -48,10 +48,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    autoChooser.setDefaultOption("Middle Cone & Balance", 1);
+    autoChooser.setDefaultOption("Drive on Out", 1);
     autoChooser.addOption("Balance", 2);
-    autoChooser.addOption("Nothing", 3);
-    autoChooser.addOption("True Auto", 4);
+    autoChooser.addOption("Somethin Else", 3);
+    autoChooser.addOption("Middle Cone and Balance", 4);
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.

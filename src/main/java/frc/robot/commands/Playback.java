@@ -31,7 +31,7 @@ public class Playback extends CommandBase {
 
     @Override
     public void execute() {
-        if (stopwatchCounter < AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.size() - 1) {
+        if (stopwatchCounter < AutoSubsystemValues.frontLeftSpeeds.object[m_whichOne].size() - 1) {
             stopwatchCounter++;
 
             double frontLeft = AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(stopwatchCounter);
