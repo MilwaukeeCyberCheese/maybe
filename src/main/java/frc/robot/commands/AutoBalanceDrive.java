@@ -48,6 +48,10 @@ public class AutoBalanceDrive extends CommandBase {
     timer.start();
 
     balanceStarted = false;
+    firstEdge = false;
+    top = false;
+    secondEdge = false;
+    bottom = false;
 
     balancePid.setSetpoint(0);
 
