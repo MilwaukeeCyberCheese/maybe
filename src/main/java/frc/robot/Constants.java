@@ -34,7 +34,7 @@ public final class Constants {
 
                 public static final double DRIVE_SPEED = -0.4;
 
-                public static final double BOUNCE_THRESHOLD = 20;
+                public static final double BOUNCE_THRESHOLD = 15;
 
                 public static final double START_BALANCE_ANGLE = 13;
 
@@ -117,7 +117,7 @@ public final class Constants {
                 public static final double SLOW_DRIVE_SPEED = 0.5;
                 public static final double SLOW_TURN_SPEED = 0.7;
                 public static final double TURBO_DRIVE_SPEED = 1.0;
-                public static final double TURBO_TURN_SPEED = 0.9;
+                public static final double TURBO_TURN_SPEED = 1.0;
 
                 public static final boolean LEFT_FRONT_INVERTED = true;
                 public static final boolean LEFT_REAR_INVERTED = true;
@@ -141,7 +141,7 @@ public final class Constants {
                 public static final Value intakeUp = Value.kReverse;
                 public static final Value intakeOff = Value.kOff;
 
-                public static final int STALL_LIMIT = 30;
+                public static final int STALL_LIMIT = 5;
                 public static final int FREE_LIMIT = 60;
 
                 public static final double PROTECT_INTAKE_THRESHOLD = 0.03;
@@ -159,8 +159,8 @@ public final class Constants {
                 public static final double LIFT_SPEED = 0.35;
                 public static final double PID_CHANGE_SPEED = 1.2;
 
-                public static final double SPEED_LIMITER_UPPER = 0.45;
-                public static final double SPEED_LIMITER_LOWER = -0.45;
+                public static final double SPEED_LIMITER_UPPER = 0.5;
+                public static final double SPEED_LIMITER_LOWER = -0.4;
 
                 public static final double CUBE_INTAKE_POSITION = 0;
 

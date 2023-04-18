@@ -15,11 +15,15 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** Have the robot drive arcade style. */
-public class AutoBalanceDrive extends CommandBase {
+public class AutoBalanceDriveOut extends CommandBase {
   private final Drivetrain m_drivetrain;
   private final Shifter m_shifter;
   private final Intake m_intake;
   private boolean balanceStarted = false;
+  private boolean top = false;
+  private boolean firstEdge = false;
+  private boolean secondEdge = false;
+  private boolean bottom = false;
   private Stopwatch timer = new Stopwatch();
   private PIDController balancePid = new PIDController(Constants.balance.P, Constants.balance.I, Constants.balance.D);
 
@@ -28,7 +32,7 @@ public class AutoBalanceDrive extends CommandBase {
    *
    * @param drivetrain The drivetrain subsystem to drive
    */
-  public AutoBalanceDrive(Drivetrain drivetrain, Shifter shifter, Intake intake) {
+  public AutoBalanceDriveOut(Drivetrain drivetrain, Shifter shifter, Intake intake) {
     m_drivetrain = drivetrain;
     m_shifter = shifter;
     m_intake = intake;
@@ -44,6 +48,10 @@ public class AutoBalanceDrive extends CommandBase {
     timer.start();
 
     balanceStarted = false;
+    firstEdge = false;
+    top = false;
+    secondEdge = false;
+    bottom = false;
 
     balancePid.setSetpoint(0);
 
@@ -57,7 +65,23 @@ public class AutoBalanceDrive extends CommandBase {
     m_intake.drive(0);
     double pitchAngleDegrees = MathUtil.clamp(Constants.balance.gyro.getRoll(), -Constants.balance.BOUNCE_THRESHOLD, Constants.balance.BOUNCE_THRESHOLD);
 
-    if (!balanceStarted) {
+    if (!firstEdge || !top || !secondEdge || !bottom) {
+      m_drivetrain.drive(Constants.balance.DRIVE_SPEED, 0);
+      if (Math.abs(pitchAngleDegrees) >= Constants.balance.START_BALANCE_ANGLE) {
+        firstEdge = true;
+      }
+      if (Math.abs(pitchAngleDegrees) <= 0.5 && firstEdge) {
+        top = true;
+      }
+      if (Math.abs(pitchAngleDegrees) <= Constants.balance.START_BALANCE_ANGLE &&
+          top) {
+        secondEdge = true;
+      }
+      if (Math.abs(pitchAngleDegrees) <= 0.5 && secondEdge) {
+        bottom = true;
+      }
+
+    } else if (!balanceStarted) {
       m_drivetrain.drive(-Constants.balance.DRIVE_SPEED, 0);
       if (Math.abs(pitchAngleDegrees) >= Constants.balance.START_BALANCE_ANGLE) {
         balanceStarted = true;

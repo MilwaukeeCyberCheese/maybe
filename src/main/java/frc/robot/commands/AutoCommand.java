@@ -28,7 +28,7 @@ public class AutoCommand extends SequentialCommandGroup {
 
                     Commands.race(new CubeIntakePosition(elevatorSubsystem), new ProtectIntake(intake)),
 
-                    new AutoBalanceDrive(drivetrain, shifter, intake));
+                    new AutoBalanceDriveOut(drivetrain, shifter, intake));
         }
     }
 
