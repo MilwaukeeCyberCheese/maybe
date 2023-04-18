@@ -38,7 +38,7 @@ public class Playback extends CommandBase {
         this.m_elevatorSubsystem = elevatorSubsystem;
         this.m_shifter = shifter;
         this.m_whichOne = whichOne;
-        addRequirements(m_intake);
+        addRequirements(m_intake, m_drivetrain, m_elevatorSubsystem, m_shifter);
     }
 
     @Override

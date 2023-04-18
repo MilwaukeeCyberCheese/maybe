@@ -28,7 +28,7 @@ public class AutoBalancer extends CommandBase {
   public AutoBalancer(Drivetrain drivetrain, Shifter shifter) {
     m_drivetrain = drivetrain;
     m_shifter = shifter;
-    addRequirements(m_drivetrain);
+    addRequirements(m_drivetrain, m_shifter);
 
   }
 
