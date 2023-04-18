@@ -151,6 +151,8 @@ public final class Constants {
                 public static final double MIN_INTAKE = 0;
                 public static final double MAX_INTAKE = 30;
 
+                public static final double BELOW_UP_INTAKE = 5;
+
                 public static final boolean LEFT_INVERTED = false;
                 public static final boolean RIGHT_INVERTED = true;
 
