@@ -51,7 +51,7 @@ public class ElevatorPID extends CommandBase {
           .setPosition(m_elevatorSubsystem.position + m_positionChange.getAsDouble() * Constants.lift.PID_CHANGE_SPEED);
     } // sets a speed if PID is not active
     else {
-      m_elevatorSubsystem.setSpeed(m_positionChange.getAsDouble() * Constants.lift.LIFT_SPEED);
+      m_elevatorSubsystem.setSpeed(m_positionChange.getAsDouble() * Constants.lift.DIRECT_LIFT_SPEED);
     }
 
   }

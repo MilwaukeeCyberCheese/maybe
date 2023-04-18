@@ -25,7 +25,6 @@ public final class Constants {
 
         public static final class balance {
                 public static final AHRS gyro = new AHRS(SerialPort.Port.kUSB);
-                public static final double IMBALANCED_THRESHOLD_DEGREES = 2.5;
                 public static final double BALANCED_THRESHOLD_DEGREES = 1.0;
                 public static final double BALANCE_SPEED_MOD = 1;
                 public static final double P = 0.023;
@@ -41,9 +40,6 @@ public final class Constants {
         }
 
         public static final class sensors {
-
-                public static final double LEFT_DRIVE_ENCODER_DISTANCE_PER_PULSE = 0.0;
-                public static final double RIGHT_DRIVE_ENCODER_DISTANCE_PER_PULSE = 0.0;
 
                 public static final RelativeEncoder leftLift = controllers.leftLiftSpark.getEncoder();
                 public static final RelativeEncoder rightLift = controllers.rightLiftSpark.getEncoder();
@@ -108,11 +104,11 @@ public final class Constants {
 
                 public static final int CURRENT_LIMIT = 60;
 
-                public static final double THROTTLE_LIMITER = 0.7;
-                public static final double ROTATION_LIMITER = 0.5;
+                public static final double THROTTLE_LIMITER_RATE = 0.7;
+                public static final double ROTATION_LIMITER_RATE = 0.5;
 
-                public static final double DRIVE_SPEED = 0.8;
-                public static final double TURN_SPEED = 0.9;
+                public static final double DEFAULT_DRIVE_SPEED = 0.8;
+                public static final double DEFAULT_TURN_SPEED = 0.9;
 
                 public static final double SLOW_DRIVE_SPEED = 0.5;
                 public static final double SLOW_TURN_SPEED = 0.7;
@@ -139,9 +135,9 @@ public final class Constants {
 
                 public static final double DRIVE_SPEED_THRESHOLD = 0.4;
 
-                public static final Value intakeDown = Value.kForward;
-                public static final Value intakeUp = Value.kReverse;
-                public static final Value intakeOff = Value.kOff;
+                public static final Value INTAKE_DOWN = Value.kForward;
+                public static final Value INTAKE_UP = Value.kReverse;
+                public static final Value INTAKE_OFF = Value.kOff;
 
                 public static final int STALL_LIMIT = 5;
                 public static final int FREE_LIMIT = 60;
@@ -158,7 +154,7 @@ public final class Constants {
                 public static final boolean LEFT_INVERTED = false;
                 public static final boolean RIGHT_INVERTED = true;
 
-                public static final double LIFT_SPEED = 0.35;
+                public static final double DIRECT_LIFT_SPEED = 0.35;
                 public static final double PID_CHANGE_SPEED = 1.2;
 
                 public static final double SPEED_LIMITER_UPPER = 0.5;

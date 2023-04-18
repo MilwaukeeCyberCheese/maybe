@@ -22,7 +22,7 @@ public class IntakeCubeDown extends CommandBase {
     @Override
     public void initialize() {
         // sets intake position to down
-        m_intake.setPosition(Constants.intake.intakeDown);
+        m_intake.setPosition(Constants.intake.INTAKE_DOWN);
     }
 
     // run whenever command is called

@@ -27,7 +27,7 @@ public class IntakeOff extends CommandBase {
   @Override
   public void initialize() {
     //sets intake to off
-    m_intake.setPosition(Constants.intake.intakeOff);
+    m_intake.setPosition(Constants.intake.INTAKE_OFF);
   }
 
 }

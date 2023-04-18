@@ -18,8 +18,8 @@ public class Drivetrain extends SubsystemBase {
   public double rotationActual;
   private double previousThrottle = 0;
   private double previousRotation = 0;
-  private SlewRateLimiter throttleLimiter = new SlewRateLimiter(Constants.drive.THROTTLE_LIMITER);
-  private SlewRateLimiter rotationLimiter = new SlewRateLimiter(Constants.drive.ROTATION_LIMITER);
+  private SlewRateLimiter throttleLimiter = new SlewRateLimiter(Constants.drive.THROTTLE_LIMITER_RATE);
+  private SlewRateLimiter rotationLimiter = new SlewRateLimiter(Constants.drive.ROTATION_LIMITER_RATE);
 
   /**
    * The Drivetrain subsystem incorporates the sensors and actuators attached to

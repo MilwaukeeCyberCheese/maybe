@@ -52,8 +52,8 @@ public class ArcadeDrive extends CommandBase {
       m_turnSpeedMod = Constants.drive.TURBO_TURN_SPEED;
       m_driveSpeedMod = Constants.drive.TURBO_DRIVE_SPEED;
     } else {
-      m_turnSpeedMod = Constants.drive.TURN_SPEED;
-      m_driveSpeedMod = Constants.drive.DRIVE_SPEED;
+      m_turnSpeedMod = Constants.drive.DEFAULT_TURN_SPEED;
+      m_driveSpeedMod = Constants.drive.DEFAULT_DRIVE_SPEED;
     }
 
     // set speeds of drivetrain relative to regular, turbo, or slow

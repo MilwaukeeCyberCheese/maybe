@@ -25,7 +25,7 @@ public class AutoCommand extends SequentialCommandGroup {
             addCommands(
                     Commands.race(new ConePlacePosition(elevatorSubsystem), new ProtectIntake(intake)),
 
-                    new IntakeAuto(intake, Constants.intake.intakeUp, () -> Constants.intake.CUBE_SPEED, () -> 1500),
+                    new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> Constants.intake.CUBE_SPEED, () -> 1500),
 
                     Commands.race(new CubeIntakePosition(elevatorSubsystem), new ProtectIntake(intake)),
 

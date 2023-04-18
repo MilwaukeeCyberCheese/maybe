@@ -53,7 +53,7 @@ public class AutoBalanceDrive extends CommandBase {
   @Override
   public void execute() {
     // put the intake up and not running
-    m_intake.setPosition(Constants.intake.intakeUp);
+    m_intake.setPosition(Constants.intake.INTAKE_UP);
     m_intake.drive(0);
 
     // get pitch from gyro, ensuring that it doesn't go over a certain value

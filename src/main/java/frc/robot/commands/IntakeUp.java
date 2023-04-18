@@ -27,7 +27,7 @@ public class IntakeUp extends CommandBase {
   @Override
   public void initialize() {
     //sets position of intake to up
-    m_intake.setPosition(Constants.intake.intakeUp);
+    m_intake.setPosition(Constants.intake.INTAKE_UP);
   }
 
   

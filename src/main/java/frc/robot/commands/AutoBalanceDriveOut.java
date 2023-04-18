@@ -61,7 +61,7 @@ public class AutoBalanceDriveOut extends CommandBase {
   @Override
   public void execute() {
     // stow intake and stop
-    m_intake.setPosition(Constants.intake.intakeUp);
+    m_intake.setPosition(Constants.intake.INTAKE_UP);
     m_intake.drive(0);
 
     // clamp gyro angle to minimize impact from bouncing
