@@ -90,7 +90,7 @@ public final class AutoSubsystemValues {
                                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                                 0.0, 0.0, 0.0));
 
-                static List<List<Double>> frontLeftSpeeds = new ArrayList<>(Arrays.asList(autoOne));
+                public static List<List<Double>> frontLeftSpeeds = new ArrayList<>(Arrays.asList(autoOne));
                 
         }
 
@@ -169,7 +169,7 @@ public final class AutoSubsystemValues {
                                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
-                                static List<List<Double>> frontRightSpeeds = new ArrayList<>(Arrays.asList(autoOne));
+                                public static List<List<Double>> frontRightSpeeds = new ArrayList<>(Arrays.asList(autoOne));
         }
 
         public static class backLeftSpeeds {
@@ -252,7 +252,7 @@ public final class AutoSubsystemValues {
                                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                                 0.0, 0.0, 0.0));
-                                static List<List<Double>> backLeftSpeeds = new ArrayList<>(Arrays.asList(autoOne));
+                                public static List<List<Double>> backLeftSpeeds = new ArrayList<>(Arrays.asList(autoOne));
         }
 
         public static class backRightSpeeds {
@@ -335,7 +335,7 @@ public final class AutoSubsystemValues {
                                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                                 0.0, 0.0, 0.0));
-                                static List<List<Double>> backRightSpeeds = new ArrayList<>(Arrays.asList(autoOne));
+                                public static List<List<Double>> backRightSpeeds = new ArrayList<>(Arrays.asList(autoOne));
         }
 
         public static class intaking {
@@ -418,7 +418,7 @@ public final class AutoSubsystemValues {
                                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
                                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
-                                static List<List<Double>> intaking = new ArrayList<>(Arrays.asList(autoOne));
+                                public static List<List<Double>> intaking = new ArrayList<>(Arrays.asList(autoOne));
         }
 
         public static class gear {
@@ -536,7 +536,7 @@ public final class AutoSubsystemValues {
                                 false, false, false, false, false, false, false, false, false, false, false,
                                 false, false, false, false, false, false, false, false, false, false, false,
                                 false, false, false));
-                                static List<List<Boolean>> gear = new ArrayList<>(Arrays.asList(autoOne));
+                                public static List<List<Boolean>> gear = new ArrayList<>(Arrays.asList(autoOne));
         }
 
         public static class liftPos {
@@ -848,7 +848,7 @@ public final class AutoSubsystemValues {
                                 1.4642831683158875, 1.4642831683158875, 1.4642831683158875, 1.4642831683158875,
                                 1.4642831683158875, 1.4642831683158875, 1.4642831683158875, 1.4642831683158875,
                                 1.4642831683158875, 1.4642831683158875, 1.4642831683158875));
-                                static List<List<Double>> liftPos = new ArrayList<>(Arrays.asList(autoOne));
+                                public static List<List<Double>> liftPos = new ArrayList<>(Arrays.asList(autoOne));
         }
 
         public static class intakePos {
@@ -1102,6 +1102,6 @@ public final class AutoSubsystemValues {
                                 Value.kForward, Value.kForward, Value.kForward, Value.kForward, Value.kForward,
                                 Value.kForward, Value.kForward, Value.kForward));
 
-                                static List<List<Value>> frontLeftSpeeds = new ArrayList<>(Arrays.asList(autoOne));
+                                public static List<List<Value>> intakePos = new ArrayList<>(Arrays.asList(autoOne));
         }
 }

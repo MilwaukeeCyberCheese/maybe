@@ -31,29 +31,29 @@ public class Playback extends CommandBase {
 
     @Override
     public void execute() {
-        if (stopwatchCounter < AutoSubsystemValues.frontLeftSpeeds.object[m_whichOne].size() - 1) {
+        if (stopwatchCounter < AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(m_whichOne.getAsInt()).size() - 1) {
             stopwatchCounter++;
 
-            double frontLeft = AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(stopwatchCounter);
-            double frontRight = AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(stopwatchCounter);
-            double backLeft = AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(stopwatchCounter);
-            double backRight = AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(stopwatchCounter);
+            double frontLeft = AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(m_whichOne.getAsInt()).get(stopwatchCounter);
+            double frontRight = AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(m_whichOne.getAsInt()).get(stopwatchCounter);
+            double backLeft = AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(m_whichOne.getAsInt()).get(stopwatchCounter);
+            double backRight = AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(m_whichOne.getAsInt()).get(stopwatchCounter);
 
             m_drivetrain.setWheelSpeeds(frontLeft, frontRight, backLeft, backRight);
 
-            double intakeSpeed = AutoSubsystemValues.intaking.intaking.get(stopwatchCounter);
+            double intakeSpeed = AutoSubsystemValues.intaking.intaking.get(m_whichOne.getAsInt()).get(stopwatchCounter);
 
             m_intake.drive(intakeSpeed);
 
-            double liftPos = AutoSubsystemValues.liftPos.liftPos.get(stopwatchCounter);
+            double liftPos = AutoSubsystemValues.liftPos.liftPos.get(m_whichOne.getAsInt()).get(stopwatchCounter);
 
             m_elevatorSubsystem.setPosition(liftPos);
 
-            Value intakePos = AutoSubsystemValues.intakePos.intakePos.get(stopwatchCounter);
+            Value intakePos = AutoSubsystemValues.intakePos.intakePos.get(m_whichOne.getAsInt()).get(stopwatchCounter);
 
             m_intake.setPosition(intakePos);
 
-            boolean gear = AutoSubsystemValues.gear.gear.get(stopwatchCounter);
+            boolean gear = AutoSubsystemValues.gear.gear.get(m_whichOne.getAsInt()).get(stopwatchCounter);
 
             m_shifter.setGear(gear);
         }
