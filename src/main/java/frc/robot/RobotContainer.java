@@ -117,8 +117,6 @@ public class RobotContainer {
     Trigger rightBumperTwo = new JoystickButton(m_controllerTwo, 6);
     Trigger backButtonTwo = new JoystickButton(m_controllerTwo, 7);
 
-    Trigger rightTriggerOne = new Trigger(() -> m_filteredController.getRightTriggerActive());
-
     Trigger leftTriggerTwo = new Trigger(() -> m_filteredControllerTwo.getLeftTriggerActive());
     Trigger rightTriggerTwo = new Trigger(() -> m_filteredControllerTwo.getRightTriggerActive());
 
