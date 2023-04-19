@@ -41,7 +41,7 @@ public class CubePlacePosition extends CommandBase {
   @Override
   // return true when at position
   public boolean isFinished() {
-    if (Math.abs(m_elevatorSubsystem.position - Constants.lift.CONE_INTAKE_POSITION) < Constants.lift.TOLERANCE) {
+    if (Math.abs(m_elevatorSubsystem.position - Constants.lift.CONE_INTAKE_POSITION) < Constants.lift.TOLERANCE || m_elevatorSubsystem.abort()) {
       return true;
     } else {
       return false;

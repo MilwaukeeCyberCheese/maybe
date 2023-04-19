@@ -43,7 +43,7 @@ public class ConeIntakePosition extends CommandBase {
   public boolean isFinished() {
 
     // finishes when the lift is at the proper position
-    if (Math.abs(m_elevatorSubsystem.position - Constants.lift.CONE_INTAKE_POSITION) < Constants.lift.TOLERANCE) {
+    if (Math.abs(m_elevatorSubsystem.position - Constants.lift.CONE_INTAKE_POSITION) < Constants.lift.TOLERANCE || m_elevatorSubsystem.abort()) {
       return true;
     } else {
       return false;

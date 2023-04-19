@@ -122,13 +122,6 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void autonomousPeriodic() {
-    if (RobotContainer.m_elevatorSubsystem.abort()) {
-      m_autoCommand.cancel();
-    }
-  }
-
-  @Override
   public void teleopInit() {
     // This makes sure that the autonomous stops running when
     // teleop starts running.

@@ -37,6 +37,8 @@ public final class Constants {
 
                 public static final double START_BALANCE_ANGLE = 13;
 
+                public static final double MIN_LIFT_POSITION = 15;
+
         }
 
         public static final class sensors {
