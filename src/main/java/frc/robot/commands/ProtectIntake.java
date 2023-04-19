@@ -33,7 +33,7 @@ public class ProtectIntake extends CommandBase {
     // puts the intake up if the robot is driving above 0.4
     if ((Math.abs(RobotContainer.m_drivetrain.rotationActual) > Constants.intake.DRIVE_SPEED_THRESHOLD
         || Math.abs(RobotContainer.m_drivetrain.throttleActual) > Constants.intake.DRIVE_SPEED_THRESHOLD)
-        && RobotContainer.m_elevatorSubsystem.position < 5) {
+        && RobotContainer.m_elevatorSubsystem.position < Constants.lift.BELOW_UP_INTAKE) {
       m_intake.setPosition(Constants.intake.INTAKE_UP);
     }
 
