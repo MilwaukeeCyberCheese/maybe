@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -38,6 +39,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+
+    //silence joystick error messages
+   DriverStation.silenceJoystickConnectionWarning(true);
+   
     // initialize auto options
     autoChooser.setDefaultOption("Drive on Out", 1);
     autoChooser.addOption("Balance", 2);
@@ -117,6 +122,13 @@ public class Robot extends TimedRobot {
   }
 
   @Override
+  public void autonomousPeriodic() {
+    if (RobotContainer.m_elevatorSubsystem.abort()) {
+      m_autoCommand.cancel();
+    }
+  }
+
+  @Override
   public void teleopInit() {
     // This makes sure that the autonomous stops running when
     // teleop starts running.
@@ -124,7 +136,7 @@ public class Robot extends TimedRobot {
       m_autoCommand.cancel();
     }
 
-    //put robot in second gear at the start of teleop
+    // put robot in second gear at the start of teleop
     new Second(RobotContainer.m_shifter);
   }
 

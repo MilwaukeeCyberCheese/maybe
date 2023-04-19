@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class ElevatorSubsystem extends SubsystemBase {
     public double speed;
     public double position;
+    public double previousPosition;
     public double setPosition = 0;
     public boolean PIDenabled;
     private PIDController slidePid = new PIDController(Constants.lift.P, Constants.lift.I, Constants.lift.D);
@@ -86,6 +87,16 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     }
 
+    public boolean abort() {
+        if (Constants.controllers.leftLiftSpark.getOutputCurrent() > Constants.lift.ABORT_AMPS
+                || Constants.controllers.rightLiftSpark.getOutputCurrent() > Constants.lift.ABORT_AMPS) {
+            return true;
+        } else if(!slidePid.atSetpoint() && PIDenabled && Math.abs(previousPosition - position) < Constants.lift.ABORT_CHANGE){
+        return true;}else {
+            return false;
+        }
+    }
+
     /** Call log method every loop. */
     @Override
     public void periodic() {
@@ -99,7 +110,8 @@ public class ElevatorSubsystem extends SubsystemBase {
             RobotContainer.m_autoSubsystem.addLiftPos(setPosition);
         }
 
-        // determine position of lift based off average of the position of both motors
+        // determine position of lift based off average of the position of both motors and set previous position
+        previousPosition = position;
         position = (Constants.sensors.leftLift.getPosition() + Constants.sensors.rightLift.getPosition()) / 2;
 
         // set speed of lift using PID if PIDenabled
