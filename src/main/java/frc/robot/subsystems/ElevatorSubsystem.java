@@ -73,6 +73,8 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     /** The log method puts interesting information to the SmartDashboard. */
     public void log() {
+        // send abort
+        SmartDashboard.putBoolean("Lift Abort", abort());
 
         // send actual position, and positon to set to
         SmartDashboard.putNumber("Slide Position", position);
@@ -91,8 +93,10 @@ public class ElevatorSubsystem extends SubsystemBase {
         if (Constants.controllers.leftLiftSpark.getOutputCurrent() > Constants.lift.ABORT_AMPS
                 || Constants.controllers.rightLiftSpark.getOutputCurrent() > Constants.lift.ABORT_AMPS) {
             return true;
-        } else if(!slidePid.atSetpoint() && PIDenabled && Math.abs(previousPosition - position) < Constants.lift.ABORT_CHANGE){
-        return true;}else {
+        } else if (!slidePid.atSetpoint() && PIDenabled
+                && Math.abs(previousPosition - position) < Constants.lift.ABORT_CHANGE) {
+            return true;
+        } else {
             return false;
         }
     }
@@ -110,7 +114,8 @@ public class ElevatorSubsystem extends SubsystemBase {
             RobotContainer.m_autoSubsystem.addLiftPos(setPosition);
         }
 
-        // determine position of lift based off average of the position of both motors and set previous position
+        // determine position of lift based off average of the position of both motors
+        // and set previous position
         previousPosition = position;
         position = (Constants.sensors.leftLift.getPosition() + Constants.sensors.rightLift.getPosition()) / 2;
 
