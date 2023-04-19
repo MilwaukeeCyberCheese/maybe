@@ -27,11 +27,11 @@ public final class Constants {
                 public static final AHRS gyro = new AHRS(SerialPort.Port.kUSB);
                 public static final double BALANCED_THRESHOLD_DEGREES = 1.0;
                 public static final double BALANCE_SPEED_MOD = 1;
-                public static final double P = 0.023;
+                public static final double P = 0.028;
                 public static final double I = 0.000;
-                public static final double D = 0.002;
+                public static final double D = 0.004;
 
-                public static final double DRIVE_SPEED = -0.4;
+                public static final double DRIVE_SPEED = -0.45;
 
                 public static final double BOUNCE_THRESHOLD = 15;
 
@@ -141,8 +141,8 @@ public final class Constants {
                 public static final Value INTAKE_UP = Value.kReverse;
                 public static final Value INTAKE_OFF = Value.kOff;
 
-                public static final int STALL_LIMIT = 5;
-                public static final int FREE_LIMIT = 60;
+                public static final int STALL_LIMIT = 10;
+                public static final int FREE_LIMIT = 80;
 
                 public static final double LIFT_SPEED_THRESHOLD = 0.03;
         }
@@ -165,7 +165,7 @@ public final class Constants {
                 public static final double SPEED_LIMITER_UPPER = 0.5;
                 public static final double SPEED_LIMITER_LOWER = -0.4;
 
-                public static final double CUBE_INTAKE_POSITION = 0;
+                public static final double CUBE_INTAKE_POSITION = 2;
 
                 public static final double CONE_INTAKE_POSITION = 80; //TODO
 

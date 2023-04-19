@@ -90,15 +90,15 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
 
     public boolean abort() {
-        if (Constants.controllers.leftLiftSpark.getOutputCurrent() > Constants.lift.ABORT_AMPS
-                || Constants.controllers.rightLiftSpark.getOutputCurrent() > Constants.lift.ABORT_AMPS) {
-            return true;
-        } else if (!slidePid.atSetpoint() && PIDenabled
-                && Math.abs(previousPosition - position) < Constants.lift.ABORT_CHANGE) {
-            return true;
-        } else {
-            return false;
-        }
+        // if (Constants.controllers.leftLiftSpark.getOutputCurrent() > Constants.lift.ABORT_AMPS
+        //         || Constants.controllers.rightLiftSpark.getOutputCurrent() > Constants.lift.ABORT_AMPS) {
+        //     return true;
+        // } else if (!slidePid.atSetpoint() && PIDenabled
+        //         && Math.abs(previousPosition - position) < Constants.lift.ABORT_CHANGE) {
+        //     return true;
+        // } else {
+            return false; //TODO
+        // }
     }
 
     /** Call log method every loop. */

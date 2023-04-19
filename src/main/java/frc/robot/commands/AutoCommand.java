@@ -23,13 +23,16 @@ public class AutoCommand extends SequentialCommandGroup {
         }
         if (autoMode.getAsInt() == 2) {
             addCommands(
-                    Commands.race(new ConePlacePosition(elevatorSubsystem), new ProtectIntake(intake)),
+                new IntakeDown(intake),
 
-                    new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> Constants.intake.CUBE_SPEED, () -> 1500),
+                Commands.race(new ConePlacePosition(elevatorSubsystem), new ProtectIntake(intake)),
 
-                    Commands.race(new CubeIntakePosition(elevatorSubsystem), new ProtectIntake(intake)),
+                new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> Constants.intake.CUBE_SPEED, () -> 1500),
 
-                    new AutoBalanceDriveOut(drivetrain, shifter, intake));
+                Commands.race(new CubeIntakePosition(elevatorSubsystem), new ProtectIntake(intake))
+
+                // new AutoBalanceDriveOut(drivetrain, shifter, intake)
+                );
         }
     }
 
