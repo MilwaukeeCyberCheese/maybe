@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
-import frc.robot.commands.AutoBalanceDriveOut;
+import frc.robot.commands.AutoBalanceDrive;
 import frc.robot.commands.ConePlacePosition;
 import frc.robot.commands.CubeIntakePosition;
 import frc.robot.commands.IntakeAuto;
@@ -39,7 +39,7 @@ public class BalanceMiddleCone extends SequentialCommandGroup {
 
                                 Commands.race(new CubeIntakePosition(elevatorSubsystem), new ProtectIntake(intake)),
 
-                                new AutoBalanceDriveOut(drivetrain, shifter, intake));
+                                new AutoBalanceDrive(drivetrain, shifter, intake));
 
         }
 
