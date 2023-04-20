@@ -12,10 +12,10 @@ import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shifter;
 
-public class BalanceMiddleCone extends SequentialCommandGroup {
+public class MidConeDriveOut extends SequentialCommandGroup {
 
         // constructor
-        public BalanceMiddleCone(Intake intake, Drivetrain drivetrain,
+        public MidConeDriveOut(Intake intake, Drivetrain drivetrain,
                         ElevatorSubsystem elevatorSubsystem,
                         Shifter shifter) {
 
@@ -30,9 +30,11 @@ public class BalanceMiddleCone extends SequentialCommandGroup {
                                 new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> Constants.intake.CUBE_SPEED,
                                                 () -> 500, () -> 0, () -> 0),
 
-                                Commands.parallel(new CubeIntakePosition(elevatorSubsystem, () -> 0), new IntakeAuto(intake, Constants.intake.INTAKE_DOWN, () -> 0, () -> 500, () -> 0, () -> 300)),
+                                Commands.parallel(new CubeIntakePosition(elevatorSubsystem, () -> 0),
+                                                new IntakeAuto(intake, Constants.intake.INTAKE_DOWN, () -> 0, () -> 500,
+                                                                () -> 0, () -> 300)),
 
-                                new AutoBalanceDrive(drivetrain, shifter, intake));
+                                new DriveToTime(() -> -0.5, () -> 0, () -> false, () -> false, () -> 4000, drivetrain));
 
         }
 

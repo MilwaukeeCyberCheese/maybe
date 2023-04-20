@@ -14,14 +14,14 @@ import frc.robot.commands.IntakeUp;
 import frc.robot.commands.ProtectIntake;
 import frc.robot.commands.Second;
 import frc.robot.commands.ZeroSlides;
+import frc.robot.commands.LiftPos.ConeIntakePosition;
+import frc.robot.commands.LiftPos.ConePlacePosition;
+import frc.robot.commands.LiftPos.CubeIntakePosition;
+import frc.robot.commands.LiftPos.CubePlacePosition;
 import frc.robot.commands.auto.RecordAuto;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutoBalanceDrive;
 import frc.robot.commands.AutoBalancer;
-import frc.robot.commands.ConeIntakePosition;
-import frc.robot.commands.ConePlacePosition;
-import frc.robot.commands.CubeIntakePosition;
-import frc.robot.commands.CubePlacePosition;
 import frc.robot.commands.IntakeCubeDown;
 import frc.robot.commands.IntakeConeUp;
 import frc.robot.other.FilteredController;
@@ -73,7 +73,7 @@ public class RobotContainer {
 
     m_elevatorSubsystem.setDefaultCommand(
         new ElevatorPID(() -> -m_filteredControllerTwo.getYLeft(0.2), m_elevatorSubsystem,
-            () -> !m_controllerTwo.getBackButton()));
+            () -> !m_controllerTwo.getStartButton()));
 
     m_intake.setDefaultCommand(new ProtectIntake(m_intake));
 
@@ -142,10 +142,10 @@ public class RobotContainer {
     leftTriggerTwo.whileTrue(new IntakeCubeDown(m_intake));
     rightTriggerTwo.whileTrue(new IntakeConeUp(m_intake));
 
-    dpadUpTwo.onTrue(new ConePlacePosition(m_elevatorSubsystem));
-    dpadDownTwo.onTrue(new ConeIntakePosition(m_elevatorSubsystem));
-    dpadLeftTwo.onTrue(new CubePlacePosition(m_elevatorSubsystem));
-    dpadRightTwo.onTrue(new CubeIntakePosition(m_elevatorSubsystem));
+    dpadUpTwo.onTrue(new ConePlacePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
+    dpadDownTwo.onTrue(new ConeIntakePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
+    dpadLeftTwo.onTrue(new CubePlacePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
+    dpadRightTwo.onTrue(new CubeIntakePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
 
   }
 
