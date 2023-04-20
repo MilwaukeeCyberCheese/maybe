@@ -7,7 +7,6 @@ import frc.robot.Constants;
 import frc.robot.commands.AutoBalanceDrive;
 import frc.robot.commands.ConePlacePosition;
 import frc.robot.commands.CubeIntakePosition;
-import frc.robot.commands.IntakeAuto;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.ProtectIntake;
@@ -35,7 +34,7 @@ public class BalanceMiddleCone extends SequentialCommandGroup {
                                 new WaitCommand(0.3),
 
                                 new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> Constants.intake.CUBE_SPEED,
-                                                () -> 500),
+                                                () -> 500, () -> Constants.intake.INTAKE_DELAY),
 
                                 Commands.race(new CubeIntakePosition(elevatorSubsystem), new ProtectIntake(intake)),
 

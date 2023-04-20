@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.auto;
 
 import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.Intake;
@@ -15,6 +15,7 @@ public class IntakeAuto extends CommandBase {
     private final DoubleSupplier m_speed;
     private final Stopwatch timer = new Stopwatch();
     private final IntSupplier m_runtime;
+    private final IntSupplier m_delay;
 
     /**
      * Creates a new automatic intake Command.
@@ -25,36 +26,39 @@ public class IntakeAuto extends CommandBase {
      * @param runtime  time to run intake for
      * 
      */
-    public IntakeAuto(Intake intake, Value position, DoubleSupplier speed, IntSupplier runtime) {
+    public IntakeAuto(Intake intake, Value position, DoubleSupplier speed, IntSupplier runtime, IntSupplier delay) {
         this.m_intake = intake;
         this.m_position = position;
         this.m_speed = speed;
         this.m_runtime = runtime;
+        this.m_delay = delay;
         addRequirements(m_intake);
     }
 
     @Override
     public void initialize() {
-        //reset and restart timer
+        // reset and restart timer
         timer.stop();
         timer.reset();
         timer.start();
 
-        //set position of intake
+        // set position of intake
         m_intake.setPosition(m_position);
     }
 
     // run whenever command is called
     @Override
     public void execute() {
-        //run intake at speed
-        m_intake.drive(m_speed.getAsDouble());
+        // run intake at speed
+        if (timer.getTime() > m_delay.getAsInt()) {
+            m_intake.drive(m_speed.getAsDouble());
+        }
 
     }
 
     @Override
     public boolean isFinished() {
-        //returns whether the time exceeds the time allotted to run
+        // returns whether the time exceeds the time allotted to run
         return timer.getTime() > m_runtime.getAsInt();
 
     }
@@ -62,7 +66,7 @@ public class IntakeAuto extends CommandBase {
     // stop motor when finished
     @Override
     public void end(boolean interrupted) {
-        //stops intake when finished
+        // stops intake when finished
         m_intake.drive(0);
     }
 }

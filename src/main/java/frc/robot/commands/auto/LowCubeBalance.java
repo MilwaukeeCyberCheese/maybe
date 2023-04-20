@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import frc.robot.Constants;
 import frc.robot.commands.AutoBalanceDrive;
-import frc.robot.commands.IntakeAuto;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Intake;
@@ -18,7 +17,7 @@ public class LowCubeBalance extends SequentialCommandGroup {
             Shifter shifter) {
 
         addCommands(
-                new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> Constants.intake.CONE_SPEED, () -> 500),
+                new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> Constants.intake.CONE_SPEED, () -> 500, () -> Constants.intake.INTAKE_DELAY),
                 new AutoBalanceDrive(drivetrain, shifter, intake));
 
     }

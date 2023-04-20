@@ -19,7 +19,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public final class Constants {
 
-        public static final class autos{
+        public static final class autos {
                 public static final int DRIVE_OUT = 0;
         }
 
@@ -127,6 +127,8 @@ public final class Constants {
         }
 
         public static final class intake {
+                public static final int INTAKE_DELAY = 300;
+
                 public static final boolean INVERTED = true;
 
                 public static final double CONE_SPEED = 0.7;
@@ -151,8 +153,8 @@ public final class Constants {
                 public static final double MIN_INTAKE = 0;
                 public static final double MAX_INTAKE = 30;
 
-                public static final double ABORT_AMPS = 80; //TODO
-                public static final double ABORT_CHANGE = 0.5; //TODO
+                public static final double ABORT_AMPS = 80; // TODO
+                public static final double ABORT_CHANGE = 0.5; // TODO
 
                 public static final double BELOW_UP_INTAKE = 5;
 
@@ -167,7 +169,7 @@ public final class Constants {
 
                 public static final double CUBE_INTAKE_POSITION = 2;
 
-                public static final double CONE_INTAKE_POSITION = 80; //TODO
+                public static final double CONE_INTAKE_POSITION = 80; // TODO
 
                 public static final double CUBE_PLACE_POSITION = 90;
 
