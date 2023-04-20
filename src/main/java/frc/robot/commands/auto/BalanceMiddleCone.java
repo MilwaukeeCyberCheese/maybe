@@ -23,18 +23,15 @@ public class BalanceMiddleCone extends SequentialCommandGroup {
                         Shifter shifter) {
 
                 addCommands(
-                                new IntakeDown(intake),
+                                new IntakeAuto(intake, Constants.intake.INTAKE_DOWN, () -> 0, () -> 300, () -> 0,
+                                                () -> 0),
 
-                                new WaitCommand(0.5),
-
-                                new ConePlacePosition(elevatorSubsystem),
-
-                                new IntakeUp(intake),
-
-                                new WaitCommand(0.3),
+                                Commands.parallel(new ConePlacePosition(elevatorSubsystem),
+                                                new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> 0, () -> 500,
+                                                                () -> 0, () -> 300)),
 
                                 new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> Constants.intake.CUBE_SPEED,
-                                                () -> 500, () -> Constants.intake.INTAKE_DELAY),
+                                                () -> 500, () -> 0, () -> 0),
 
                                 Commands.race(new CubeIntakePosition(elevatorSubsystem), new ProtectIntake(intake)),
 
