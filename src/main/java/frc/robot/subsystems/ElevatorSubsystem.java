@@ -22,6 +22,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     public double setPosition = 0;
     public boolean PIDenabled;
     private PIDController slidePid = new PIDController(Constants.lift.P, Constants.lift.I, Constants.lift.D);
+    public boolean protectIntake;
 
     /** Create a new elevator subsystem. */
     public ElevatorSubsystem() {
@@ -52,6 +53,11 @@ public class ElevatorSubsystem extends SubsystemBase {
         Constants.controllers.leftLiftSpark.set(speed);
         Constants.controllers.rightLiftSpark.set(speed);
     }
+
+public void protectIntake(boolean protect){
+    protectIntake = protect;
+}
+
 
     /**
      * Reset encoder positions of the lift to zero
