@@ -127,7 +127,7 @@ public final class Constants {
         }
 
         public static final class intake {
-                public static final int INTAKE_DELAY = 300;
+                public static final int INTAKE_DELAY = 700;
 
                 public static final boolean INVERTED = true;
 

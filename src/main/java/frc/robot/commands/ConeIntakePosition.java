@@ -5,7 +5,7 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
-
+import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.ElevatorSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /* runs the lift to the position to intake a cone from the single substation */
 public class ConeIntakePosition extends CommandBase {
   private final ElevatorSubsystem m_elevatorSubsystem;
+  private final Stopwatch timer = new Stopwatch();
 
 
    /**
@@ -27,6 +28,7 @@ public class ConeIntakePosition extends CommandBase {
 
   @Override
   public void initialize() {
+    
 
   }
 

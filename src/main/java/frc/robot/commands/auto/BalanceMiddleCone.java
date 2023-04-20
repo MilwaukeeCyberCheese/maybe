@@ -25,12 +25,12 @@ public class BalanceMiddleCone extends SequentialCommandGroup {
 
                                 Commands.parallel(new ConePlacePosition(elevatorSubsystem),
                                                 new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> 0, () -> 500,
-                                                                () -> 0, () -> 300)),
+                                                                () -> 0, () -> 500)),
 
                                 new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> Constants.intake.CUBE_SPEED,
                                                 () -> 500, () -> 0, () -> 0),
 
-                                Commands.race(new CubeIntakePosition(elevatorSubsystem), new ProtectIntake(intake)),
+                                Commands.parallel(new CubeIntakePosition(elevatorSubsystem), new IntakeAuto(intake, Constants.intake.INTAKE_DOWN, () -> 0, () -> 500, () -> 0, () -> 300)),
 
                                 new AutoBalanceDrive(drivetrain, shifter, intake));
 

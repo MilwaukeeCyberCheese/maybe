@@ -39,7 +39,7 @@ public class ProtectIntake extends CommandBase {
 
     //puts the intake down if the elevator is moving within a certain range
     if ((m_liftMoving && Constants.lift.MAX_INTAKE > RobotContainer.m_elevatorSubsystem.position)
-        || !RobotContainer.m_elevatorSubsystem.PIDenabled) {
+        || !RobotContainer.m_elevatorSubsystem.PIDenabled || (RobotContainer.m_elevatorSubsystem.protectIntake && Constants.lift.MAX_INTAKE > RobotContainer.m_elevatorSubsystem.position)) {
       m_intake.setPosition(Constants.intake.INTAKE_DOWN);
       System.out.println(RobotContainer.m_elevatorSubsystem.speed);
     }
