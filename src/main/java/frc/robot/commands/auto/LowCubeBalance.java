@@ -1,11 +1,10 @@
-package frc.robot.commands;
+package frc.robot.commands.auto;
 
-import java.util.function.IntSupplier;
-
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+
 import frc.robot.Constants;
+import frc.robot.commands.AutoBalanceDrive;
+import frc.robot.commands.IntakeAuto;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Intake;
