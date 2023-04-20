@@ -10,10 +10,13 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.BalanceMiddleCone;
 import frc.robot.commands.IntakeOff;
 import frc.robot.commands.Second;
 import frc.robot.commands.ZeroSlides;
-import frc.robot.commands.AutoCommand;
+import frc.robot.commands.LowCubeBalance;
+import frc.robot.commands.PlaybackAuto;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,9 +29,9 @@ import frc.robot.commands.AutoCommand;
  */
 public class Robot extends TimedRobot {
   // creates sendable for choosing autonomous
-  public static SendableChooser<Integer> autoChooser = new SendableChooser<>();
+  public static SendableChooser<SequentialCommandGroup> autoChooser = new SendableChooser<>();
 
-  private AutoCommand m_autoCommand;
+  private SequentialCommandGroup m_autoCommand;
 
   private RobotContainer m_robotContainer;
 
@@ -44,10 +47,10 @@ public class Robot extends TimedRobot {
    DriverStation.silenceJoystickConnectionWarning(true);
    
     // initialize auto options
-    autoChooser.setDefaultOption("Drive on Out", 1);
-    autoChooser.addOption("Balance", 2);
-    autoChooser.addOption("Somethin Else", 3);
-    autoChooser.addOption("Middle Cone and Balance", 4);
+    autoChooser.setDefaultOption("Zilch", null);
+    autoChooser.addOption("Low Cube Balance", new LowCubeBalance(RobotContainer.m_intake, RobotContainer.m_drivetrain, RobotContainer.m_elevatorSubsystem, RobotContainer.m_shifter));
+    autoChooser.addOption("Somethin Else", new PlaybackAuto(RobotContainer.m_intake, RobotContainer.m_drivetrain, RobotContainer.m_elevatorSubsystem, RobotContainer.m_shifter));
+    autoChooser.addOption("Middle Cone and Balance", new BalanceMiddleCone(RobotContainer.m_intake, RobotContainer.m_drivetrain, RobotContainer.m_elevatorSubsystem, RobotContainer.m_shifter));
 
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our

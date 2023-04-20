@@ -30,4 +30,9 @@ public class IntakeDown extends CommandBase {
     m_intake.setPosition(Constants.intake.INTAKE_DOWN);
   }
 
+  @Override
+  public boolean isFinished(){
+    return true;
+  }
+
 }

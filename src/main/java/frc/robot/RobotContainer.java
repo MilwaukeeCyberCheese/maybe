@@ -18,7 +18,7 @@ import frc.robot.commands.ZeroSlides;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutoBalanceDrive;
 import frc.robot.commands.AutoBalancer;
-import frc.robot.commands.AutoCommand;
+import frc.robot.commands.LowCubeBalance;
 import frc.robot.commands.ConeIntakePosition;
 import frc.robot.commands.ConePlacePosition;
 import frc.robot.commands.CubeIntakePosition;
@@ -30,7 +30,7 @@ import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Shifter;
-
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.Intake;
@@ -58,9 +58,6 @@ public class RobotContainer {
   public static final FilteredController m_filteredControllerTwo = new FilteredController(m_controllerTwo);
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
-  private static final AutoCommand m_autoCommand = new AutoCommand(m_intake, m_drivetrain,
-      m_elevatorSubsystem, m_shifter, () -> Robot.autoChooser.getSelected());
-
   public static boolean readAuto = false;
 
   /**
@@ -93,8 +90,8 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public AutoCommand getAutonomousCommand() {
-    return m_autoCommand;
+  public SequentialCommandGroup getAutonomousCommand() {
+    return Robot.autoChooser.getSelected();
   }
 
   /**
