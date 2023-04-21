@@ -29,4 +29,8 @@ public class First extends CommandBase {
     m_shifter.setGear(Constants.drive.FIRST_GEAR);
   }
 
+  @Override
+  public boolean isFinished(){
+    return true;
+  }
 }

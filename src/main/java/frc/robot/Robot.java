@@ -17,9 +17,11 @@ import frc.robot.commands.IntakeOff;
 import frc.robot.commands.Second;
 import frc.robot.commands.ZeroSlides;
 import frc.robot.commands.auto.LowCubeBalance;
+import frc.robot.commands.auto.LowCubeBalanceDriveOutII;
 import frc.robot.commands.auto.LowCubeBalanceOut;
 import frc.robot.commands.auto.MidConeDriveOut;
 import frc.robot.commands.auto.MidCubeDriveOut;
+import frc.robot.commands.auto.LowCubeDriveOut;
 import frc.robot.commands.auto.PlaybackAuto;
 
 /**
@@ -66,6 +68,11 @@ public class Robot extends TimedRobot {
         RobotContainer.m_drivetrain, RobotContainer.m_elevatorSubsystem, RobotContainer.m_shifter));
     autoChooser.addOption("Low Cube Balance Mobility", new LowCubeBalanceOut(RobotContainer.m_intake,
         RobotContainer.m_drivetrain, RobotContainer.m_elevatorSubsystem, RobotContainer.m_shifter));
+        autoChooser.addOption("Low Cube Balance Mobility take II", new LowCubeBalanceDriveOutII(RobotContainer.m_intake,
+        RobotContainer.m_drivetrain, RobotContainer.m_elevatorSubsystem, RobotContainer.m_shifter));
+        autoChooser.addOption("Low Cube Drive Out", new LowCubeDriveOut(RobotContainer.m_intake,
+        RobotContainer.m_drivetrain, RobotContainer.m_elevatorSubsystem, RobotContainer.m_shifter));
+
 
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
