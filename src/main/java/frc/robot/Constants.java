@@ -192,6 +192,6 @@ public final class Constants {
 
                 public static double P = 0.5;
                 public static double I = 0;
-                public static double D = 0;
+                public static double D = 0.001;
         }
 }

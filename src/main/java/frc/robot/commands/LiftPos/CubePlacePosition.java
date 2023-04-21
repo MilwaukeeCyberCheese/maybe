@@ -22,6 +22,7 @@ public class CubePlacePosition extends CommandBase {
    * Creates a new lift position Command.
    *
    * @param elevatorSubsystem subsystem controlling the elevators
+   * @param delay milliseconds to wait before moving lift
    */
   public CubePlacePosition(ElevatorSubsystem elevatorSubsystem, IntSupplier delay) {
     m_elevatorSubsystem = elevatorSubsystem;
@@ -52,7 +53,7 @@ public class CubePlacePosition extends CommandBase {
   // return true when at position
   public boolean isFinished() {
     if (Math.abs(m_elevatorSubsystem.position - Constants.lift.CUBE_PLACE_POSITION) < Constants.lift.TOLERANCE
-        || m_elevatorSubsystem.abort()) {
+        ) {
       return true;
     } else {
       return false;

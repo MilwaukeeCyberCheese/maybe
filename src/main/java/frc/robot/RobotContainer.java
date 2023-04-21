@@ -11,6 +11,7 @@ import frc.robot.commands.IntakeConeCommand;
 import frc.robot.commands.IntakeCubeCommand;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeUp;
+import frc.robot.commands.MidCubeScore;
 import frc.robot.commands.ProtectIntake;
 import frc.robot.commands.Second;
 import frc.robot.commands.ZeroSlides;
@@ -29,6 +30,7 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Shifter;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.Command.InterruptionBehavior;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.Intake;
@@ -77,7 +79,8 @@ public class RobotContainer {
     m_intake.setDefaultCommand(new ProtectIntake(m_intake));
 
     // m_autoSubsystem.setDefaultCommand(
-    //     new RecordAuto(m_autoSubsystem, () -> m_controllerTwo.getXButton(), () -> m_controllerTwo.getBButton()));
+    // new RecordAuto(m_autoSubsystem, () -> m_controllerTwo.getXButton(), () ->
+    // m_controllerTwo.getBButton()));
 
     // Configure the button bindings
     configureButtonBindings();
@@ -143,7 +146,7 @@ public class RobotContainer {
 
     dpadUpTwo.onTrue(new ConePlacePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
     dpadDownTwo.onTrue(new ConeIntakePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
-    dpadLeftTwo.onTrue(new CubePlacePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
+    dpadLeftTwo.onTrue(new MidCubeScore(m_intake, m_elevatorSubsystem).withInterruptBehavior(InterruptionBehavior.kCancelIncoming));
     dpadRightTwo.onTrue(new CubeIntakePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
 
   }
