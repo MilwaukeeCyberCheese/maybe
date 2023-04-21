@@ -5,18 +5,13 @@
 package frc.robot.commands.auto;
 
 import frc.robot.Constants;
-import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.PIDCommand;
 
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
-import java.util.function.IntSupplier;
-
 /** Have the robot drive arcade style. */
 public class SpinAround extends CommandBase {
   private final Drivetrain m_drivetrain;

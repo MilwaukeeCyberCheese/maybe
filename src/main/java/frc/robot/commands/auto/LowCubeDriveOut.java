@@ -1,10 +1,7 @@
 package frc.robot.commands.auto;
 
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.LiftPos.ConePlacePosition;
-import frc.robot.commands.LiftPos.CubeIntakePosition;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Intake;

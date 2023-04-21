@@ -5,12 +5,10 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shifter;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** Have the robot drive arcade style. */
@@ -18,7 +16,6 @@ public class AutoBalanceDriveOut extends CommandBase {
   private final Drivetrain m_drivetrain;
   private final Shifter m_shifter;
   private final Intake m_intake;
-  private boolean balanceStarted = false;
   private boolean top = false;
   private boolean firstEdge = false;
   private boolean secondEdge = false;
@@ -45,7 +42,6 @@ public class AutoBalanceDriveOut extends CommandBase {
     new First(m_shifter);
 
     // reset checker variables
-    balanceStarted = false;
     firstEdge = false;
     top = false;
     secondEdge = false;

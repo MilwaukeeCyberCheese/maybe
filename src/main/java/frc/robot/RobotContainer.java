@@ -18,7 +18,6 @@ import frc.robot.commands.LiftPos.ConeIntakePosition;
 import frc.robot.commands.LiftPos.ConePlacePosition;
 import frc.robot.commands.LiftPos.CubeIntakePosition;
 import frc.robot.commands.LiftPos.CubePlacePosition;
-import frc.robot.commands.auto.RecordAuto;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutoBalanceDrive;
 import frc.robot.commands.AutoBalancer;
@@ -77,8 +76,8 @@ public class RobotContainer {
 
     m_intake.setDefaultCommand(new ProtectIntake(m_intake));
 
-    m_autoSubsystem.setDefaultCommand(
-        new RecordAuto(m_autoSubsystem, () -> m_controllerTwo.getXButton(), () -> m_controllerTwo.getBButton()));
+    // m_autoSubsystem.setDefaultCommand(
+    //     new RecordAuto(m_autoSubsystem, () -> m_controllerTwo.getXButton(), () -> m_controllerTwo.getBButton()));
 
     // Configure the button bindings
     configureButtonBindings();
