@@ -87,7 +87,7 @@ public class AutoBalanceDriveOut extends CommandBase {
 
     } // check for floor outside community zone
     else if (!balanceStarted) {
-      m_drivetrain.drive(-Constants.balance.DRIVE_SPEED, 0);
+      m_drivetrain.drive(0.3, 0);
       if (Math.abs(pitchAngleDegrees) >= Constants.balance.START_BALANCE_ANGLE) {
         balanceStarted = true;
       }

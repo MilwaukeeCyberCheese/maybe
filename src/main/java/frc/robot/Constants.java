@@ -31,6 +31,12 @@ public final class Constants {
                 public static final double I = 0.000;
                 public static final double D = 0.004;
 
+                public static final double SpinP = 0.20;
+                public static final double SpinI = 0.000;
+                public static final double SpinD = 0.000;
+
+                public static final double SPIN_TOLERANCE = 2;
+
                 public static final double DRIVE_SPEED = -0.45;
 
                 public static final double BOUNCE_THRESHOLD = 15;

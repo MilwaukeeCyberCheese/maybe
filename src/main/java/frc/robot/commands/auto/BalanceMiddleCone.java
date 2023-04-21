@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.commands.AutoBalanceDrive;
-import frc.robot.commands.ProtectIntake;
 import frc.robot.commands.LiftPos.ConePlacePosition;
 import frc.robot.commands.LiftPos.CubeIntakePosition;
 import frc.robot.subsystems.Drivetrain;

@@ -80,6 +80,7 @@ public class Drivetrain extends SubsystemBase {
 
     // adds pitch of the gyro
     SmartDashboard.putNumber("Gyro Pitch", Constants.balance.gyro.getRoll());
+    SmartDashboard.putNumber("Gyro Angle", Constants.balance.gyro.getAngle());
   }
 
   /**

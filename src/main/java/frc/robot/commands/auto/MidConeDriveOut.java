@@ -3,8 +3,6 @@ package frc.robot.commands.auto;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.AutoBalanceDrive;
-import frc.robot.commands.ProtectIntake;
 import frc.robot.commands.LiftPos.ConePlacePosition;
 import frc.robot.commands.LiftPos.CubeIntakePosition;
 import frc.robot.subsystems.Drivetrain;
@@ -34,7 +32,7 @@ public class MidConeDriveOut extends SequentialCommandGroup {
                                                 new IntakeAuto(intake, Constants.intake.INTAKE_DOWN, () -> 0, () -> 500,
                                                                 () -> 0, () -> 300)),
 
-                                new DriveToTime(() -> -0.5, () -> 0, () -> false, () -> false, () -> 4000, drivetrain));
+                                new DriveToTime(() -> -0.5, () -> 0, () -> false, () -> false, () -> 3500, drivetrain));
 
         }
 
