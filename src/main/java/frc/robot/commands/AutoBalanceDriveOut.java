@@ -23,7 +23,6 @@ public class AutoBalanceDriveOut extends CommandBase {
   private boolean firstEdge = false;
   private boolean secondEdge = false;
   private boolean bottom = false;
-  private PIDController balancePid = new PIDController(Constants.balance.P, Constants.balance.I, Constants.balance.D);
 
   /**
    * Creates a new AutoBalance Command.
@@ -53,8 +52,7 @@ public class AutoBalanceDriveOut extends CommandBase {
     bottom = false;
 
     // initialize PID
-    balancePid.setSetpoint(0);
-    balancePid.setTolerance(Constants.balance.BALANCED_THRESHOLD_DEGREES);
+
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -86,22 +84,6 @@ public class AutoBalanceDriveOut extends CommandBase {
       }
 
     } // check for floor outside community zone
-    else if (!balanceStarted) {
-      m_drivetrain.drive(-Constants.balance.DRIVE_SPEED, 0);
-      if (Math.abs(pitchAngleDegrees) >= Constants.balance.START_BALANCE_ANGLE) {
-        balanceStarted = true;
-      }
-
-    } else {
-
-      // simulate gyro with controller
-      // double pitchAngleDegrees = -1 *
-      // RobotContainer.m_filteredControllerTwo.getYLeft(0.1) * 10;
-
-      // set throttle and drive drivetrain
-      double throttle = balancePid.calculate(pitchAngleDegrees);
-      m_drivetrain.drive(throttle * Constants.balance.BALANCE_SPEED_MOD, 0);
-    }
 
   }
 
@@ -109,10 +91,6 @@ public class AutoBalanceDriveOut extends CommandBase {
   @Override
   public boolean isFinished() {
     // Y-button ends command
-    if (RobotContainer.m_filteredController.getYButton()) {
-      return true;
-    } else {
-      return false;
-    }
+    return bottom;
   }
 }
