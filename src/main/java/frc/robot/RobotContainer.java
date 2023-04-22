@@ -7,23 +7,24 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 
 import frc.robot.commands.First;
-import frc.robot.commands.IntakeConeCommand;
-import frc.robot.commands.IntakeCubeCommand;
-import frc.robot.commands.IntakeDown;
-import frc.robot.commands.IntakeUp;
-import frc.robot.commands.MidCubeScore;
-import frc.robot.commands.ProtectIntake;
 import frc.robot.commands.Second;
-import frc.robot.commands.ZeroSlides;
-import frc.robot.commands.LiftPos.ConeIntakePosition;
-import frc.robot.commands.LiftPos.ConePlacePosition;
-import frc.robot.commands.LiftPos.CubeIntakePosition;
-import frc.robot.commands.LiftPos.CubePlacePosition;
+import frc.robot.commands.auto.autos.MidCubeScore;
+import frc.robot.commands.balancing.AutoBalanceDrive;
+import frc.robot.commands.balancing.AutoBalancer;
+import frc.robot.commands.elevator.ConeIntakePosition;
+import frc.robot.commands.elevator.ConePlacePosition;
+import frc.robot.commands.elevator.CubeIntakePosition;
+import frc.robot.commands.elevator.CubePlacePosition;
+import frc.robot.commands.elevator.ElevatorPID;
+import frc.robot.commands.elevator.ZeroSlides;
+import frc.robot.commands.intake.IntakeConeCommand;
+import frc.robot.commands.intake.IntakeConeUp;
+import frc.robot.commands.intake.IntakeCubeCommand;
+import frc.robot.commands.intake.IntakeCubeDown;
+import frc.robot.commands.intake.IntakeDown;
+import frc.robot.commands.intake.IntakeUp;
+import frc.robot.commands.intake.ProtectIntake;
 import frc.robot.commands.ArcadeDrive;
-import frc.robot.commands.AutoBalanceDrive;
-import frc.robot.commands.AutoBalancer;
-import frc.robot.commands.IntakeCubeDown;
-import frc.robot.commands.IntakeConeUp;
 import frc.robot.other.FilteredController;
 import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Drivetrain;
@@ -34,7 +35,6 @@ import edu.wpi.first.wpilibj2.command.Command.InterruptionBehavior;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.Intake;
-import frc.robot.commands.ElevatorPID;
 
 /**
  * This class is where the bulk of the robot should be declared. Since

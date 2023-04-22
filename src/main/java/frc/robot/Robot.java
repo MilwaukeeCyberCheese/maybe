@@ -11,18 +11,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.auto.BalanceMiddleCone;
-import frc.robot.commands.auto.BalanceMiddleCube;
-import frc.robot.commands.IntakeOff;
 import frc.robot.commands.Second;
-import frc.robot.commands.ZeroSlides;
-import frc.robot.commands.auto.LowCubeBalance;
-import frc.robot.commands.auto.LowCubeBalanceDriveOutII;
-import frc.robot.commands.auto.LowCubeBalanceOut;
-import frc.robot.commands.auto.MidConeDriveOut;
-import frc.robot.commands.auto.MidCubeDriveOut;
-import frc.robot.commands.auto.LowCubeDriveOut;
-import frc.robot.commands.auto.PlaybackAuto;
+import frc.robot.commands.auto.autos.BalanceMiddleCone;
+import frc.robot.commands.auto.autos.BalanceMiddleCube;
+import frc.robot.commands.auto.autos.LowCubeBalance;
+import frc.robot.commands.auto.autos.LowCubeBalanceDriveOutII;
+import frc.robot.commands.auto.autos.LowCubeBalanceOut;
+import frc.robot.commands.auto.autos.LowCubeDriveOut;
+import frc.robot.commands.auto.autos.MidConeDriveOut;
+import frc.robot.commands.auto.autos.MidCubeDriveOut;
+import frc.robot.commands.auto.autos.PlaybackAuto;
+import frc.robot.commands.elevator.ZeroSlides;
+import frc.robot.commands.intake.IntakeOff;
 
 /**
  * The VM is configured to automatically run this class, and to call the
