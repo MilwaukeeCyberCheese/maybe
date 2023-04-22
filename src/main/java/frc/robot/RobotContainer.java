@@ -14,7 +14,6 @@ import frc.robot.commands.balancing.AutoBalancer;
 import frc.robot.commands.elevator.ConeIntakePosition;
 import frc.robot.commands.elevator.ConePlacePosition;
 import frc.robot.commands.elevator.CubeIntakePosition;
-import frc.robot.commands.elevator.CubePlacePosition;
 import frc.robot.commands.elevator.ElevatorPID;
 import frc.robot.commands.elevator.ZeroSlides;
 import frc.robot.commands.intake.IntakeConeCommand;

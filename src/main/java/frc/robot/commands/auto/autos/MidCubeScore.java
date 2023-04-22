@@ -3,15 +3,12 @@ package frc.robot.commands.auto.autos;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.auto.timeBased.DriveToTime;
 import frc.robot.commands.auto.timeBased.IntakeAuto;
 import frc.robot.commands.elevator.CubeIntakePosition;
 import frc.robot.commands.elevator.CubePlacePosition;
 import frc.robot.commands.intake.IntakeUp;
-import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shifter;
 
 public class MidCubeScore extends SequentialCommandGroup {
 
