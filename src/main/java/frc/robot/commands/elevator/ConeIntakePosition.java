@@ -22,6 +22,7 @@ public class ConeIntakePosition extends CommandBase {
    * Creates a new lift position Command.
    *
    * @param elevatorSubsystem subsystem controlling the elevators
+   * @param delay            delay before starting the command
    */
   public ConeIntakePosition(ElevatorSubsystem elevatorSubsystem, IntSupplier delay) {
     m_elevatorSubsystem = elevatorSubsystem;

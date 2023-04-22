@@ -22,12 +22,8 @@ public class SpinAround extends CommandBase {
   /**
    * Creates a new ArcadeDrive command.
    *
-   * @param throttle   The control input for the left side of the drive
    * @param angle   The control input for the right sight of the drive
-   * @param slow  whether or not to enable slow mode
-   * @param turbo whether or not to enable turbo mode
    * @param drivetrain The drivetrain subsystem to drive
-   * @param runtime how long to drive for
    */
   public SpinAround(DoubleSupplier angle,
       Drivetrain drivetrain) {

@@ -32,8 +32,9 @@ public class DriveToTime extends CommandBase {
    * @param rotation   The control input for the right sight of the drive
    * @param slow  whether or not to enable slow mode
    * @param turbo whether or not to enable turbo mode
-   * @param drivetrain The drivetrain subsystem to drive
    * @param runtime how long to drive for
+   * @param drivetrain The drivetrain subsystem to drive
+   * 
    */
   public DriveToTime(DoubleSupplier throttle, DoubleSupplier rotation, BooleanSupplier slow, BooleanSupplier turbo, IntSupplier runtime,
       Drivetrain drivetrain) {

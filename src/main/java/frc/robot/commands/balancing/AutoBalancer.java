@@ -24,6 +24,7 @@ public class AutoBalancer extends CommandBase {
    * Creates a new AutoBalance Command.
    *
    * @param drivetrain The drivetrain subsystem to drive
+   * @param shifter    Shifter for the gearboxes
    *
    */
   public AutoBalancer(Drivetrain drivetrain, Shifter shifter) {
