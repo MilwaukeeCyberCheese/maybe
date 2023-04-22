@@ -17,8 +17,8 @@ public class LowCubeDriveOut extends SequentialCommandGroup {
                         Shifter shifter) {
 
                 addCommands(
-                                new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> Constants.intake.CONE_SPEED, () -> 300, () -> 0,
-                                                () -> 0),
+                                new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> Constants.intake.CONE_SPEED,
+                                                () -> 300, () -> 0, () -> 0, () -> 0.0),
 
                                 new DriveToTime(() -> -0.5, () -> 0, () -> false, () -> false, () -> 3500, drivetrain));
 

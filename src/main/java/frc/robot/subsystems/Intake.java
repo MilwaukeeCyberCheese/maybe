@@ -53,9 +53,15 @@ public class Intake extends SubsystemBase {
 
     }
 
+    public double getCurrent() {
+        return Constants.controllers.intakeSpark.getOutputCurrent();
+    }
+
     public void log() {
         //log intake speed
         SmartDashboard.putNumber("IntakeSpeed", speed);
+        //log intake current
+        SmartDashboard.putNumber("IntakeCurrent", getCurrent());
     }
 
 }

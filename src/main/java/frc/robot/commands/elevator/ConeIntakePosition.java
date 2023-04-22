@@ -22,7 +22,7 @@ public class ConeIntakePosition extends CommandBase {
    * Creates a new lift position Command.
    *
    * @param elevatorSubsystem subsystem controlling the elevators
-   * @param delay            delay before starting the command
+   * @param delay             delay before starting the command
    */
   public ConeIntakePosition(ElevatorSubsystem elevatorSubsystem, IntSupplier delay) {
     m_elevatorSubsystem = elevatorSubsystem;
@@ -53,8 +53,7 @@ public class ConeIntakePosition extends CommandBase {
   public boolean isFinished() {
 
     // finishes when the lift is at the proper position
-    if (Math.abs(m_elevatorSubsystem.position - Constants.lift.CONE_INTAKE_POSITION) < Constants.lift.TOLERANCE
-        || m_elevatorSubsystem.abort()) {
+    if (Math.abs(m_elevatorSubsystem.position - Constants.lift.CONE_INTAKE_POSITION) < Constants.lift.TOLERANCE) {
       return true;
     } else {
       return false;

@@ -149,8 +149,7 @@ public final class Constants {
                 public static final Value INTAKE_UP = Value.kReverse;
                 public static final Value INTAKE_OFF = Value.kOff;
 
-                public static final int STALL_LIMIT = 10;
-                public static final int FREE_LIMIT = 80;
+                public static final double STALL_LIMIT_CONE = 50.0; // TODO
 
                 public static final double LIFT_SPEED_THRESHOLD = 0.03;
         }
@@ -158,9 +157,6 @@ public final class Constants {
         public static final class lift {
                 public static final double MIN_INTAKE = 0;
                 public static final double MAX_INTAKE = 35;
-
-                public static final double ABORT_AMPS = 80; // TODO
-                public static final double ABORT_CHANGE = 0.5; // TODO
 
                 public static final double BELOW_UP_INTAKE = 5;
 

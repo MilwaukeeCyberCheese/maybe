@@ -18,7 +18,8 @@ public class LowCubeBalance extends SequentialCommandGroup {
             Shifter shifter) {
 
         addCommands(
-                new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> Constants.intake.CONE_SPEED, () -> 500, () -> 0, () -> 0),
+                new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> Constants.intake.CONE_SPEED, () -> 500,
+                        () -> 0, () -> 0, () -> 0.0),
                 new AutoBalanceDrive(drivetrain, shifter, intake));
 
     }

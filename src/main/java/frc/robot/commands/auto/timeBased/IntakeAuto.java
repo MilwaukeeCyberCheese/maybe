@@ -17,6 +17,7 @@ public class IntakeAuto extends CommandBase {
     private final IntSupplier m_runtime;
     private final IntSupplier m_delay;
     private final IntSupplier m_actuateDelay;
+    private final DoubleSupplier m_stallCurrent;
 
     /**
      * Creates a new automatic intake Command.
@@ -27,16 +28,18 @@ public class IntakeAuto extends CommandBase {
      * @param runtime      time to run intake for
      * @param delay        time to wait for the intake to start running
      * @param actuateDelay time to wait for the intake to change position
+     * @param stallCurrent current to stall the intake at
      * 
      */
     public IntakeAuto(Intake intake, Value position, DoubleSupplier speed, IntSupplier runtime, IntSupplier delay,
-            IntSupplier actuateDelay) {
+            IntSupplier actuateDelay, DoubleSupplier stallCurrent) {
         this.m_intake = intake;
         this.m_position = position;
         this.m_speed = speed;
         this.m_runtime = runtime;
         this.m_delay = delay;
         this.m_actuateDelay = actuateDelay;
+        this.m_stallCurrent = stallCurrent;
         addRequirements(m_intake);
     }
 
@@ -62,12 +65,20 @@ public class IntakeAuto extends CommandBase {
             m_intake.drive(m_speed.getAsDouble());
         }
 
+        if (m_stallCurrent.getAsDouble() != 0.0) {
+            if (Math.abs(m_intake.getCurrent()) > m_stallCurrent.getAsDouble()) {
+                m_intake.drive(0);
+            } else {
+                m_intake.drive(m_speed.getAsDouble());
+            }
+        }
+
     }
 
     @Override
     public boolean isFinished() {
         // returns whether the time exceeds the time allotted to run
-        return timer.getTime() > m_runtime.getAsInt();
+        return timer.getTime() > m_runtime.getAsInt() || m_intake.getCurrent() > m_stallCurrent.getAsDouble();
 
     }
 

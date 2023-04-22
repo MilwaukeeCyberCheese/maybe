@@ -22,7 +22,7 @@ public class ConePlacePosition extends CommandBase {
    * Creates a new lift position Command.
    *
    * @param elevatorSubsystem subsystem controlling the elevators
-   * @param delay milliseconds to wait before moving lift
+   * @param delay             milliseconds to wait before moving lift
    */
   public ConePlacePosition(ElevatorSubsystem elevatorSubsystem, IntSupplier delay) {
     m_elevatorSubsystem = elevatorSubsystem;
@@ -53,8 +53,7 @@ public class ConePlacePosition extends CommandBase {
   @Override
   public boolean isFinished() {
     // return true when lift is at position
-    if (Math.abs(m_elevatorSubsystem.position - Constants.lift.CONE_PLACE_POSITION) < Constants.lift.TOLERANCE
-        || m_elevatorSubsystem.abort()) {
+    if (Math.abs(m_elevatorSubsystem.position - Constants.lift.CONE_PLACE_POSITION) < Constants.lift.TOLERANCE) {
       return true;
     } else {
       return false;

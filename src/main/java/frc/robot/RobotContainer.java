@@ -8,13 +8,15 @@ import edu.wpi.first.wpilibj.XboxController;
 
 import frc.robot.commands.First;
 import frc.robot.commands.Second;
-import frc.robot.commands.auto.autos.MidCubeScore;
 import frc.robot.commands.balancing.AutoBalanceDrive;
 import frc.robot.commands.balancing.AutoBalancer;
 import frc.robot.commands.elevator.ConeIntakePosition;
 import frc.robot.commands.elevator.ConePlacePosition;
 import frc.robot.commands.elevator.CubeIntakePosition;
+import frc.robot.commands.elevator.CubePlacePosition;
 import frc.robot.commands.elevator.ElevatorPID;
+import frc.robot.commands.elevator.MidConeScore;
+import frc.robot.commands.elevator.MidCubeScore;
 import frc.robot.commands.elevator.ZeroSlides;
 import frc.robot.commands.intake.IntakeConeCommand;
 import frc.robot.commands.intake.IntakeConeUp;
@@ -30,7 +32,6 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Shifter;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.Command.InterruptionBehavior;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.Intake;
@@ -109,6 +110,8 @@ public class RobotContainer {
     Trigger rightBumperOne = new JoystickButton(m_controller, 6);
 
     Trigger aButtonTwo = new JoystickButton(m_controllerTwo, 1);
+    Trigger bButtonTwo = new JoystickButton(m_controllerTwo, 2);
+    Trigger xButtonTwo = new JoystickButton(m_controllerTwo, 3);
     Trigger yButtonTwo = new JoystickButton(m_controllerTwo, 4);
     Trigger leftBumperTwo = new JoystickButton(m_controllerTwo, 5);
     Trigger rightBumperTwo = new JoystickButton(m_controllerTwo, 6);
@@ -143,9 +146,12 @@ public class RobotContainer {
     leftTriggerTwo.whileTrue(new IntakeCubeDown(m_intake));
     rightTriggerTwo.whileTrue(new IntakeConeUp(m_intake));
 
+    xButtonTwo.onTrue(new MidCubeScore(m_intake, m_elevatorSubsystem));
+    bButtonTwo.onTrue(new MidConeScore(m_intake, m_elevatorSubsystem));
+
     dpadUpTwo.onTrue(new ConePlacePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
     dpadDownTwo.onTrue(new ConeIntakePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
-    dpadLeftTwo.onTrue(new MidCubeScore(m_intake, m_elevatorSubsystem).withInterruptBehavior(InterruptionBehavior.kCancelIncoming));
+    dpadLeftTwo.onTrue(new CubePlacePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
     dpadRightTwo.onTrue(new CubeIntakePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
 
   }
