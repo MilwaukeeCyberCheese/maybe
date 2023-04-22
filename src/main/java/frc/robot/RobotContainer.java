@@ -11,6 +11,7 @@ import frc.robot.commands.Second;
 import frc.robot.commands.balancing.AutoBalanceDrive;
 import frc.robot.commands.balancing.AutoBalancer;
 import frc.robot.commands.elevator.ConeIntakePosition;
+import frc.robot.commands.elevator.ConeIntakeSingle;
 import frc.robot.commands.elevator.ConePlacePosition;
 import frc.robot.commands.elevator.CubeIntakePosition;
 import frc.robot.commands.elevator.CubePlacePosition;
@@ -142,10 +143,10 @@ public class RobotContainer {
 
     leftBumperTwo.whileTrue(new IntakeCubeCommand(m_intake));
     rightBumperTwo.whileTrue(new IntakeConeCommand(m_intake));
-
     leftTriggerTwo.whileTrue(new IntakeCubeDown(m_intake));
-    rightTriggerTwo.whileTrue(new IntakeConeUp(m_intake));
 
+
+    rightTriggerTwo.onTrue(new ConeIntakeSingle(m_intake, m_elevatorSubsystem));
     xButtonTwo.onTrue(new MidCubeScore(m_intake, m_elevatorSubsystem));
     bButtonTwo.onTrue(new MidConeScore(m_intake, m_elevatorSubsystem));
 
