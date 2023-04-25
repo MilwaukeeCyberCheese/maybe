@@ -44,23 +44,19 @@ public class Playback extends CommandBase {
     @Override
     public void execute() {
         // check for time running to exceed size
-        if (stopwatchCounter < AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(m_whichOne.getAsInt()).size()
+        if (stopwatchCounter < AutoSubsystemValues.left.left.get(m_whichOne.getAsInt()).size()
                 - 1) {
             // increment counter
             stopwatchCounter++;
 
             // get speeds for drivetrain wheels
-            double frontLeft = AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(m_whichOne.getAsInt())
+            double left = AutoSubsystemValues.left.left.get(m_whichOne.getAsInt())
                     .get(stopwatchCounter);
-            double frontRight = AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(m_whichOne.getAsInt())
-                    .get(stopwatchCounter);
-            double backLeft = AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(m_whichOne.getAsInt())
-                    .get(stopwatchCounter);
-            double backRight = AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(m_whichOne.getAsInt())
+            double right = AutoSubsystemValues.right.right.get(m_whichOne.getAsInt())
                     .get(stopwatchCounter);
 
             // set speeds of wheels
-            m_drivetrain.setWheelSpeeds(frontLeft, frontRight, backLeft, backRight);
+            m_drivetrain.setWheelSpeeds(left, right);
 
             //get speed of intake
             double intakeSpeed = AutoSubsystemValues.intaking.intaking.get(m_whichOne.getAsInt()).get(stopwatchCounter);

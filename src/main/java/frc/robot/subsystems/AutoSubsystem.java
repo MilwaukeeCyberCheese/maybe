@@ -11,11 +11,9 @@ public class AutoSubsystem extends SubsystemBase {
     }
 
     // adds drive speeds to recording
-    public void addDriveSpeeds(double frontLeft, double frontRight, double backLeft, double backRight) {
-        AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(0).add(frontLeft);
-        AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(0).add(frontRight);
-        AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(0).add(backLeft);
-        AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(0).add(backRight);
+    public void addDriveSpeeds(double left, double right) {
+        AutoSubsystemValues.left.left.get(0).add(left);
+        AutoSubsystemValues.right.right.get(0).add(right);
     }
 
     // adds intake position to recording
@@ -42,10 +40,8 @@ public class AutoSubsystem extends SubsystemBase {
     public void clearShit() {
         AutoSubsystemValues.liftPos.liftPos.get(0).clear();
         AutoSubsystemValues.intaking.intaking.get(0).clear();
-        AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(0).clear();
-        AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(0).clear();
-        AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(0).clear();
-        AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(0).clear();
+        AutoSubsystemValues.left.left.get(0).clear();
+        AutoSubsystemValues.right.right.get(0).clear();
         AutoSubsystemValues.intakePos.intakePos.get(0).clear();
         AutoSubsystemValues.gear.gear.get(0).clear();
     }
@@ -61,11 +57,11 @@ public class AutoSubsystem extends SubsystemBase {
 
         // append the frontLeft speeds
         toPrint += "\n\n public static List<Double> //TODO frontLeftSpeeds = new LinkedList<Double>(Arrays.asList(";
-        for (int i = 0; i < AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(0).size(); i++) {
-            double frontLeftSpeeds = AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(0).get(i);
+        for (int i = 0; i < AutoSubsystemValues.left.left.get(0).size(); i++) {
+            double frontLeftSpeeds = AutoSubsystemValues.left.left.get(0).get(i);
             toPrint += frontLeftSpeeds;
 
-            if (i != AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(0).size() - 1) {
+            if (i != AutoSubsystemValues.left.left.get(0).size() - 1) {
                 toPrint += ",";
             }
         }
@@ -73,39 +69,17 @@ public class AutoSubsystem extends SubsystemBase {
 
         // append the frontRight speeds
         toPrint += "\n\n public static List<Double> //TODO frontRightSpeeds = new LinkedList<Double>(Arrays.asList(";
-        for (int i = 0; i < AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(0).size(); i++) {
-            double frontRightSpeeds = AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(0).get(i);
+        for (int i = 0; i < AutoSubsystemValues.right.right.get(0).size(); i++) {
+            double frontRightSpeeds = AutoSubsystemValues.right.right.get(0).get(i);
             toPrint += frontRightSpeeds;
 
-            if (i != AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(0).size() - 1) {
+            if (i != AutoSubsystemValues.right.right.get(0).size() - 1) {
                 toPrint += ",";
             }
         }
         toPrint += "));}\n";
 
-        // append the backLeft speeds
-        toPrint += "\n\n public static List<Double> //TODO backLeftSpeeds = new LinkedList<Double>(Arrays.asList(";
-        for (int i = 0; i < AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(0).size(); i++) {
-            double backLeftSpeeds = AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(0).get(i);
-            toPrint += backLeftSpeeds;
-
-            if (i != AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(0).size() - 1) {
-                toPrint += ",";
-            }
-        }
-        toPrint += "));}\n";
-
-        // append the backRight speeds
-        toPrint += "\n\n public static List<Double> //TODO backRightSpeeds = new LinkedList<Double>(Arrays.asList(";
-        for (int i = 0; i < AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(0).size(); i++) {
-            double backRightSpeeds = AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(0).get(i);
-            toPrint += backRightSpeeds;
-
-            if (i != AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(0).size() - 1) {
-                toPrint += ",";
-            }
-        }
-        toPrint += "));}\n";
+       
 
         // append the intake speeds
         toPrint += "\n\n public static List<Double> //TODO intaking = new LinkedList<Double>(Arrays.asList(";
@@ -164,10 +138,8 @@ public class AutoSubsystem extends SubsystemBase {
 
         AutoSubsystemValues.liftPos.liftPos.get(0).clear();
         AutoSubsystemValues.intaking.intaking.get(0).clear();
-        AutoSubsystemValues.frontLeftSpeeds.frontLeftSpeeds.get(0).clear();
-        AutoSubsystemValues.frontRightSpeeds.frontRightSpeeds.get(0).clear();
-        AutoSubsystemValues.backLeftSpeeds.backLeftSpeeds.get(0).clear();
-        AutoSubsystemValues.backRightSpeeds.backRightSpeeds.get(0).clear();
+        AutoSubsystemValues.left.left.get(0).clear();
+        AutoSubsystemValues.right.right.get(0).clear();
         AutoSubsystemValues.intakePos.intakePos.get(0).clear();
         AutoSubsystemValues.gear.gear.get(0).clear();
     }
