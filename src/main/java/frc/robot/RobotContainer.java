@@ -20,7 +20,6 @@ import frc.robot.commands.elevator.MidConeScore;
 import frc.robot.commands.elevator.MidCubeScore;
 import frc.robot.commands.elevator.ZeroSlides;
 import frc.robot.commands.intake.IntakeConeCommand;
-import frc.robot.commands.intake.IntakeConeUp;
 import frc.robot.commands.intake.IntakeCubeCommand;
 import frc.robot.commands.intake.IntakeCubeDown;
 import frc.robot.commands.intake.IntakeDown;
