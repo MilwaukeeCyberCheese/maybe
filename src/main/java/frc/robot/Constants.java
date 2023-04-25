@@ -74,6 +74,8 @@ public final class Constants {
                 public static final int LEFT_LIFT_SPARK = 5;
                 public static final int RIGHT_LIFT_SPARK = 6;
                 public static final int INTAKE_SPARK = 7;
+                public static final int DRIVETRAIN_LEFT_MIDDLE_SPARK = 8;
+                public static final int DRIVETRAIN_RIGHT_MIDDLE_SPARK = 9;
 
                 /**
                  * These static objects are used throughout the program.
@@ -88,6 +90,10 @@ public final class Constants {
                                 MotorType.kBrushless);
                 public static final CANSparkMax rightRearSpark = new CANSparkMax(DRIVETRAIN_RIGHT_REAR_SPARK,
                                 MotorType.kBrushless);
+                public static final CANSparkMax leftMiddleSpark = new CANSparkMax(DRIVETRAIN_LEFT_MIDDLE_SPARK,
+                                MotorType.kBrushless);
+                public static final CANSparkMax rightMiddleSpark = new CANSparkMax(DRIVETRAIN_RIGHT_MIDDLE_SPARK,
+                                MotorType.kBrushless);
 
                 public static final CANSparkMax intakeSpark = new CANSparkMax(INTAKE_SPARK,
                                 MotorType.kBrushless);
@@ -101,9 +107,9 @@ public final class Constants {
         public static final class drive {
 
                 public static final MotorControllerGroup m_leftMotorController = new MotorControllerGroup(
-                                controllers.leftFrontSpark, controllers.leftRearSpark);
+                                controllers.leftFrontSpark, controllers.leftRearSpark, controllers.leftMiddleSpark);
                 public static final MotorControllerGroup m_rightMotorController = new MotorControllerGroup(
-                                controllers.rightFrontSpark, controllers.rightRearSpark);
+                                controllers.rightFrontSpark, controllers.rightRearSpark, controllers.rightMiddleSpark);
 
                 public static final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotorController,
                                 m_rightMotorController);
