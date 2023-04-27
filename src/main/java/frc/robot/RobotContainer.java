@@ -71,19 +71,20 @@ public class RobotContainer {
                 .getXRight(.2),
             () -> m_filteredController.getLeftTriggerActive(0.2), () -> m_filteredController.getRightTriggerActive(0.2),
             m_drivetrain));
-
-    m_elevatorSubsystem.setDefaultCommand(
-        new ElevatorPID(() -> -m_filteredControllerTwo.getYLeft(0.2), m_elevatorSubsystem,
-            () -> !m_controllerTwo.getStartButton()));
+    if (!Constants.SINGLE_DRIVER) {
+      m_elevatorSubsystem.setDefaultCommand(
+          new ElevatorPID(() -> -m_filteredControllerTwo.getYLeft(0.2), m_elevatorSubsystem,
+              () -> !m_controllerTwo.getStartButton()));
+    }
 
     m_intake.setDefaultCommand(new ProtectIntake(m_intake));
 
-    // m_autoSubsystem.setDefaultCommand(
-    // new RecordAuto(m_autoSubsystem, () -> m_controllerTwo.getXButton(), () ->
-    // m_controllerTwo.getBButton()));
-
     // Configure the button bindings
-    configureButtonBindings();
+    if (Constants.SINGLE_DRIVER) {
+      configureButtonBindingsOneDriver();
+    } else {
+      configureButtonBindingsTwoDrivers();
+    }
   }
 
   /**
@@ -104,7 +105,7 @@ public class RobotContainer {
    * it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {
+  private void configureButtonBindingsTwoDrivers() {
     // Create the triggers
     Trigger leftBumperOne = new JoystickButton(m_controller, 5);
     Trigger rightBumperOne = new JoystickButton(m_controller, 6);
@@ -144,7 +145,6 @@ public class RobotContainer {
     rightBumperTwo.whileTrue(new IntakeConeCommand(m_intake));
     leftTriggerTwo.whileTrue(new IntakeCubeDown(m_intake));
 
-
     rightTriggerTwo.onTrue(new ConeIntakeSingle(m_intake, m_elevatorSubsystem));
     xButtonTwo.onTrue(new MidCubeScore(m_intake, m_elevatorSubsystem));
     bButtonTwo.onTrue(new MidConeScore(m_intake, m_elevatorSubsystem));
@@ -153,6 +153,48 @@ public class RobotContainer {
     dpadDownTwo.onTrue(new ConeIntakePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
     dpadLeftTwo.onTrue(new CubePlacePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
     dpadRightTwo.onTrue(new CubeIntakePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
+
+  }
+
+  private void configureButtonBindingsOneDriver() {
+    // Create the triggers
+    Trigger leftBumperOne = new JoystickButton(m_controller, 5);
+    Trigger rightBumperOne = new JoystickButton(m_controller, 6);
+
+    Trigger aButtonOne = new JoystickButton(m_controller, 1);
+    Trigger bButtonOne = new JoystickButton(m_controller, 2);
+    Trigger xButtonOne = new JoystickButton(m_controller, 3);
+    Trigger yButtonOne = new JoystickButton(m_controller, 4);
+
+    Trigger backButtonOne = new JoystickButton(m_controller, 7);
+
+    Trigger leftStickButtonOne = new JoystickButton(m_controller, 9);
+    Trigger rightStickButtonOne = new JoystickButton(m_controller, 10);
+
+    Trigger dpadUpOne = new Trigger(() -> m_filteredController.getPOVButton() == 8);
+    Trigger dpadDownOne = new Trigger(() -> m_filteredController.getPOVButton() == 2);
+    Trigger dpadLeftOne = new Trigger(() -> m_filteredController.getPOVButton() == 6);
+    Trigger dpadRightOne = new Trigger(() -> m_filteredController.getPOVButton() == 4);
+
+    // map the trigers to commands
+    leftBumperOne.onTrue(new First(m_shifter));
+    rightBumperOne.onTrue(new Second(m_shifter));
+
+    backButtonOne.whileTrue(new ZeroSlides(m_elevatorSubsystem));
+
+    leftStickButtonOne.onTrue(new AutoBalancer(m_drivetrain, m_shifter));
+    rightStickButtonOne.onTrue(new AutoBalanceDrive(m_drivetrain, m_shifter, m_intake));
+
+    yButtonOne.whileTrue(new IntakeUp(m_intake));
+    aButtonOne.whileTrue(new IntakeDown(m_intake));
+
+    bButtonOne.whileTrue(new IntakeCubeCommand(m_intake));
+    xButtonOne.whileTrue(new IntakeConeCommand(m_intake));
+
+    dpadUpOne.onTrue(new ConePlacePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
+    dpadDownOne.onTrue(new ConeIntakePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
+    dpadLeftOne.onTrue(new CubePlacePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
+    dpadRightOne.onTrue(new CubeIntakePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
 
   }
 
