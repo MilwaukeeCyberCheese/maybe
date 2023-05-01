@@ -56,6 +56,43 @@ public class FilteredController {
         return new InputFilter(controller.getRightY()).getFiltered(deadzone);
     }
 
+     /**
+     * Gets the filtered X input for the given stick.
+     * 
+     * @return double
+     */
+    public double getXLeft() {
+        return new InputFilter(controller.getLeftX()).getFiltered(0.2);
+    }
+
+    /**
+     * Gets the filtered X input for the given stick.
+     * 
+     * @return double
+     */
+    public double getXRight() {
+        return new InputFilter(controller.getRightX()).getFiltered(0.2);
+    }
+
+    /**
+     * Gets the filtered Y input for the given stick.
+     * 
+     * @return double
+     */
+    public double getYLeft() {
+        return new InputFilter(controller.getLeftY()).getFiltered(0.2);
+    }
+
+    /**
+     * Gets the filtered Y input for the given stick.
+     * 
+     * @return double
+     */
+    public double getYRight() {
+        return new InputFilter(controller.getRightY()).getFiltered(0.2);
+    }
+
+
     /**
      * Returns if the right trigger is active or not within a deadzone
      * 
@@ -246,5 +283,21 @@ public class FilteredController {
      */
     public boolean getRightBumper() {
         return controller.getRightBumper();
+    }
+
+    public boolean getLeftStickPressed() {
+        return controller.getLeftStickButton();
+    }
+
+    public boolean getRightStickPressed() {
+        return controller.getRightStickButton();
+    }
+
+    public boolean getBackButton() {
+        return controller.getBackButton();
+    }
+
+    public boolean getStartButton() {
+        return controller.getStartButton();
     }
 }
