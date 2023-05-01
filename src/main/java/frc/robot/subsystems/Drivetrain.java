@@ -5,10 +5,8 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
-import frc.robot.other.Stopwatch;
-
-import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,13 +16,11 @@ public class Drivetrain extends SubsystemBase {
   private double throttle;
   private double rotation;
   public double throttleActual;
-  private double rotationActual;
+  public double rotationActual;
   private double previousThrottle = 0;
   private double previousRotation = 0;
-  private boolean brakeMode = false;
-  private Stopwatch brakingTimer = new Stopwatch();
-  private SlewRateLimiter throttleLimiter = new SlewRateLimiter(Constants.drive.THROTTLE_LIMITER);
-  private SlewRateLimiter rotationLimiter = new SlewRateLimiter(Constants.drive.ROTATION_LIMITER);
+  private SlewRateLimiter throttleLimiter = new SlewRateLimiter(Constants.drive.THROTTLE_LIMITER_RATE);
+  private SlewRateLimiter rotationLimiter = new SlewRateLimiter(Constants.drive.ROTATION_LIMITER_RATE);
 
   /**
    * The Drivetrain subsystem incorporates the sensors and actuators attached to
@@ -36,43 +32,61 @@ public class Drivetrain extends SubsystemBase {
   public Drivetrain() {
     super();
 
-    // We need to invert one side of the drivetrain so that positive voltages
-    // result in both sides moving forward. Depending on how your robot's
-    // gearbox is constructed, you might have to invert the left side instead.
-    Constants.controllers.leftFrontSpark.setInverted(Constants.drive.LEFT_FRONT_INVERTED);
-    Constants.controllers.leftRearSpark.setInverted(Constants.drive.LEFT_REAR_INVERTED);
-    Constants.controllers.rightFrontSpark.setInverted(Constants.drive.RIGHT_FRONT_INVERTED);
-    Constants.controllers.rightRearSpark.setInverted(Constants.drive.RIGHT_REAR_INVERTED);
+    // invert motors so they drive in same direction
+    Constants.drive.m_rightMotorController.setInverted(Constants.drive.RIGHT_FRONT_INVERTED);
+    Constants.drive.m_leftMotorController.setInverted(Constants.drive.LEFT_FRONT_INVERTED);
+
+    // sets a current limit to protect motors
     Constants.controllers.leftFrontSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
     Constants.controllers.rightFrontSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
     Constants.controllers.leftRearSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
     Constants.controllers.rightRearSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
+    Constants.controllers.leftMiddleSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
+    Constants.controllers.rightMiddleSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
+
+    // sets braking or coasting of motors
     Constants.controllers.leftFrontSpark.setIdleMode(Constants.drive.IDLE_MODE);
     Constants.controllers.leftRearSpark.setIdleMode(Constants.drive.IDLE_MODE);
     Constants.controllers.rightFrontSpark.setIdleMode(Constants.drive.IDLE_MODE);
     Constants.controllers.rightRearSpark.setIdleMode(Constants.drive.IDLE_MODE);
+    Constants.controllers.leftMiddleSpark.setIdleMode(Constants.drive.IDLE_MODE);
+    Constants.controllers.rightMiddleSpark.setIdleMode(Constants.drive.IDLE_MODE);
 
-    // Let's name the sensors on the LiveWindow
-    addChild("Drive", Constants.drive.m_drive);
   }
 
   /** The log method puts interesting information to the SmartDashboard. */
   public void log() {
 
+    System.out.println(Robot.autoChooser.getSelected());
+
     SmartDashboard.putData("Drivetrain", Constants.drive.m_drive);
+
+    // adds speed of each motor
     SmartDashboard.putNumber("FrontLeft Speed", Constants.controllers.leftFrontSpark.get());
     SmartDashboard.putNumber("FrontRight Speed", Constants.controllers.rightFrontSpark.get());
     SmartDashboard.putNumber("BackLeft Speed", Constants.controllers.leftRearSpark.get());
     SmartDashboard.putNumber("BackRight Speed", Constants.controllers.rightRearSpark.get());
-    SmartDashboard.putNumber("FrontLeft Temp", Constants.controllers.leftFrontSpark.getMotorTemperature());
-    SmartDashboard.putNumber("BackLeft Temp", Constants.controllers.leftRearSpark.getMotorTemperature());
-    SmartDashboard.putNumber("FrontRight Temp", Constants.controllers.rightFrontSpark.getMotorTemperature());
-    SmartDashboard.putNumber("BackRight Temp", Constants.controllers.rightRearSpark.getMotorTemperature());
+
+    // adds averaged temperature of all drive motors
+    SmartDashboard.putNumber("Drive Motor Temp",
+        (Constants.controllers.rightRearSpark.getMotorTemperature()
+            + Constants.controllers.leftRearSpark.getMotorTemperature()
+            + Constants.controllers.leftFrontSpark.getMotorTemperature()
+            + Constants.controllers.rightFrontSpark.getMotorTemperature()
+            + Constants.controllers.leftMiddleSpark.getMotorTemperature()
+            + Constants.controllers.rightMiddleSpark.getMotorTemperature()) / 6);
+
+    // adds current drawn by each drive motor
     SmartDashboard.putNumber("FrontLeft Current", Constants.controllers.leftFrontSpark.getOutputCurrent());
     SmartDashboard.putNumber("BackLeft Current", Constants.controllers.leftRearSpark.getOutputCurrent());
     SmartDashboard.putNumber("FrontRight Current", Constants.controllers.rightFrontSpark.getOutputCurrent());
     SmartDashboard.putNumber("BackRight Current", Constants.controllers.rightRearSpark.getOutputCurrent());
+    SmartDashboard.putNumber("MiddleLeft Current", Constants.controllers.leftMiddleSpark.getOutputCurrent());
+    SmartDashboard.putNumber("MiddleRight Current", Constants.controllers.rightMiddleSpark.getOutputCurrent());
+
+    // adds pitch of the gyro
     SmartDashboard.putNumber("Gyro Pitch", Constants.balance.gyro.getRoll());
+    SmartDashboard.putNumber("Gyro Angle", Constants.balance.gyro.getAngle());
   }
 
   /**
@@ -80,12 +94,13 @@ public class Drivetrain extends SubsystemBase {
    *
    * @param throttle Speed in range [-1,1]
    * @param rotation Speed in range [-1,1]
-   * @param brakeMode whether brakes should be engaged or not
    */
-  public void drive(double throttle, double rotation, boolean brakeMode) {
+  public void drive(double throttle, double rotation) {
     this.rotation = rotation;
     this.throttle = throttle;
-    this.brakeMode = brakeMode;
+
+    // apply acceleration limiting to throttle and rotation if increasing, otherwise
+    // no limiting is applied
     if (Math.abs(throttle) > Math.abs(previousThrottle)) {
       throttleActual = throttleLimiter.calculate(throttle);
     } else {
@@ -96,14 +111,23 @@ public class Drivetrain extends SubsystemBase {
     } else {
       rotationActual = rotation;
     }
+
+    // run drivetrain at determined speeds
     Constants.drive.m_drive.arcadeDrive(throttleActual, rotationActual);
   }
 
-  public void setWheelSpeeds(double frontLeft, double frontRight, double backLeft, double backRight) {
-    Constants.controllers.leftFrontSpark.set(frontLeft);
-    Constants.controllers.rightFrontSpark.set(frontRight);
-    Constants.controllers.leftRearSpark.set(backLeft);
-    Constants.controllers.rightRearSpark.set(backRight);
+  /**
+   * Allows for driving of each side individually
+   *
+   * @param left  speed to set left wheels to
+   * @param right speed to set right wheels to
+   * 
+   * 
+   */
+  public void setWheelSpeeds(double left, double right) {
+    Constants.drive.m_leftMotorController.set(left);
+    Constants.drive.m_rightMotorController.set(right);
+
   }
 
   /** Call log method every loop. */
@@ -111,32 +135,14 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
     log();
 
+    // adds wheel speeds every 20 milliseconds
     if (RobotContainer.readAuto) {
-      RobotContainer.m_autoSubsystem.addDriveSpeeds(Constants.controllers.leftFrontSpark.get(),
-          Constants.controllers.rightFrontSpark.get(), Constants.controllers.leftRearSpark.get(),
-          Constants.controllers.rightRearSpark.get());
+      RobotContainer.m_autoSubsystem.addDriveSpeeds(Constants.drive.m_leftMotorController.get(),
+          Constants.drive.m_rightMotorController.get());
     }
 
+    // sets previous throttle and rotation to compare for limiting
     previousThrottle = throttle;
     previousRotation = rotation;
-    // if (throttle == 0 && rotation == 0 && previousRotation != 0 &&
-    // previousThrottle != 0) {
-    // brakingTimer.stop();
-    // brakingTimer.reset();
-    // brakingTimer.start();
-    // }
-
-    // if((throttle == 0 && rotation == 0 && brakingTimer.getTime() >= 300) ||
-    // brakeMode){
-    // Constants.controllers.leftFrontSpark.setIdleMode(IdleMode.kBrake);
-    // Constants.controllers.leftRearSpark.setIdleMode(IdleMode.kBrake);
-    // Constants.controllers.rightFrontSpark.setIdleMode(IdleMode.kBrake);
-    // Constants.controllers.rightRearSpark.setIdleMode(IdleMode.kBrake);
-    // }else{
-    // Constants.controllers.leftFrontSpark.setIdleMode(IdleMode.kCoast);
-    // Constants.controllers.leftRearSpark.setIdleMode(IdleMode.kCoast);
-    // Constants.controllers.rightFrontSpark.setIdleMode(IdleMode.kCoast);
-    // Constants.controllers.rightRearSpark.setIdleMode(IdleMode.kCoast);
-    // }
   }
 }

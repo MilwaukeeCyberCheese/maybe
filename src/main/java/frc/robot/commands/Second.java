@@ -12,6 +12,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class Second extends CommandBase {
   private final Shifter m_shifter;
 
+  /**
+   * Creates a new shifting Command.
+   *
+   * @param shifter subsystem actuating the cylinders for the gearboxes
+   */
   public Second(Shifter shifter) {
     m_shifter = shifter;
     addRequirements(m_shifter);
@@ -20,8 +25,8 @@ public class Second extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
+    // sets gear
     m_shifter.setGear(Constants.drive.SECOND_GEAR);
   }
 
- 
 }

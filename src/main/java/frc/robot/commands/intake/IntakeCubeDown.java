@@ -1,14 +1,19 @@
-package frc.robot.commands;
+package frc.robot.commands.intake;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class IntakeConeDown extends CommandBase {
+public class IntakeCubeDown extends CommandBase {
     private final Intake m_intake;
 
-    // constructor
-    public IntakeConeDown(Intake intake) {
+    /**
+     * Creates a new intake Command.
+     *
+     * @param intake subsystem controlling the intake
+     * 
+     */
+    public IntakeCubeDown(Intake intake) {
         this.m_intake = intake;
 
         addRequirements(m_intake);
@@ -16,18 +21,21 @@ public class IntakeConeDown extends CommandBase {
 
     @Override
     public void initialize() {
-        m_intake.setPosition(Constants.intake.intakeDown);
+        // sets intake position to down
+        m_intake.setPosition(Constants.intake.INTAKE_DOWN);
     }
 
     // run whenever command is called
     @Override
     public void execute() {
-        m_intake.drive(Constants.intake.CONE_SLOW);
+        // sets speed of intake
+        m_intake.drive(Constants.intake.CUBE_SPEED);
     }
 
     // stop motor when finished
     @Override
     public void end(boolean interrupted) {
+        // stops intake when finisheds
         m_intake.drive(0);
     }
 }

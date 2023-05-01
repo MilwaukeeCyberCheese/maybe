@@ -5,16 +5,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.other.Stopwatch;
 
 public class Intake extends SubsystemBase {
 
     private double speed;
     public Value position;
-    private Stopwatch timer = new Stopwatch();
 
     /**
-     * Creates a new ExampleSubsystem.
+     * Creates a subsystem to control the intake
      */
     public Intake() {
         Constants.controllers.intakeSpark.setInverted(Constants.intake.INVERTED);
@@ -22,33 +20,48 @@ public class Intake extends SubsystemBase {
 
     @Override
     public void periodic() {
-        // This method will be called once per scheduler run
+        // adds position and speed to recording
         if (RobotContainer.readAuto) {
             RobotContainer.m_autoSubsystem.addIntaking(Constants.controllers.intakeSpark.get());
             RobotContainer.m_autoSubsystem.addIntakePos(Constants.pneumatics.intakeSolenoid.get());
         }
+
         log();
-        
-        
+
     }
 
+    /**
+     * Run intake at given speed
+     *
+     * @param speed Speed in range [-1,1]
+     * 
+     */
     public void drive(double speed) {
-    
+
         Constants.controllers.intakeSpark.set(speed);
     }
 
+    /**
+     * Set position of the intake
+     *
+     * @param position
+     * 
+     */
     public void setPosition(Value position) {
         this.position = position;
         Constants.pneumatics.intakeSolenoid.set(position);
 
     }
 
-    public Value getPosition(){
-        return Constants.pneumatics.intakeSolenoid.get();
+    public double getCurrent() {
+        return Constants.controllers.intakeSpark.getOutputCurrent();
     }
 
     public void log() {
+        //log intake speed
         SmartDashboard.putNumber("IntakeSpeed", speed);
+        //log intake current
+        SmartDashboard.putNumber("IntakeCurrent", getCurrent());
     }
 
 }

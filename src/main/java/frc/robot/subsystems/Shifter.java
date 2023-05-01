@@ -14,22 +14,29 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 public class Shifter extends SubsystemBase {
 
-
   /** Create a new shifter subsystem. */
   public Shifter() {
-    /* empty because there's nothing to put into it */
+    /* empty because there's nothing initialize */
 
   }
 
-  public void setGear(boolean position) {
-    Constants.pneumatics.shifterSolenoid.set(position);
+  /**
+   * Shifting of gears for the drivetrain
+   *
+   * @param gear gear to set the intake to
+   * 
+   */
+  public void setGear(boolean gear) {
+    Constants.pneumatics.shifterSolenoid.set(gear);
 
   }
 
   /** The log method puts the status of each solenoid to SmartDashboard */
   public void log() {
-    SmartDashboard.putData("Shifter", Constants.pneumatics.shifterSolenoid);
+    // logs position of solenoid
     SmartDashboard.putBoolean("Gear", Constants.pneumatics.shifterSolenoid.get());
+
+    // logs compressor current
     SmartDashboard.putNumber("Compressor Current", Constants.pneumatics.PCM.getCompressorCurrent());
 
   }
@@ -37,9 +44,11 @@ public class Shifter extends SubsystemBase {
   /** Call log method every loop. */
   @Override
   public void periodic() {
+    // adds gear to recording
     if (RobotContainer.readAuto) {
       RobotContainer.m_autoSubsystem.addShifter(Constants.pneumatics.shifterSolenoid.get());
     }
+
     log();
   }
 }

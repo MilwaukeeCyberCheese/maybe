@@ -2,22 +2,26 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.auto.timeBased;
 
 import frc.robot.Constants;
+import frc.robot.other.Stopwatch;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
+import java.util.function.IntSupplier;
 
 /** Have the robot drive arcade style. */
-public class ArcadeDrive extends CommandBase {
+public class DriveToTime extends CommandBase {
   private final Drivetrain m_drivetrain;
   private final DoubleSupplier m_throttle;
   private final DoubleSupplier m_rotation;
   private final BooleanSupplier m_slow;
   private final BooleanSupplier m_turbo;
+  private final IntSupplier m_runtime;
+  private final Stopwatch timer = new Stopwatch();
   private double m_turnSpeedMod = 1;
   private double m_driveSpeedMod = 1;
 
@@ -28,17 +32,27 @@ public class ArcadeDrive extends CommandBase {
    * @param rotation   The control input for the right sight of the drive
    * @param slow  whether or not to enable slow mode
    * @param turbo whether or not to enable turbo mode
+   * @param runtime how long to drive for
    * @param drivetrain The drivetrain subsystem to drive
+   * 
    */
-  public ArcadeDrive(DoubleSupplier throttle, DoubleSupplier rotation, BooleanSupplier slow, BooleanSupplier turbo,
+  public DriveToTime(DoubleSupplier throttle, DoubleSupplier rotation, BooleanSupplier slow, BooleanSupplier turbo, IntSupplier runtime,
       Drivetrain drivetrain) {
     m_drivetrain = drivetrain;
     m_throttle = throttle;
     m_rotation = rotation;
     m_slow = slow;
     m_turbo = turbo;
+    m_runtime = runtime;
     addRequirements(m_drivetrain);
   }
+
+@Override
+public void initialize(){
+    timer.stop();
+    timer.reset();
+    timer.start();
+}
 
   // Called repeatedly when this Command is scheduled to run
   @Override
@@ -64,7 +78,7 @@ public class ArcadeDrive extends CommandBase {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    return false; // Runs until interrupted since drivetrain should be always on
+    return timer.getTime() > m_runtime.getAsInt(); // Runs until interrupted since drivetrain should be always on
   }
 
   // Called once after isFinished returns true
