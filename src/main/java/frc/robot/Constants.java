@@ -68,16 +68,17 @@ public final class Constants {
         }
 
         public static final class controllers {
-                public static final int DRIVETRAIN_LEFT_FRONT_SPARK = 1; // front = closest to intake, left = facing
-                                                                         // intake
-                public static final int DRIVETRAIN_RIGHT_FRONT_SPARK = 2;
+                public static final int DRIVETRAIN_LEFT_FRONT_SPARK = 1;
+                public static final int DRIVETRAIN_LEFT_MIDDLE_SPARK = 2;
                 public static final int DRIVETRAIN_LEFT_REAR_SPARK = 3;
-                public static final int DRIVETRAIN_RIGHT_REAR_SPARK = 4;
-                public static final int LEFT_LIFT_SPARK = 5;
-                public static final int RIGHT_LIFT_SPARK = 6;
-                public static final int INTAKE_SPARK = 7;
-                public static final int DRIVETRAIN_LEFT_MIDDLE_SPARK = 8;
-                public static final int DRIVETRAIN_RIGHT_MIDDLE_SPARK = 9;
+
+                public static final int DRIVETRAIN_RIGHT_FRONT_SPARK = 4;
+                public static final int DRIVETRAIN_RIGHT_MIDDLE_SPARK = 5;
+                public static final int DRIVETRAIN_RIGHT_REAR_SPARK = 6;
+
+                public static final int LEFT_LIFT_SPARK = 7;
+                public static final int RIGHT_LIFT_SPARK = 8;
+                public static final int INTAKE_SPARK = 9;
 
                 /**
                  * These static objects are used throughout the program.
@@ -86,15 +87,16 @@ public final class Constants {
                  */
                 public static final CANSparkMax leftFrontSpark = new CANSparkMax(DRIVETRAIN_LEFT_FRONT_SPARK,
                                 MotorType.kBrushless);
-                public static final CANSparkMax leftRearSpark = new CANSparkMax(DRIVETRAIN_LEFT_REAR_SPARK,
-                                MotorType.kBrushless);
-                public static final CANSparkMax rightFrontSpark = new CANSparkMax(DRIVETRAIN_RIGHT_FRONT_SPARK,
-                                MotorType.kBrushless);
-                public static final CANSparkMax rightRearSpark = new CANSparkMax(DRIVETRAIN_RIGHT_REAR_SPARK,
-                                MotorType.kBrushless);
                 public static final CANSparkMax leftMiddleSpark = new CANSparkMax(DRIVETRAIN_LEFT_MIDDLE_SPARK,
                                 MotorType.kBrushless);
+                public static final CANSparkMax leftRearSpark = new CANSparkMax(DRIVETRAIN_LEFT_REAR_SPARK,
+                                MotorType.kBrushless);
+
+                public static final CANSparkMax rightFrontSpark = new CANSparkMax(DRIVETRAIN_RIGHT_FRONT_SPARK,
+                                MotorType.kBrushless);
                 public static final CANSparkMax rightMiddleSpark = new CANSparkMax(DRIVETRAIN_RIGHT_MIDDLE_SPARK,
+                                MotorType.kBrushless);
+                public static final CANSparkMax rightRearSpark = new CANSparkMax(DRIVETRAIN_RIGHT_REAR_SPARK,
                                 MotorType.kBrushless);
 
                 public static final CANSparkMax intakeSpark = new CANSparkMax(INTAKE_SPARK,
@@ -109,9 +111,9 @@ public final class Constants {
         public static final class drive {
 
                 public static final MotorControllerGroup m_leftMotorController = new MotorControllerGroup(
-                                controllers.leftFrontSpark, controllers.leftRearSpark, controllers.leftMiddleSpark);
+                                controllers.leftFrontSpark, controllers.leftMiddleSpark, controllers.leftRearSpark);
                 public static final MotorControllerGroup m_rightMotorController = new MotorControllerGroup(
-                                controllers.rightFrontSpark, controllers.rightRearSpark, controllers.rightMiddleSpark);
+                                controllers.rightFrontSpark, controllers.rightMiddleSpark, controllers.rightRearSpark);
 
                 public static final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotorController,
                                 m_rightMotorController);

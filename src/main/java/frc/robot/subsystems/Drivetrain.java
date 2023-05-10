@@ -38,19 +38,19 @@ public class Drivetrain extends SubsystemBase {
 
     // sets a current limit to protect motors
     Constants.controllers.leftFrontSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
-    Constants.controllers.rightFrontSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
-    Constants.controllers.leftRearSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
-    Constants.controllers.rightRearSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
     Constants.controllers.leftMiddleSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
+    Constants.controllers.leftRearSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
+    Constants.controllers.rightFrontSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
     Constants.controllers.rightMiddleSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
+    Constants.controllers.rightRearSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);
 
     // sets braking or coasting of motors
     Constants.controllers.leftFrontSpark.setIdleMode(Constants.drive.IDLE_MODE);
+    Constants.controllers.leftMiddleSpark.setIdleMode(Constants.drive.IDLE_MODE);
     Constants.controllers.leftRearSpark.setIdleMode(Constants.drive.IDLE_MODE);
     Constants.controllers.rightFrontSpark.setIdleMode(Constants.drive.IDLE_MODE);
-    Constants.controllers.rightRearSpark.setIdleMode(Constants.drive.IDLE_MODE);
-    Constants.controllers.leftMiddleSpark.setIdleMode(Constants.drive.IDLE_MODE);
     Constants.controllers.rightMiddleSpark.setIdleMode(Constants.drive.IDLE_MODE);
+    Constants.controllers.rightRearSpark.setIdleMode(Constants.drive.IDLE_MODE);
 
   }
 
@@ -69,20 +69,20 @@ public class Drivetrain extends SubsystemBase {
 
     // adds averaged temperature of all drive motors
     SmartDashboard.putNumber("Drive Motor Temp",
-        (Constants.controllers.rightRearSpark.getMotorTemperature()
-            + Constants.controllers.leftRearSpark.getMotorTemperature()
-            + Constants.controllers.leftFrontSpark.getMotorTemperature()
-            + Constants.controllers.rightFrontSpark.getMotorTemperature()
+        (Constants.controllers.leftFrontSpark.getMotorTemperature()
             + Constants.controllers.leftMiddleSpark.getMotorTemperature()
-            + Constants.controllers.rightMiddleSpark.getMotorTemperature()) / 6);
+            + Constants.controllers.leftRearSpark.getMotorTemperature()
+            + Constants.controllers.rightFrontSpark.getMotorTemperature()
+            + Constants.controllers.rightMiddleSpark.getMotorTemperature()
+            + Constants.controllers.rightRearSpark.getMotorTemperature()) / 6);
 
     // adds current drawn by each drive motor
     SmartDashboard.putNumber("FrontLeft Current", Constants.controllers.leftFrontSpark.getOutputCurrent());
+    SmartDashboard.putNumber("MiddleLeft Current", Constants.controllers.leftMiddleSpark.getOutputCurrent());
     SmartDashboard.putNumber("BackLeft Current", Constants.controllers.leftRearSpark.getOutputCurrent());
     SmartDashboard.putNumber("FrontRight Current", Constants.controllers.rightFrontSpark.getOutputCurrent());
-    SmartDashboard.putNumber("BackRight Current", Constants.controllers.rightRearSpark.getOutputCurrent());
-    SmartDashboard.putNumber("MiddleLeft Current", Constants.controllers.leftMiddleSpark.getOutputCurrent());
     SmartDashboard.putNumber("MiddleRight Current", Constants.controllers.rightMiddleSpark.getOutputCurrent());
+    SmartDashboard.putNumber("BackRight Current", Constants.controllers.rightRearSpark.getOutputCurrent());
 
     // adds pitch of the gyro
     SmartDashboard.putNumber("Gyro Pitch", Constants.balance.gyro.getRoll());
