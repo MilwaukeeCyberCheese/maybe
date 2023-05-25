@@ -19,7 +19,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public final class Constants {
 
-        public static final boolean SINGLE_DRIVER = false;
+        public static final boolean SINGLE_DRIVER = true;
 
         public static final class autos {
                 public static final int DRIVE_OUT = 0;

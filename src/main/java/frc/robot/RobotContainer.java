@@ -67,8 +67,8 @@ public class RobotContainer {
     // Assign default commands
     m_drivetrain.setDefaultCommand(
         new ArcadeDrive(
-            () -> -m_filteredController.getYLeft(), () -> -m_filteredController
-                .getXRight(.2),
+            () -> m_filteredController.getXRight(), () -> m_filteredController
+                .getYLeft(.2),
             () -> m_filteredController.getLeftTriggerActive(0.2), () -> m_filteredController.getRightTriggerActive(0.2),
             m_drivetrain));
     if (!Constants.SINGLE_DRIVER) {
@@ -110,8 +110,8 @@ public class RobotContainer {
     new Trigger(m_filteredController::getLeftBumper).onTrue(new First(m_shifter));
     new Trigger(m_filteredController::getRightBumper).onTrue(new Second(m_shifter));
 
-    new Trigger(m_filteredController::getAButton).onTrue(new IntakeDown(m_intake));
-    new Trigger(m_filteredController::getYButton).onTrue(new IntakeUp(m_intake));
+    new Trigger(m_filteredControllerTwo::getAButton).onTrue(new IntakeDown(m_intake));
+    new Trigger(m_filteredControllerTwo::getYButton).onTrue(new IntakeUp(m_intake));
 
     new Trigger(m_filteredController::getBButton).onTrue(new MidConeScore(m_intake, m_elevatorSubsystem));
     new Trigger(m_filteredController::getXButton).onTrue(new MidCubeScore(m_intake, m_elevatorSubsystem));
@@ -120,7 +120,7 @@ public class RobotContainer {
     new Trigger(m_filteredControllerTwo::getRightBumper).whileTrue(new IntakeConeCommand(m_intake));
     new Trigger(m_filteredControllerTwo::getLeftTriggerActive).whileTrue(new IntakeCubeDown(m_intake));
     new Trigger(m_filteredControllerTwo::getRightTriggerActive)
-        .whileTrue(new ConeIntakeSingle(m_intake, m_elevatorSubsystem));
+        .onTrue(new ConeIntakeSingle(m_intake, m_elevatorSubsystem));
 
     new Trigger(m_filteredControllerTwo::getBackButton).onTrue(new ZeroSlides(m_elevatorSubsystem));
 
@@ -170,8 +170,8 @@ public class RobotContainer {
     leftStickButtonOne.onTrue(new AutoBalancer(m_drivetrain, m_shifter));
     rightStickButtonOne.onTrue(new AutoBalanceDrive(m_drivetrain, m_shifter, m_intake));
 
-    yButtonOne.whileTrue(new IntakeUp(m_intake));
-    aButtonOne.whileTrue(new IntakeDown(m_intake));
+    yButtonOne.onTrue(new IntakeUp(m_intake));
+    aButtonOne.onTrue(new IntakeDown(m_intake));
 
     bButtonOne.whileTrue(new IntakeCubeCommand(m_intake));
     xButtonOne.whileTrue(new IntakeConeCommand(m_intake));
