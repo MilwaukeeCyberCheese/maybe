@@ -120,13 +120,14 @@ public class RobotContainer {
     new Trigger(m_filteredControllerTwo::getLeftTriggerActive).whileTrue(new IntakeCubeDown(m_intake));
 
     new Trigger(() -> m_buttons.getRawButton(2)).onTrue(new ZeroSlides(m_elevatorSubsystem));
-    new Trigger(() -> m_buttons.getRawButton(3)).whileTrue(new AutoBalancer(m_drivetrain, m_shifter));
+    new Trigger(() -> m_buttons.getRawButton(3)).onTrue(new AutoBalancer(m_drivetrain, m_shifter));
     new Trigger(() -> m_buttons.getRawButton(4)).whileTrue(new ElevatorPID(() -> 1.0, m_elevatorSubsystem, () -> true));
     new Trigger(() -> m_buttons.getRawButton(5)).onTrue(new MidConeScore(m_intake, m_elevatorSubsystem));
-    new Trigger(() -> m_buttons.getRawButton(6)).whileTrue(new ));
-    new Trigger(() -> m_buttons.getRawButton(7)).onTrue(new MidConeScore(m_intake, m_elevatorSubsystem));
+    new Trigger(() -> m_buttons.getRawButton(6)).whileTrue(new IntakeCubeDown(m_intake));
+    new Trigger(() -> m_buttons.getRawButton(7)).whileTrue(new ElevatorPID(() -> -1.0, m_elevatorSubsystem, () -> true);
     new Trigger(() -> m_buttons.getRawButton(8)).onTrue(new MidCubeScore(m_intake, m_elevatorSubsystem));
-    new Trigger(() -> m_buttons.getRawButton(9)).onTrue(new MidCubeScore(m_intake, m_elevatorSubsystem));
+    //new Trigger(() -> m_buttons.getRawButton(9)).onTrue(new IntakeUpThenCone(m_intake));
+//TODO add IntakeUpThenCone
 
     new Trigger(m_filteredControllerTwo::getBackButton).onTrue(new ZeroSlides(m_elevatorSubsystem));
 
