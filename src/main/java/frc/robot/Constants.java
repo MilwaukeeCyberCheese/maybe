@@ -19,7 +19,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public final class Constants {
 
-        public static final boolean SINGLE_DRIVER = true;
+        public static final boolean SINGLE_DRIVER = false;
 
         public static final class autos {
                 public static final int DRIVE_OUT = 0;
@@ -128,8 +128,8 @@ public final class Constants {
                 public static final double DEFAULT_DRIVE_SPEED = 0.8;
                 public static final double DEFAULT_TURN_SPEED = 0.9;
 
-                public static final double SLOW_DRIVE_SPEED = 0.5;
-                public static final double SLOW_TURN_SPEED = 0.7;
+                public static final double SLOW_DRIVE_SPEED = 0.3;
+                public static final double SLOW_TURN_SPEED = 0.6;
                 public static final double TURBO_DRIVE_SPEED = 1.0;
                 public static final double TURBO_TURN_SPEED = 1.0;
 

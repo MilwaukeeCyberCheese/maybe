@@ -26,9 +26,7 @@ public class ConeIntakeSingle extends SequentialCommandGroup {
                         () -> 2000, () -> 0, () -> 0, () -> Constants.intake.STALL_LIMIT_CONE),
 
                 Commands.parallel(new CubeIntakePosition(elevatorSubsystem, () -> 0),
-                        new IntakeAuto(intake, Constants.intake.INTAKE_DOWN, () -> 0, () -> 500, () -> 0, () -> 300, () -> 0.0)),
-
-                        new IntakeUp(intake)
+                        new IntakeAuto(intake, Constants.intake.INTAKE_DOWN, () -> 0, () -> 500, () -> 0, () -> 300, () -> 0.0))
 
                 
 

@@ -65,20 +65,13 @@ public class IntakeAuto extends CommandBase {
             m_intake.drive(m_speed.getAsDouble());
         }
 
-        if (m_stallCurrent.getAsDouble() != 0.0) {
-            if (Math.abs(m_intake.getCurrent()) > m_stallCurrent.getAsDouble()) {
-                m_intake.drive(0);
-            } else {
-                m_intake.drive(m_speed.getAsDouble());
-            }
-        }
 
     }
 
     @Override
     public boolean isFinished() {
         // returns whether the time exceeds the time allotted to run
-        return timer.getTime() > m_runtime.getAsInt() || m_intake.getCurrent() > m_stallCurrent.getAsDouble();
+        return timer.getTime() > m_runtime.getAsInt();
 
     }
 

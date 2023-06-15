@@ -28,8 +28,8 @@ public class DriveToTime extends CommandBase {
   /**
    * Creates a new ArcadeDrive command.
    *
-   * @param throttle   The control input for the left side of the drive
-   * @param rotation   The control input for the right sight of the drive
+   * @param throttle   The control input for speed
+   * @param rotation   The control input for rotation
    * @param slow  whether or not to enable slow mode
    * @param turbo whether or not to enable turbo mode
    * @param runtime how long to drive for

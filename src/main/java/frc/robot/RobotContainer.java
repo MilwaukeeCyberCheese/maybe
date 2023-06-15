@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 
 import frc.robot.commands.First;
@@ -56,6 +57,7 @@ public class RobotContainer {
   public static final FilteredController m_filteredController = new FilteredController(m_controller);
   private static final XboxController m_controllerTwo = new XboxController(1);
   public static final FilteredController m_filteredControllerTwo = new FilteredController(m_controllerTwo);
+  private static final Joystick m_buttons = new Joystick(2);
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
   public static boolean readAuto = false;
@@ -113,14 +115,14 @@ public class RobotContainer {
     new Trigger(m_filteredControllerTwo::getAButton).onTrue(new IntakeDown(m_intake));
     new Trigger(m_filteredControllerTwo::getYButton).onTrue(new IntakeUp(m_intake));
 
-    new Trigger(m_filteredController::getBButton).onTrue(new MidConeScore(m_intake, m_elevatorSubsystem));
-    new Trigger(m_filteredController::getXButton).onTrue(new MidCubeScore(m_intake, m_elevatorSubsystem));
-
     new Trigger(m_filteredControllerTwo::getLeftBumper).whileTrue(new IntakeCubeCommand(m_intake));
     new Trigger(m_filteredControllerTwo::getRightBumper).whileTrue(new IntakeConeCommand(m_intake));
     new Trigger(m_filteredControllerTwo::getLeftTriggerActive).whileTrue(new IntakeCubeDown(m_intake));
-    new Trigger(m_filteredControllerTwo::getRightTriggerActive)
-        .onTrue(new ConeIntakeSingle(m_intake, m_elevatorSubsystem));
+
+    new Trigger(() -> m_buttons.getRawButton(2)).onTrue(new ConeIntakeSingle(m_intake, m_elevatorSubsystem));
+    new Trigger(() -> m_buttons.getRawButton(5)).onTrue(new AutoBalancer(m_drivetrain, m_shifter));
+    new Trigger(() -> m_buttons.getRawButton(7)).onTrue(new MidConeScore(m_intake, m_elevatorSubsystem));
+    new Trigger(() -> m_buttons.getRawButton(9)).onTrue(new MidCubeScore(m_intake, m_elevatorSubsystem));
 
     new Trigger(m_filteredControllerTwo::getBackButton).onTrue(new ZeroSlides(m_elevatorSubsystem));
 
@@ -133,9 +135,10 @@ public class RobotContainer {
     new Trigger(() -> m_filteredControllerTwo.getPOVButton() == 4)
         .onTrue(new CubeIntakePosition(m_elevatorSubsystem, () -> Constants.intake.INTAKE_DELAY));
 
-    new Trigger(m_filteredController::getLeftStickPressed).onTrue(new AutoBalancer(m_drivetrain, m_shifter));
-    new Trigger(m_filteredController::getRightStickPressed)
-        .onTrue(new AutoBalanceDrive(m_drivetrain, m_shifter, m_intake));
+    // new Trigger(m_filteredController::getLeftStickPressed).onTrue(new
+    // AutoBalancer(m_drivetrain, m_shifter));
+    // new Trigger(m_filteredController::getRightStickPressed)
+    // .onTrue(new AutoBalanceDrive(m_drivetrain, m_shifter, m_intake));
 
     // map the trigers to commands
 
