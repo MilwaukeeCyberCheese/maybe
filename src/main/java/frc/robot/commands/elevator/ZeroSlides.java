@@ -30,4 +30,8 @@ public class ZeroSlides extends CommandBase {
     m_elevatorSubsystem.zero();
   }
 
+  @Override
+  public boolean isFinished(){
+    return true;
+  }
 }
