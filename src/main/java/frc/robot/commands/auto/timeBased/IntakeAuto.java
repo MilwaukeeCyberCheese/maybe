@@ -17,7 +17,6 @@ public class IntakeAuto extends CommandBase {
     private final IntSupplier m_runtime;
     private final IntSupplier m_delay;
     private final IntSupplier m_actuateDelay;
-    private final DoubleSupplier m_stallCurrent;
 
     /**
      * Creates a new automatic intake Command.
@@ -32,14 +31,13 @@ public class IntakeAuto extends CommandBase {
      * 
      */
     public IntakeAuto(Intake intake, Value position, DoubleSupplier speed, IntSupplier runtime, IntSupplier delay,
-            IntSupplier actuateDelay, DoubleSupplier stallCurrent) {
+            IntSupplier actuateDelay) {
         this.m_intake = intake;
         this.m_position = position;
         this.m_speed = speed;
         this.m_runtime = runtime;
         this.m_delay = delay;
         this.m_actuateDelay = actuateDelay;
-        this.m_stallCurrent = stallCurrent;
         addRequirements(m_intake);
     }
 

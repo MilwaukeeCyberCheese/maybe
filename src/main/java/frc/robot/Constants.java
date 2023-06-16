@@ -122,7 +122,7 @@ public final class Constants {
 
                 public static final int CURRENT_LIMIT = 60;
 
-                public static final double THROTTLE_LIMITER_RATE = 0.7;
+                public static final double THROTTLE_LIMITER_RATE = 0.1;
                 public static final double ROTATION_LIMITER_RATE = 0.5;
 
                 public static final double DEFAULT_DRIVE_SPEED = 0.8;

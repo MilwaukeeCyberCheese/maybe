@@ -5,7 +5,6 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
@@ -56,8 +55,6 @@ public class Drivetrain extends SubsystemBase {
 
   /** The log method puts interesting information to the SmartDashboard. */
   public void log() {
-
-    System.out.println(Robot.autoChooser.getSelected());
 
     SmartDashboard.putData("Drivetrain", Constants.drive.m_drive);
 
@@ -114,6 +111,7 @@ public class Drivetrain extends SubsystemBase {
 
     // run drivetrain at determined speeds
     Constants.drive.m_drive.arcadeDrive(throttleActual, rotationActual);
+    System.out.println(throttleActual);
   }
 
   /**

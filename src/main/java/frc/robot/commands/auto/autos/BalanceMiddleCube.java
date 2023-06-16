@@ -21,18 +21,18 @@ public class BalanceMiddleCube extends SequentialCommandGroup {
 
                 addCommands(
                                 new IntakeAuto(intake, Constants.intake.INTAKE_DOWN, () -> 0, () -> 300, () -> 0,
-                                                () -> 0, () -> 0.0),
+                                                () -> 0),
 
                                 Commands.parallel(new CubePlacePosition(elevatorSubsystem, () -> 0),
                                                 new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> 0, () -> 500,
-                                                                () -> 0, () -> 500, () -> 0.0)),
+                                                                () -> 0, () -> 500)),
 
                                 new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> Constants.intake.CONE_SPEED,
-                                                () -> 500, () -> 0, () -> 0, () -> 0.0),
+                                                () -> 500, () -> 0, () -> 0),
 
                                 Commands.parallel(new CubeIntakePosition(elevatorSubsystem, () -> 0),
                                                 new IntakeAuto(intake, Constants.intake.INTAKE_DOWN, () -> 0, () -> 500,
-                                                                () -> 0, () -> 300, () -> 0.0)),
+                                                                () -> 0, () -> 300)),
 
                                 new AutoBalanceDrive(drivetrain, shifter, intake));
 

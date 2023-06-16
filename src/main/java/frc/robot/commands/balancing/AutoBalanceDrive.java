@@ -64,6 +64,7 @@ public class AutoBalanceDrive extends CommandBase {
     // check if gryo value exceeds the threshold for being on the charge station,
     // otherwise drive backwards until true
     if (!balanceStarted) {
+      System.out.println("not started");
       m_drivetrain.drive(Constants.balance.DRIVE_SPEED, 0);
       if (Math.abs(pitchAngleDegrees) >= Constants.balance.START_BALANCE_ANGLE) {
         balanceStarted = true;

@@ -21,18 +21,18 @@ public class MidConeDriveOut extends SequentialCommandGroup {
 
                 addCommands(
                                 new IntakeAuto(intake, Constants.intake.INTAKE_DOWN, () -> 0, () -> 300, () -> 0,
-                                                () -> 0, () -> 0.0),
+                                                () -> 0),
 
                                 Commands.parallel(new ConePlacePosition(elevatorSubsystem, () -> 0),
                                                 new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> 0, () -> 500,
-                                                                () -> 0, () -> 500, () -> 0.0)),
+                                                                () -> 0, () -> 500)),
 
                                 new IntakeAuto(intake, Constants.intake.INTAKE_UP, () -> Constants.intake.CUBE_SPEED,
-                                                () -> 500, () -> 0, () -> 0, () -> 0.0),
+                                                () -> 500, () -> 0, () -> 0),
 
                                 Commands.parallel(new CubeIntakePosition(elevatorSubsystem, () -> 0),
                                                 new IntakeAuto(intake, Constants.intake.INTAKE_DOWN, () -> 0, () -> 500,
-                                                                () -> 0, () -> 300, () -> 0.0)),
+                                                                () -> 0, () -> 300)),
 
                                 new DriveToTime(() -> -0.5, () -> 0, () -> false, () -> false, () -> 3500, drivetrain));
 
