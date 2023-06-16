@@ -27,7 +27,6 @@ public class IntakeAuto extends CommandBase {
      * @param runtime      time to run intake for
      * @param delay        time to wait for the intake to start running
      * @param actuateDelay time to wait for the intake to change position
-     * @param stallCurrent current to stall the intake at
      * 
      */
     public IntakeAuto(Intake intake, Value position, DoubleSupplier speed, IntSupplier runtime, IntSupplier delay,

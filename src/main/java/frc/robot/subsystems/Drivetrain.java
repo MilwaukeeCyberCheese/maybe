@@ -32,8 +32,8 @@ public class Drivetrain extends SubsystemBase {
     super();
 
     // invert motors so they drive in same direction
-    Constants.drive.m_rightMotorController.setInverted(Constants.drive.RIGHT_FRONT_INVERTED);
-    Constants.drive.m_leftMotorController.setInverted(Constants.drive.LEFT_FRONT_INVERTED);
+    Constants.drive.m_rightMotorController.setInverted(Constants.drive.RIGHT_INVERTED);
+    Constants.drive.m_leftMotorController.setInverted(Constants.drive.LEFT_INVERTED);
 
     // sets a current limit to protect motors
     Constants.controllers.leftFrontSpark.setSmartCurrentLimit(Constants.drive.CURRENT_LIMIT);

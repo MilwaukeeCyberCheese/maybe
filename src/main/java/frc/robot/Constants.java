@@ -39,7 +39,7 @@ public final class Constants {
 
                 public static final double SPIN_TOLERANCE = 2;
 
-                public static final double DRIVE_SPEED = -0.45;
+                public static final double DRIVE_SPEED = 0.45;
 
                 public static final double BOUNCE_THRESHOLD = 15;
 
@@ -133,10 +133,8 @@ public final class Constants {
                 public static final double TURBO_DRIVE_SPEED = 1.0;
                 public static final double TURBO_TURN_SPEED = 1.0;
 
-                public static final boolean LEFT_FRONT_INVERTED = true;
-                public static final boolean LEFT_REAR_INVERTED = true;
-                public static final boolean RIGHT_FRONT_INVERTED = false;
-                public static final boolean RIGHT_REAR_INVERTED = false;
+                public static final boolean LEFT_INVERTED = false;
+                public static final boolean RIGHT_INVERTED = false;
 
                 public static final boolean SECOND_GEAR = false;
                 public static final boolean FIRST_GEAR = true;

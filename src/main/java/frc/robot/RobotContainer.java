@@ -69,8 +69,8 @@ public class RobotContainer {
     // Assign default commands
     m_drivetrain.setDefaultCommand(
         new ArcadeDrive(
-            () -> m_filteredController.getXRight(), () -> m_filteredController
-                .getYLeft(.2),
+            () -> m_filteredController.getYLeft(), () -> m_filteredController
+                .getXRight(),
             () -> m_filteredController.getLeftTriggerActive(0.2), () -> m_filteredController.getRightTriggerActive(0.2),
             m_drivetrain));
     if (!Constants.SINGLE_DRIVER) {

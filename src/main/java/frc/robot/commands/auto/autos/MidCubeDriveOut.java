@@ -36,7 +36,7 @@ public class MidCubeDriveOut extends SequentialCommandGroup {
 
                         new IntakeUp(intake),
 
-                new DriveToTime(() -> -0.5, () -> 0, () -> false, () -> false, () -> 3500, drivetrain)
+                new DriveToTime(() -> 0.5, () -> 0, () -> false, () -> false, () -> 3500, drivetrain)
 
         );
 
