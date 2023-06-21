@@ -56,9 +56,9 @@ public class ElevatorPID extends CommandBase {
 
   }
 
-  @Override
-  public boolean isFinished(){
-    return Constants.lift.TOLERANCE <= Math.abs(ElevatorSubsystem.position - ElevatorSubsystem.setPosition);
-  }
+  // @Override
+  // public boolean isFinished(){
+  //   return Constants.lift.TOLERANCE <= Math.abs(ElevatorSubsystem.position - ElevatorSubsystem.setPosition);
+  // }
 
 }

@@ -67,11 +67,9 @@ public class Drivetrain extends SubsystemBase {
     // adds averaged temperature of all drive motors
     SmartDashboard.putNumber("Drive Motor Temp",
         (Constants.controllers.leftFrontSpark.getMotorTemperature()
-            + Constants.controllers.leftMiddleSpark.getMotorTemperature()
             + Constants.controllers.leftRearSpark.getMotorTemperature()
             + Constants.controllers.rightFrontSpark.getMotorTemperature()
-            + Constants.controllers.rightMiddleSpark.getMotorTemperature()
-            + Constants.controllers.rightRearSpark.getMotorTemperature()) / 6);
+            + Constants.controllers.rightRearSpark.getMotorTemperature()) / 4);
 
     // adds current drawn by each drive motor
     SmartDashboard.putNumber("FrontLeft Current", Constants.controllers.leftFrontSpark.getOutputCurrent());
