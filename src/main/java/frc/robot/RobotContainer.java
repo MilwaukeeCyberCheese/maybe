@@ -71,7 +71,7 @@ public class RobotContainer {
         new ArcadeDrive(
             () -> m_filteredController.getYLeft(), () -> m_filteredController
                 .getXRight(),
-            () -> m_filteredController.getLeftTriggerActive(0.2), () -> m_filteredController.getRightTriggerActive(0.2),
+            () -> m_filteredController.getLeftTriggerActive(0.2) || m_buttons.getRawButton(1), () -> m_filteredController.getRightTriggerActive(0.2),
             m_drivetrain));
     if (!Constants.SINGLE_DRIVER) {
       m_elevatorSubsystem.setDefaultCommand(
