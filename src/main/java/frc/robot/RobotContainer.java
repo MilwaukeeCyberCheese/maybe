@@ -27,6 +27,7 @@ import frc.robot.commands.intake.IntakeUp;
 import frc.robot.commands.intake.IntakeUpThenCone;
 import frc.robot.commands.intake.ProtectIntake;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.other.FilteredButton;
 import frc.robot.other.FilteredController;
 import frc.robot.subsystems.AutoSubsystem;
 import frc.robot.subsystems.Drivetrain;
@@ -58,7 +59,7 @@ public class RobotContainer {
   private static final XboxController m_controllerTwo = new XboxController(1);
   public static final FilteredController m_filteredControllerTwo = new FilteredController(m_controllerTwo);
   private static final Joystick m_buttons = new Joystick(2);
-  private static final FIlteredButtons = new FilteredButtons(m_buttons);
+  private static final FilteredButton m_filteredButtons = new FilteredButton(m_buttons);
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
   public static boolean readAuto = false;
@@ -120,14 +121,14 @@ public class RobotContainer {
     new Trigger(m_filteredControllerTwo::getRightBumper).whileTrue(new IntakeConeCommand(m_intake));
     new Trigger(m_filteredControllerTwo::getLeftTriggerActive).whileTrue(new IntakeCubeDown(m_intake));
 
-    new Trigger(() -> m_buttons.getRawButton(2)).onTrue(new ZeroSlides(m_elevatorSubsystem));
-    new Trigger(() -> m_buttons.getRawButton(3)).onTrue(new AutoBalanceDrive(m_drivetrain, m_shifter, m_intake));
-    new Trigger(() -> m_buttons.getRawButton(4)).whileTrue(new ElevatorPID(() -> 0.6, m_elevatorSubsystem, () -> !m_controllerTwo.getStartButton() && !m_buttons.getRawButton(1)));
-    new Trigger(() -> m_buttons.getRawButton(5)).onTrue(new MidConeScore(m_intake, m_elevatorSubsystem));
-    new Trigger(() -> m_buttons.getRawButton(6)).whileTrue(new IntakeCubeDown(m_intake));
-    new Trigger(() -> m_buttons.getRawButton(7)).whileTrue(new ElevatorPID(() -> -0.6, m_elevatorSubsystem, () -> !m_controllerTwo.getStartButton() && !m_buttons.getRawButton(1)));
-    new Trigger(() -> m_buttons.getRawButton(8)).onTrue(new MidCubeScore(m_intake, m_elevatorSubsystem));
-    new Trigger(() -> m_buttons.getRawButton(9)).whileTrue(new IntakeUpThenCone(m_intake));
+    new Trigger(m_filteredButtons::getOneB).onTrue(new ZeroSlides(m_elevatorSubsystem));
+    new Trigger(m_filteredButtons::getOneC).onTrue(new AutoBalanceDrive(m_drivetrain, m_shifter, m_intake));
+    new Trigger(m_filteredButtons::getTwoA).whileTrue(new ElevatorPID(() -> 0.6, m_elevatorSubsystem, () -> !m_controllerTwo.getStartButton() && !m_buttons.getRawButton(1)));
+    new Trigger(m_filteredButtons::getTwoB).onTrue(new MidConeScore(m_intake, m_elevatorSubsystem));
+    new Trigger(m_filteredButtons::getTwoC).whileTrue(new IntakeCubeDown(m_intake));
+    new Trigger(m_filteredButtons::getThreeA).whileTrue(new ElevatorPID(() -> -0.6, m_elevatorSubsystem, () -> !m_controllerTwo.getStartButton() && !m_buttons.getRawButton(1)));
+    new Trigger(m_filteredButtons::getThreeB).onTrue(new MidCubeScore(m_intake, m_elevatorSubsystem));
+    new Trigger(m_filteredButtons::getThreeC).whileTrue(new IntakeUpThenCone(m_intake));
 
     new Trigger(m_filteredControllerTwo::getBackButton).onTrue(new ZeroSlides(m_elevatorSubsystem));
 
