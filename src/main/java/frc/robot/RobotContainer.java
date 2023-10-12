@@ -58,6 +58,7 @@ public class RobotContainer {
   private static final XboxController m_controllerTwo = new XboxController(1);
   public static final FilteredController m_filteredControllerTwo = new FilteredController(m_controllerTwo);
   private static final Joystick m_buttons = new Joystick(2);
+  private static final FIlteredButtons = new FilteredButtons(m_buttons);
 
   public static final AutoSubsystem m_autoSubsystem = new AutoSubsystem();
   public static boolean readAuto = false;
