@@ -9,7 +9,6 @@ import frc.robot.RobotContainer;
 public class Intake extends SubsystemBase {
 
     private double speed;
-    public Value position;
 
     /**
      * Creates a subsystem to control the intake
@@ -48,7 +47,6 @@ public class Intake extends SubsystemBase {
      * 
      */
     public void setPosition(Value position) {
-        this.position = position;
         Constants.pneumatics.intakeSolenoid.set(position);
 
     }
